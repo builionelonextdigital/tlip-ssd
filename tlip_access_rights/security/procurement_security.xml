@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="ir.rule" id="procurement_task_user_rule">
+            <field name="name">Procurement Task internal user rule</field>
+            <field name="model_id" ref="tlip_procurement.model_procurement_task" />
+            <field name="groups" eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">[ '|', '|', '|', ('request_line_ids.budget_department_id.job_ids.id', 'in', user.employee_ids.job_id.ids), ('approver_ids.job_id', 'in', user.employee_ids.job_id.ids), ('approver_ids.user_id', '=', user.id), ('user_id','=',user.id)]</field>
+        </record>
+
+        <record model="ir.rule" id="purchase_request_user_rule">
+            <field name="name">Purchase request internal user rule</field>
+            <field name="model_id" ref="tlip_procurement.model_request_purchase" />
+            <field name="groups" eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">['|', '|',  '|', '|', ('approver_ids.job_id', 'in', user.employee_ids.job_id.ids), ('approver_ids.user_id', '=', user.id), ('budget_department_id.department_group_id.job_ids','in',user.employee_ids.job_id.ids), ('user_id','=',user.id), ('budget_department_id','in',user.employee_ids.department_id.budget_department_id.ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="procurement_task_procurement_user_rule">
+            <field name="name">Procurement Task Procurement user rule</field>
+            <field name="model_id" ref="tlip_procurement.model_procurement_task" />
+            <field name="groups" eval="[(4, ref('tlip_access_rights.group_tlip_procurement_user'))]" />
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record model="ir.rule" id="procurement_task_accountant_user_rule">
+            <field name="name">Procurement Task Accountant user rule</field>
+            <field name="model_id" ref="tlip_procurement.model_procurement_task" />
+            <field name="groups" eval="[(4, ref('account.group_account_readonly'))]" />
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record model="ir.rule" id="purchase_request_procurement_user_rule">
+            <field name="name">Purchase Request Procurement user rule</field>
+            <field name="model_id" ref="tlip_procurement.model_request_purchase" />
+            <field name="groups" eval="[(4, ref('tlip_access_rights.group_tlip_procurement_user'))]" />
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record model="ir.rule" id="purchase_request_accountant_user_rule">
+            <field name="name">Procurement Request Accountant user rule</field>
+            <field name="model_id" ref="tlip_procurement.model_request_purchase" />
+            <field name="groups" eval="[(4, ref('account.group_account_readonly'))]" />
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record model="ir.rule" id="purchase_requisition_user_rule">
+            <field name="name">Purchase Requisition User</field>
+            <field name="model_id" ref="tlip_procurement.model_purchase_requisition"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">['|', '|', ('user_id', '=', user.id), ('approver_ids.job_id', 'in', user.employee_ids.job_id.ids), ('approver_ids.user_id', '=', user.id)]</field>
+        </record>
+    
+        <record model="ir.rule" id="purchase_requisition_procurement_rule">
+            <field name="name">Purchase Requisition Procurement</field>
+            <field name="model_id" ref="tlip_procurement.model_purchase_requisition"/>
+            <field name="groups" eval="[(4, ref('tlip_access_rights.group_tlip_procurement_user'))]" />
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+        <record model="ir.rule" id="purchase_supplement_user_rule">
+            <field name="name">Purchase Supplement User</field>
+            <field name="model_id" ref="tlip_procurement.model_purchase_supplement"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">['|', '|', ('user_id', '=', user.id), ('approver_ids.job_id', 'in', user.employee_ids.job_id.ids), ('approver_ids.user_id', '=', user.id)]</field>
+        </record>
+
+        <record model="ir.rule" id="purchase_supplement_procurement_rule">
+            <field name="name">Purchase Supplement Procurement</field>
+            <field name="model_id" ref="tlip_procurement.model_purchase_supplement"/>
+            <field name="groups" eval="[(4, ref('tlip_access_rights.group_tlip_procurement_user'))]" />
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+    </data>
+</odoo>

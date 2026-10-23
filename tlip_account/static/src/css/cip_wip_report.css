@@ -1,0 +1,105 @@
+/* CIP/WIP Summary Report Styles */
+
+/* Hide empty rows completely - they create gaps */
+.account_report tr.empty {
+    display: none !important;
+}
+
+/* Group Header Row - with "Opening Balance", "Occurred in this period", "Ending Balance" */
+.account_report tr.cip_wip_group_header > td {
+    background-color: #d1e7dd !important;
+    font-weight: bold !important;
+    border-bottom: 0 !important;
+}
+
+/* Dark border on the left of first numeric column */
+.account_report tr.cip_wip_group_header td.line_cell:nth-child(4) {
+    border-left: 2px solid #495057 !important;
+}
+
+/* Dark border between Opening Balance and Occurred in this period */
+.account_report tr.cip_wip_group_header td.line_cell:nth-child(6) {
+    border-left: 2px solid #495057 !important;
+}
+
+/* Dark border between Occurred in this period and Ending Balance */
+.account_report tr.cip_wip_group_header td.line_cell:nth-child(8) {
+    border-left: 2px solid #495057 !important;
+}
+
+/* Column Header Row - with "Debit", "Credit", "Increase", "Decrease" */
+.account_report tr.cip_wip_column_header > td {
+    background-color: #d1e7dd !important;
+    border-bottom: 2px solid #495057 !important;
+    font-weight: bold !important;
+}
+
+/* Dark border on the left of first numeric column */
+.account_report tr.cip_wip_column_header td.line_cell:nth-child(4) {
+    border-left: 2px solid #495057 !important;
+}
+
+/* Light border between Debit and Credit */
+.account_report tr.cip_wip_column_header td.line_cell:nth-child(5) {
+    border-right: 1px solid #b8dcc7 !important;
+}
+
+/* Dark border between Opening Balance and Occurred in this period */
+.account_report tr.cip_wip_column_header td.line_cell:nth-child(6) {
+    border-left: 2px solid #495057 !important;
+}
+
+/* Light border between Increase and Decrease */
+.account_report tr.cip_wip_column_header td.line_cell:nth-child(7) {
+    border-right: 1px solid #b8dcc7 !important;
+}
+
+/* Dark border between Occurred in this period and Ending Balance */
+.account_report tr.cip_wip_column_header td.line_cell:nth-child(8) {
+    border-left: 2px solid #495057 !important;
+}
+
+/* Light border between Ending Debit and Credit */
+.account_report tr.cip_wip_column_header td.line_cell:nth-child(9) {
+    border-right: 1px solid #b8dcc7 !important;
+}
+
+/* Heavy border after column 3 (budget code column) to separate text from numbers */
+.account_report tr.cip_wip_group_header td.line_cell:nth-child(3),
+.account_report tr.cip_wip_column_header td.line_cell:nth-child(3) {
+    border-right: 2px solid #495057 !important;
+}
+
+/* Project Subtotal Row - light background with bold text */
+.account_report tr.cip_wip_project_subtotal > td {
+    background-color: #e9f5ec !important;
+    font-weight: bold !important;
+    border-top: 1px solid #b8dcc7 !important;
+    border-bottom: 1px solid #b8dcc7 !important;
+}
+
+/* Add subtle borders in data rows for grouping */
+.account_report tr.line_level_1 td.line_cell:nth-child(3) {
+    border-right: 1px solid #d1e7dd !important;
+}
+
+.account_report tr.line_level_1 td.line_cell:nth-child(5) {
+    border-right: 1px solid #d1e7dd !important;
+}
+
+.account_report tr.line_level_1 td.line_cell:nth-child(7) {
+    border-right: 1px solid #d1e7dd !important;
+}
+
+/* Totals Row - dark green background with white text */
+.account_report tr.cip_wip_totals > td {
+    background-color: #d1e7dd!important;
+    color: rgb(255, 255, 255) !important;
+    font-weight: bold !important;
+    border-top: 2px solid #495057 !important;
+}
+
+/* Ensure text in totals row is white */
+.account_report tr.cip_wip_totals td.line_cell {
+    color: #495057 !important;
+}

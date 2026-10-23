@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_cron_expire_leasing_quotations" model="ir.cron">
+            <field name="name">Expire Leasing Quotations</field>
+            <field name="model_id" ref="tlip_leasing.model_leasing_quotation"/>
+            <field name="state">code</field>
+            <field name="code">model._check_and_expire_quotations()</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+        <record id="ir_cron_activate_supplmental_agreement" model="ir.cron">
+            <field name="name">Activate Supplemental Agreement</field>
+            <field name="model_id" ref="tlip_leasing.model_leasing_supplement"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_activate_supplement_agreements()</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+        <record id="ir_cron_activate_termination_agreement" model="ir.cron">
+            <field name="name">Auto Terminate Agreement</field>
+            <field name="model_id" ref="tlip_leasing.model_leasing_termination"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_activate_termination_agreements()</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+        <record model="ir.cron" id="cron_update_location_lease_state">
+            <field name="name">Update Stock Location Lease State</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="state">code</field>
+            <field name="interval_number">6</field>
+            <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 17:00:00')" />
+            <field name="interval_type">hours</field>
+            <field name="model_id" ref="stock.model_stock_location"/>
+            <field name="code">model.cron_update_location_lease_state()</field>
+        </record>
+    </data>
+</odoo>

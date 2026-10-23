@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="analytic_report_investment_plan" model="analytic.report">
+            <field name="name">Investment Plan Projection</field>
+        </record>
+        <record id="analytic_report_profit_loss_statement" model="analytic.report">
+            <field name="name">Profit &amp; Loss Statement Projection</field>
+        </record>
+        <record id="analytic_report_cashflow" model="analytic.report">
+            <field name="name">Cashflow Projection</field>
+        </record>
+        <record id="analytic_report_operation_misc" model="analytic.report">
+            <field name="name">Operation &amp; Miscellaneous Expenses</field>
+        </record>
+        <record id="analytic_report_direct_cost" model="analytic.report">
+            <field name="name">Direct Cost Report</field>
+        </record>
+        <record id="analytic_report_sales" model="analytic.report">
+            <field name="name">Sales Report</field>
+        </record>
+    </data>
+</odoo>

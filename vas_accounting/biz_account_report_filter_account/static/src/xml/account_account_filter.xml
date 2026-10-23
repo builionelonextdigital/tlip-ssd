@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="account_report_filter_account.AccountReportFilterAccounts">
+        <Dropdown
+            menuClass="'account_report_filter accounts'"
+        >
+            <button class="btn btn-secondary">
+                <i class="fa fa-filter me-1"/>Accounts
+            </button>
+
+            <t t-set-slot="content">
+                <div class="dropdown-item gap-2 align-items-center">
+                    <label>Accounts</label>
+                    <MultiRecordSelector t-props="getMultiRecordSelectorProps('account.account', 'account_accounts')"/>
+                </div>
+            </t>
+        </Dropdown>
+    </t>
+</templates>

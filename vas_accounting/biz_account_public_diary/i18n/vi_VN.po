@@ -1,0 +1,4 @@
+#. module: base
+#: model:ir.module.module,shortdesc:base.module_biz_account_public_diary
+msgid "BizApps - Account Public Diary"
+msgstr "BizApps - Sổ nhật ký chung"

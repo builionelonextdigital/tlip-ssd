@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="land_plot_view_list" model="ir.ui.view">
+        <field name="name">land_plot.view.list</field>
+        <field name="model">stock.location</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="complete_name" string="Land Plot" />
+                <field name="location_id" />
+                <field name="land_plot_category_id" string="Category" />
+                <field name="internal_usage_area" optional="show" />
+                <field name="gross_area" />
+                <field name="saleable_area" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="latitute" optional="hide" />
+                <field name="longitude" optional="hide" />
+                <field name="lease_state" />
+                <field name="state"
+                    widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state == 'wait_for_approval'"
+                    decoration-success="state == 'confirm'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="land_plot_view_form" model="ir.ui.view">
+        <field name="name">land_plot.view.form</field>
+        <field name="model">stock.location</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_submit_approval" string="Submit" type="object"
+                        class="oe_highlight"
+                        invisible="state != 'draft'"  confirm="Are you sure that you want to do this action?" />
+                    <!-- <button name="action_confirm" string="Confirm" type="object"
+                        class="oe_highlight"
+                        invisible="state != 'wait_for_approval'" /> -->
+                    <button name="action_approve_request" type="object" string="Approve"
+                        invisible="user_status != 'pending' or state != 'wait_for_approval'"
+                        class="btn-primary" data-hotkey="v" />
+                    <button name="action_reject_request" string="Refuse" type="object"
+                        invisible="user_status != 'pending' or state != 'wait_for_approval'"
+                        data-hotkey="z"  confirm="Are you sure that you want to do this action?" />
+                    <button name="action_withdraw_approval" string="Withdraw" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="btn btn-secondary"
+                        invisible="state != 'wait_for_approval'" />
+                    <button name="action_reset_approval" string="Reset Approval" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="state not in ('rejected', 'withdrawn')" />
+                    <button name="action_reset" string="Reset" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="oe_highlight"
+                        invisible="state not in ('rejected', 'cancel', 'confirm')" />
+                    <button name="action_cancel" string="Cancel" type="object"
+                        invisible="state != 'draft'"  confirm="Are you sure that you want to do this action?" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_open_approval_history_ids"
+                            type="object"
+                            icon="fa-history">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Approval Histories
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <h1>
+                        <field name="name" string="Land Plot Name" readonly="state != 'draft'" />
+                    </h1>
+                    <label for="location_id" string="Plot View" />
+                    <h2>
+                        <field name="location_id" domain="[('is_plot_view', '=', True)]"
+                            context="{'form_view_ref': 'tlip_stock.plot_view_form'}"
+                            readonly="state != 'draft'" options="{'no_create': True}" />
+                    </h2>
+                    <group>
+                        <group>
+                            <field name="is_plot_view" invisible="1" />
+                            <field name="is_land_plot" invisible="1" />
+                            <field name="land_plot_category_id"
+                                readonly="state != 'draft' or location_id"
+                                required="state == 'draft'" />
+                            <field name="land_plot_group_id" readonly="state != 'draft'"
+                                required="state == 'draft'" />
+                            <field name="gross_area" readonly="state != 'draft'" />
+                            <field name="saleable_area" readonly="state != 'draft'" />
+                            <field name="internal_usage" readonly="state != 'draft'" />
+                        </group>
+                        <group>
+                            <field name="lease_state" readonly="1" />
+                            <label for="date_start" string="Effective Period" />
+                            <div class="o_row">
+                                <field name="date_start" nolabel="1" readonly="state != 'draft'" />
+                                <span class="fa fa-arrow-right" />
+                                <field name="date_end" nolabel="1" readonly="state != 'draft'" />
+                            </div>
+                            <field name="latitute" readonly="state != 'draft'" />
+                            <field name="longitude" readonly="state != 'draft'" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="other_info" string="Other Info">
+                            <group string="Lot Information">
+                                <group>
+                                    <field name="map_location" />
+                                    <field name="coordinate_ids">
+                                        <list editable="bottom">
+                                            <field name="name" />
+                                            <field name="value" />
+                                        </list>
+                                    </field>
+                                </group>
+                                <group>
+                                    <field name="footprint_area" />
+                                    <field name="floor_area" />
+                                    <field name="security_house" />
+                                    <field name="pump_house" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Approval" name="approval">
+                            <field name="approver_ids" mode="list" readonly="1">
+                                <list editable="bottom" decoration-success="status=='approved'"
+                                    decoration-warning="status in ['pending', 'waiting']"
+                                    decoration-danger="status=='refused'" no_open="1">
+                                    <field name="existing_request_user_ids" column_invisible="True" />
+                                    <field name="sequence" column_invisible="True" />
+                                    <field name="user_id" string="Approver"
+                                        required="not job_id" />
+                                    <field name="job_id" required="not user_id" />
+                                    <field name="status" />
+                                    <field name="company_id" column_invisible="True" />
+                                </list>
+                            </field>
+                            <field name="approval_request_id" invisible="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="plot_view_list" model="ir.ui.view">
+        <field name="name">plot.view.list</field>
+        <field name="model">stock.location</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="complete_name" string="Land Plot" />
+                <field name="land_plot_category_id" string="Type" />
+                <field name="has_layout" invisible="1" />
+                <button class="btn" string="View" name="action_open_layout" type="object"
+                    invisible="not has_layout"
+                    icon="fa-map-o" />
+            </list>
+        </field>
+    </record>
+
+    <record id="plot_view_form" model="ir.ui.view">
+        <field name="name">plot.view.form</field>
+        <field name="model">stock.location</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_submit_approval" string="Submit" type="object"
+                        class="oe_highlight"
+                        invisible="state != 'draft'"  confirm="Are you sure that you want to do this action?" />
+                    <!-- <button name="action_confirm" string="Confirm" type="object"
+                        class="oe_highlight"
+                        invisible="state != 'wait_for_approval'" /> -->
+                    <button name="action_withdraw_approval" string="Withdraw" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="btn btn-secondary"
+                        invisible="state not in ('wait_for_approval', 'draft')" />
+                    <button name="action_reset" string="Reset" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="oe_highlight"
+                        invisible="state not in ('rejected', 'cancel', 'confirm')" />
+                    <button name="action_cancel" string="Cancel" type="object"
+                        invisible="state != 'draft'"  confirm="Are you sure that you want to do this action?" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_open_layout" type="object"
+                            icon="fa-map-o">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Map
+                                </span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button" name="action_open_child_plots" type="object"
+                            icon="fa-cubes">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Child Plots
+                                </span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button" name="action_open_approval_history_ids"
+                            type="object"
+                            icon="fa-history">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Approval Histories
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <h1>
+                        <field name="name" string="Plot View" readonly="state != 'draft'" />
+                    </h1>
+                    <label for="location_id" string="Parent Plot View" />
+                    <h2>
+                        <field name="location_id" domain="[('is_plot_view', '=', True)]"
+                            readonly="state != 'draft'"
+                            options="{'no_create': True, 'no_open': True}" />
+                    </h2>
+                    <group>
+                        <group>
+                            <field name="is_plot_view" invisible="1" />
+                            <field name="land_plot_category_id"
+                                readonly="state != 'draft' or location_id"
+                                options="{'no_create': True}" required="state == 'draft'" />
+                            <field name="gross_area" readonly="state != 'draft'" />
+                        </group>
+                        <group>
+                            <field name="saleable_area" readonly="1" />
+                            <field name="occupied_area" />
+                            <field name="reserved_area" />
+                            <field name="vacant_area" />
+                            <field name="internal_usage_area" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="layout_image" widget="image"
+                                readonly="state != 'draft'"
+                                options='{"preview_image": "layout_image"}' />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Approval" name="approval" invisible="state == 'confirm'">
+                            <field name="approver_ids" mode="list" readonly="1">
+                                <list editable="bottom" decoration-success="status=='approved'"
+                                    decoration-warning="status in ['pending', 'waiting']"
+                                    decoration-danger="status=='refused'" no_open="1">
+                                    <field name="existing_request_user_ids" column_invisible="True" />
+                                    <field name="sequence" column_invisible="True" />
+                                    <field name="user_id" string="Approver"
+                                        required="not job_id" />
+                                    <field name="job_id" required="not user_id" />
+                                    <field name="status" />
+                                    <field name="company_id" column_invisible="True" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_plan_map" model="ir.ui.view">
+        <field name="name">view_plan_map</field>
+        <field name="model">stock.location</field>
+        <field name="type">plan</field>
+        <field name="arch" type="xml">
+            <plan layout_image_url="layout_image_url" mode="editable" layout_data="layout_data"
+                tooltip_data="tooltip_data" />
+        </field>
+    </record>
+
+    <record id="land_plot_view_search" model="ir.ui.view">
+        <field name="name">stock.location.search</field>
+        <field name="model">stock.location</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <search string="Land Plot">
+                <field name="complete_name" string="Land Plot" />
+                <field name="location_id" string="Plot View" />
+                <field name="land_plot_category_id" string="Land Plot Category" />
+                <filter name="filter_vacant" string="Vacant"
+                    domain="[('lease_state', '=', 'vacant')]" />
+                <filter name="filter_under_negotiation" string="Under Negotiation"
+                    domain="[('lease_state', '=', 'under_negotiation')]" />
+                <filter name="filter_reserved" string="Reserved"
+                    domain="[('lease_state', '=', 'reserved')]" />
+                <filter name="filter_occupied" string="Occupied"
+                    domain="[('lease_state', '=', 'occupied')]" />
+                <group expand="0" string="Group By">
+                    <filter string="Land Plot Category" name="groupby_land_plot_category"
+                        domain="[]" context="{'group_by': 'land_plot_category_id'}" />
+                    <filter string="Lease Status" name="groupby_lease_status" domain="[]"
+                        context="{'group_by': 'lease_state'}" />
+                    <filter string="State" name="groupby_state" domain="[]"
+                        context="{'group_by': 'state'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="plot_view_search" model="ir.ui.view">
+        <field name="name">plot.view.search</field>
+        <field name="model">stock.location</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <search string="Plot View">
+                <field name="complete_name" string="Name" />
+                <field name="location_id" string="Parent Plot" />
+                <field name="land_plot_category_id" string="Category" />
+                <group expand="0" string="Group By">
+                    <filter string="Parent Plot" name="groupby_parent_plot" domain="[]"
+                        context="{'group_by': 'location_id'}" />
+                    <filter string="Land Plot Category" name="groupby_land_plot_category"
+                        domain="[]" context="{'group_by': 'land_plot_category_id'}" />
+                    <filter string="Land Plot Group" name="groupby_land_plot_group"
+                        domain="[]" context="{'group_by': 'land_plot_group_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_land_plot_view">
+        <field name="name">Land Plots</field>
+        <field name="res_model">stock.location</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_stock.land_plot_view_list')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_stock.land_plot_view_form')})]" />
+        <field name="search_view_id" ref="land_plot_view_search" />
+        <field name="domain">[('is_land_plot', '=', True), ('is_plot_view', '=', False), ('usage',
+            '=', 'internal')]</field>
+        <field name="context">{'default_is_land_plot': True, 'default_is_plot_view': False,
+            'default_usage': 'internal'}</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_plot_view">
+        <field name="name">Plot View</field>
+        <field name="res_model">stock.location</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_stock.plot_view_list')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_stock.plot_view_form')})]" />
+        <field name="search_view_id" ref="plot_view_search" />
+        <field name="domain">[('is_plot_view', '=', True)]</field>
+        <field name="context">{'default_is_plot_view': True, 'default_is_land_plot': True}</field>
+    </record>
+
+</odoo>

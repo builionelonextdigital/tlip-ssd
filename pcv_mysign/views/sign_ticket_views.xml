@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sign_ticket_form_inherit" model="ir.ui.view">
+        <field name="name">sign.ticket.form.inherit.tlip</field>
+        <field name="model">sign.ticket</field>
+        <field name="inherit_id" ref="pcv_sign_ticket.view_sign_ticket_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='signer_line_ids']//list" position="inside">
+                <field name="mysign_error" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

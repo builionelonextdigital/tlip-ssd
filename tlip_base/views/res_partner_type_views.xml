@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tlip_base_res_partner_type_tree" model="ir.ui.view">
+        <field name="name">tlip.base.res.partner.type.tree</field>
+        <field name="model">res.partner.type</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+</odoo>

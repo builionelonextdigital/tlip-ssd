@@ -1,0 +1,1144 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pcv_vas_trial_balance_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-13 07:40+0000\n"
+"PO-Revision-Date: 2025-02-13 07:40+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pcv_vas_trial_balance_report
+#: model:ir.model,name:pcv_vas_trial_balance_report.model_account_account
+msgid "Account"
+msgstr "Tài khoản"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.335_group
+msgid "Accrued expenses"
+msgstr "Chi phí phải trả"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2411_group
+msgid "Acquisition of fixed assets"
+msgstr "Mua sắm TSCĐ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.141_group
+msgid "Advances"
+msgstr "Tạm ứng"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.229_group
+msgid "Allowance for impairment of assets"
+msgstr "Dự phòng tổn thất tài sản"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.34312_group
+msgid "Bond discounts"
+msgstr "Chiết khấu trái phiếu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.34313_group
+msgid "Bond premiums"
+msgstr "Phụ trội trái phiếu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1212_group
+#: model:account.group,name:pcv_vas_trial_balance_report.1282_group
+msgid "Bonds"
+msgstr "Trái phiếu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3531_group
+msgid "Bonus fund"
+msgstr "Quỹ khen thưởng"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3411_group
+msgid "Borrowings"
+msgstr "Các khoản đi vay"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.341_group
+msgid "Borrowings and finance lease liabilities"
+msgstr "Vay và nợp thuê tài chính"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2111_group
+msgid "Buildings & structures"
+msgstr "Nhà cửa, vật kiến trúc"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6422_group
+msgid "COffice supply expenses"
+msgstr "Chi phí vật liệu quản lý"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.441_group
+msgid "Capital expenditure funds"
+msgstr "Nguồn vốn đầu tư xây dựng cơ bản"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.4112_group
+msgid "Capital surplus"
+msgstr "Thặng dư vốn cổ phần"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.112_group
+msgid "Cash in banks"
+msgstr "Tiền gửi ngân hàng"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.113_group
+msgid "Cash in transit"
+msgstr "Tiền đang chuyển"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.111_group
+msgid "Cash on hand"
+msgstr "Tiền mặt"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2135_group
+msgid "Computer software"
+msgstr "Chương trình phần mềm"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2412_group
+#: model:account.group,name:pcv_vas_trial_balance_report.241_group
+msgid "Construction in progress"
+msgstr "Xây dựng cơ bản dở dang"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3522_group
+msgid "Construction warranty provisions"
+msgstr "Dự phòng bảo hành công trình xây dựng"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.4111_group
+msgid "Contributed capital"
+msgstr "Vốn góp chủ sở hữu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.4113_group
+msgid "Conversion options on convertible bonds"
+msgstr "Quyền chọn chuyển đổi trái phiếu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3432_group
+msgid "Convertible bonds"
+msgstr "Trái phiếu chuyển đổi"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2132_group
+msgid "Copyrights"
+msgstr "Quyền phát hành"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3334_group
+msgid "Corporate income tax"
+msgstr "Thuế thu nhập doanh nghiệp"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.821_group
+msgid "Corporate income tax expenses"
+msgstr "Chi phí thuế thu nhập doanh nghiệp"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.632_group
+msgid "Cost of goods sold"
+msgstr "Cost of goods sold"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.623_group
+msgid "Costs of construction machinery"
+msgstr "Chi phí sử dụng máy thi công"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.8211_group
+msgid "Current tax expense"
+msgstr "Chi phí thuế TNDN hiện hành"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1612_group
+msgid "Current year expenditure"
+msgstr "Chi sự nghiệp năm nay"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.133_group
+msgid "Deductible VAT"
+msgstr "Thuế GTGT được khấu trừ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1332_group
+msgid "Deductible VAT of fixed assets"
+msgstr "Thuế GTGT được khấu trừ của TSCĐ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1331_group
+msgid "Deductible VAT of goods and services"
+msgstr "Thuế GTGT được khấu trừ của hàng hóa, dịch vụ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.243_group
+msgid "Deferred tax assets"
+msgstr "Tài sản thuế thu nhập hoãn lại"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.8212_group
+msgid "Deferred tax expense"
+msgstr "Chi phí thuế TNDN hoãn lại"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.347_group
+msgid "Deferred tax liabilities"
+msgstr "Thuế thu nhập hoãn lại phải trả"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.344_group
+msgid "Deposits received"
+msgstr "Nhận ký quỹ, ký cược"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2142_group
+msgid "Depreciation of financial leased assets"
+msgstr "Hao mòn TSCĐ thuê tài chính"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.214_group
+msgid "Depreciation of fixed assets"
+msgstr "Hao mòn tài sản cố định"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2143_group
+msgid "Depreciation of intangible fixed assets"
+msgstr "Hao mòn TSCĐ vô hình"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2147_group
+msgid "Depreciation of investment properties"
+msgstr "Hao mòn bất động sản đầu tư"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2141_group
+msgid "Depreciation of tangible fixed assets"
+msgstr "Hao mòn TSCĐ hữu hình"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.412_group
+msgid "Differences upon asset revaluation"
+msgstr "Chênh lệch đánh giá lại tài sản"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.413_group
+msgid "Differences upon asset revaluation"
+msgstr "Chênh lệch tỷ giá hối đoái"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.622_group
+msgid "Direct labour costs"
+msgstr "Chi phí nhân công trực tiếp"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.621_group
+msgid "Direct raw material costs"
+msgstr "Chi phí nguyên liệu, vật liệu trực tiếp"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6411_group
+msgid "Employees costs"
+msgstr "Chi phí nhân viên"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6421_group
+msgid "Employees management costs"
+msgstr "Chi phí nhân viên quản lý"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.417_group
+msgid "Enterprise reorganization assistance fund"
+msgstr "Quỹ hỗ trợ sắp xếp doanh nghiệp"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3523_group
+msgid "Enterprise restructuring provisions"
+msgstr "Dự phòng tái cơ cấu doanh nghiệp"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.33381_group
+msgid "Environment protection tax"
+msgstr "Thuế bảo vệ môi trường"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3338_group
+msgid "Environmental protection tax and other taxes"
+msgstr "Thuế bảo vệ môi trường và các loại thuế khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1534_group
+msgid "Equipment & spare parts"
+msgstr "Thiết bị, phụ tùng thay thế"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6234_group
+msgid "Equipment depreciation expense"
+msgstr "Chi phí khấu hao máy thi công"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2281_group
+msgid "Equity investments in other entities"
+msgstr "Đầu tư góp vốn vào đơn vị khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.4132_group
+msgid "Exchange rate differences in pre-operating period"
+msgstr "Chênh lệch tỷ giá hối đoái trong giai đoạn trước hoạt động"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.4131_group
+msgid ""
+"Exchange rate differences on revaluation of monetary items denominated in "
+"foreign currency"
+msgstr "Chênh lệch tỷ giá do đánh giá lại các khoản mục tiền tệ có gốc ngoại tệ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.627_group
+msgid "Factory overheads"
+msgstr "Chi phí sản xuất chung"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6271_group
+msgid "Factory staff costs"
+msgstr "Chi phí nhân viên phân xưởng"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3339_group
+msgid "Fees & charges & other payables"
+msgstr "Phí, lệ phí và các khoản phải nộp khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.212_group
+msgid "Finance lease fixed assets"
+msgstr "Tài sản cố định thuê tài chính"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.635_group
+msgid "Financial costsa"
+msgstr "Chi phí tài chính"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.515_group
+msgid "Financial income"
+msgstr "Doanh thu hoạt động tài chính"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2122_group
+msgid "Financial leased intangible fixed assets"
+msgstr "TSCĐ vô hình thuê tài chính"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3412_group
+msgid "Financial leased liabilities"
+msgstr "Nợ thuê tài chính"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2121_group
+msgid "Financial leased tangible fixed assets"
+msgstr "TSCĐ hữu hình thuê tài chính"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.155_group
+msgid "Finished goods"
+msgstr "Thành phẩm"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1551_group
+msgid "Finished goods - inventory"
+msgstr "Thành phẩm nhập kho"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1557_group
+msgid "Finished goods - real estates"
+msgstr "Thành phẩm bất động sản"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6274_group
+#: model:account.group,name:pcv_vas_trial_balance_report.6414_group
+#: model:account.group,name:pcv_vas_trial_balance_report.6424_group
+msgid "Fixed asset depreciation"
+msgstr "Chi phí khấu hao TSCĐ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1122_group
+msgid "Foreign currencies in bank"
+msgstr "Ngoại tệ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1132_group
+msgid "Foreign currencies in transit"
+msgstr "Ngoại tệ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1112_group
+msgid "Foreign currencies on hand"
+msgstr "Ngoại tệ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2136_group
+msgid "GLicenses & franchises"
+msgstr "Giấy phép và giấy phép nhượng quyền"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.642_group
+msgid "General administration expenses"
+msgstr "Chi phí quản lý doanh nghiệp"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.158_group
+msgid "Goods in bonded warehouse"
+msgstr "Hàng hóa kho bảo thuế"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.151_group
+msgid "Goods in transit"
+msgstr "Hàng mua đang đi đường"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.171_group
+msgid "Government bonds purchased for resale"
+msgstr "Giao dịch mua bán lại trái phiếu chính phủ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.461_group
+msgid "Government sourced funds"
+msgstr "Nguồn kinh phí sự nghiệp"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3384_group
+msgid "Health insurance"
+msgstr "Bảo hiểm y tế"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.128_group
+msgid "Held to maturity investments"
+msgstr "Đầu tư nắm giữ đến ngày đáo hạn"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3333_group
+msgid "Import & export tax"
+msgstr "Thuế xuất, nhập khẩu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1562_group
+msgid "Incidental expense"
+msgstr "Chi phí thu mua hàng hóa"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.911_group
+msgid "Income summary"
+msgstr "Xác định kết quả kinh doanh"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1533_group
+msgid "Instruments for rent"
+msgstr "Đồ dùng cho thuê"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.213_group
+msgid "Intangible fixed assets"
+msgstr "Tài sản cố định vô hình"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.336_group
+msgid "Internal payables"
+msgstr "Phải trả nội bộ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3363_group
+msgid "Internal payables for borrowing costs eligible for capitalization"
+msgstr "Phải trả nội bộ về chi phí đi vay đủ điều kiện được vốn hoá"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3362_group
+msgid "Internal payables for foreign exchange differences"
+msgstr "Phải trả nội bộ về chênh lệch tỷ giá"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3361_group
+msgid "Internal payables for working capital received"
+msgstr "Phải trả nội bộ về vốn kinh doanh"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1363_group
+msgid "Internal receivables on borrowing costs eligible for capitalization"
+msgstr "Phải thu nội bộ về chi phí đi vay đủ điều kiện được vốn hoá"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1362_group
+msgid "Internal receivables on foreign exchange difference"
+msgstr "Phải thu nội bộ về chênh lệch tỷ giá"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.136_group
+msgid "Intra-company receivables"
+msgstr "Phải thu nội bộ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.414_group
+msgid "Investment and development fund"
+msgstr "Quỹ đầu tư phát triển"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.217_group
+msgid "Investment properties"
+msgstr "Bất động sản đầu tư"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.222_group
+msgid "Investments in joint ventures or associates"
+msgstr "Đầu tư vào công ty liên doanh, liên kết"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.221_group
+msgid "Investments in subsidiaries"
+msgstr "Đầu tư vào công ty con"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.343_group
+msgid "Issued Bonds"
+msgstr "Trái phiếu phát hành"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6231_group
+msgid "Labour costs"
+msgstr "Chi phí nhân công"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3337_group
+msgid "Land & housing tax, land rental charges"
+msgstr "Thuế nhà đất, tiền thuê đất"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2131_group
+msgid "Land use rights"
+msgstr "Quyền sử dụng đất"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1283_group
+msgid "Loans"
+msgstr "Cho vay"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2112_group
+msgid "Machinery & equipment"
+msgstr "Máy móc, thiết bị"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2413_group
+msgid "Major repairs of fixed assets"
+msgstr "Sửa chữa lớn TSCĐ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3534_group
+msgid "Management bonus fund"
+msgstr "Quỹ thưởng ban quản lý điều hành công ty"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6232_group
+#: model:account.group,name:pcv_vas_trial_balance_report.6272_group
+msgid "Material costs"
+msgstr "Chi phí nguyên, vật liệu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6412_group
+msgid "Materials and packing materials"
+msgstr "Chi phí nguyên vật liệu, bao bì"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.156_group
+msgid "Merchandise goods"
+msgstr "Hàng hóa"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1123_group
+msgid "Monetary gold in bank"
+msgstr "Vàng tiền tệ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1113_group
+msgid "Monetary gold on hand"
+msgstr "Vàng tiền tệ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.244_group
+msgid "Mortgage, collaterals and deposits"
+msgstr "Cầm cố, thế chấp, ký quỹ, ký cược"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3336_group
+msgid "Natural resources using tax"
+msgstr "Thuế tài nguyên"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.161_group
+msgid "Non-business expenditures"
+msgstr "Chi sự nghiệp"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.4612_group
+msgid "Non-business funds of current year"
+msgstr "Nguồn kinh phí sự nghiệp năm nay"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.4611_group
+msgid "Non-business funds of previous year"
+msgstr "Nguồn kinh phí sự nghiệp năm trước"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.466_group
+msgid "Non-business funds used for fixed asset acquisitions"
+msgstr "Nguồn kinh phí đã hình thành TSCĐ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2114_group
+msgid "Office equipment and furniture"
+msgstr "Thiết bị, dụng cụ quản lý"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3431_group
+msgid "Ordinary bonds"
+msgstr "Trái phiếu thường"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.41111_group
+msgid "Ordinary shares with voting rights"
+msgstr "Cổ phiếu phổ thông có quyền biểu quyết"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.811_group
+msgid "Other Expenses"
+msgstr "Chi phí khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.711_group
+msgid "Other Income"
+msgstr "Thu nhập khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.4118_group
+msgid "Other capital"
+msgstr "Vốn khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.418_group
+msgid "Other equity funds"
+msgstr "Các quỹ khác thuộc vốn chủ sở hữu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6238_group
+#: model:account.group,name:pcv_vas_trial_balance_report.6278_group
+#: model:account.group,name:pcv_vas_trial_balance_report.6418_group
+#: model:account.group,name:pcv_vas_trial_balance_report.6428_group
+msgid "Other expenses"
+msgstr "Chi phí bằng tiền khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2138_group
+msgid "Other intangible fixed assets"
+msgstr "TSCĐ vô hình khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3368_group
+msgid "Other internal payables"
+msgstr "Phải trả nội bộ khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1368_group
+msgid "Other internal receivables"
+msgstr "Phải thu nội bộ khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2288_group
+msgid "Other investment"
+msgstr "Đầu tư khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.228_group
+msgid "Other investments"
+msgstr "Đầu tư khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1288_group
+msgid "Other investments held to maturity"
+msgstr "Các khoản đầu tư khác nắm giữ đến ngày đáo hạn"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3388_group
+#: model:account.group,name:pcv_vas_trial_balance_report.338_group
+msgid "Other payables"
+msgstr "Phải trả, phải nộp khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3524_group
+msgid "Other provisions"
+msgstr "Dự phòng phải trả khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1388_group
+#: model:account.group,name:pcv_vas_trial_balance_report.138_group
+msgid "Other receivables"
+msgstr "Phải thu khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.5118_group
+msgid "Other revenue"
+msgstr "Doanh thu khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2118_group
+msgid "Other tangible fixed assets"
+msgstr "TSCĐ khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.33382_group
+msgid "Other taxes"
+msgstr "Các loại thuế khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.33311_group
+msgid "Output VAT"
+msgstr "Thuế GTGT đầu ra"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6237_group
+#: model:account.group,name:pcv_vas_trial_balance_report.6277_group
+msgid "Outside services"
+msgstr "Chi phí dịch vụ mua ngoài"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6417_group
+#: model:account.group,name:pcv_vas_trial_balance_report.6427_group
+msgid "Outside services"
+msgstr "Chi phí dịch vụ ngoài"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.157_group
+msgid "Outward goods on consignment"
+msgstr "Hàng gửi đi bán"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.411_group
+msgid "Owner’s equity"
+msgstr "Vốn đầu tư của chủ sở hữu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1532_group
+msgid "Packaging rotation"
+msgstr "Bao bì luân chuyển"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.34311_group
+msgid "Par value of bonds"
+msgstr "Mệnh giá trái phiếu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2133_group
+msgid "Patents"
+msgstr "Bản quyền, bằng sáng chế"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3385_group
+msgid "Payables on equitization"
+msgstr "Phải trả về cổ phần hóa"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.334_group
+msgid "Payables to employees"
+msgstr "Phải trả người lao động"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3348_group
+msgid "Payables to others"
+msgstr "Phải trả người lao động khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3341_group
+msgid "Payables to staff"
+msgstr "Phải trả công nhân viên"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2115_group
+msgid "Perennial plants, working and producing animals"
+msgstr "Cây lâu năm, súc vật làm việc và cho sản phẩm"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3335_group
+msgid "Personal income tax"
+msgstr "Thuế thu nhập cá nhân"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.41112_group
+msgid "Preference shares"
+msgstr "Cổ phiếu ưu đãi"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.242_group
+msgid "Prepaid expenses"
+msgstr "Chi phí phải trả"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1611_group
+msgid "Previous years expenditure"
+msgstr "Previous years expenditure"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.357_group
+msgid "Price stabilization fund"
+msgstr "Quỹ bình ổn giá"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1385_group
+msgid "Privatization receivables"
+msgstr "Phải thu về cổ phần hoá"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3521_group
+msgid "Product warranty provisions"
+msgstr "Dự phòng bao hành sản phẩm hàng hóa"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.631_group
+msgid "Production costs"
+msgstr "Giá thành sản xuất"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.337_group
+msgid "Progress billings"
+msgstr "Thanh toán theo tiến độ kế hoạch hợp đồng xây dựng"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1567_group
+msgid "Property Inventories"
+msgstr "Hàng hóa bất động sản"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6426_group
+msgid "Provision expenses"
+msgstr "Chi phí dự phòng"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2291_group
+msgid "Provision for decline in value of trading securities"
+msgstr "Dự phòng giảm giá chứng khoán kinh doanh"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2293_group
+msgid "Provision for doubtful debts"
+msgstr "Dự phòng phải thu khó đòi"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2292_group
+msgid "Provision for investment loss in other entities"
+msgstr "Dự phòng tổn thất đầu tư vào đơn vị khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2294_group
+msgid "Provision for reserve inventories"
+msgstr "Dự phòng giảm giá hàng tồn kho"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.352_group
+msgid "Provisions"
+msgstr "Dự phòng phải trả"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1561_group
+msgid "Purchase costs"
+msgstr "Giá hàng hóa"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.611_group
+msgid "Purchases"
+msgstr "Mua hàng"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6112_group
+msgid "Purchases of goods"
+msgstr "Mua hàng hóa"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6111_group
+msgid "Purchases of raw materials"
+msgstr "Mua nguyên liệu, vật liệu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.353_group
+msgid "QBonus and welfare fund"
+msgstr "Quỹ khen thưởng phúc lợi"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.152_group
+msgid "Raw materials"
+msgstr "Nguyên liệu, vật liệu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.521_group
+msgid "Revenue deductions"
+msgstr "Các khoản giảm trừ doanh thu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.5114_group
+msgid "Revenue from government grants"
+msgstr "Doanh thu trợ cấp, trợ giá"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.5117_group
+msgid "Revenue from investment properties"
+msgstr "Doanh thu kinh doanh bất động sản đầu tư"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.5112_group
+msgid "Revenue from sales of finished goods"
+msgstr "Doanh thu bán các thành phẩm"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.5111_group
+msgid "Revenue from sales of merchandises"
+msgstr "Doanh thu bán hàng hóa"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.5113_group
+msgid "Revenue from services rendered"
+msgstr "Doanh thu cung cấp dịch vụ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.511_group
+msgid "Revenues"
+msgstr "Doanh thu bán hàng"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.5212_group
+msgid "Sales allowances"
+msgstr "Giảm giá hàng bán"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.5211_group
+msgid "Sales discounts"
+msgstr "Chiết khấu thương mại"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.5213_group
+msgid "Sales returns"
+msgstr "Hàng bán bị trả lại"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3561_group
+#: model:account.group,name:pcv_vas_trial_balance_report.356_group
+msgid "Science and technology development fund"
+msgstr "Quỹ phát triển khoa học và công nghệ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3562_group
+msgid ""
+"Science and technology development fund used for fixed asset acquisition"
+msgstr "Quỹ phát triển khoa học và công nghệ đã hình thành TSCĐ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1218_group
+msgid "Securities and other financial instruments"
+msgstr "Chứng khoán và công cụ tài chính khác"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.641_group
+msgid "Selling expenses"
+msgstr "Chi phí hàng bán"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1211_group
+msgid "Shares"
+msgstr "Cổ phiếu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1381_group
+msgid "Shortage of assets awaiting resolution"
+msgstr "Tài sản thiếu chờ xử lý"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3383_group
+msgid "Social insurance"
+msgstr "Bảo hiểm xã hội"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3332_group
+msgid "Special consumption tax"
+msgstr "Thuế tiêu thụ đặc biệt"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6423_group
+msgid "Stationery costs"
+msgstr "Chi phí đồ dùng văn phòng"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3381_group
+msgid "Surplus of assets awaiting for resolution"
+msgstr "Tài sản thừa chờ giải quyết"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.211_group
+msgid "Tangible fixed assets"
+msgstr "Tài sản cố định hữu hình"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.333_group
+msgid "Taxes and other payables to the State"
+msgstr "Thuế và các khoản phải nộp nhà nước"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6425_group
+msgid "Taxes, fees and charges"
+msgstr "Thuế, phí và lệ phí"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1281_group
+msgid "Time deposits"
+msgstr "Tiền ký gửi có hạn"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1531_group
+msgid "Tools & supplies"
+msgstr "Công cụ, dụng cụ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6233_group
+#: model:account.group,name:pcv_vas_trial_balance_report.6273_group
+msgid "Tools and instruments"
+msgstr "Chi phí dụng cụ sản xuất"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6413_group
+msgid "Tools and instruments"
+msgstr "Chi phí dụng cụ, đồ dùng"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.153_group
+msgid "Tools and supplies"
+msgstr "Công cụ, dụng cụ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.331_group
+msgid "Trade payables"
+msgstr "Phải trả cho người bán"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.131_group
+msgid "Trade receivables"
+msgstr "Phải thu của khách hàng"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3382_group
+msgid "Trade union fees"
+msgstr "Kinh phí công đoàn"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2134_group
+msgid "Trademarks and brand name"
+msgstr "Nhãn hiệu, tên thương mại"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.121_group
+msgid "Trading securities"
+msgstr "Chứng khoán kinh doanh"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.2113_group
+msgid "Transportation & transmission vehicles"
+msgstr "Phương tiện vận tải, truyền dẫn"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.419_group
+msgid "Treasury stocks"
+msgstr "Cổ phiếu quỹ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.421_group
+msgid "Undistributed profit after tax"
+msgstr "Lợi nhuận sau thuế chưa phân phối"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.4212_group
+msgid "Undistributed profit after tax of current year"
+msgstr "Lợi nhuận sau thuế chưa phân phối năm nay"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.4211_group
+msgid "Undistributed profit after tax of previous year"
+msgstr "Lợi nhuận sau thuế chưa phân phối năm trước"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3387_group
+msgid "Unearned revenue"
+msgstr "Doanh thu chưa thực hiện"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3386_group
+msgid "Unemployment insurance"
+msgstr "Bảo hiểm thất nghiệp"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.33312_group
+msgid "VAT on imported goods"
+msgstr "Thuế GTGT hàng nhập khẩu"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3331_group
+msgid "VAT payable"
+msgstr "Thuế GTGT phải nộp"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1121_group
+msgid "Vietnamese dong in bank"
+msgstr "Tiền Việt Nam"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1131_group
+msgid "Vietnamese dong in transit"
+msgstr "Tiền Việt Nam"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1111_group
+msgid "Vietnamese dong on hand"
+msgstr "Tiền Việt Nam"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.6415_group
+msgid "Warranty expenses"
+msgstr "Chi phí bảo hành"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3532_group
+msgid "Welfare fund"
+msgstr "Quỹ phúc lợi"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.3533_group
+msgid "Welfare fund used for fixed asset acquisitions"
+msgstr "Quỹ phúc lợi đã hình thành TSCĐ"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.154_group
+msgid "Work in progress"
+msgstr "Chi phí sản xuất, kinh doanh dở dang"
+
+#. module: pcv_vas_trial_balance_report
+#: model:account.group,name:pcv_vas_trial_balance_report.1361_group
+msgid "Working capital provided to sub-units"
+msgstr "Vốn kinh doanh ở các đơn vị trực thuộc"

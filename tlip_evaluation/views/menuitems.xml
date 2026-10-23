@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Procurement / Configuration / Evaluation -->
+    <menuitem id="menu_evaluation"
+        name="Evaluation"
+        parent="purchase.menu_purchase_config"
+        sequence="120" />
+    <menuitem id="menu_evaluation_criteria"
+        name="Criteria for Evaluation"
+        parent="tlip_evaluation.menu_evaluation"
+        action="tlip_evaluation.action_evaluation_criteria"
+        sequence="10" />
+    <menuitem id="menu_evaluation_question"
+        name="Questions for Evaluation"
+        parent="tlip_evaluation.menu_evaluation"
+        action="tlip_evaluation.action_evaluation_question"
+        sequence="20" />
+
+</odoo>

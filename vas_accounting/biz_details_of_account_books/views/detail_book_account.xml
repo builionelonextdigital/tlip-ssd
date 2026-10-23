@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_detail_book_account" model="ir.actions.client">
+        <field name="name">Detailed of book account BTC (S38-DN)</field>
+        <field name="tag">account_report</field>
+        <field name="context" eval="{'report_id': ref('biz_details_of_account_books.detail_book_report')}"/>
+    </record>
+
+    <menuitem id="menu_action_detail_book_account" name="Detailed of book account BTC (S38-DN)"
+              action="action_detail_book_account"
+              parent="biz_vietnamese_accounting_menu.menu_accounting_vn_report" groups="account.group_account_user"/>
+</odoo>

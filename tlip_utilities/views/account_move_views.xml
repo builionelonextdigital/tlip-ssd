@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_move_form_view_inherit_utility_consumption" model="ir.ui.view">
+        <field name="name">account.move.form.view.inherit.utility.consumption</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="tlip_account.account_move_form_view_inherit" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']/list//field[@name='quantity']"
+                position="before">
+                <field name="last_value"
+                    required="parent.invoice_type_code == 'utility' and parent.utility_quantity_based_on == 'consumption'"
+                    column_invisible="parent.move_type not in ('out_invoice', 'out_refund') or parent.invoice_type_code != 'utility' or parent.utility_quantity_based_on != 'consumption'" />
+                <field name="new_value"
+                    required="parent.invoice_type_code == 'utility' and parent.utility_quantity_based_on == 'consumption'"
+                    column_invisible="parent.move_type not in ('out_invoice', 'out_refund') or parent.invoice_type_code != 'utility' or parent.utility_quantity_based_on != 'consumption'" />
+                <field name="multiplier"
+                    required="parent.invoice_type_code == 'utility' and parent.utility_quantity_based_on == 'consumption'"
+                    column_invisible="parent.move_type not in ('out_invoice', 'out_refund') or parent.invoice_type_code != 'utility' or parent.utility_quantity_based_on != 'consumption'" />
+                <field name="radio_cosfi"
+                    required="parent.invoice_type_code == 'utility' and parent.utility_electricity_type == 'reactive_power'"
+                    column_invisible="parent.move_type not in ('out_invoice', 'out_refund') or parent.invoice_type_code != 'utility' or parent.utility_electricity_type != 'reactive_power'" />
+                <field name="radio_kfactor"
+                    required="parent.invoice_type_code == 'utility' and parent.utility_electricity_type == 'reactive_power'"
+                    column_invisible="parent.move_type not in ('out_invoice', 'out_refund') or parent.invoice_type_code != 'utility' or parent.utility_electricity_type != 'reactive_power'" />
+                <field name="utility_quantity"
+                    required="parent.invoice_type_code == 'utility' and parent.utility_electricity_type == 'reactive_power'"
+                    column_invisible="parent.move_type not in ('out_invoice', 'out_refund') or parent.invoice_type_code != 'utility' or parent.utility_electricity_type != 'reactive_power'" />
+                <field name="connection_quantity"
+                    required="parent.invoice_type_code == 'utility' and parent.utility_electricity_type == 'connection_charge'"
+                    column_invisible="parent.move_type not in ('out_invoice', 'out_refund') or parent.invoice_type_code != 'utility' or parent.utility_electricity_type != 'connection_charge'" />
+                <field name="connection_rate"
+                    required="parent.invoice_type_code == 'utility' and parent.utility_electricity_type == 'connection_charge'"
+                    column_invisible="parent.move_type not in ('out_invoice', 'out_refund') or parent.invoice_type_code != 'utility' or parent.utility_electricity_type != 'connection_charge'" />
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/list//field[@name='quantity']"
+                position="attributes">
+                <attribute name="column_invisible">(parent.invoice_type_code == 'utility' and parent.utility_electricity_type == 'reactive_power')</attribute>
+            </xpath>
+            <field name="development_project_id" position="after">
+                <label for="utitlity_period_from" string="Period" invisible="invoice_type_code != 'utility'"/>
+                <div class="o_row">
+                    <field name="utitlity_period_from" nolabel="1" class="oe_inline"
+                        invisible="invoice_type_code != 'utility'"
+                        readonly="approval_state != 'draft'"
+                        widget="daterange"
+                        options="{'end_date_field': 'utitlity_period_to'}" />
+                    <field name="utitlity_period_to" nolabel="1" class="oe_inline"
+                        readonly="approval_state != 'draft'" invisible="1" />
+                </div>
+                <field name="electricity_point_id" 
+                    string="Metering Point"
+                    readonly="approval_state != 'draft'"
+                    invisible="utility_type != 'electricity' or not invoice_type_id" />
+                <field name="water_point_id"
+                    string="Metering Point"
+                    readonly="approval_state != 'draft'"
+                    invisible="utility_type != 'water' or not invoice_type_id" />
+                <field name="measurement_point_location_name"
+                    invisible="utility_type != 'water' or not invoice_type_id" />
+                <field name="metering_point" invisible="1" />
+                <field name="electricity_type" invisible="not electricity_type"  />
+            </field>
+            <xpath expr="//page[@name='invoice_tab']" position="before">
+                <page id="utility_tab"
+                    name="utility_tab"
+                    string="Consumption"
+                    invisible="move_type not in ('out_invoice', 'out_refund') or invoice_type_code != 'utility' or utility_electricity_type != 'reactive_power'">
+                    <field name="utility_line_ids"
+                        mode="list"
+                        readonly="state != 'draft'">
+                        <list editable="bottom" string="Utility Lines">
+                            <field name="product_id"
+                                domain="[('utility_type', '=', 'electricity')]"
+                                options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                            <field name="quantity" />
+                            <field name="unit_price" />
+                            <field name="amount" />
+                        </list>
+                    </field>
+                    <field name="utility_total_amount" invisible="1" />
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/list"
+                position="inside">
+                <field name="electricity_point_id" column_invisible="parent.utility_type != 'electricity' or not parent.invoice_type_id" optional="hide" options="{'no_open': 1, 'no_create': 1}" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_invoice_request_payment_list_inherit" model="ir.ui.view">
+        <field name="name">account.move.view.form.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="tlip_account.view_invoice_request_payment_list"/>
+        <field name="arch" type="xml">
+            <field name="invoice_type_id" position="after">
+                <field name="electricity_type" column_invisible="context.get('request_source', False) != 'utility'"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_request_payment_view" model="ir.actions.act_window">
+        <field name="name">Request for Payment</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_account.view_invoice_request_payment_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_account.view_invoice_request_payment_form')})]" />
+        <field name="context">{'request_source': 'utility', 'default_move_type': 'out_invoice',
+            'default_utility_type': 'electricity', 'default_is_request_payment': True}</field>
+        <field name="domain">[('utility_type', 'in', ('water', 'electricity')), ('is_request_payment', '=', True)]</field>
+    </record>
+</odoo>

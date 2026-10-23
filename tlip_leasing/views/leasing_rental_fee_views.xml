@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rental_fee_list_view" model="ir.ui.view">
+        <field name="name">rental_fee_list_view</field>
+        <field name="model">leasing.rental.fee</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="currency_id" column_invisible="1"/>
+                <field name="fee_type_id" />
+                <field name="uom_id" string="Unit"/>
+                <field name="price_unit" string="Amount"/>
+                <field name="date_from" string="From" required="1"/>
+                <field name="date_to" string="To" required="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rental_fee_list_view_1" model="ir.ui.view">
+        <field name="name">rental_fee_list_view_1</field>
+        <field name="model">leasing.rental.fee</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="currency_id" column_invisible="1"/>
+                <field name="line_number" />
+                <field name="location_start" />
+                <field name="location_end" />
+                <field name="number_of_pipes" />
+                <field name="telecom_line_length" />
+                <field name="fee_type_id" />
+                <field name="uom_id" string="Unit"/>
+                <field name="price_unit" string="Amount"/>
+                <field name="premium_excluded_vat"/>
+            </list>
+        </field>
+    </record>
+    
+
+</odoo>

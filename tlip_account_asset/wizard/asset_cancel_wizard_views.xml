@@ -1,0 +1,17 @@
+<odoo>
+    <record id="view_asset_cancel_wizard_form" model="ir.ui.view">
+        <field name="name">asset.cancel.wizard.form</field>
+        <field name="model">asset.cancel.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Cancel Asset">
+                <group>
+                    <field name="reason"/>
+                </group>
+                <footer>
+                    <button string="Cancel Asset" type="object" name="action_cancel_asset" class="btn-primary"/>
+                    <button string="Discard" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

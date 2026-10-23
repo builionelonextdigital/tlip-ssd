@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_partner_form_custom_inherit_tlip_evaluation" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.tlip.evaluation</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="tlip_base.view_tlip_base_partner_form_custom"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Evaluation" invisible="vendor_state != 'approved'">
+                    <group>
+                        <field name="last_evaluation_date" readonly="1" />
+                        <field name="total_score" readonly="1" />
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="procurement_select_request_type_form_view" model="ir.ui.view">
+        <field name="name">procurement.select.request.type.form</field>
+        <field name="model">procurement.select.request.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="request_id" invisible="1"/>
+                    <field name="request_type"
+                        widget="dynamic_dropdown"
+                        options="{'values': 'get_request_type_selection'}" />
+                </group>
+                <footer>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_procurement_select_request_type" model="ir.actions.act_window">
+        <field name="name">Select Type of request</field>
+        <field name="res_model">procurement.select.request.type</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

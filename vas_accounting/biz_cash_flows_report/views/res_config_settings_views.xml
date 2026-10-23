@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form_cash_flows" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.account.cash.flows</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="40"/>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//block[@name='fiscal_localization_setting_container']//div[@class='content-group']" position="after">
+                    <div class="content-group">
+                        <div class="row mt16">
+                            <button name="update_cash_flows" string="Update Data Cash Flows" type="object"/>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

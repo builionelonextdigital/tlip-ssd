@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="summary_change_wizard_view_form" model="ir.ui.view">
+        <field name="name">summary_change_wizard_view_form</field>
+        <field name="model">summary.change.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="supplement_agreement_id" invisible="1" />
+                        <field name='effective_date' />
+                        <field name='reason' />
+                    </group>
+                </group>
+                <field name="change_line_ids" nolabel="1" readonly="1" widget="one2many"
+                    invisible="not change_line_ids">
+                    <list>
+                        <field name="name" widget="text" />
+                        <field name="current_value" widget="text" />
+                        <field name="new_value" widget="html" />
+                    </list>
+                </field>
+                <footer>
+                    <button name="button_confirm" type="object"
+                        data-hotkey="q" string="Confirm" class="oe_highlight" />
+                    <button special="cancel" data-hotkey="z" string="Cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

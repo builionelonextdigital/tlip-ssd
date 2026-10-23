@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_contract_type_view_list" model="ir.ui.view">
+        <field name="name">purchase_contract_type.view.list</field>
+        <field name="model">purchase.contract.type</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name" />
+                <field name="classification" />
+                <field name="document_template_id" />
+            </list>
+        </field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="action_purchase_contract_type_view">
+        <field name="name">Purchase Contract Type</field>
+        <field name="res_model">purchase.contract.type</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_procurement.purchase_contract_type_view_list')})]" />
+    </record>
+
+</odoo>

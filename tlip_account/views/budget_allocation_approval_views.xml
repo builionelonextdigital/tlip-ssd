@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="budget_allocation_approval_view_form" model="ir.ui.view">
+        <field name="name">budget.allocation.approval.view.form</field>
+        <field name="model">budget.allocation.approval</field>
+        <field name="arch" type="xml">
+            <form string="Budget Approval">
+                <header>
+                    <button name="action_submit_approval" string="Submit" type="object"
+                        class="btn btn-primary"
+                        invisible="state != 'draft'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_approve_request" type="object" string="Approve"
+                        invisible="user_status != 'pending' or state != 'wait_for_approval'"
+                        class="btn-primary" data-hotkey="v"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_reject_request" string="Refuse" type="object"
+                        invisible="user_status != 'pending' or state != 'wait_for_approval'"
+                        data-hotkey="z"
+                        confirm="Are you sure that you want to do this action?" />
+                    <widget name="attach_document" string="Attach Document" action="message_post" invisible="state != 'draft'"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                        invisible="state not in ('wait_for_approval', 'draft')" confirm="Are you sure that you want to do this action?" />
+                    <button name="action_reset" string="Reset" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="btn btn-secondary"
+                        invisible="state not in ('rejected', 'cancel')" />
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,wait_for_approval,approved,rejected" />
+                </header>
+                <sheet string="Budget Approval">
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_open_approval_history_ids"
+                            type="object"
+                            icon="fa-history">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Approval Requests
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <span class="o_form_label">Budget Approval</span>
+                        <h1 class="d-flex">
+                            <field name="priority" widget="priority" class="me-3" />
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="budget_approval_type"
+                                widget="radio" options="{'horizontal': true}"
+                                readonly="state != 'draft'" />
+                            <field name="user_id" required="1"
+                                options="{'no_create': True}"
+                                readonly="state != 'draft'" />
+                            <label for="date_from" string="Period" />
+                            <div class="o_row">
+                                <field name="date_from" nolabel="1" class="oe_inline"
+                                    readonly="state != 'draft'" widget="daterange"
+                                    options="{'end_date_field': 'date_to'}" />
+                                <field name="date_to" nolabel="1" class="oe_inline"
+                                    readonly="state != 'draft'" invisible="1" />
+                            </div>
+                            <field name="budget_category_id" required="1"
+                                options="{'no_create': True}"
+                                readonly="state != 'draft'" />
+                            <field name="company_id" 
+                                readonly="state != 'draft'"
+                                options="{'no_create': True, 'no_open': True, 'no_create_edit': True}"/>
+                        </group>
+                        <group>
+                            <field name="transfer_amount" />
+                            <field name="src_budget_code_id"
+                                options="{'no_create': True}"
+                                required="budget_approval_type == 'transfer'"
+                                invisible="budget_approval_type != 'transfer'"
+                                readonly="state != 'draft'" />
+                            <field name="dest_budget_code_id" required="1"
+                                options="{'no_create': True}"
+                                readonly="state != 'draft'" />
+                            <field name="issue_date" readonly="state != 'draft'" />
+                            <field name="ref" readonly="state != 'draft'" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Budget Allocation" name="budget_allocation">
+                            <field name="budget_allocation_line_ids" colspan="4"
+                                readonly="state != 'draft'">
+                                <list string="Budget Allocation" editable="bottom">
+                                    <field name="available_budget_analytic_ids" column_invisible="1" />
+                                    <field name="budget_analytic_id"
+                                        options="{'no_create': True}" />
+                                    <field name="transfer_amount" />
+                                    <field name="description" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Summary" name="summary">
+                            <group>
+                                <group string="Source Budget Code"
+                                    invisible="budget_approval_type != 'transfer'">
+                                    <field name="src_budget_code_id" readonly="1" />
+                                    <field name="src_budget_amount" string="Budgeted" />
+                                    <field name="src_committed_amount" string="Reserved" />
+                                    <field name="src_achieved_amount" string="Used" />
+                                    <field name="src_prev_additional_amount"
+                                        string="Previous Additional" />
+                                    <field name="src_origin_remained_amount"
+                                        string="Origin Remained" />
+                                    <field name="src_new_remained_amount" string="New Remained" />
+                                    <field name="src_transfer_amount" string="Additional Amount" />
+                                </group>
+                                <group string="Destination Budget Code">
+                                    <field name="dest_budget_code_id" readonly="1" />
+                                    <field name="dest_budget_amount" string="Budgeted" />
+                                    <field name="dest_committed_amount" string="Reserved" />
+                                    <field name="dest_achieved_amount" string="Used" />
+                                    <field name="dest_prev_additional_amount"
+                                        string="Previous Additional" />
+                                    <field name="dest_origin_remained_amount"
+                                        string="Origin Remained" />
+                                    <field name="dest_new_remained_amount" string="New Remained" />
+                                    <field name="transfer_amount" string="Additional Amount" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Approver(s)" name="approver" invisible="state == 'draft'">
+                            <field name="approver_ids" mode="list" readonly="1">
+                                <list editable="bottom" decoration-success="status=='approved'"
+                                    decoration-warning="status in ['pending', 'waiting']"
+                                    decoration-danger="status=='refused'" no_open="1">
+                                    <field name="existing_request_user_ids" column_invisible="True" />
+                                    <field name="sequence" column_invisible="True" />
+                                    <field name="user_id" string="Approver"
+                                        required="not job_id" />
+                                    <field name="job_id" required="not user_id" />
+                                    <field name="status" />
+                                    <field name="company_id" column_invisible="True" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="budget_allocation_approval_view_tree" model="ir.ui.view">
+        <field name="name">budget.allocation.approval.view.tree</field>
+        <field name="model">budget.allocation.approval</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="priority" optional="show" widget="priority" nolabel="1" />
+                <field name="name" />
+                <field name="budget_approval_type" />
+                <field name="user_id" />
+                <field name="period_str" />
+                <field name="transfer_amount" />
+                <field name="state" widget="badge"
+                    decoration-danger="state == 'rejected'"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state == 'wait_for_approval'"
+                    decoration-success="state == 'approved'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_budget_allocation_approval_filter" model="ir.ui.view">
+        <field name="name">budget_allocation.approval.view.search</field>
+        <field name="model">budget.allocation.approval</field>
+        <field name="arch" type="xml">
+            <search string="Search Budget Approval">
+                <field name="name" string="Budget Approval" />
+                <field name="user_id" />
+                <filter name="my_requests" string="My Requests" domain="[('user_id', '=', uid)]" />
+                <filter name="filter_approvals_to_review" string="My Approvals to Review"
+                    domain="[('state', '=', 'wait_for_approval'), '|', ('current_approver_id.job_id.employee_ids.user_id', 'in', [uid]), ('current_approver_id.user_id', '=', uid)]" />
+                <filter string="Starred" name="starred" domain="[('priority', '=', '1')]" />
+                <separator />
+                <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]" />
+                <separator />
+                <filter name="approved" string="Confirmed" domain="[('state', '=', 'approved')]" />
+                <filter name="to_approve" string="Waiting for Approval"
+                    domain="[('state', '=', 'wait_for_approval')]" />
+                <group expand="0" string="Group By">
+                    <filter string="Requester" name="requester" domain="[]"
+                        context="{'group_by': 'user_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="budget_approval_allocation_action" model="ir.actions.act_window">
+        <field name="name">Budget Approval</field>
+        <field name="res_model">budget.allocation.approval</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+</odoo>

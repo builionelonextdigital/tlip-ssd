@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit accounting_period_closing form view -->
+    <record id="accounting_period_closing_view_form_fx_adjust" model="ir.ui.view">
+        <field name="name">accounting.period.closing.view.form.fx.adjust</field>
+        <field name="model">accounting.period.closing</field>
+        <field name="inherit_id" ref="tlip_account.accounting_period_closing_view_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Insert new button BEFORE the close button -->
+            <xpath expr="//header/button[@name='action_close']" position="after">
+
+                <button name="action_adjust_fx_monthly"
+                        string="Adjustment FX Monthly"
+                        type="object"
+                        confirm="Recalculate FX Out (OK) for this month?"
+                        groups="account.group_account_manager"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

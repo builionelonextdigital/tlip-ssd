@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="oos_mapping_view_tree" model="ir.ui.view">
+        <field name="name">oos.mapping.view.tree</field>
+        <field name="model">oos.mapping</field>
+        <field name="arch" type="xml">
+            <list string="OOS Mapping" editable="bottom">
+                <field name="item_code" />
+                <field name="item_name" />
+                <field name="budget_code_id" />
+                <field name="debit_account_id"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                <field name="credit_account_id"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                <field name="company_id"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                <field name="category_id" domain="[('parent_id', '!=', False)]"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                <field name="description" />
+                <field name="partner_debit_id"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                <field name="partner_credit_id"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+            </list>
+        </field>
+    </record>
+
+    <record id="oos_mapping_view_search" model="ir.ui.view">
+        <field name="name">oos.mapping.view.search</field>
+        <field name="model">oos.mapping</field>
+        <field name="arch" type="xml">
+            <search string="OOS Mapping">
+                <field name="item_code" />
+                <field name="item_name" />
+                <field name="budget_code_id" />
+                <field name="budget_account_id" />
+                <field name="category_id" />
+                <field name="description" />
+                <separator />
+                <group expand="0" string="Group By">
+                    <filter string="Category" name="category_id"
+                        context="{'group_by':'category_id'}" />
+                    <separator />
+                    <filter string="Item Code" name="item_code"
+                        context="{'group_by':'item_code'}" />
+                    <separator />
+                    <filter string="Item Name" name="item_name"
+                        context="{'group_by':'item_name'}" />
+                    <separator />
+                    <filter string="Company" name="company_id"
+                        context="{'group_by':'company_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="oos_mapping_action" model="ir.actions.act_window">
+        <field name="name">OOS Mapping</field>
+        <field name="res_model">oos.mapping</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>

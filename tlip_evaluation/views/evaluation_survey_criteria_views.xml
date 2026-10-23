@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_evaluation_survey_criteria_form" model="ir.ui.view">
+        <field name="name">evaluation.survey.criteria.form</field>
+        <field name="model">evaluation.survey.criteria</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <notebook>
+                        <group>
+                            <field name="state" invisible="1" />
+                        </group>
+                        <page string="Questions">
+                            <field name="survey_question_ids" readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="evaluation_question_id" column_invisible="1" />
+                                    <field name="question"
+                                    readonly="evaluation_question_id" required="1" />
+                                    <field name="rating" required="1" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="action_update_questions" string="Save" type="object" class="btn-primary" />
+                        <button string="Discard" class="btn-secondary" special="cancel" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

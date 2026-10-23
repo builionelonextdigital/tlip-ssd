@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="item_code_view_list" model="ir.ui.view">
+        <field name="name">item_code_view_list</field>
+        <field name="model">product.product</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" string="Goods/Service"/>
+                <field name="uom_id" />
+                <field name="categ_id" />
+            </list>
+        </field>
+    </record>
+
+    <record id="item_code_view_form" model="ir.ui.view">
+        <field name="name">item_code_view_form</field>
+        <field name="model">product.product</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Product"/>
+                        <h1>
+                            <div class="d-flex">
+                                <field class="text-break" name="name" options="{'line_breaks': False}" widget="text" />
+                            </div>
+                        </h1>
+                    </div>
+                    <div name="options">
+                        <span class="d-inline-flex">
+                            <field name="sale_ok"/>
+                            <label for="sale_ok"/>
+                        </span>
+                        <span class="d-inline-flex" invisible="type == 'combo'">
+                            <field name="purchase_ok"/>
+                            <label for="purchase_ok"/>
+                        </span>
+                    </div>
+                    <notebook>
+                        <page string="General Information" name="general_information">
+                            <group>
+                                <group name="group_general">
+                                    <field name="active" invisible="1"/>
+                                    <field name="type" widget="radio" options="{'horizontal': True}"/>
+                                    <field name="service_tracking" invisible="1 or type != 'service'"/>
+                                    <field name="product_tooltip"
+                                        class="fst-italic text-muted"
+                                        string=""
+                                        invisible="not product_tooltip"
+                                    />
+                                </group>
+                                <group name="group_standard_price">
+                                    <field name="default_code" string="Code"/>
+                                    <field
+                                        name="uom_id"
+                                        class="oe_inline" style="max-width:136px"
+                                        options="{'no_create': True}"
+                                    />
+                                    <field name="categ_id" string="Category"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="taxes_id" widget="many2many_tags"
+                                        string="Sales Taxes (non-EPE)"
+                                        domain="[('company_id', '=', company_id),('type_tax_use', '=', 'sale')]"
+                                        context="{'search_default_sale': 1}"
+                                        options="{'create': false, 'create_edit': false}"/>
+                                    <field name="epe_taxes_id" widget="many2many_tags"
+                                        domain="[('company_id', '=', company_id),('type_tax_use', '=', 'sale')]"
+                                        context="{'search_default_sale': 1}"
+                                        options="{'create': false, 'create_edit': false}"/>
+                                    <field name="supplier_taxes_id"
+                                        invisible="not purchase_ok or type == 'combo'"
+                                        domain="[('company_id', '=', company_id),('type_tax_use', '=', 'purchase')]"
+                                        widget="many2many_tags"
+                                        context="{
+                                            'default_type_tax_use':'purchase',
+                                            'search_default_purchase': 1,
+                                            'search_default_service': type == 'service',
+                                            'search_default_goods': type == 'consu',
+                                        }"
+                                    />
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="cost_currency_id" invisible="1"/>
+                                    <field name="product_variant_id" invisible="1"/>
+                                </group>
+                            </group>
+                            <group name="internal_notes" string="Internal Notes">
+                                <field colspan="2" name="description" nolabel="1" placeholder="This note is only for internal purposes."/>
+                            </group>
+                        </page>
+                        <page string="Accounting" name="invoicing" groups="account.group_account_readonly">
+                            <group name="properties" groups="account.group_account_readonly">
+                                <group string="Receivables">
+                                    <field name="property_account_income_id"
+                                        groups="account.group_account_readonly"/>
+                                    <field name="income_budget_code_id" />
+
+                                </group>
+                                <group string="Payables" name="payables">
+                                    <field name="property_account_expense_id"
+                                        groups="account.group_account_readonly"/>
+                                    <field name="expense_budget_code_id" />
+                                </group>
+                            </group>
+                            <group name="accounting" groups="account.group_account_readonly,account.group_account_invoice"/>
+                            <group name="other_info" string="Other Information"
+                                groups="account.group_account_readonly">
+                                <field name="invoice_description_en" />
+                                <field name="invoice_description_vn" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="action_item_code_view">
+        <field name="name">Goods/Services</field>
+        <field name="res_model">product.product</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_account.item_code_view_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_account.item_code_view_form')})]" />
+    </record>
+
+</odoo>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="email_template_electricity_request_payment" model="mail.template">
+            <field name="name">Request for Payment</field>
+            <field name="model_id" ref="account.model_account_move" />
+            <field name="subject">{{object.email_subject}}</field>
+            <field name="email_from">{{ (object.user_id.email_formatted or
+                object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px">
+                    <p>Kính gửi: <t t-out="object.partner_id.name"/>,</p>
+                    <p><t t-out="object.company_id.name"/> xin thông báo:</p>
+                    <p>Theo đề nghị thanh toán số <strong><t t-out="object.request_payment_number"/></strong>
+                        ngày <strong>
+                            <t t-out="object.invoice_date.strftime('%d/%m/%Y')"/></strong>, tổng tiền là <strong><t t-out="format_amount(object.amount_total, object.currency_id).replace('.00', '')"/>
+                        </strong>. Hạn thanh toán: <strong>
+                        <t t-out="object.invoice_date_due.strftime('%d/%m/%Y')"/></strong>.</p>
+                    <p>Nếu hạn thanh toán trùng với ngày thứ 7, chủ nhật hoặc ngày lễ thì hạn thanh toán sẽ được lùi lại vào ngày làm việc kế tiếp.</p>
+                    <p>Quý khách hàng vui lòng làm thủ tục thanh toán đúng hạn.</p>
+
+                    <p>Chi tiết yêu cầu thanh toán vui lòng xem file đính kèm.</p>
+
+                    <p>Mọi vướng mắc xin Quý khách hàng vui lòng liên hệ theo số điện thoại:
+                        <t t-out="object.company_id.phone"/> hoặc liên hệ với người phụ trách qua email: <strong>
+                        <t t-out="object.user_id.email"/></strong> để được giải đáp.</p>
+
+                    <p>
+                        <em>Đây là thư tự động, Quý khách hàng vui lòng không phản hồi lại thư này.</em>
+                    </p>
+
+                    <p>Trân trọng cảm ơn!</p>
+
+                    <hr />
+
+                    <p>Dear <t t-out="object.partner_id.name"/>,</p>
+
+                    <p><t t-out="object.company_id.name"/>: </p>
+                    <p>Following the payment request No. <strong><t t-out="object.request_payment_number"/></strong>,
+                        dated <strong><t t-out="object.invoice_date.strftime('%d/%m/%Y')"/></strong>, total amount is <strong><t t-out="format_amount(object.amount_total, object.currency_id).replace('.00', '')"/>
+                        </strong>. Due date: <strong>
+                        <t t-out="object.invoice_date_due.strftime('%d/%m/%Y')"/></strong>.</p>
+
+                    <p>Please kindly make the payment on time.</p>
+
+                    <p>Details of the payment request are in the attached file.</p>
+
+                    <p>If you have any concerns, please contact us at <t t-out="object.company_id.phone"/> or
+                        reach the person in charge via email: <strong><t t-out="object.user_id.email"/></strong>
+                        .</p>
+
+                    <p>
+                        <em>This is an automatic email, please do not reply to this email.</em>
+                    </p>
+
+                    <p>Thank you for your cooperation!</p>
+
+                    <h />
+
+                    <p>
+                        <strong><t t-out="object.company_id.name"/></strong>
+                        <br />
+                        <t t-out="object.company_id.street"/> <br /> Tel: <t t-out="object.company_id.phone"/>
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True" />
+        </record>
+    </data>
+</odoo>

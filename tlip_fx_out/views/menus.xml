@@ -1,0 +1,4 @@
+<odoo>
+    <menuitem id="menu_fx_out_root" name="FX Out" parent="account.menu_finance_configuration"/>
+    <menuitem id="menu_fx_out_rates" name="Daily FX Out Rates" parent="menu_fx_out_root" action="action_fx_out_rate"/>
+</odoo>

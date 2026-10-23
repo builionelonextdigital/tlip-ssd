@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="menu_asset_modify"
+        name="Modify Information"
+        action="tlip_account_asset.asset_modify_cr_action"
+        parent="account.menu_finance_entries"
+        sequence="61" />
+
+</odoo>

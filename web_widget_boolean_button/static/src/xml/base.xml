@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="web_widget_boolean_button.FieldBooleanButton" owl="1">
+        <div t-if="props.multiLines" class="o_stat_info boolean_button_multi_line">
+            <span t-attf-class="o_stat_text o_not_hover {{textColor}}">
+                <span class="o_stat_text d-block" t-foreach="text" t-as="textLine" t-key="textLine">
+                    <t t-esc="textLine"/>
+                </span>
+            </span>
+            <span t-attf-class="o_stat_text o_hover {{hoverColor}}">
+                <span class="o_stat_text d-block" t-foreach="hover" t-as="hoverLine" t-key="hoverLine">
+                    <t t-esc="hoverLine"/>
+                </span>
+            </span>
+        </div>
+        <div t-else="" class="o_stat_info">
+            <span t-attf-class="o_stat_text o_not_hover {{textColor}}">
+                <t t-esc="text"/>
+            </span>
+            <span t-attf-class="o_stat_text o_hover {{hoverColor}}">
+                <t t-esc="hover"/>
+            </span>
+        </div>
+    </t>
+</templates>

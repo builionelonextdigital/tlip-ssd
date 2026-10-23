@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_business_pdf_document_inherit_signer"
+        inherit_id="biz_profit_loss_statement.report_business_pdf_document">
+        <xpath expr="//div[hasclass('signature-block')]" position="after">
+            <div t-if="o.env.context.get('show_signer_placeholders')" class="row text-center" style="page-break-inside:avoid; color: white; margin-top: 100px; margin-bottom: 100px;">
+                <div style="page-break-after: avoid;" class="col-4">
+                    <p>[signer1]</p>
+                </div>
+                <div style="page-break-after: avoid;" class="col-4">
+                    <p>[signer2]</p>
+                </div>
+                <div style="page-break-after: avoid;" class="col-4">
+                    <p>[signer3]</p>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

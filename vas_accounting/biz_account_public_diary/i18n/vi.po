@@ -1,0 +1,259 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* biz_account_public_diary
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-20 06:22+0000\n"
+"PO-Revision-Date: 2024-01-20 06:22+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "- Ngày mở sổ: ...."
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "- Số này có .... trang, đánh số từ trang số 01 đến trang ...."
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "<br/><span class=\"s03a-dn-title-small\">Đơn vị:</span>"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "<br/><span class=\"s03a-dn-title-small\">Địa chỉ: </span>"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid ""
+"<span class=\"s03a-dn-header-title\">Mẫu số S03a-DN</span>\n"
+"                                    <br/>\n"
+"                                    <span class=\"s03a-dn-text-italic\">(Ban hành theo Thông tư số 200/2014/TT-BTC</span>\n"
+"                                    <br/>\n"
+"                                    <span class=\"s03a-dn-text-italic\">Ngày 22/12/2014 của Bộ Tài chính)</span>"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "<span class=\"s03a-dn-title-small\">Cộng chuyển sang trang sau</span>"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid ""
+"<span style=\"font-style: italic;\">Ngày .... tháng .... năm ....</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s03a-dn-title-small\">Kế toán trưởng</span>\n"
+"                        <br/>\n"
+"                        <span>(Ký, họ tên)</span>"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid ""
+"<span style=\"font-style: italic;\">Ngày .... tháng .... năm ....</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s03a-dn-title-small\">Người lập biểu</span>\n"
+"                        <br/>\n"
+"                        <span>(Ký, họ tên)</span>"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid ""
+"<span style=\"font-style: italic;\">Ngày .... tháng .... năm ....</span>\n"
+"                        <span/>\n"
+"                        <br/>\n"
+"                        <span class=\"s03a-dn-title-small\">Người đại diện theo pháp luật</span>\n"
+"                        <br/>\n"
+"                        <span>(Ký, họ tên, đóng dấu)</span>"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "<span>0</span>"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "<span>x</span>"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model:ir.ui.menu,name:biz_account_public_diary.menu_action_account_public_diary_wizard
+msgid "Account Public Diary"
+msgstr "Sổ nhật ký chung"
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.account_public_diary_wizard_form
+msgid "Cancel"
+msgstr "Hủy bỏ"
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "Chứng từ"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model:ir.model.fields,field_description:biz_account_public_diary.field_account_public_diary_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model:ir.model.fields,field_description:biz_account_public_diary.field_account_public_diary_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "Có"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model:ir.model.fields,field_description:biz_account_public_diary.field_account_public_diary_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "Diễn giải"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model:ir.model.fields,field_description:biz_account_public_diary.field_account_public_diary_wizard__from_date
+msgid "From Date"
+msgstr "Từ ngày"
+
+#. module: biz_account_public_diary
+#: model:ir.model.fields,field_description:biz_account_public_diary.field_account_public_diary_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model:ir.model.fields,field_description:biz_account_public_diary.field_account_public_diary_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model:ir.model.fields,field_description:biz_account_public_diary.field_account_public_diary_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model:ir.model.fields,field_description:biz_account_public_diary.field_account_public_diary_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "Ngày, tháng"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "Ngày, tháng ghi sổ"
+msgstr ""
+
+#. module: biz_account_public_diary
+#. odoo-python
+#: code:addons/biz_account_public_diary/wizard/account_public_diary_wizard.py:0
+#, python-format
+msgid "Năm %s"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "Nợ"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model:ir.actions.act_window,name:biz_account_public_diary.account_public_diary_wizard_action
+#: model:ir.model,name:biz_account_public_diary.model_account_public_diary_wizard
+msgid "Public Diary"
+msgstr "Sổ nhật ký chung"
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.account_public_diary_wizard_form
+msgid "S03a-DN(PDF)"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.account_public_diary_wizard_form
+msgid "S03a-DN(XLSX)"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "STT dòng"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "Số hiệu"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "Số hiệu TK đối ứng"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "Số phát sinh"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "Số trang trước chuyển sang"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "SỔ NHẬT KÝ CHUNG"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model:ir.model,name:biz_account_public_diary.model_ir_actions_account_public_diary
+msgid "Technical model for account public diary"
+msgstr ""
+
+#. module: biz_account_public_diary
+#. odoo-python
+#: code:addons/biz_account_public_diary/wizard/account_public_diary_wizard.py:0
+#, python-format
+msgid "Tháng %s Năm %s"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model:ir.model.fields,field_description:biz_account_public_diary.field_account_public_diary_wizard__to_date
+msgid "To Date"
+msgstr "Đến ngày"
+
+#. module: biz_account_public_diary
+#. odoo-python
+#: code:addons/biz_account_public_diary/wizard/account_public_diary_wizard.py:0
+#, python-format
+msgid "Từ ngày: %s đến ngày: %s"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "Đã ghi sổ cái"
+msgstr ""
+
+#. module: biz_account_public_diary
+#: model_terms:ir.ui.view,arch_db:biz_account_public_diary.s03a_dn_pdf
+msgid "Đơn vị tính: Đồng"
+msgstr ""

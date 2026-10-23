@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="menu_accounting_vn_root" name="Accounting Vietnamese" parent="accountant.menu_accounting" sequence="34"/>
+    <menuitem name="Configuration" id="menu_accounting_vn_config" parent="menu_accounting_vn_root" sequence="10"/>
+    <menuitem name="Report VN" id="menu_accounting_vn_report" parent="menu_accounting_vn_root" sequence="20"/>
+</odoo>

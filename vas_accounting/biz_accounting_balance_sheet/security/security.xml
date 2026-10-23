@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="accounting_balance_sheet_comp_rule" model="ir.rule">
+            <field name="name">Accounting balance sheet multi company rule</field>
+            <field name="model_id" ref="model_accounting_balance_sheet"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record id="accounting_balance_sheet_report_comp_rule" model="ir.rule">
+            <field name="name">Accounting balance sheet report multi company rule</field>
+            <field name="model_id" ref="model_accounting_balance_sheet_report"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record id="accounting_balance_template_comp_rule" model="ir.rule">
+            <field name="name">Accounting balance template multi company rule</field>
+            <field name="model_id" ref="model_accounting_balance_template"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

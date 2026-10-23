@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <menuitem id="viet_nam_district_menu" 
+        parent="contacts.menu_localisation" 
+        action="vn_address.vn_address_district_action" 
+        name="VN District"
+        sequence="10"/>
+
+    <menuitem id="viet_nam_ward_menu" 
+        parent="contacts.menu_localisation" 
+        action="vn_address.vn_address_ward_action" 
+        name="VN Ward"
+        sequence="20"/>
+
+</odoo>

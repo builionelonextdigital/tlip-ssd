@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <openerp> -->
+<odoo>
+    <data>
+        <record id="paperformat_a4_contract" model="report.paperformat">
+            <field name="name">A4 Portrait Contract</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">17.50</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">19.05</field>
+            <field name="margin_right">17.50</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">5</field>
+            <field name="dpi">90</field>
+        </record>
+        <record id="statements_cash_flows_report_pdf" model="ir.actions.report">
+            <field name="name">Statements Cash Flows PDF</field>
+            <field name="model">statements.cash.flows.report</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">biz_cash_flows_report.report_statements_cash_flows_pdf</field>
+            <field name="report_file">biz_cash_flows_report.report_statements_cash_flows_pdf</field>
+            <field name="binding_model_id" ref="model_statements_cash_flows_report"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="paperformat_a4_contract"/>
+        </record>
+        <record id="statements_cash_flows_report_xlsx" model="ir.actions.report">
+             <field name="name">Statements Cash Flows Excel</field>
+             <field name="model">statements.cash.flows.report</field>
+             <field name="report_type">xlsx</field>
+             <field name="report_name">biz_cash_flows_report.rp_cash_flows</field>
+             <field name="report_file">biz_cash_flows_report.rp_cash_flows</field>
+             <field name="print_report_name">'Cash flows report'</field>
+             <field name="binding_model_id" ref="model_statements_cash_flows_report"/>
+             <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

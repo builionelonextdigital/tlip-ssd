@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_evaluation_question_tree" model="ir.ui.view">
+        <field name="name">evaluation.question.tree</field>
+        <field name="model">evaluation.question</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="evaluation_criteria_id" options="{'no_create': True}" />
+                <field name="question" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_evaluation_question" model="ir.actions.act_window">
+        <field name="name">Questions for Evaluation</field>
+        <field name="res_model">evaluation.question</field>
+        <field name="view_mode">list</field>
+    </record>
+
+</odoo>

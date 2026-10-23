@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_template_form_view_inherit_invoices_list" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.invoices.list</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <div name="options" position="inside">
+                <div>
+                    <field name="general_product"/>
+                    <label for="general_product"/>
+                </div>
+            </div>
+            <field name="property_account_expense_id" position="after">
+                <field name="taxable_product"/>
+                <field name="untaxable_products"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_invoice_tree" model="ir.ui.view">
+        <field name="name">account.invoice.list</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" /> 
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="request_payment_number" />
+                <field name="request_payment_date" />
+            </field>
+            <field name="name" position="after">
+                <field name="partner_id" string="Customer/Vendor" column_invisible="context.get('default_move_type')" />
+                <field name="tlip_entry_code" optional="show"/>
+            </field>
+            <field name="invoice_date_due" position="attributes">
+                <attribute name="string">Overdue Days</attribute>
+            </field>
+            <field name="invoice_date_due" position="before">
+                <field name="invoice_date_due" optional="show" invisible="payment_state in ('paid', 'in_payment', 'reversed') or state == 'cancel'"/>
+            </field>
+            <field name="status_in_payment" position="before">
+                <field name="request_owner_id" />
+                <field name="request_reason" />
+                <field name="approval_state" widget="badge"
+                    decoration-info="approval_state=='draft'"
+                    decoration-warning="approval_state=='wait_for_approval'"
+                    decoration-danger="approval_state in ('rejected', 'cancel')"
+                    decoration-success="approval_state=='approved'" />
+                <field name="accounting_state" widget="badge"
+                    decoration-info="accounting_state=='draft'"
+                    decoration-warning="accounting_state in ('wait_for_approval', 'wait_to_post')"
+                    decoration-success="accounting_state=='posted'" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_tree_tlip_account_inherit" model="ir.ui.view">
+        <field name="name">account.move.list</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree" /> 
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field name="accounting_state" widget="badge"
+                    decoration-info="accounting_state=='draft'"
+                    decoration-warning="accounting_state in ('wait_for_approval', 'wait_to_post')"
+                    decoration-success="accounting_state=='posted'" />
+            </field>
+            <field name="name" position="after">
+                <field name="tlip_entry_code" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="account.view_move_form" model="ir.ui.view">
+        <field name="groups_id" eval="[(4, ref('account.group_account_basic'))]" />
+    </record>
+
+    <record id="account_move_form_view_inherit" model="ir.ui.view">
+        <field name="name">account.move.form.view.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button type="object" name="action_view_child_moves"
+                    class="oe_stat_button" icon="fa-pencil-square-o"
+                    invisible="not child_move_ids">
+                    <field name="child_move_count" widget="statinfo" string="Childs" />
+                </button>
+            </xpath>
+            <!-- <xpath expr="//button[@name='action_post']" position="after">
+                <button name="action_confirm_expense" string="Confirm Expense" type="object"
+                    class="btn"
+                    invisible="state != 'draft' or approval_state != 'draft' or move_type != 'in_invoice'" />
+            </xpath> -->
+
+            <xpath expr="//field[@name='ref']" position="before">
+                <field name="tlip_entry_code" readonly="1" invisible="not tlip_entry_code"/>
+            </xpath>
+
+            <!-- [07.01.12] Always hide the 'Pay' button for Vendor Bills -->
+            <xpath expr="//button[@name='action_register_payment']" position="attributes">
+                <attribute name="invisible">(
+                                    state != 'posted'
+                                    or payment_state not in ('not_paid', 'partial', 'in_payment')
+                                    or move_type not in ('out_invoice', 'out_refund', 'in_refund', 'out_receipt', 'in_receipt')
+                                    or invoice_has_outstanding
+                                )</attribute>
+            </xpath>
+
+            <xpath expr="//page[@id='l10n_vn']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <div name="currency_div" position="replace">
+                <div name="currency_div" groups="base.group_multi_currency" class="w-100"
+                    style="white-space: pre;">
+                    <field name="currency_id" readonly="state != 'draft'" class="oe_inline"
+                        options="{'no_create': True}"
+                        context="{'search_default_active': 1, 'search_default_inactive': 1}" />
+                    <div class="break" />
+                    <div name="currency_conversion_div" class="d-flex text-muted float-start"
+                        invisible="currency_id == company_currency_id">
+                        <span>1 </span>
+                        <field name="currency_id" readonly="True" options="{'no_open': True}" />
+                        <span> = </span>
+                        <field name="entry_currency_rate"
+                            readonly="state != 'draft'" />
+                        <span> </span>
+                        <field name="company_currency_id" readonly="True"
+                            options="{'no_open': True}" />
+                    </div>
+                </div>
+            </div>
+            <field name="partner_shipping_id" position="after">
+                <field name="invoice_type_id"
+                    invisible="move_type not in ('out_invoice', 'out_refund')"
+                    readonly="state != 'draft'"
+                    required="move_type in ('out_invoice', 'out_refund')"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                <field name="minvoice_template_payment_method" invisible="move_type not in ('out_invoice', 'out_refund')" readonly="state != 'draft'" required="move_type in ('out_invoice', 'out_refund')" />
+                <field name="invoice_type_code" invisible="1" />
+                <field name="approval_readonly" invisible="1" />
+                <field name="paid_by" invisible="move_type != 'in_invoice'"
+                    readonly="state != 'draft'" required="move_type == 'in_invoice'" />
+                <field name="employee_id" readonly="state != 'draft'"
+                    invisible="move_type != 'in_invoice' or paid_by == 'company'"
+                    domain="[('employee_ids', '!=', False)]"
+                    required="paid_by == 'employee'" />
+                <field name="is_request_payment" invisible="1" />
+            </field>
+            <xpath expr="//field[@name='invoice_line_ids']/list//field[@name='product_id']"
+                position="before">
+                <field name="line_no" />
+            </xpath>
+            <!-- <xpath expr="//group[@name='utm_link']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath> -->
+            <xpath expr="//page[@name='other_info']//field[@name='delivery_date']" position="before">
+                <field name="email_for_payment"/>
+                <field name="email_for_invoice"/>
+            </xpath>
+            <xpath expr="//page[@name='invoice_tab']//field[@name='invoice_line_ids']"
+                position="attributes">
+                <attribute name="widget">section_and_note_one2many</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='price_unit']"
+                position="attributes">
+                <attribute name="column_invisible">parent.invoice_type_code == 'leasing'</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/list//field[@name='quantity']"
+                position="before">
+                <field name="area" required="parent.invoice_type_code == 'leasing'"
+                    column_invisible="parent.move_type not in ('out_invoice', 'out_refund') or parent.invoice_type_code != 'leasing'" />
+                <field name="date_from"
+                    required="parent.invoice_type_code == 'leasing'"
+                    column_invisible="parent.move_type not in ('out_invoice', 'out_refund') or parent.invoice_type_code != 'leasing'" />
+                <field name="date_to" required="parent.invoice_type_code == 'leasing'"
+                    column_invisible="parent.move_type not in ('out_invoice', 'out_refund') or parent.invoice_type_code != 'leasing'" />
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='price_unit']"
+                position="after">
+                <field name="leasing_price_unit"
+                    string="Price"
+                    column_invisible="parent.invoice_type_code != 'leasing'" />
+                <field name="tax_excluded"
+                    column_invisible="parent.move_type not in ['out_invoice', 'out_refund']"
+                    string="Tax Excluded" />
+            </xpath>
+
+            <xpath expr="//group[@id='header_right_group']" position="inside">
+                <field name="development_phase_id" readonly="state != 'draft'"
+                    options="{'no_create': True, 'no_create_edit': True}" />
+                <field name="development_project_id" readonly="state != 'draft'"
+                    options="{'no_create': True, 'no_create_edit': True}" />
+                <field name="request_payment_number" invisible="not request_payment_number" readonly="1"/>
+            </xpath>
+            <xpath
+                expr="//field[@name='invoice_line_ids']/list//field[@name='analytic_distribution']"
+                position="attributes">
+                <attribute name="string">Budget Code</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/list//field[@name='account_id']"
+                position="before">
+                <xpath
+                    expr="//field[@name='invoice_line_ids']/list//field[@name='analytic_distribution']"
+                    position="move" />
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/list//field[@name='account_id']"
+                position="before">
+                <xpath expr="//field[@name='line_ids']/list//field[@name='analytic_distribution']"
+                    position="move"
+                    string="Budget Code" />
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/list//field[@name='account_id']"
+                position="after">
+                <field name="partner_id" optional="hide" options="{'no_create': 1}" column_invisible="parent.move_type not in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')" />
+            </xpath>
+            <chatter position="attributes">
+                <attribute name="open_attachments">True</attribute>
+            </chatter>
+            <field name="partner_shipping_id" position="after">
+                <xpath expr="//notebook//label[@for='ref']" position="move" />
+                <xpath expr="//notebook//field[@name='ref']" position="move" />
+            </field>
+            <field name="partner_shipping_id" position="attributes">
+                <attribute name="context">{'default_type': 'invoice', 'default_parent_id':
+                    partner_id}</attribute>
+            </field>
+            <xpath expr="//field[@name='line_ids']/list//field[@name='date_maturity']"
+                position="after">
+                <field name="payment_note" optional="hide" />
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/list"
+                position="inside">
+                <field name="entry_currency_rate" optional="hide" />
+                <field name="land_plot_id" optional="hide"
+                    invisible="parent.move_type not in ('out_invoice', 'out_refund') or parent.invoice_type_code != 'leasing'"
+                    options="{'no_open': 1, 'no_create': 1}" />
+                <field name="development_project_id" optional="hide" options="{'no_open': 1, 'no_create': 1}" />
+                <field name="development_phase_id" optional="hide" options="{'no_open': 1, 'no_create': 1}" />
+                <field name="development_project_code" optional="hide" />
+                <field name="contract_number" optional="hide" />
+            </xpath>
+            <xpath expr="//page[@name='other_info']" position="before">
+                <page name='contract_info' string="Contract Info" >
+                    <group>
+                        <group string="Contract">
+                            <field name="contract_number" readonly="approval_state != 'draft'" />
+                            <field name="contract_signing_date" readonly="approval_state != 'draft'" />
+                            <field name="contract_payment_article"
+                                readonly="approval_state != 'draft'" />
+                        </group>
+                        <group string="Payment">
+                            <field name="customer_contact_ids" widget="many2many_tags"
+                                context="{'default_parent_id': partner_id, 'default_type': 'contact', 'form_view_ref': 'base.view_partner_simple_form'}" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//page[@name='invoice_tab']//list//field[@name='partner_id']" position="attributes">
+                <attribute name="column_invisible">0</attribute>
+            </xpath>
+            <xpath expr="//page[@name='invoice_tab']//list//field[@name='area']"
+                position="before">
+                <xpath expr="//page[@name='invoice_tab']//list//field[@name='partner_id']"
+                    position="move" />
+            </xpath>
+            <field name="ref" position="after">
+                <field name="request_payment_number"
+                    readonly="1" force_save="1"
+                    invisible="not is_request_payment" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_tlip_request_account_move_approval_form_inherit_account" model="ir.ui.view">
+        <field name="name">tlip.request.account.move.approval.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="approval_state"
+                    readonly="1" widget="statusbar"
+                    statusbar_visible="draft,wait_for_approval,approved"
+                    invisible="approval_state == 'approved' or state != 'draft' or not is_request_payment"
+                />
+                <field name="accounting_approval_state"
+                    readonly="1" widget="statusbar"
+                    statusbar_visible="draft,wait_for_approval,approved"
+                    invisible="(is_request_payment and approval_state != 'approved') or state != 'draft' or accounting_approval_state == 'approved'"
+                />
+            </field>
+            <field name="state" position="attributes">
+                <attribute name="invisible">accounting_approval_state != 'approved' and state == 'draft'</attribute>
+            </field>
+            <xpath expr="//button[@name='button_cancel'][1]" position="attributes">
+                <attribute name="invisible">not id or state != 'draft' or move_type != 'entry' or approval_state in ('wait_for_approval', 'withdrawn', 'rejected')</attribute>
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_cancel'][2]" position="attributes">
+                <attribute name="invisible">not id or state != 'draft' or move_type == 'entry' or approval_state in ('wait_for_approval', 'withdrawn', 'rejected')</attribute>
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_reverse']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_register_payment']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_post']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_draft']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_post']" position="after">
+                <!-- Normal Approval Flow -->
+                <button name="action_submit_approval" string="Submit" type="object"
+                    class="btn btn-primary"
+                    invisible="state != 'draft' or approval_state != 'draft' or not is_request_payment"
+                    confirm="Are you sure that you want to do this action?" />
+                <button name="action_approve_request" type="object" string="Approve"
+                    invisible="user_status != 'pending' or approval_state != 'wait_for_approval' or not is_request_payment"
+                    class="btn-primary" data-hotkey="v"
+                    confirm="Are you sure that you want to do this action?" />
+                <button name="action_reject_request" string="Refuse" type="object"
+                    invisible="user_status != 'pending' or approval_state != 'wait_for_approval' or not is_request_payment"
+                    data-hotkey="z"
+                    confirm="Are you sure that you want to do this action?" />
+                <button name="action_withdraw_approval" string="Withdraw" type="object"
+                    confirm="Are you sure that you want to do this action?"
+                    invisible="approval_state != 'wait_for_approval' or not is_request_payment" />
+                <button name="action_reset_approval" string="Reset Approval" type="object"
+                    confirm="Are you sure that you want to do this action?"
+                    invisible="approval_state not in ('rejected', 'withdrawn') or not is_request_payment" />
+                <!-- Accounting Approval Flow -->
+                <button name="action_submit_approval" string="Submit" type="object"
+                    groups="account.group_account_basic"
+                    class="btn btn-primary"
+                    invisible="state != 'draft' or accounting_approval_state != 'draft' or (is_request_payment and approval_state != 'approved')"
+                    confirm="Are you sure that you want to do this action?" />
+                <button name="action_approve_request" type="object" string="Approve"
+                    invisible="user_status != 'pending' or accounting_approval_state != 'wait_for_approval' or (is_request_payment and approval_state != 'approved')"
+                    class="btn-primary" data-hotkey="v"
+                    confirm="Are you sure that you want to do this action?" />
+                <button name="action_reject_request" string="Refuse" type="object"
+                    invisible="user_status != 'pending' or accounting_approval_state != 'wait_for_approval' or (is_request_payment and approval_state != 'approved')" data-hotkey="z"
+                    confirm="Are you sure that you want to do this action?" />
+                <button name="action_withdraw_approval" string="Withdraw" type="object"
+                    confirm="Are you sure that you want to do this action?"
+                    invisible="accounting_approval_state != 'wait_for_approval' or (is_request_payment and approval_state != 'approved')" />
+                <button name="action_accounting_reset_approval" string="Reset Approval"
+                    type="object"
+                    invisible="accounting_approval_state not in ('rejected', 'withdrawn')"
+                    confirm="Are you sure that you want to do this action?" />
+            </xpath>
+            <xpath expr="//div[@name='button_box']//button[1]" position="before">
+                <button class="oe_stat_button" name="action_open_approval_history_ids"
+                    type="object"
+                    icon="fa-history">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">
+                            Approval Requests
+                        </span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Approver(s)" name="approver"
+                    invisible="not approver_ids">
+                    <field name="approver_ids" mode="list" readonly="1">
+                        <list editable="bottom" decoration-success="status=='approved'"
+                            decoration-warning="status in ['pending', 'waiting']"
+                            decoration-danger="status=='refused'" no_open="1">
+                            <field name="existing_request_user_ids" column_invisible="True" />
+                            <field name="sequence" column_invisible="True" />
+                            <field name="user_id" string="Approver"
+                                required="not job_id" />
+                            <field name="job_id" required="not user_id" />
+                            <field name="status" />
+                            <field name="company_id" column_invisible="True" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+            <field name="development_phase_id" position="before">
+                <field name="is_accountant_user" invisible="1" />
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="domain">[('company_id', 'in', (company_id, False)), ('is_blocked', '=', False), '|', ('parent_id', '=', False), ('is_company', '=', True), '|', '|', ('customer_state', '=', 'approved'), ('vendor_state', '=', 'approved'), ('internal_approval_state', '=', True)]</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_vendor_bill_employee_expense_inherit" model="ir.ui.view">
+        <field name="name">account.move.view.account.bill.paid.by.form.inherit</field>
+        <field name="mode">primary</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_bill_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="before">
+                <separator />
+                <filter name="employee_expense" string="Employee Expenses"
+                    domain="[('paid_by', '=', 'employee')]" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_vendor_bill_employee_expense_list_inherit" model="ir.ui.view">
+        <field name="name">account.move.view.form.inherit</field>
+        <field name="model">account.move</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="account.view_in_invoice_bill_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="js_class"></attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_in_invoice_bill_tree_inherit" model="ir.ui.view">
+        <field name="name">account.out.invoice.tree.inherit.pcv.minvoice</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_in_invoice_bill_tree" /> 
+        <field name="arch" type="xml">
+            <field name="minvoice_state" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
+            <field name="minvoice_publish_state" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_form_inherit_pcv_minvoice_inherit_tlip_account" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.pcv.minvoice.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="pcv_minvoice.view_move_form_inherit_pcv_minvoice"/>
+        <field name="arch" type="xml">
+            <page id="minvoice_tab" position="attributes">
+                <attribute name="groups">account.group_account_user</attribute>
+            </page>
+            <button name="button_open_minvoice_wizard" position="attributes">
+                <attribute name="groups">account.group_account_user</attribute>
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </button>
+            <button name="button_draft" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_filter_inherit_tlip_account" model="ir.ui.view">
+        <field name="name">account.invoice.select.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <filter name="cancel" position="after">
+                <separator/>
+                <filter name="filter_approvals_to_review" string="My Approvals to Review"
+                    domain="['&amp;', '|', ('current_approver_id.job_id.employee_ids.user_id', 'in', [uid]), ('current_approver_id.user_id', '=', uid), '|', ('approval_state', '=', 'wait_for_approval'), ('accounting_approval_state', '=', 'wait_for_approval')]" />
+            </filter>
+            <field name="name" position="attributes">
+                <attribute name="filter_domain">[
+                                '|', '|' , '|', '|', '|', 
+                                ('name', 'ilike', self), ('invoice_origin', 'ilike', self),
+                                ('ref', 'ilike', self), ('payment_reference', 'ilike', self),
+                            ('partner_id', 'child_of', self), ('request_payment_number', 'ilike', self)]
+                </attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_tlip_vendor_bill_employee_expense" model="ir.actions.act_window">
+        <field name="name">Employee Expenses</field>
+        <field name="res_model">account.move</field>
+        <field name="path">employee-expenses</field>
+        <field name="view_mode">list,kanban,form,activity</field>
+        <field name="view_id" ref="account.view_in_invoice_bill_tree" />
+        <field name="search_view_id" ref="tlip_account.view_vendor_bill_employee_expense_inherit" />
+        <field name="domain">[('paid_by', '=', 'employee'), ('move_type', 'in', ['in_invoice',
+            'in_refund'])]</field>
+        <field name="context">{'search_default_in_invoice': 1, 'default_move_type': 'in_invoice',
+            'display_account_trust': True, 'default_paid_by': 'employee'}</field>
+    </record>
+
+    <record id="action_account_outbound_payment_request_payment" model="ir.actions.act_window">
+        <field name="name">Request for Payment</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('payment_type', '=', 'outbound'), ('is_request_payment', '=', True)]</field>
+        <field name="context">{'create': False, 'edit': False, 'delete': False}</field>
+    </record>
+    <record id="action_account_inbound_payment_request" model="ir.actions.act_window">
+        <field name="name">Request for Deposit Payments</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('payment_type', '=', 'inbound'), ('is_request_payment', '=', True)]</field>
+        <field name="context">{'create': False, 'edit': False, 'delete': False}</field>
+    </record>
+
+    <record id="action_account_invoice_request_payment" model="ir.actions.act_window">
+        <field name="name">Request for Invoice Payments</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="account.view_account_invoice_filter" />
+        <field name="search_view_id" ref="account.view_account_invoice_filter" />
+        <field name="domain">[('move_type', '=', 'out_invoice'), ('is_request_payment', '=', True)]</field>
+        <field name="context">{'create': False, 'edit': False, 'delete': False}</field>
+    </record>
+
+    <record id="view_out_invoice_tree_inherit_tlip_account" model="ir.ui.view">
+        <field name="name">account.out.invoice.tree.inherit.tlip_account</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_out_invoice_tree" />
+        <field name="arch" type="xml">
+            <field name="status_in_payment" position="after">
+                <field name="minvoice_no" string="M-Invoice No" optional="hide" />
+                <field name="minvoice_issued_date" string="M-Invoice Date" optional="hide" />
+                <field name="minvoice_template_id" string="M-Invoice Serial" optional="hide" invisible="minvoice_state == 'uncreated'"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_multi_send_request_payment_email" model="ir.actions.server">
+        <field name="name">Send Email</field>
+        <field name="model_id" ref="account.model_account_move" />
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.action_multi_send()</field>
+    </record>
+
+    <record id="account_move_action_multi_submit_approval" model="ir.actions.server">
+        <field name="name">Submit</field>
+        <field name="model_id" ref="account.model_account_move" />
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+            records.action_multi_submit_approval()
+        </field>
+    </record>
+
+    <record id="account_move_action_multi_approve_approval" model="ir.actions.server">
+        <field name="name">Approve</field>
+        <field name="model_id" ref="account.model_account_move" />
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+            records.action_multi_approve_approval()
+        </field>
+    </record>
+
+    <record id="account.action_move_out_invoice_type" model="ir.actions.act_window">
+        <field name="domain">['&amp;', ('move_type', 'in', ['out_invoice', 'out_refund']), '|', ('is_request_payment', '=', False), '&amp;', ('is_request_payment', '=', True), ('approval_state', '=', 'approved')]</field>
+    </record>
+
+    <record id="account.action_move_in_invoice_type" model="ir.actions.act_window">
+        <field name="domain">['&amp;', ('move_type', 'in', ['in_invoice', 'in_refund']), '|', ('is_request_payment', '=', False), '&amp;', ('is_request_payment', '=', True), ('approval_state', '=', 'approved')]</field>
+    </record>
+
+    <!-- Hide counterpart buttons -->
+    <record id="view_move_form_hide_counterpart_buttons" model="ir.ui.view">
+        <field name="name">account.move.form.hide.counterpart.buttons</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="biz_account_counterpart.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_delete_counterpart']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_smart_create_counterpart']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

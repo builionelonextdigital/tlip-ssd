@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="asset_modify_form">
+        <field name="name">wizard.asset.modify.form</field>
+        <field name="model">asset.modify</field>
+        <field name="inherit_id" ref="account_asset.asset_modify_form" />
+        <field name="arch" type="xml">
+            <field name="account_depreciation_expense_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="account_asset_id" position="before">
+                <field name="revaluation_reason_id" invisible="asset_type != 'fixed_asset' or modify_action != 'dispose'"
+                    required="asset_type == 'fixed_asset' and modify_action == 'dispose'"
+                    domain="[('type', '=', 'decrease')]"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+            </field>
+            <xpath expr="//button[@name='modify']" position="attributes">
+                <attribute name="context">{'tlip_custom_asset': True}</attribute>
+            </xpath>
+
+            <xpath expr="//footer" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//footer" position="after">
+                <footer>
+                    <button name="button_confirm_asset_modify_cr"
+                            string="Confirm" 
+                            type="object"
+                            class="btn-primary"
+                            data-hotkey="p" />
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"
+                            data-hotkey="x"/>
+                </footer>
+            </xpath>
+        </field>
+    </record>
+</odoo>

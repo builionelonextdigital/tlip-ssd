@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="tlip_account_payment_layout_standard"
+              inherit_id="tlip_base.tlip_layout_standard"
+              primary="True">
+        <xpath expr="//div[hasclass('company_name')]" position="after">
+            <div class="col-4"/>
+            <div class="col-3 text-end" style="position: absolute; right: 0%; top: 30%;">
+                <table class="table table-borderless no-padding">
+                    <tr>
+                        <td style="padding: 0 !important;"><span>Ngày lập / <i>Created on:</i></span></td>
+                        <td style="padding: 0 !important;"><span t-field="o.create_date" t-options="{&quot;widget&quot;: &quot;date&quot;, &quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Request:</td>
+                        <td><span t-esc="o.approval_request_id.id"/></td>
+                    </tr>
+                </table>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="tlip_account_payment_layout"
+              inherit_id="tlip_base.tlip_layout"
+              primary="True">
+        <xpath expr="//t[@t-call='tlip_base.tlip_layout_standard']" position="replace">
+            <t t-call="tlip_account.tlip_account_payment_layout_standard"><t t-out="0"/></t>
+        </xpath>
+    </template>
+
+    <template id="report_account_payment_document">
+        <t t-call="tlip_account.tlip_account_payment_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+            <t t-set="company_accounts" t-value="o.company_id._get_bank_account_info()" />
+            <t t-set="is_inbound" t-value="o.payment_type == 'inbound'" />
+            <t t-set="is_bank_payment" 
+                t-value="o.journal_id.type == 'bank'" />
+            <t t-set="debit_account" 
+                t-value="o.outstanding_account_id if is_inbound else o.destination_account_id" />
+            <t t-set="credit_account" 
+                t-value="o.destination_account_id if is_inbound else o.outstanding_account_id" />
+            <t t-set="approver_signatures" t-value="o.generate_list_approver_signatures()" />
+            <style>
+                table.no-padding td{
+                    padding: 0 !important;
+                }
+                td {
+                    text-align: left;
+                    padding-left: 0 !important;
+                }
+                td.underline, p.underline {
+                    border-bottom: 1px solid black;
+                }
+                p {
+                    margin-top: 0;
+                    margin-bottom: 2px;
+                }
+                div {
+                    margin-top: 0;
+                    margin-bottom: 0;
+                }
+                td, th {
+                    padding-top: 2px !important;
+                    padding-bottom: 2px !important;
+                }
+            </style>
+            <div class="page" style="font-family:Times New Roman; padding-top: 15px">
+                <div class="text-center" style="margin-bottom: 15px">
+                    <h3 style="margin-bottom: 10px">
+                        <t t-if="is_inbound">PHIẾU THU / <i>RECEIVING VOUCHER</i></t>
+                        <!-- Outbound -->
+                        <t t-else="">
+                            <t t-if="is_bank_payment">
+                                THANH TOÁN QUA NGÂN HÀNG / <i>PAYMENT VIA BANK</i>
+                            </t>
+                            <t t-else="">
+                                PHIẾU CHI / <i>PAYMENT VOUCHER</i>
+                            </t>
+                        </t>
+                    </h3>
+                    <strong>
+                        Ngày / <i>Date:</i> <span class="px-3" t-if="o.confirmed_due_date" t-esc="o.confirmed_due_date.day" />
+                        Tháng / <i>Month:</i> <span class="px-3" t-if="o.confirmed_due_date" t-esc="o.confirmed_due_date.month" />
+                        Năm / <i>Year</i> <span class="px-3" t-if="o.confirmed_due_date" t-esc="o.confirmed_due_date.year" />
+                    </strong>
+                </div>
+                <div style="margin-left: 65%">
+                    <table class="table table-borderless no-padding">
+                        <tr>
+                            <td style="width: 55%;"><strong>Quyển số / <i>Folio</i></strong></td>
+                            <td class="underline">
+                                <t t-esc="o.payment_reference" />
+                            </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Số / <i>Number</i> </strong></td>
+                          <td class="underline">
+                            <t t-esc="(o.move_id and o.move_id.tlip_entry_code) or o.name" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Nợ / <i>Debit</i> </strong></td>
+                          <td class="underline">
+                            <t t-esc="debit_account.code" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Có / <i>Credit</i> </strong></td>
+                          <td class="underline">
+                            <t t-esc="credit_account.code" />
+                          </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <table class="table table-borderless">
+                        <tr>
+                            <td style="width: 25%">
+                                <strong>
+                                    <span>
+                                        <t t-if="is_inbound">Họ tên người nộp</t>
+                                        <t t-else="">Họ tên người nhận</t>
+                                    </span><br/>
+                                    <i>
+                                        <t t-if="is_inbound">Full name of payer</t>
+                                        <t t-else="">Full name of payee</t>
+                                    </i>
+                                </strong>
+                            </td>
+                            <td>
+                                <p class="underline" t-if="o.partner_id" t-field="o.partner_id" />
+                                <p t-else="" class="underline" style="width: 100%; height: 25px;" />
+                            </td>
+                        </tr>
+                        <t t-if="is_bank_payment and not is_inbound">
+                            <tr>
+                                <td style="width: 25%">
+                                    <strong>
+                                        <span>Số tài khoản nhận</span><br/>
+                                        <i>Account no</i>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <p class="underline" t-if="o.partner_bank_id.acc_number" t-field="o.partner_bank_id.acc_number" />
+                                    <p t-else="" class="underline" style="width: 100%; height: 25px;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%">
+                                    <strong>
+                                        <span>Tên ngân hàng</span><br/>
+                                        <i>At bank</i>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <p class="underline" t-if="o.partner_bank_id.bank_id.name" t-field="o.partner_bank_id.bank_id.name" />
+                                    <p t-else="" class="underline" style="width: 100%; height: 25px;" />
+                                </td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span>Địa chỉ</span><br/>
+                                    <i>Address</i>
+                                </strong> 
+                            </td>
+                            <td>
+                                <t t-set="address_complete" t-value="o.partner_id.get_full_partner_address() if o.partner_id else ''" />
+                                <p class="underline" t-if="o.partner_id" t-esc="address_complete" />
+                                <p t-else="" class="underline" style="width: 100%; height: 25px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span>
+                                        <t t-if="is_inbound">Lý do nộp</t>
+                                        <t t-else="">Lý do chi</t>
+                                    </span><br/>
+                                    <i>For</i>
+                                </strong>
+                            </td>
+                            <td>
+                                <p t-if="o.memo" class="underline" t-field="o.memo" />
+                                <p t-else="" class="underline" style="width: 100%; height: 25px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span>Số tiền</span><br/>
+                                    <i>Amount</i>
+                                </strong>
+                            </td>
+                            <td>
+                                <p t-if="o.amount" class="underline" t-field="o.amount" />
+                                <p t-else="" class="underline" style="width: 100%; height: 25px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Bằng chữ</strong>
+                            </td>
+                            <td>
+                                <p t-if="o.amount_in_words_vn" class="underline" t-field="o.amount_in_words_vn" />
+                                <p t-else="" class="underline" style="width: 100%; height: 25px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong><i>In word</i></strong>
+                            </td>
+                            <td>
+                                <p t-if="o.amount_in_words_en" class="underline" t-field="o.amount_in_words_en" />
+                                <p t-else="" class="underline" style="width: 100%; height: 25px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Chứng từ kèm theo</strong>
+                            </td>
+                            <td>
+                                <p class="underline" style="width: 100%; height: 25px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong><i>Attached Documents</i></strong>
+                            </td>
+                            <td>
+                                <p class="underline" style="width: 100%; height: 25px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span>Đã thanh toán/ghi sổ vào</span><br/>
+                                    <i>Paid/recorded on:</i>
+                                </strong>
+                            </td>
+                            <td>
+                                <p t-if="o.state == 'paid'" class="underline"  t-field="o.date" t-options='{"widget": "date", "format": "dd/MM/yyyy"}' />
+                                <p t-else="" class="underline" style="width: 100%; height: 25px;" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div style="page-break-before: always; page-break-inside: avoid;" t-if="is_bank_payment and is_inbound">
+                    <p style="font-weight: bold;font-size:15pt">Thông tin tài khoản / <span
+                            style="font-syle:italic"></span>Bank account:</p>
+                    <p style="margin-bottom: 0">Vui lòng chuyển số tiền phải trả vào tài khoản ngân hàng của chúng tôi theo thông
+                        tin sau: </p>
+                    <p style="font-style:italic">Please remit the payable amount to our bank account as
+                        belows: </p>
+                    <table class="table table-borderless" style="width:100%; margin-bottom: 3px;">
+                        <tr>
+                            <td style="width: 30%; vertical-align: top;">
+                                Số tài khoản / <i>Account Number</i>
+                            </td>
+                            <td style="width: 70%; padding-left: 10px;">
+                                <b><t t-esc="company_accounts[0]" /></b>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <t t-if="len(company_accounts) > 1">
+                        <t t-foreach="company_accounts[1:]" t-as="acc">
+                            <table class="table table-borderless" style="width:100%; margin-bottom: 3px;">
+                                <tr>
+                                    <td style="width: 30%; vertical-align: top;">
+                                        Hoặc / <i>Or</i>
+                                    </td>
+                                    <td style="width: 70%; padding-left: 10px;">
+                                        <b><t t-esc="acc"/></b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </t>
+                    </t>
+                    
+                    <div class="row">
+                        <div class="col-3"> Lưu ý/ <span style="font-style:italic">Note: </span>
+                        </div>
+                        <div class="col-9" style="padding-left:10px">
+                            <b>Phí của ngân hàng sẽ được trả bởi khách hàng/ <span
+                                    style="font-style:italic">Bank's charge shall be borne by you.</span></b>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                
+                <div style="margin-bottom: 100px;">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th style="width: 33%; text-align: center; font-weight: bold">
+                                    <span>Người lập biểu</span><br/>
+                                    <i>Prepared by</i>
+                                </th>
+                                <th style="width: 33%; text-align: center; font-weight: bold">
+                                    <span>Kế toán trưởng</span><br/>
+                                    <i>Chief Accountant</i>
+                                </th>
+                                <th style="width: 33%; text-align: center; font-weight: bold">
+                                    <span>Được duyệt bởi</span><br/>
+                                    <i>Approved by</i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <t t-if="approver_signatures">
+                            <tbody>
+                                <tr>
+                                    <t t-foreach="approver_signatures" t-as="signature">
+                                        <td style="width: 33%; text-align: center; font-weight: bold">
+                                            <img t-if="signature" class="o_company_logo_big" t-att-src="image_data_uri(signature)" style="height: 100px" alt="Logo"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </t>
+                    </table>
+                </div>
+                <div t-if="not is_bank_payment">
+                    <table class="table table-borderless no-padding">
+                        <tr>
+                            <td colspan="2">
+                                <strong class="px-3">
+                                    <span>
+                                        <t t-if="is_inbound">Đã nhận đủ số tiền /</t>
+                                        <t t-else="">Đã chi đủ số tiền /</t>
+                                    </span>
+                                    <i>
+                                        <t t-if="is_inbound">Received the amount</t>
+                                        <t t-else="">Paid the amount</t>
+                                    </i>
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 15%"><strong>Bằng chữ</strong></td>
+                            <td>
+                                <p t-if="o.amount_in_words_vn" class="underline" t-field="o.amount_in_words_vn" />
+                                <p t-else="" class="underline" style="width: 100%; height: 25px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong><i>In word</i></strong></td>
+                            <td>
+                                <p t-if="o.amount_in_words_en" class="underline" t-field="o.amount_in_words_en" />
+                                <p t-else="" class="underline" style="width: 100%; height: 25px;" />
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="text-align: right;">
+                        <strong>
+                            Ngày / <i>Date:</i> <span class="px-3" t-esc="o.date.day" />
+                            Tháng / <i>Month:</i> <span class="px-3" t-esc="o.date.month" />
+                            Năm / <i>Year</i> <span class="px-3" t-esc="o.date.year" />
+                        </strong>
+                    </div>
+                    <div>
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50%; text-align: center; font-weight: bold">
+                                        <span>
+                                            <t t-if="is_inbound">Người nộp tiền</t>
+                                            <t t-else="">Người nhận tiền</t>
+                                        </span><br/>
+                                        <i>
+                                            <t t-if="is_inbound">Payer</t>
+                                            <t t-else="">Payee</t>
+                                        </i>
+                                    </th>
+                                    <th style="width: 50%; text-align: center; font-weight: bold">
+                                        <span>Thủ quỹ</span><br/>
+                                        <i>Cashier</i>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_account_payment">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang or o.company_id.partner_id.lang"/>
+                <t t-call="tlip_account.report_account_payment_document" t-lang="lang" />
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tlip_approval_request_inherit_module_name" model="ir.ui.view">
+        <field name="name">approval.request.view.form.inherit</field>
+        <field name="model">approval.request</field>
+        <field name="inherit_id" ref="approvals.approval_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_refuse']" position="attributes">
+                <attribute name="invisible">to_review_contract or request_status in ['approved', 'refused', 'cancel'] or user_status != 'pending'</attribute>
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_refuse']" position="before">
+                <button name="action_approve" string="Approve" type="object"
+                    invisible="not to_review_contract or request_status in ['approved', 'refused', 'cancel'] or user_status != 'pending'" context="{'review_contract_refuse': True}" confirm="Are you sure that you want to do this action?"/>
+            </xpath>
+
+            <group name="request_details" position="inside">
+                <field name="to_review_contract" invisible="1"/>
+                <field name="related_model" invisible="1" />
+                <field name="related_res_name" invisible="1" />
+                <field name="related_res_id" string="Source" readonly="1"/>
+                <field name="withdraw_reason" invisible="request_status != 'cancel'" />
+            </group>
+            <xpath expr="//field[@name='approver_ids']//field[@name='status']" position="attributes">
+                <attribute name="column_invisible">parent.to_review_contract</attribute>
+            </xpath>
+            <xpath expr="//field[@name='approver_ids']//field[@name='status']" position="after">
+                <field name="review_status" string="Review Status" column_invisible="not parent.to_review_contract"/>
+            </xpath>
+            <xpath expr="//field[@name='approver_ids']//field[@name='user_id']" position="after">
+                <field name="job_id" required="not user_id" />
+            </xpath>
+            <field name="user_id" position="attributes">
+                <attribute name="required">not job_id</attribute>
+            </field>
+            <field name="approval_type" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <button name="action_draft" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </button>
+            <xpath expr="//notebook" position="inside">
+                <page name="reviews" string="Reviews" invisible="not to_review_contract">
+                    <field name="approval_review_ids">
+                        <list editable="bottom">
+                            <field name="create_uid" string="Approver" />
+                            <field name="old_value" readonly="id and create_uid != uid" />
+                            <field name="new_value" readonly="id and create_uid != uid" />
+                            <field name="reason" readonly="id and create_uid != uid" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="approval_request_view_tree_inherit_tlip_approval" model="ir.ui.view">
+        <field name="name">approval.request.view.list.inherit.tlip_approval</field>
+        <field name="model">approval.request</field>
+        <field name="inherit_id" ref="approvals.approval_request_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="reason" />
+                <field name="related_model" invisible="1" />
+                <field name="related_res_id" string="Source" widget="many2many_reference" />
+                <button name="action_open_related_document" type="object" icon="fa-external-link" class="btn-link pt-0" invisible="not related_model or not related_res_id"/>
+                <field name="partner_id" optional="show" />
+                <field name="amount" optional="show" />
+                <field name="debit_account_ids" widget="many2many_tags" optional="show" />
+                <field name="credit_account_ids" widget="many2many_tags" optional="show" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="approval_request_multi_approve_action_server" model="ir.actions.server">
+        <field name="name">Approve</field>
+        <field name="model_id" ref="approvals.model_approval_request"/>
+        <field name="binding_model_id" ref="approvals.model_approval_request"/>
+        <field name="state">code</field>
+        <field name="binding_view_types">list</field>
+        <field name="code">
+            for record in records:
+                record.action_approve()
+        </field>
+    </record>
+
+    <menuitem
+        id="approvals.approvals_menu_root"
+        name="Approvals"
+        groups="base.group_system"/>
+</odoo>

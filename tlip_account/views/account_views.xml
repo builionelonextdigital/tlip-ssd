@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_account_form_view_inherit_exchange_valuation_frequency" model="ir.ui.view">
+        <field name="name">account.account.form.view.inherit.exchange_valuation_frequency</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form" />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field name="use_for_cip" />
+                <field name="show_exchange_frequency" invisible="1" />
+                <field name="exchange_valuation_frequency"
+                    invisible="not show_exchange_frequency" />
+                <field name="bank_id" options="{'no_create': True, 'no_create_edit': True}"
+                    invisible="not show_exchange_frequency" />
+            </field>
+        </field>
+    </record>
+
+    <record id="account_account_list_view_inherit_exchange_valuation_frequency" model="ir.ui.view">
+        <field name="name">account.account.list.view.inherit.exchange_valuation_frequency</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_list" />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field name="use_for_cip" />
+                <field name="show_exchange_frequency" column_invisible="1" />
+                <field name="exchange_valuation_frequency"
+                    readonly="not show_exchange_frequency" />
+                <field name="bank_id" options="{'no_create': True, 'no_create_edit': True}"
+                    readonly="not show_exchange_frequency" />
+            </field>
+        </field>
+    </record>
+</odoo>

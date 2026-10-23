@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_location_form_inherit_tlip_stock" model="ir.ui.view">
+        <field name="name">stock.location.view.form.inherit.tlip.stock</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <field name="scrap_location" position="after">
+                <field name="damage_location" invisible="usage not in ('inventory', 'internal')"/>
+                <field name="maintenance_location" invisible="usage not in ('inventory', 'internal')"/>
+                <field name="is_exported_for_use"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

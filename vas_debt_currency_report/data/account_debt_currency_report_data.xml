@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_debt_currency_report_data" model="account.report">
+        <field name="name">Account Debt Currency</field>
+        <field name="filter_journals" eval="True" />
+        <field name="filter_analytic" eval="True" />
+        <field name="filter_growth_comparison" eval="False" />
+        <field name="filter_multi_company">selector</field>
+        <field name="filter_unfold_all" eval="True" />
+        <field name="filter_currency" eval="True" />
+        <field name="filter_accounts" eval="True" />
+        <field name="filter_hierarchy">never</field>
+        <field name="filter_hide_0_lines">never</field>
+        <field name="default_opening_date_filter">this_month</field>
+        <field name="search_bar" eval="True" />
+        <field name="custom_handler_model_id" ref="model_account_debt_currency_report_handler" />
+        <field name="column_ids">
+            <record id="debt_currency_report_debit" model="account.report.column">
+                <field name="name">Debit</field>
+                <field name="expression_label">debit</field>
+            </record>
+            <record id="debt_currency_report_credit" model="account.report.column">
+                <field name="name">Credit</field>
+                <field name="expression_label">credit</field>
+            </record>
+            <record id="debt_currency_report_debit_currency" model="account.report.column">
+                <field name="name">Debit Currency</field>
+                <field name="expression_label">debit_currency</field>
+            </record>
+            <record id="debt_currency_report_credit_currency" model="account.report.column">
+                <field name="name">Credit Currency</field>
+                <field name="expression_label">credit_currency</field>
+            </record>
+        </field>
+    </record>
+</odoo>

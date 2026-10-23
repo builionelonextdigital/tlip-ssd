@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="electricity_category_view_tree" model="ir.ui.view">
+        <field name="name">electricity.category.view.tree</field>
+        <field name="model">electricity.category</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_utilities_electricity_categories_view" model="ir.actions.act_window">
+        <field name="name">Electricity Categories</field>
+        <field name="res_model">electricity.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>

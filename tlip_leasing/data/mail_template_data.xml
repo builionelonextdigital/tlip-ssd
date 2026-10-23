@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="stock_location_cr_mail_template" model="mail.template">
+        <field name="name">Change Land Plot Approved</field>
+        <field name="subject">[Change Land Plot Approved] {{ object.name }}</field>
+        <field name="model_id" ref="tlip_leasing.model_stock_location_cr"/>
+        <field name="auto_delete" eval="False"/>
+        <field name="active" eval="True"/>
+        <field name="body_html" type="html">
+            <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                Dear,<br/><br/>
+                <strong>Change Land Plot</strong> has been approved:<br/>
+                Request: <t t-out="object.name" /><br/>
+                Regards,
+            </p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,20 @@
+.o_plan_view {
+    height: 100%;
+    overflow-y: scroll;
+
+    .o_content {
+        height: 90% !important;
+        overflow: hidden !important;
+
+        #location-selection {
+            display: flex;
+            justify-content: center;
+            height: 7%;
+
+            .select-container {
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+}

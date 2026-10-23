@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_tlip_procurement_vendor_tree" model="ir.ui.view">
+        <field name="name">tlip.procurement.vendor.tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="mode">primary</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <field name="user_id" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
+            <field name="company_id" position="after">
+                <field name="vendor_code" />
+                <field name="vendor_type_ids" widget="many2many_tags" />
+                <field name="vendor_state" widget="badge"
+                    decoration-danger="vendor_state == 'rejected'"
+                    decoration-info="vendor_state == 'draft'"
+                    decoration-success="vendor_state == 'approved'" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_tlip_procurement_vendor_form" model="ir.ui.view">
+        <field name="name">tlip.procurement.vendor.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="tlip_approval.view_tlip_base_partner_form_inherit_approval" />
+        <field name="priority" eval="100" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="string">Vendors</attribute>
+            </xpath>
+            <button name="action_update_contact_info" position="before">
+                <button name="action_submit_approval" string="Submit" type="object"
+                    context="{'approval_partner_type': 'vendor'}"
+                    class="btn btn-secondary"
+                    invisible="vendor_state != 'draft'" confirm="Are you sure that you want to do this action?" />
+                <button name="action_reset" string="Reset" type="object" class="oe_highlight"
+                    confirm="Are you sure that you want to do this action?"
+                    context="{'approval_partner_type': 'vendor'}"
+                    invisible="vendor_state != 'rejected'" />
+            </button>
+            <field name="vendor_state" position="after">
+                <field name="vendor_state" widget="statusbar" statusbar_visible="draft" />
+            </field>
+            <xpath expr="//group[@name='register_address_vn']/span[@name='address_name']"
+                position="before">
+                <field name="vendor_code" readonly="1" />
+            </xpath>
+            <xpath expr="//group[@name='register_address_en']/span[@name='address_name']"
+                position="before">
+                <field name="vendor_type_ids" widget="many2many_tags"
+                    options="{'no_create': True, 'no_create_edit': True}" required="1"
+                    readonly="vendor_state != 'draft'" />
+            </xpath>
+            <xpath expr="//group[@name='detail_company_info']/field[@name='function']"
+                position="before">
+                <field name="vendor_type_ids" widget="many2many_tags"
+                    options="{'no_create': True, 'no_create_edit': True}" required="1"
+                    readonly="vendor_state != 'draft'" />
+            </xpath>
+            <button name="action_get_attachment_view" position="after">
+                <button class="oe_stat_button"
+                    type="object" name="action_view_change_requests_vendor"
+                    icon="fa-file-text-o"
+                    string="Change Requests"
+                    invisible="vendor_state != 'approved'"
+                />
+            </button>
+        </field>
+    </record>
+
+
+    <record id="tlip_procurement_vendor_action" model="ir.actions.act_window">
+        <field name="name">Vendors</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_procurement.view_tlip_procurement_vendor_tree')}),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('base.res_partner_kanban_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_procurement.view_tlip_procurement_vendor_form')})]" />
+        <field name="search_view_id" ref="tlip_base.view_partner_search_inherit_tlip_base" />
+        <field name="domain">[('vendor_state', '=', 'approved'), ('parent_id', '=', False)]</field>
+        <field name="context">{'default_is_company': True, 'default_supplier_rank': 1,
+            'procurement_vendor': True, 'create': 0}</field>
+    </record>
+
+    <record id="tlip_procurement_vendor_registration_action" model="ir.actions.act_window">
+        <field name="name">Vendor Registration</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_procurement.view_tlip_procurement_vendor_tree')}),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('base.res_partner_kanban_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_procurement.view_tlip_procurement_vendor_form')})]" />
+        <field name="search_view_id" ref="tlip_base.view_partner_search_inherit_tlip_base" />
+        <field name="domain">[('parent_id', '=', False)]</field>
+        <field name="context">{'default_is_company': True, 'default_supplier_rank': 1,
+            'procurement_vendor': True, 'create': 0}</field>
+    </record>
+
+    <record id="tlip_procurement_vendor_type_action" model="ir.actions.act_window">
+        <field name="name">Vendor Type</field>
+        <field name="res_model">res.partner.type</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[]</field>
+    </record>
+
+    <record id="tlip_procurement_register_vendor_action" model="ir.actions.act_window">
+        <field name="name">Register Vendor</field>
+        <field name="res_model">check.partner.exist.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_check_type': 'vendor'}</field>
+    </record>
+
+</odoo>

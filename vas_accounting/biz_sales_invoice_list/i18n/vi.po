@@ -1,0 +1,139 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* biz_sales_invoice_list
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-02 08:07+0000\n"
+"PO-Revision-Date: 2024-02-02 08:07+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: biz_sales_invoice_list
+#: model:ir.actions.report,print_report_name:biz_sales_invoice_list.action_report_invoice_list_xlsx
+msgid "'BẢNG KÊ HÓA ĐƠN, CHỨNG TỪ HÀNG HÓA, DỊCH VỤ BÁN RA'"
+msgstr ""
+
+#. module: biz_sales_invoice_list
+#: model:ir.model.fields.selection,name:biz_sales_invoice_list.selection__account_tax__type_vat__10_vat
+msgid "10 %"
+msgstr ""
+
+#. module: biz_sales_invoice_list
+#: model:ir.model,name:biz_sales_invoice_list.model_account_account
+msgid "Account"
+msgstr "Tài khoản"
+
+#. module: biz_sales_invoice_list
+#: model_terms:ir.ui.view,arch_db:biz_sales_invoice_list.wizard_sale_invoicelist_form
+msgid "Cancel"
+msgstr "Hủy"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_wizard_sale_invoicelist__create_uid
+msgid "Created by"
+msgstr "Tạo bởi"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_wizard_sale_invoicelist__create_date
+msgid "Created on"
+msgstr "Được tạo vào lúc"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_wizard_sale_invoicelist__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_wizard_sale_invoicelist__from_date
+msgid "From date"
+msgstr "Từ ngày"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_account_move_line__product_not_taxable
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_product_product__product_not_taxable
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_product_template__product_not_taxable
+msgid "HHDV is not taxable"
+msgstr "HHDV không chịu thuế"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_wizard_sale_invoicelist__id
+msgid "ID"
+msgstr ""
+
+#. module: biz_sales_invoice_list
+#: model:ir.actions.report,name:biz_sales_invoice_list.action_report_invoice_list_xlsx
+msgid "Invoice list"
+msgstr "Bảng kê hóa đơn"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_account_account__is_output_vat
+msgid "Is output VAT"
+msgstr "Là thuế GTGT đầu ra"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model,name:biz_sales_invoice_list.model_account_move_line
+msgid "Journal Item"
+msgstr "Hạng mục bút toán"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_wizard_sale_invoicelist____last_update
+msgid "Last Modified on"
+msgstr "Sửa lần cuối vào"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_wizard_sale_invoicelist__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật sau cùng bởi"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_wizard_sale_invoicelist__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật sau cùng"
+
+#. module: biz_sales_invoice_list
+#: model_terms:ir.ui.view,arch_db:biz_sales_invoice_list.wizard_sale_invoicelist_form
+msgid "Print"
+msgstr "In"
+
+#. module: biz_sales_invoice_list
+#: model:ir.actions.act_window,name:biz_sales_invoice_list.wizard_sale_invoicelist_action
+#: model:ir.ui.menu,name:biz_sales_invoice_list.wizard_sale_invoicelist_menu
+msgid "Print sales invoice list"
+msgstr "Bảng in hóa đơn bán ra"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model,name:biz_sales_invoice_list.model_product_template
+msgid "Product"
+msgstr "Sản phẩm"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model,name:biz_sales_invoice_list.model_wizard_sale_invoicelist
+msgid "Sales invoice list"
+msgstr "Bảng kê hóa đơn bán ra"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model,name:biz_sales_invoice_list.model_account_tax
+msgid "Tax"
+msgstr "Thuế"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_wizard_sale_invoicelist__to_date
+msgid "To date"
+msgstr "Đến ngày"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model.fields,field_description:biz_sales_invoice_list.field_account_tax__type_vat
+msgid "Type vat"
+msgstr "Loại vat"
+
+#. module: biz_sales_invoice_list
+#: model:ir.model,name:biz_sales_invoice_list.model_report_biz_sales_invoice_list_report_invoice_list_xlsx
+msgid "report_invoice_list_xlsx"
+msgstr ""

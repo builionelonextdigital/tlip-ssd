@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="electricity_point_view_form" model="ir.ui.view">
+        <field name="name">electricity.point.view.form</field>
+        <field name="model">electricity.point</field>
+        <field name="arch" type="xml">
+            <form string="Electricity Point">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="btn btn-primary"
+                        invisible="state != 'draft'" />
+                    <button name="action_reset" string="Reset to Draft" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="btn btn-secondary"
+                        invisible="state == 'draft'" />
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,confirm" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" string="Electricity Point"
+                                readonly="state != 'draft'" />
+                            <field name="electricity_point_name" readonly="state != 'draft'" />
+                            <field name="electricity_type" readonly="state != 'draft'" />
+                            <field name="electricity_categ_id" readonly="state != 'draft'"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                            <field name="contract_number"
+                                readonly="state != 'draft'" />
+                            <field name="connection_contract_number"
+                                readonly="state != 'draft'" />
+                        </group>
+                        <group>
+                            <field name="partner_id"
+                                readonly="state != 'draft'"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                            <field name="partner_code" />
+                            <field name="land_plot_name" string="Land Plot" readonly="state != 'draft'"/>
+                            <!-- <field name="land_plot_id" readonly="state != 'draft'"
+                                domain="[('is_land_plot', '=', True), ('is_plot_view', '=', False), ('usage', '=', 'internal')]"
+                                options="{'no_create': True, 'no_create_edit': True}" /> -->
+                            <field name="company_id" readonly="state != 'draft'"
+                                options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                            <field name="pricelist_id" readonly="state != 'draft'" options="{'no_create': True, 'no_create_edit': True}"/>    
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="general_info" string="General Info">
+                            <group>
+                                <group>
+                                    <field name="signing_date"
+                                        readonly="state != 'draft'" />
+                                    <field name="starting_date"
+                                        readonly="state != 'draft'" />
+                                    <field name="ending_date"
+                                        readonly="state != 'draft'" />
+                                    <field name="contract_payment_article"
+                                        readonly="state != 'draft'" />
+                                    <label for="payment_due_date"/>
+                                    <div class="oe_inline">
+                                        <field name="payment_due_date" nolabel="1" class="oe_inline" readonly="state != 'draft'" />
+                                        days after record date </div>
+                                    <field name='customer_contact_ids' widget="many2many_tags"
+                                        context="{'default_parent_id': partner_id, 'default_type': 'contact', 'form_view_ref': 'base.view_partner_simple_form'}" />
+                                    <field name="auto_issue_payment" readonly="state != 'draft'" />
+                                </group>
+                                <group>
+                                    <field name="connection_signing_date"
+                                        readonly="state != 'draft'" />
+                                    <field name="connection_contract_payment_article" readonly="state != 'draft'" />
+                                    <field name="meter_code"
+                                        readonly="state != 'draft'" />
+                                    <field name="tax_apply_type" widget="radio"
+                                        options="{'horizontal': True}"
+                                        readonly="state != 'draft'" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="record_schedule" string="Record Schedules">
+                            <field name="consumption_record_schedule_ids" readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="day_in_month" />
+                                    <field name="electricity_consumption_id" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="note" string="Notes">
+                            <field name="note" widget="html" readonly="state != 'draft'" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="electricity_point_view_tree" model="ir.ui.view">
+        <field name="name">electricity.point.view.tree</field>
+        <field name="model">electricity.point</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="electricity_point_name" />
+                <field name="electricity_type" />
+                <field name="electricity_categ_id" />
+                <field name="partner_id" />
+                <field name="company_id" />
+                <field name="tax_apply_type" />
+                <field name="land_plot_id" />
+                <field name="count_record_in_month" />
+                <field name="state" widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-success="state == 'confirm'" />
+                <field name="sync_status" widget="badge"
+                    decoration-warning="state == 'in_progress'"
+                    decoration-success="sync_status == 'done'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="electricity_point_view_search" model="ir.ui.view">
+        <field name="name">electricity_point.view.search</field>
+        <field name="model">electricity.point</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name"  />
+                <field name="partner_id" />
+                <filter name="filter_draft" string="Draft"
+                    domain="[('state', '=', 'draft')]" />
+                <filter name="filter_confirm" string="Confirm"
+                    domain="[('state', '=', 'confirm')]" />
+                <group expand="0" string="Group By">
+                    <filter string="Partner" name="groupby_partner"
+                        domain="[]" context="{'group_by': 'partner_id'}" />
+                    <filter string="State" name="groupby_state" domain="[]"
+                        context="{'group_by': 'state'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_utilities_electricity_points_view" model="ir.actions.act_window">
+        <field name="name">Electricity Points</field>
+        <field name="res_model">electricity.point</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>

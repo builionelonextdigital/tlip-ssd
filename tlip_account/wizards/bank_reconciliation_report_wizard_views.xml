@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="bank_reconciliation_report_wizard_form_view" model="ir.ui.view">
+        <field name="name">bank.reconciliation.report.wizard.form.view</field>
+        <field name="model">bank.reconciliation.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Bank Reconciliation Report">
+                <group>
+                    <group>
+                        <field name="partner_bank_ids"
+                            options="{'no_create': 1, 'no_create_edit': 1}"
+                            widget="many2many_tags" required="1" />
+                        <field name="reconciliation_date" required="1" />
+                    </group>
+                </group>
+                <footer>
+                    <button name="button_generate_reconciliation_data" string="Open" type="object"
+                        class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record
+        id="action_bank_reconciliation_report" model="ir.actions.act_window">
+        <field name="name">Bank Reconciliation Report</field>
+        <field name="res_model">bank.reconciliation.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

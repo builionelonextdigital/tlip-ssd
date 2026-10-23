@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_debit_credit_control_list_xlsx" model="ir.actions.report">
+        <field name="name">Debit and Credit Control List</field>
+        <field name="model">debit.credit.report.wizard</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">tlip_account.report_debit_credit_xlsx</field>
+        <field name="report_file">tlip_account.report_debit_credit_xlsx</field>
+        <field name="print_report_name">'Debit and Credit Control List'</field>
+        <field name="binding_model_id" ref="model_debit_credit_report_wizard" />
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_batch_payment_document">
+        <t t-call="tlip_base.tlip_layout">
+            <div class="page" style="font-family: Times New Roman; padding-top: 30px">
+                <t t-set="o" t-value="o.with_context(lang=lang)" />
+                <t t-set="is_inbound" t-value="o.payment_type == 'inbound'" />
+                <style>
+                    table.no-padding td{
+                        padding: 0 !important;
+                        text-align: left;
+                    }
+                    i {
+                        font-size: 12px;
+                    }
+                    .main-table th strong {
+                        color: blue;
+                        font-weight: bold !important;
+                    }
+                    .main-table th {
+                        text-align: center !important;
+                    }
+                    .main-table td {
+                        vertical-align: middle !important;
+                    }
+                </style>
+                <!-- Document Info -->
+                <div class="text-center" style="margin-bottom: 15px">
+                    <h3 style="color: blue; font-weight: bold; margin-bottom: 10px">
+                        <t t-if="is_inbound">PHIẾU BÁO CÓ
+                            NGÂN HÀNG / RECEIVING VIA BANK</t>
+                        <t t-else="">HIẾU BÁO NỢ
+                            NGÂN HÀNG / PAYMENT VIA BANK</t>
+                    </h3>
+                </div>
+                <div style="margin-left: 55%">
+                    <table class="table table-borderless no-padding">
+                        <tr>
+                            <td colspan="2">
+                                <span>Số chứng từ</span>
+                                <br />
+                                <i>(Voucher No:)</i>
+                            </td>
+                            <td colspan="4">
+                                <t t-esc="o.name" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20%">
+                                <span>Ngày</span>
+                                <br />
+                                <i>(Date)</i>
+                            </td>
+                            <td>
+                                <t t-esc="o.date.day" />
+                            </td>
+                            <td style="width: 20%">
+                                <span>tháng</span>
+                                <br />
+                                <i>(month)</i>
+                            </td>
+                            <td>
+                                <t t-esc="o.date.month" />
+                            </td>
+                            <td style="width: 20%">
+                                <span>năm</span>
+                                <br />
+                                <i>(year)</i>
+                            </td>
+                            <td>
+                                <t t-esc="o.date.year" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- Main Table -->
+                <table class="table table-bordered table-sm main-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%">
+                                <strong>Đơn vị trả tiền</strong>
+                                <br />
+                                <i>(Unit of payment)</i>
+                            </th>
+                            <th style="width: 25%">
+                                <strong>Chi tiết các khoản</strong>
+                                <br />
+                                <i>(Details)</i>
+                            </th>
+                            <th style="width: 10%">
+                                <strong>Ghi nợ</strong>
+                                <br />
+                                <i>(Debit Acc)</i>
+                            </th>
+                            <th style="width: 10%">
+                                <strong>Ghi có</strong>
+                                <br />
+                                <i>(Credit Acc)</i>
+                            </th>
+                            <th style="width: 15%">
+                                <strong>Số tiền VND</strong>
+                                <br />
+                                <i>(VND Amount)</i>
+                            </th>
+                            <th style="width: 15%">
+                                <strong>Số tiền gốc N.tệ</strong>
+                                <br />
+                                <i>(Original Amount)</i>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop through your lines -->
+                        <tr t-foreach="o.payment_ids" t-as="payment">
+                            <t t-set="debit_account" 
+                                t-value="payment.outstanding_account_id if is_inbound else payment.destination_account_id" />
+                            <t t-set="credit_account" 
+                                t-value="payment.destination_account_id if is_inbound else payment.outstanding_account_id" />
+
+                            <td>
+                                <span t-if="payment.partner_id" t-field="payment.partner_id" />
+                            </td>
+                            <td>
+                                <span t-if="payment.memo" t-field="payment.memo" />
+                            </td>
+                            <td class="text-center">
+                                <span t-if="debit_account.code" t-field="debit_account.code" />
+                            </td>
+                            <td class="text-center">
+                                <span t-if="credit_account.code" t-field="credit_account.code" />
+                            </td>
+                            <td style="text-align: right">
+                                <span t-esc="payment.amount" />
+                            </td>
+                            <td style="text-align: right">
+                                <span t-esc="payment.entry_amount_currency" />
+                            </td>
+                        </tr>
+                        <!-- Total -->
+                        <tr>
+                            <td colspan="4">
+                                <strong class="text-danger" style="padding-left: 40px">Tổng cộng </strong><i>(Total)</i>
+                            </td>
+                            <td class="text-danger" style="text-align: right">
+                                <strong>
+                                    <t t-esc="o.total_amount_payment" />
+                                </strong>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div class="row" style="margin-bottom: 50px;">
+                                    <div class="col-3">
+                                        <span>
+                                            <strong class="text-danger">Số tiền bằng chữ</strong><br />
+                                            <i>(Amount in words)</i>
+                                        </span>
+                                    </div>
+                                    <div class="col-6">
+                                        <span t-esc="o.total_amount_in_words_vn" /><br />
+                                        <i>(<t t-esc="o.total_amount_in_words_en"/>)</i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="margin-bottom: 100px;">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th style="width: 33%; text-align: center;">
+                                    <strong>Người lập</strong><br/>
+                                    <i>(Prepared by)</i>
+                                </th>
+                                <th style="width: 33%; text-align: center;">
+                                    <strong>Kế toán trưởng</strong><br/>
+                                    <i>(Chief Accountant)</i>
+                                </th>
+                                <th style="width: 33%; text-align: center;">
+                                    <strong>Được duyệt bởi</strong><br/>
+                                    <i>(Approved by)</i>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+            </div>
+        </t>
+    </template>
+
+    <template id="report_batch_payment">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.company_id.partner_id.lang" />
+                <t t-call="tlip_account.report_batch_payment_document" t-lang="lang" />
+            </t>
+        </t>
+    </template>
+</odoo>

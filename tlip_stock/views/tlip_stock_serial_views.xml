@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tlip_stock_serial_view_list" model="ir.ui.view">
+        <field name="name">tlip.stock.serial.view.list</field>
+        <field name="model">tlip.stock.serial</field>
+        <field name="arch" type="xml">
+            <list create="0" editable="bottom">
+                <field name="product_id" />
+                <field name="display_name" string="Barcode" />
+                <field name="package_id" />
+                <field name="quantity" />
+            </list>
+        </field>
+    </record>
+
+</odoo>

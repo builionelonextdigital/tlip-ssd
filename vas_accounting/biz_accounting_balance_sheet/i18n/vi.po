@@ -1,0 +1,722 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* biz_accounting_balance_sheet
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-04 04:26+0000\n"
+"PO-Revision-Date: 2024-03-04 04:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.actions.report,print_report_name:biz_accounting_balance_sheet.action_report_accounting_balance_xlsx
+msgid "'Accounting balance sheet (Excel) - %s' % (object.id)"
+msgstr "'Bảng cân đối kế toán (Excel) - %s' % (object.id)"
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid ""
+"(Ban hành theo Thông tư Số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài chính)"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "(Ký, họ tên)"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "(Ký, họ tên, đóng dấu)"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "(Áp dụng cho doanh nghiệp đáp ứng giả định hoạt động liên tục)"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid ""
+"<b>Ghi chú:</b><br/>\n"
+"\t\t\t\t\t\t\t\t\t(1) Những chỉ tiêu không có số liệu được miễn trình bày nhưng không được đánh lại “Mã số” chỉ tiêu.<br/>\n"
+"\t\t\t\t\t\t\t\t\t(2) Số liệu trong các chỉ tiêu có dấu (*) được ghi bằng số âm dưới hình thức ghi trong ngoặc đơn (...).<br/>\n"
+"\t\t\t\t\t\t\t\t\t(3) Đối với doanh nghiệp có kỳ kế toán năm là năm dương lịch (X) thì “Số cuối năm“ có thể ghi là “31.12.X“; “Số đầu năm“ có thể ghi là “01.01.X“.<br/>\n"
+"\t\t\t\t\t\t\t\t\t(4) Đối với người lập biểu là các đơn vị dịch vụ kế toán phải ghi rõ Số chứng chỉ hành nghề,  tên và địa chỉ Đơn vị cung cấp dịch vụ kế toán. Người lập biểu là cá nhân ghi rõ Số chứng chỉ hành nghề.<br/>"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid ""
+"<span> - Số chứng chỉ hành nghề;</span><br/>\n"
+"\t\t\t\t\t\t\t\t\t\t<span> - Đơn vị cung cấp dịch vụ kế toán</span>"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "<strong>Đơn vị báo cáo: </strong>"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "<strong>Địa chỉ: </strong>"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__access_warning
+msgid "Access warning"
+msgstr "Cảnh báo truy cập"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line__move_line_ids
+msgid "Account move line"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__account_ids
+msgid "Account systems"
+msgstr "Hệ thống tài khoản"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.actions.report,name:biz_accounting_balance_sheet.accounting_balance_sheet_report_pdf
+msgid "Accounting Balance Report PDF"
+msgstr "Bảng cân đối kế toán (PDF)"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model,name:biz_accounting_balance_sheet.model_accounting_balance_sheet
+#: model:ir.model,name:biz_accounting_balance_sheet.model_accounting_balance_sheet_report
+#: model:ir.model,name:biz_accounting_balance_sheet.model_report_biz_accounting_balance_sheet_rp_account_balance_sheet
+#: model:ir.model.fields.selection,name:biz_accounting_balance_sheet.selection__accounting_balance_sheet__report_type__accounting_balance_sheet
+#: model:ir.model.fields.selection,name:biz_accounting_balance_sheet.selection__accounting_balance_template__template_type__accounting_balance_sheet
+msgid "Accounting Balance Sheet"
+msgstr "Bảng cân đối kế toán"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model,name:biz_accounting_balance_sheet.model_accounting_balance_sheet_report_line
+msgid "Accounting Balance Sheet Line"
+msgstr "Dòng Bảng Cân đối Kế toán"
+
+#. module: biz_accounting_balance_sheet
+#. odoo-python
+#: code:addons/biz_accounting_balance_sheet/models/accounting_balance_sheet_report.py:0
+#, python-format
+msgid "Accounting Balance Sheet: %s - %s"
+msgstr "Bảng cân đối kế toán: %s - %s"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model,name:biz_accounting_balance_sheet.model_accounting_balance_template
+msgid "Accounting Balance Template"
+msgstr "Mẫu bảng cân đối kế toán"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model,name:biz_accounting_balance_sheet.model_accounting_balance_template_line
+msgid "Accounting Balance Template Line"
+msgstr "Mẫu bảng cân đối kế toán chi tiết"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.actions.act_window,name:biz_accounting_balance_sheet.action_accounting_balance_sheet
+#: model:ir.actions.act_window,name:biz_accounting_balance_sheet.action_accounting_balance_sheet_report
+#: model:ir.ui.menu,name:biz_accounting_balance_sheet.menu_accounting_balance_sheet
+#: model:ir.ui.menu,name:biz_accounting_balance_sheet.menu_accounting_balance_sheet_report
+msgid "Accounting balance sheet"
+msgstr "Bảng cân đối kế toán"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.actions.act_window,name:biz_accounting_balance_sheet.action_accounting_balance_sheet_report_line
+msgid "Accounting balance sheet detail"
+msgstr "Bảng cân đối kế toán chi tiết"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.actions.act_window,name:biz_accounting_balance_sheet.action_accounting_balance_template
+#: model:ir.ui.menu,name:biz_accounting_balance_sheet.menu_accounting_balance_template
+msgid "Accounting balance template"
+msgstr "Mẫu bảng cân đối kế toán"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_needaction
+msgid "Action Needed"
+msgstr "Cần xử lý"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__active
+msgid "Active"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__activity_ids
+msgid "Activities"
+msgstr "Các hoạt động"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Hành động ngoại lệ"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__activity_state
+msgid "Activity State"
+msgstr "Tình trạng hoạt động"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Biểu tượng loại hoạt động"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields.selection,name:biz_accounting_balance_sheet.selection__accounting_balance_sheet__value_on_report__always_positive
+msgid "Always positive"
+msgstr "Luôn dương"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__apply_by
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line__apply_by
+msgid "Apply by"
+msgstr "Áp dụng tính theo"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line__balance_id
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template_line__balance_id
+msgid "Assets"
+msgstr "Chỉ tiêu"
+
+#. module: biz_accounting_balance_sheet
+#. odoo-python
+#: code:addons/biz_accounting_balance_sheet/models/accounting_balance_sheet_report.py:0
+#, python-format
+msgid "Assets: %s"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_attachment_count
+msgid "Attachment Count"
+msgstr "Số đính kèm"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template__balance_ids
+msgid "Balance"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__is_bold_report
+msgid "Bold in report"
+msgstr "In đậm trong báo cáo"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_res_company__business_cycle
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_res_config_settings__business_cycle
+msgid "Business cycle (Month)"
+msgstr "Chu kỳ kinh doanh (Tháng)"
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "Bảng cân đối kế toán"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.view_accounting_balance_sheet_report_form
+msgid "Calculate"
+msgstr "Tính toán"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__categ_name
+msgid "Category name"
+msgstr "Tên danh mục"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields.selection,name:biz_accounting_balance_sheet.selection__accounting_balance_sheet_report__state__closed
+msgid "Closed"
+msgstr "Đã chốt"
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.view_accounting_balance_sheet_report_form
+msgid "Closing"
+msgstr "Chốt sổ"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__code
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line__code
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template_line__code
+msgid "Code"
+msgstr "Mã"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model,name:biz_accounting_balance_sheet.model_res_company
+msgid "Companies"
+msgstr "Công ty"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__company_id
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__company_id
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template__company_id
+msgid "Company"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model,name:biz_accounting_balance_sheet.model_res_config_settings
+msgid "Config Settings"
+msgstr "Cài đặt Cấu hình"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__create_uid
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__create_uid
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line__create_uid
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template__create_uid
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template_line__create_uid
+msgid "Created by"
+msgstr "Được tạo bởi"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__create_date
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__create_date
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line__create_date
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template__create_date
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template_line__create_date
+msgid "Created on"
+msgstr "Được tạo lúc"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,help:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__access_url
+msgid "Customer Portal URL"
+msgstr "Đường dẫn cổng thông tin khách hàng"
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.view_accounting_balance_sheet_report_form
+msgid "Detail"
+msgstr "Chi tiết"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__display_name
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__display_name
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line__display_name
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template__display_name
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template_line__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields.selection,name:biz_accounting_balance_sheet.selection__accounting_balance_sheet_report__state__draft
+msgid "Draft"
+msgstr "Dự thảo"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields.selection,name:biz_accounting_balance_sheet.selection__accounting_balance_sheet__value_on_report__zero_when_negative
+msgid "Equals 0 when the result is negative"
+msgstr "Bằng 0 khi kết quả âm"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_follower_ids
+msgid "Followers"
+msgstr "Người theo dõi"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Người theo dõi (Các đối tác)"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,help:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__from_date
+msgid "From Date"
+msgstr "Từ ngày"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields.selection,name:biz_accounting_balance_sheet.selection__accounting_balance_sheet__apply_by__residual_value_credit
+msgid "Get the residual value on arise"
+msgstr "Lấy giá trị còn lại có trên phát sinh"
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "Giám đốc"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__id
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__id
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line__id
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template__id
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template_line__id
+msgid "ID"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,help:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Biểu tượng để chỉ ra một hoạt động ngoại lệ."
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,help:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Nếu đánh dấu chọn, các thông điệp mới yêu cầu sự có mặt của bạn."
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,help:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_has_error
+#: model:ir.model.fields,help:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Nếu chọn, sẽ hiển thị thông báo lỗi."
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__in_business_cycle
+msgid "In the business cycle"
+msgstr "Trong chu kỳ kinh doanh"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_is_follower
+msgid "Is Follower"
+msgstr "Trở thành người theo dõi"
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "Kế toán trưởng"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet____last_update
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report____last_update
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line____last_update
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template____last_update
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template_line____last_update
+msgid "Last Modified on"
+msgstr "Sửa lần cuối vào"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__write_uid
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__write_uid
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line__write_uid
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template__write_uid
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template_line__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__write_date
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__write_date
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line__write_date
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template__write_date
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template_line__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối vào"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__line_ids
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template__line_ids
+msgid "Line"
+msgstr "Dòng"
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "Lập, ngày"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Đính kèm chính"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_has_error
+msgid "Message Delivery error"
+msgstr "Thông báo gửi đi gặp lỗi"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_ids
+msgid "Messages"
+msgstr "Thông điệp"
+
+#. module: biz_accounting_balance_sheet
+#. odoo-python
+#: code:addons/biz_accounting_balance_sheet/models/accounting_balance_sheet_report.py:0
+#, python-format
+msgid "Move line detail"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Hạn chót lần hành động kế tiếp"
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "Mã số"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "Mẫu số B 01 - DN"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template__name
+msgid "Name"
+msgstr "Tên"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Hạn chót lần hành động kế tiếp"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__activity_summary
+msgid "Next Activity Summary"
+msgstr "Tóm tắt hoạt động tiếp theo"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__activity_type_id
+msgid "Next Activity Type"
+msgstr "Kiểu hành động kế tiếp"
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "Người lập biểu"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line__number_first_year
+msgid "Number first year"
+msgstr "Số đầu năm"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line__number_last_year
+msgid "Number last year"
+msgstr "Số cuối năm"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Số lượng Hành động"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_has_error_counter
+msgid "Number of errors"
+msgstr "Số lỗi"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,help:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Số thông điệp Cần xử lý"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,help:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Số tin gửi đi bị lỗi"
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.view_accounting_balance_sheet_report_form
+msgid "Open"
+msgstr "Mở"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__parent_level_id
+msgid "Parent Level"
+msgstr "Trường Cấp cha"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__access_url
+msgid "Portal Access URL"
+msgstr "URL truy cập cổng thông tin"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__positive_number
+msgid "Positive Number"
+msgstr "Số luôn dương"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__previous_id
+msgid "Previous period"
+msgstr "Kỳ trước"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report_line__report_id
+msgid "Report"
+msgstr "Báo cáo"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__report_type
+msgid "Report Type"
+msgstr "Loại báo cáo"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.actions.report,name:biz_accounting_balance_sheet.action_report_accounting_balance_xlsx
+msgid "Report accounting balance"
+msgstr "Bảng cân đối kế toán (Excel)"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__activity_user_id
+msgid "Responsible User"
+msgstr "Người chịu trách nhiệm"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__stt_calculate
+msgid "STT Calculate"
+msgstr "STT trên báo cáo"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__access_token
+msgid "Security Token"
+msgstr "Mã bảo mật"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__state
+msgid "State"
+msgstr "Trạng thái"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,help:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Trạng thái dựa trên hoạt động\n"
+"Quá hạn: Ngày đến hạn phải được chuyển\n"
+"Hôm nay: Hôm nay là ngày phải thực hiện\n"
+"Kế hoạch: Các hoạt động trong tương lai."
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "Số cuối năm <br/> (3)"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "Số đầu năm <br/> (4)"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields.selection,name:biz_accounting_balance_sheet.selection__accounting_balance_sheet__apply_by__residual_value_debt
+msgid "Take the residual value of the debt in arising"
+msgstr "Lấy giá trị còn lại nợ trên phát sinh"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__template_id
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template_line__template_id
+msgid "Template"
+msgstr "Mẫu"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_template__template_type
+msgid "Template Type"
+msgstr "Loại mẫu"
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "Thuyết minh"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__to_date
+msgid "To Date"
+msgstr "Đến ngày"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields.selection,name:biz_accounting_balance_sheet.selection__accounting_balance_sheet__apply_by__total_categ
+msgid "Total Category"
+msgstr "Tổng danh mục"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__total_categ_ids
+msgid "Total Categorys"
+msgstr "Tổng các danh mục"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields.selection,name:biz_accounting_balance_sheet.selection__accounting_balance_sheet__apply_by__total_credit_debit
+msgid "Total Credit -  Debit by account"
+msgstr "Tổng Có - Nợ theo tài khoản"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields.selection,name:biz_accounting_balance_sheet.selection__accounting_balance_sheet__apply_by__total_debit_credit
+msgid "Total Debit -  Credit by account"
+msgstr "Tổng Nợ - Có theo tài khoản"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,help:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Loại hoạt động ngoại lệ trên hồ sơ."
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "TÀI SẢN"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "Tại ngày"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.res_config_settings_view_form_balance
+msgid "Update Data accounting balance sheet"
+msgstr "Cập nhật dữ liệu bảng cân đối kế toán"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet__value_on_report
+msgid "Value on report"
+msgstr "Giá trị trên báo cáo"
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.view_accounting_balance_sheet_report_form
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.view_accounting_balance_sheet_report_line_tree
+msgid "View detail"
+msgstr "Xem chi tiết"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,field_description:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__website_message_ids
+msgid "Website Messages"
+msgstr "Thông điệp Website"
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model.fields,help:biz_accounting_balance_sheet.field_accounting_balance_sheet_report__website_message_ids
+msgid "Website communication history"
+msgstr "Lịch sử thông tin liên lạc website"
+
+#. module: biz_accounting_balance_sheet
+#. odoo-python
+#: code:addons/biz_accounting_balance_sheet/models/accounting_balance_sheet_report.py:0
+#, python-format
+msgid "You cannot delete data in closed state"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "năm"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model:ir.model,name:biz_accounting_balance_sheet.model_report_biz_accounting_balance_sheet_rp_account_balance_pdf
+msgid "report.biz_accounting_balance_sheet.rp_account_balance_pdf"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "tháng"
+msgstr ""
+
+#. module: biz_accounting_balance_sheet
+#: model_terms:ir.ui.view,arch_db:biz_accounting_balance_sheet.report_accounting_balance_sheet
+msgid "Đơn vị tính:"
+msgstr ""

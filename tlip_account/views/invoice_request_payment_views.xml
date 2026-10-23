@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_invoice_request_payment_list" model="ir.ui.view">
+        <field name="name">view_invoice_request_payment_list</field>
+        <field name="model">account.move</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="request_payment_number" string="Reference" />
+                <field name="partner_id" string="Customer" />
+                <field name="customer_code" string="Customer Code" />
+                <field name="epe_non_epe" />
+                <field name="contract_number" />
+                <field name="invoice_type_id" string="Request Type" />
+                <field name="amount_total" string="Amount" />
+                <field name="invoice_date_due" />
+                <field name="approval_state" invisible="approval_state == 'cancel'" widget="badge"
+                    decoration-warning="approval_state=='wait_for_approval'"
+                    decoration-danger="approval_state in ('rejected', 'cancel')"
+                    decoration-success="approval_state=='approved'" optional="hide" />
+                <field name="status_in_payment" string="Payment Status" widget="badge"
+                    decoration-danger="payment_state == 'not_paid'"
+                    decoration-warning="payment_state in ('partial', 'in_payment')"
+                    decoration-success="payment_state in ('paid', 'reversed')"
+                    invisible="payment_state == 'invoicing_legacy' or move_type == 'entry'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_invoice_request_payment_form" model="ir.ui.view">
+        <field name="name">account.move.form.view.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="tlip_account.account_move_form_view_inherit" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_title']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//div[@class='oe_title']" position="after">
+                <div class="oe_title">
+                    <span class="o_form_label">Request for Payment</span>
+                    <h1>
+                        <field name="request_payment_number" readonly="1" invisible="not request_payment_number"/>
+                        <span invisible="request_payment_number">Draft</span>
+                    </h1>
+                </div>
+            </xpath>
+            <field name="invoice_type_code" position="after">
+                <field name="available_invoice_type_ids" invisible="1" />
+                <field name="is_request_payment" invisible="1" />
+                <field name="available_product_ids" invisible="1" />
+                <field name="report_attachment_id" invisible="1" />
+            </field>
+            <field name="invoice_type_id" position="after">
+                <field name="exclude_from_debit_credit_report" invisible="0" />
+            </field>
+            <field name="invoice_type_id" position="attributes">
+                <attribute name="invisible">move_type not in ('out_invoice', 'out_refund')</attribute>
+                <attribute name="domain">[('id', 'in', available_invoice_type_ids)]</attribute>
+            </field>
+
+            <xpath expr="//page[@name='aml_tab']" position="attributes">
+                <attribute name='invisible'>1</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='other_info']" position="attributes">
+                <attribute name='invisible'>1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_date']" position="attributes">
+                <attribute name='invisible'>1</attribute>
+            </xpath>
+
+            <xpath expr="//label[@for='invoice_date']" position="attributes">
+                <attribute name='invisible'>1</attribute>
+            </xpath>
+
+            <xpath expr="//group[@id='header_right_group']/div[@name='journal_div']//field[@name='journal_id']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='journal_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='minvoice_state']" position="attributes">
+                <attribute name='invisible'>1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='minvoice_publish_state']" position="attributes">
+                <attribute name='invisible'>1</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='minvoice_tab']" position="attributes">
+                <attribute name='invisible'>1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_payment_term_id']" position="attributes">
+                <attribute name='invisible'>1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_payment_term_id']/../span" position="attributes">
+                <attribute name='invisible'>1</attribute>
+            </xpath>
+
+            <xpath expr="header" position="replace">
+                <header>
+                    <button name="action_create_request_payment_report" string="Generate Report"
+                        type="object"
+                        invisible="(state != 'draft' and report_attachment_id) or state == 'cancel' or move_type != 'out_invoice'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_open_mail_composer"
+                        string="Send Email"
+                        invisible="approval_state != 'approved'"
+                        type="object" />
+                    <button name="action_submit_approval" string="Submit" type="object"
+                        class="btn btn-primary"
+                        invisible="state != 'draft' or approval_state != 'draft'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_approve_request" type="object" string="Approve"
+                        invisible="user_status != 'pending' or approval_state != 'wait_for_approval'"
+                        class="btn-primary" data-hotkey="v"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_reject_request" string="Refuse" type="object"
+                        invisible="user_status != 'pending' or approval_state != 'wait_for_approval'"
+                        data-hotkey="z"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_withdraw_approval" string="Withdraw" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="approval_state != 'wait_for_approval'" />
+                    <button name="action_reset_approval" string="Reset Approval" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="approval_state not in ('rejected', 'withdrawn')" />
+                    <field name="approval_state"
+                        readonly="1" widget="statusbar"
+                        statusbar_visible="draft,wait_for_approval,approved"
+                        invisible="approval_state == 'approved' or state != 'draft'"
+                    />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,posted"
+                        invisible="approval_state != 'approved' and state == 'draft'" />
+                </header>
+            </xpath>
+
+            <xpath
+                expr="//field[@name='invoice_line_ids']/list//field[@name='product_id']"
+                position="attributes">
+                <attribute name='domain'>[('id', 'in', parent.available_product_ids)]</attribute>
+                <attribute name='options'>{'no_create': True, 'no_create_edit': True, 'no_open':
+                    True}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/list//field[@name='account_id']"
+                position="attributes">
+                <attribute name='column_invisible'>1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/list//field[@name='line_no']"
+                position="attributes">
+                <attribute name='column_invisible'>1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_invoice_payment_request" model="ir.actions.act_window">
+        <field name="name">Request for Payment</field>
+        <field name="res_model">account.move</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_account.view_invoice_request_payment_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_account.view_invoice_request_payment_form')})]" />
+        <field name="domain">[('move_type', '=', 'out_invoice'),('is_request_payment', '=', True)]</field>
+        <field name="context">{'default_move_type': 'out_invoice',
+            'default_is_request_payment':True}</field>
+    </record>
+
+</odoo>

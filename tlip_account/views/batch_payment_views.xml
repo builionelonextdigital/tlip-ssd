@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="batch_payment_view_form" model="ir.ui.view">
+        <field name="name">batch_payment.view.form</field>
+        <field name="model">batch.payment</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button name="action_submit_approval" string="Submit" type="object"
+                        class="btn btn-primary"
+                        invisible="approval_state != 'draft'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_approve_request" type="object" string="Approve"
+                        invisible="user_status != 'pending' or approval_state != 'wait_for_approval'"
+                        class="btn-primary" data-hotkey="v"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_reject_request" string="Refuse" type="object"
+                        invisible="user_status != 'pending' or approval_state != 'wait_for_approval'"
+                        data-hotkey="z"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_withdraw_approval" string="Withdraw" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="approval_state != 'wait_for_approval'" />
+                    <button name="action_reset_approval" string="Reset Approval" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="approval_state not in ('rejected', 'withdrawn')" />
+                    <field name="approval_state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_open_approval_history_ids"
+                            type="object"
+                            icon="fa-history">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Approval Requests
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" readonly="approval_state != 'draft'" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="available_journal_ids" invisible="1" />
+                            <field name="date" 
+                                readonly="approval_state != 'draft'" />
+                            <field name="payment_type" widget="radio"
+                                options="{'horizontal': true}"
+                                readonly="approval_state != 'draft'" />
+                            <field name="journal_id"
+                                readonly="approval_state != 'draft'"
+                                domain="[('id', 'in', available_journal_ids)]"
+                                options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                            <field name="currency_id"
+                                readonly="approval_state != 'draft'"
+                                options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                            <field name="company_id" invisible="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="payment" string="Payments">
+                            <field name="payment_ids"
+                                readonly="approval_state != 'draft'"
+                                context="{'default_payment_type': payment_type,'default_journal_id': journal_id, 'default_currency_id': currency_id,'default_company_id': company_id}">
+                                <list editable="bottom">
+                                    <field name="journal_id" column_invisible="1" />
+                                    <field name="company_id" column_invisible="1" />
+                                    <field name="date" />
+                                    <field name="partner_id"
+                                        options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                                    <field name="destination_account_id"
+                                        options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                                    <field name="currency_id"
+                                        options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                                    <field name="foreign_currency_id"
+                                        options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                                    <field name="entry_amount_currency" />
+                                    <field name="entry_currency_rate" />
+                                    <field name="amount" />
+                                    <field name="auto_reconcile_item_ids" widget="many2many_tags" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Approver(s)" name="approver" invisible="approval_state == 'draft'">
+                            <field name="approver_ids" mode="list" readonly="1">
+                                <list editable="bottom" decoration-success="status=='approved'"
+                                    decoration-warning="status in ['pending', 'waiting']"
+                                    decoration-danger="status=='refused'" no_open="1">
+                                    <field name="existing_request_user_ids" column_invisible="True" />
+                                    <field name="sequence" column_invisible="True" />
+                                    <field name="user_id" string="Approver"
+                                        required="not job_id" />
+                                    <field name="job_id" required="not user_id" />
+                                    <field name="status" />
+                                    <field name="company_id" column_invisible="True" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="batch_payment_view_tree" model="ir.ui.view">
+        <field name="name">batch_payment.view.tree</field>
+        <field name="model">batch.payment</field>
+        <field name="arch" type="xml">
+            <list string="">
+                <field name="name" />
+                <field name="date" />
+                <field name="journal_id" />
+                <field name="payment_type" />
+                <field name="approval_state" widget="badge"
+                    decoration-danger="approval_state == 'rejected'"
+                    decoration-info="approval_state == 'draft'"
+                    decoration-warning="approval_state == 'wait_for_approval'"
+                    decoration-success="approval_state == 'approved'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="batch_payment_action" model="ir.actions.act_window">
+        <field name="name">Bacth Payments</field>
+        <field name="res_model">batch.payment</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

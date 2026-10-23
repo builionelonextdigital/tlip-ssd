@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_department_form_inherit_hr_department" model="ir.ui.view">
+        <field name="name">approval.category.view.form.inherit</field>
+        <field name="model">approval.category</field>
+        <field name="inherit_id" ref="approvals.approval_category_view_form" />
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="before">
+                <field name="model_id" options="{'no_create': True}" />
+                <field name="related_model" invisible="1" />
+                <field name="to_review_contract" />
+            </xpath>
+            <page name="options" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </page>
+            <xpath expr="//notebook" position="inside">
+                <page string="Options" name="options">
+                    <field name="approval_option_ids">
+                        <list>
+                            <field name="name" />
+                            <field name="approval_minimum" />
+                            <field name="approver_sequence" />
+                        </list>
+                        <form>
+                            <sheet>
+                                <field name="related_model" invisible="1" />
+                                <field name="category_id" invisible="1" />
+                                <div class="oe_title">
+                                    <label for="name" />
+                                    <h1>
+                                        <field name="name" />
+                                    </h1>
+                                </div>
+                                <group string="Condition" name="condition">
+                                    <label for="filter_domain"
+                                        string="Conditions" />
+                                    <field name="filter_domain" nolabel="1" widget="domain"
+                                        options="{'model': 'related_model', 'in_dialog': False, 'foldable': True}" />
+                                </group>
+                                <group string="Approvers" name="approvers">
+                                    <field name="approver_ids" />
+                                    <field name="approver_sequence"
+                                        invisible="approval_minimum == 0" />
+                                    <field name="approval_minimum" />
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tlip_approval_inherit_approval_category_approver_view_tree" model="ir.ui.view">
+        <field name="name">approval.category.approver.view.list.inherit</field>
+        <field name="model">approval.category.approver</field>
+        <field name="inherit_id" ref="approvals.approval_category_approver_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="job_id" required="not user_id" options="{'no_create': True}"/>
+            </field>
+            <field name="user_id" position="attributes">
+                <attribute name="required">not job_id</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="approvals.approval_request_action_to_review_category" model="ir.actions.act_window">
+        <field name="domain">[('approver_ids.user_ids', 'in', (uid)), ('request_status', '=', 'pending'), ('category_id', '=', active_id)]</field>
+    </record>
+</odoo>

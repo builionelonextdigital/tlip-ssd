@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Chi tiết  -->
+        <record id="business_activities_results_line_search" model="ir.ui.view">
+            <field name="name">business.activities.results.line.search</field>
+            <field name="model">business.activities.results.line</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field filter_domain="[('target_config_id.name','ilike',self)]" name="target_config_id"/>
+                    <field filter_domain="[('code','ilike',self)]" name="code"/>
+                </search></field>
+        </record>
+        <record id="business_activities_results_line_tree" model="ir.ui.view">
+            <field name="name">business.activities.results.line.tree</field>
+            <field name="model">business.activities.results.line</field>
+            <field name="arch" type="xml">
+                <list default_order="number asc">
+                    <field invisible="0" name="number"/>
+                    <field name="target_config_id"/>
+                    <field name="code"/>
+                    <field name="present"/>
+                    <field name="this_year"/>
+                    <field name="year_ago"/>
+                    <field invisible="1" name="check_detail"/>
+                    <button class="btn-primary" invisible="check_detail == False" name="detail_account" string="Detail" type="object"/>
+                </list></field>
+        </record>
+        <!-- menu ket qua hoat dong kinh doanh -->
+        <record id="business_activities_results_tree" model="ir.ui.view">
+            <field name="name">business.activities.results.tree</field>
+            <field name="model">business.activities.results</field>
+            <field name="arch" type="xml">
+                <list default_order="date_from">
+                    <field name="name"/>
+                    <field name="previous_period_id"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="state"/>
+                </list></field>
+        </record>
+        <record id="business_activities_results_form" model="ir.ui.view">
+            <field name="name">business.activities.results.form</field>
+            <field name="model">business.activities.results</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button class="oe_highlight" name="button_calculate" string="Calculate" type="object"/>
+                        <button class="oe_highlight" invisible="state not in ['draft']" name="change_state" string="Closed" type="object"/>
+                        <button class="oe_highlight" invisible="state not in ['closed']" name="button_open" string="Open" type="object"/>
+                        <button name="%(biz_profit_loss_statement.action_report_business_xlsx)d" string="Excel print publishing" type="action"/>
+                        <field name="state" statusbar_visible="draft,closed" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" icon="fa-info" name="view_target" type="object">
+                                <field name="target_count" string="Chi tiết" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Name report..."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field force_save="1" name="previous_period_id" readonly="state == 'closed'"/>
+                                <label for="date_from" string="Stage"/>
+                                <div style="display: flex">
+                                    <field name="date_from" readonly="state == 'closed'" style="width: 87px"/>
+                                    <p style="width: 25px;">
+                                        ->
+                                    </p>
+                                    <field name="date_to" readonly="state == 'closed'" style="width: 87px"/>
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Details">
+                                <field name="business_activities_results_line_ids" readonly="state == 'closed'">
+                                    <list default_order="code asc">
+                                        <field invisible="1" name="number"/>
+                                        <field invisible="1" name="hide_view"/>
+                                        <field name="target_config_id"/>
+                                        <field name="code"/>
+                                        <field name="present"/>
+                                        <field name="this_year"/>
+                                        <field name="year_ago"/>
+                                        <field invisible="1" name="check_detail"/>
+                                        <button class="btn-primary" invisible="check_detail == False" name="detail_account" string="Detail" type="object"/>
+                                    </list></field>
+                                <field invisible="1" name="business_activities_results_hide_ids">
+                                    <list default_order="code asc">
+                                        <field invisible="1" name="number"/>
+                                        <field invisible="1" name="hide_view"/>
+                                        <field name="target_config_id"/>
+                                        <field name="code"/>
+                                        <field name="present"/>
+                                        <field name="this_year"/>
+                                        <field name="year_ago"/>
+                                        <field invisible="1" name="check_detail"/>
+                                        <button class="btn-primary" invisible="check_detail == False" name="detail_account" string="Detail" type="object"/>
+                                    </list></field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form></field>
+        </record>
+        <record id="action_business_activities_results" model="ir.actions.act_window">
+            <field name="name">Business activities results</field>
+            <field name="res_model">business.activities.results</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('business_activities_results_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('business_activities_results_form')})]" />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new incoterm
+                </p>
+                <p>
+                    Incoterms are used to divide transaction costs and responsibilities between buyer and seller.
+                </p></field>
+        </record>
+        <menuitem action="action_business_activities_results" groups="account.group_account_manager" id="business_activities_results" name="Business activities results" parent="biz_vietnamese_accounting_menu.menu_accounting_vn_report" sequence="30"/>
+        <!-- menu cau hinh ket qua hoat dong kinh doanh -->
+        <record id="business_activities_config_form" model="ir.ui.view">
+            <field name="name">business.activities.config.form</field>
+            <field name="model">business.activities.config</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="targets_name"/>
+                                <field name="follow"/>
+                                <field name="code"/>
+                                <field invisible="follow == 'default_formula'" name="cumulative_number_of_arising"/>
+                                <field invisible="follow == 'default_formula'" name="cumulative_account_arising_number_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field invisible="follow == 'default_formula'" name="corresponding_to_the_account_ids" widget="many2many_tags"/>
+                                <field invisible="follow == 'derivative_number_accumulation'" name="default_formula"/>
+                                <field name="sequence_number_shown_on_report"/>
+                                <field name="hide_on_report"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form></field>
+        </record>
+        <record id="business_activities_config_tree" model="ir.ui.view">
+            <field name="name">business.activities.config.tree</field>
+            <field name="model">business.activities.config</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="targets_name"/>
+                    <field name="code"/>
+                </list></field>
+        </record>
+        <record id="action_business_activities_config" model="ir.actions.act_window">
+            <field name="name">Business activities config</field>
+            <field name="res_model">business.activities.config</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('business_activities_config_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('business_activities_config_form')})]" />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new incoterm
+                </p>
+                <p>
+                    Incoterms are used to divide transaction costs and responsibilities between buyer and seller.
+                </p></field>
+        </record>
+        <menuitem action="action_business_activities_config" groups="account.group_account_manager" id="business_activities_config" name="Business activities config" parent="biz_vietnamese_accounting_menu.menu_accounting_vn_config" sequence="30"/>
+    </data>
+</odoo>

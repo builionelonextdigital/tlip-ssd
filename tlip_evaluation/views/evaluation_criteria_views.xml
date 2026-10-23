@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_evaluation_criteria_form" model="ir.ui.view">
+        <field name="name">evaluation.criteria.view.form</field>
+        <field name="model">evaluation.criteria</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="active" widget="boolean_toggle" />
+                            <field name="formula" widget="ace" options="{'mode': 'python'}" />
+                        </group>
+                        <group>
+                            <field name="evaluation_type" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_evaluation_criteria_tree" model="ir.ui.view">
+        <field name="name">evaluation.criteria.view.tree</field>
+        <field name="model">evaluation.criteria</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="evaluation_type" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_evaluation_criteria" model="ir.actions.act_window">
+        <field name="name">Criteria for Evaluation</field>
+        <field name="res_model">evaluation.criteria</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

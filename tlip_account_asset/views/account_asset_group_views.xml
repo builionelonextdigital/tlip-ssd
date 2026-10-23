@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="asset_group_form_view_inherit_tlip">
+        <field name="name">account.asset.group.form.inherit.tlip</field>
+        <field name="model">account.asset.group</field>
+        <field name="inherit_id" ref="account_asset.asset_group_form_view"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="asset_prefix"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="asset_group_list_view_inherit_tlip">
+        <field name="name">account.asset.group.list.inherit.tlip</field>
+        <field name="model">account.asset.group</field>
+        <field name="inherit_id" ref="account_asset.asset_group_list_view"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="asset_prefix"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

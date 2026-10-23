@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_minvoice"
+        name="Hóa đơn điện tử" sequence="50"
+        parent="account.menu_finance_configuration" />
+
+    <menuitem id="menu_minvoice_template"
+        name="Mẫu hóa đơn điện tử" sequence="1"
+        action="pcv_minvoice.action_view_minvoice_template"
+        parent="pcv_minvoice.menu_minvoice" />
+
+    <menuitem id="menu_minvoice_setting"
+        name="Hóa đơn điện tử"
+        parent="base.menu_custom"
+        sequence="50"/>
+
+    <menuitem id="menu_minvoice_setting_account"
+        name="Tài khoản M-invoice" sequence="1"
+        action="pcv_minvoice.action_view_minvoice_setting_account"
+        parent="pcv_minvoice.menu_minvoice_setting" />
+</odoo>

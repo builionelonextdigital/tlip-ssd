@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="product_uom_vnd_m2_month" model="uom.uom">
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+            <field name="name">VND/m2/month</field>
+            <field name="factor" eval="1.0"/>
+            <field name="uom_type">bigger</field>
+        </record>
+        <record id="product_uom_vnd_year_m2" model="uom.uom">
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+            <field name="name">VND/year/m2</field>
+            <field name="factor" eval="1.0"/>
+            <field name="uom_type">bigger</field>
+        </record>
+         <record id="product_uom_vnd_m3" model="uom.uom">
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+            <field name="name">VND/m3</field>
+            <field name="factor" eval="1.0"/>
+            <field name="uom_type">bigger</field>
+        </record>
+         <record id="product_uom_vnd_kwh" model="uom.uom">
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+            <field name="name">VND/kWh</field>
+            <field name="factor" eval="1.0"/>
+            <field name="uom_type">bigger</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sign_document_type_form_inherit_account_report" model="ir.ui.view">
+        <field name="name">sign.document.type.form.inherit.account.report</field>
+        <field name="model">sign.document.type</field>
+        <field name="inherit_id" ref="pcv_sign_ticket.view_sign_document_type_form"/>
+        <field name="arch" type="xml">
+            <field name="model_id" position="after">
+                <field name="model_name" invisible='1'/>
+                <field name="account_report_id" invisible="model_name != 'account.report'"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_sign_document_type_list_inherit_account_report" model="ir.ui.view">
+        <field name="name">sign.document.type.list.inherit.account.report</field>
+        <field name="model">sign.document.type</field>
+        <field name="inherit_id" ref="pcv_sign_ticket.view_sign_document_type_list"/>
+        <field name="arch" type="xml">
+            <field name="model_id" position="after">
+                <field name="account_report_id"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

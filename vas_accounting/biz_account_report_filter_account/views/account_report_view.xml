@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="account_report_filter_account_form_view" model="ir.ui.view">
+            <field name="name">account.report.form.filter.account</field>
+            <field name="model">account.report</field>
+            <field name="priority">10</field>
+            <field name="inherit_id" ref="account_reports.account_report_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='filter_account_type']" position="after">
+                    <field name="filter_accounts"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

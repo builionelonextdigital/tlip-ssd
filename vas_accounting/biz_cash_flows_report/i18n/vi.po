@@ -1,0 +1,588 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* biz_cash_flows_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-04 04:09+0000\n"
+"PO-Revision-Date: 2024-03-04 04:09+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: biz_cash_flows_report
+#: model:ir.actions.report,print_report_name:biz_cash_flows_report.statements_cash_flows_report_xlsx
+msgid "'Cash flows report'"
+msgstr "'Báo cáo lưu chuyển tiền tệ'"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "(By the direct method)(*)"
+msgstr "(Theo phương pháp trực tiếp)(*)"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid ""
+"(Issued under Circular No. 200/2014/TT-BTC dated December 22, 2014 of the "
+"Ministry of Finance)"
+msgstr ""
+"(Ban hành theo Thông tư số 200/2014/TT-BTC ngày 22/12/2014 của Bộ Tài chính)"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "(Sign, full name)"
+msgstr "(Ký, họ tên)"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "(Sign, full name, mark)"
+msgstr "(Ký, họ tên, đóng dấu)"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid ""
+"<span> - Số chứng chỉ hành nghề;</span><br/>\n"
+"\t\t\t\t\t\t\t\t\t\t<span> - Đơn vị cung cấp dịch vụ kế toán</span>"
+msgstr ""
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "<strong>Address: </strong>"
+msgstr "<strong>Địa chỉ: </strong>"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "<strong>Reporting company: </strong>"
+msgstr "<strong>Đơn vị báo cáo:</strong>"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields.selection,name:biz_cash_flows_report.selection__cash_flows__apply_by__according_method_of_create
+msgid "According Method Of Create"
+msgstr "Phương pháp lập"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line__account_number_export_ids
+msgid "Account Number Export"
+msgstr "Xuất số tài khoản"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line__account_number_import_ids
+msgid "Account Number Import"
+msgstr "Nhập số tài khoản"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__move_line_ids
+msgid "Account move line"
+msgstr "Bút toán"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__account_ids
+msgid "Account systems"
+msgstr "Hệ thống tài khoản"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields.selection,name:biz_cash_flows_report.selection__cash_flows__apply_by__accounting_balance_sheet
+msgid "Accounting balance sheet"
+msgstr "Bảng cân đối kế toán"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__active
+msgid "Active"
+msgstr "Kích hoạt"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__apply_by
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__apply_by
+msgid "Apply by"
+msgstr "Áp dụng tính theo"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template_line__balance_id
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__balance_id
+msgid "Assets"
+msgstr "Chỉ tiêu"
+
+#. module: biz_cash_flows_report
+#. odoo-python
+#: code:addons/biz_cash_flows_report/models/statements_cash_flows_report.py:0
+#, python-format
+msgid "Assets: %s"
+msgstr "Chỉ tiêu: %s"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__is_bold_report
+msgid "Bold in report"
+msgstr "In đậm trong báo cáo"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "CHIEF ACCOUNTANT"
+msgstr "KẾ TOÁN TRƯỞNG"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.view_statements_cash_flows_report_form
+msgid "Calculate"
+msgstr "Tính toán"
+
+#. module: biz_cash_flows_report
+#: model:ir.model,name:biz_cash_flows_report.model_cash_flows
+msgid "Cash Flow"
+msgstr "Dòng tiền"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template__cash_flows_ids
+msgid "Cash Flows"
+msgstr "Dòng tiền"
+
+#. module: biz_cash_flows_report
+#: model:ir.actions.act_window,name:biz_cash_flows_report.action_cash_flows_sheet
+#: model:ir.ui.menu,name:biz_cash_flows_report.menu_cash_flows
+msgid "Cash flows"
+msgstr "Lưu chuyển tiền tệ"
+
+#. module: biz_cash_flows_report
+#: model:ir.actions.act_window,name:biz_cash_flows_report.action_cash_flows_template
+#: model:ir.ui.menu,name:biz_cash_flows_report.menu_cash_flows_template
+msgid "Cash flows template"
+msgstr "Mẫu lưu chuyển tiền tệ"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__categ_name
+msgid "Category name"
+msgstr "Tên danh mục"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields.selection,name:biz_cash_flows_report.selection__statements_cash_flows_report__state__closed
+msgid "Closed"
+msgstr "Đã chốt"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.view_statements_cash_flows_report_form
+msgid "Closing"
+msgstr "Chốt sổ"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__code
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template_line__code
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__code
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "Code"
+msgstr "Mã số"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__column
+msgid "Column"
+msgstr "Cột"
+
+#. module: biz_cash_flows_report
+#: model:ir.model,name:biz_cash_flows_report.model_res_company
+msgid "Companies"
+msgstr "Công ty"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__company_id
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template__company_id
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__company_id
+msgid "Company"
+msgstr "Công ty"
+
+#. module: biz_cash_flows_report
+#: model:ir.model,name:biz_cash_flows_report.model_res_config_settings
+msgid "Config Settings"
+msgstr "Cài đặt Cấu hình"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__create_uid
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line__create_uid
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template__create_uid
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template_line__create_uid
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__create_uid
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__create_uid
+msgid "Created by"
+msgstr "Được tạo bởi"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__create_date
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line__create_date
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template__create_date
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template_line__create_date
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__create_date
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__create_date
+msgid "Created on"
+msgstr "Được tạo vào"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "Created on, date"
+msgstr "Lập, ngày"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line__diary_book_ids
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.view_cash_flows_form
+msgid "Diary Book"
+msgstr "Sổ nhật ký"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__display_name
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line__display_name
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template__display_name
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template_line__display_name
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__display_name
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields.selection,name:biz_cash_flows_report.selection__statements_cash_flows_report__state__draft
+msgid "Draft"
+msgstr "Nháp"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__from_date
+msgid "From Date"
+msgstr "Từ ngày"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid ""
+"Ghi chú: Các chỉ tiêu không có số liệu thì doanh nghiệp không phải trình bày"
+" nhưng không được đánh lại “Mã số” chỉ tiêu"
+msgstr ""
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__id
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line__id
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template__id
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template_line__id
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__id
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__id
+msgid "ID"
+msgstr ""
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "Illustrate"
+msgstr "Thuyết minh"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__in_business_cycle
+msgid "In the business cycle"
+msgstr "Trong chu kỳ kinh doanh"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__is_italic_report
+msgid "Italic in report"
+msgstr "In nghiêng trong báo cáo"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "LEGAL REPRESENTATIVE"
+msgstr "GIÁM ĐỐC"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows____last_update
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line____last_update
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template____last_update
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template_line____last_update
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report____last_update
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line____last_update
+msgid "Last Modified on"
+msgstr "Điều chỉnh lần cuối vào"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__write_uid
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line__write_uid
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template__write_uid
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template_line__write_uid
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__write_uid
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__write_date
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line__write_date
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template__write_date
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template_line__write_date
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__write_date
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối vào"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "Last year"
+msgstr "Năm trước"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__line_ids
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template__line_ids
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__line_ids
+msgid "Line"
+msgstr "Dòng"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line__method_of_create_id
+msgid "Method Of Create"
+msgstr "Phương pháp lập"
+
+#. module: biz_cash_flows_report
+#. odoo-python
+#: code:addons/biz_cash_flows_report/models/statements_cash_flows_report.py:0
+#, python-format
+msgid "Move line detail"
+msgstr "Chi tiết bút toán"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template__name
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__name
+msgid "Name"
+msgstr "Tên báo cáo"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "No. B03 - DN"
+msgstr "Mẫu số B03 - DN"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__number_first_year
+msgid "Number first year"
+msgstr "Năm nay"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields.selection,name:biz_cash_flows_report.selection__cash_flows__column__number_first_year
+msgid "Number first year"
+msgstr "Số đầu năm"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__number_last_year
+msgid "Number last year"
+msgstr "Năm trước"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields.selection,name:biz_cash_flows_report.selection__cash_flows__column__number_last_year
+msgid "Number last year"
+msgstr "Số cuối năm"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.view_statements_cash_flows_report_form
+msgid "Open"
+msgstr "Mở"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__parent_level
+msgid "Parent Level"
+msgstr "Trường Cấp cha"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__previous_id
+msgid "Previous period"
+msgstr "Kỳ trước"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line__reciprocal_account_export_ids
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.view_cash_flows_form
+msgid "Reciprocal Account Export"
+msgstr "Tài khoản số chi đối ứng"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line__reciprocal_account_import
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_line__reciprocal_account_import_ids
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.view_cash_flows_form
+msgid "Reciprocal Account Import"
+msgstr "Tài khoản số thu đối ứng"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__report_id
+msgid "Report"
+msgstr "Báo cáo"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__report_type
+msgid "Report Type"
+msgstr "Loại báo cáo"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.view_cash_flows_form
+msgid "Revenue Account Export"
+msgstr "Tài khoản số chi"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.view_cash_flows_form
+msgid "Revenue Account Import"
+msgstr "Tài khoản số thu"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "STATEMENTS OF CASH FLOWS"
+msgstr "BÁO CÁO LƯU CHUYỂN TIỀN TỆ"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__stt_calculate
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report_line__stt_calculate
+msgid "STT Calculate"
+msgstr "STT Tính toán"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.view_cash_flows_form
+msgid "Set Method"
+msgstr "Phương pháp lập"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__state
+msgid "State"
+msgstr "Trạng thái"
+
+#. module: biz_cash_flows_report
+#: model:ir.model,name:biz_cash_flows_report.model_report_biz_cash_flows_report_rp_cash_flows
+msgid "Statements Cash Flows"
+msgstr "Báo cáo lưu chuyển tiền tệ"
+
+#. module: biz_cash_flows_report
+#: model:ir.actions.report,name:biz_cash_flows_report.statements_cash_flows_report_xlsx
+msgid "Statements Cash Flows Excel"
+msgstr "Báo cáo lưu chuyển tiền tệ Excel"
+
+#. module: biz_cash_flows_report
+#: model:ir.actions.report,name:biz_cash_flows_report.statements_cash_flows_report_pdf
+msgid "Statements Cash Flows PDF"
+msgstr "Báo cáo lưu chuyển tiền tệ PDF"
+
+#. module: biz_cash_flows_report
+#: model:ir.actions.act_window,name:biz_cash_flows_report.action_statements_cash_flows
+#: model:ir.model,name:biz_cash_flows_report.model_statements_cash_flows_report
+#: model:ir.ui.menu,name:biz_cash_flows_report.menu_statements_cash_flows_report
+msgid "Statements Of Cash Flows Report"
+msgstr "Báo cáo lưu chuyển tiền tệ"
+
+#. module: biz_cash_flows_report
+#: model:ir.model,name:biz_cash_flows_report.model_statements_cash_flows_report_line
+msgid "Statements Of Cash Flows Report Line"
+msgstr "Chi tiết"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields.selection,name:biz_cash_flows_report.selection__cash_flows__report_type__statements_cash_flows
+#: model:ir.model.fields.selection,name:biz_cash_flows_report.selection__cash_flows_template__template_type__statements_cash_flows
+msgid "Statements of cash flows"
+msgstr "Báo cáo lưu chuyển tiền tệ"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__target_id
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "Targets"
+msgstr "Chỉ tiêu"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template_line__template_id
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__template_id
+msgid "Template"
+msgstr "Mẫu"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template__template_type
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows_template_line__domain_balance
+msgid "Template Type"
+msgstr "Loại mẫu"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "This year"
+msgstr "Năm nay"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_statements_cash_flows_report__to_date
+msgid "To Date"
+msgstr "Đến ngày"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields.selection,name:biz_cash_flows_report.selection__cash_flows__apply_by__total_categ
+msgid "Total Category"
+msgstr "Tổng danh mục"
+
+#. module: biz_cash_flows_report
+#: model:ir.model.fields,field_description:biz_cash_flows_report.field_cash_flows__total_categ_ids
+msgid "Total Categorys"
+msgstr "Tồng các danh mục"
+
+#. module: biz_cash_flows_report
+#. odoo-python
+#: code:addons/biz_cash_flows_report/models/statements_cash_flows_report.py:0
+#, python-format
+msgid "Unable to calculate data for the selected time period"
+msgstr "Không thể tính toán dữ liệu trong khoảng thời gian đã chọn"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "Unit:"
+msgstr "Đơn vị tính:"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.res_config_settings_view_form_cash_flows
+msgid "Update Data Cash Flows"
+msgstr "Cập nhật dữ liệu lưu chuyển tiền tệ"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.view_statements_cash_flows_report_form
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.view_statements_cash_flows_report_line_tree
+msgid "View detail"
+msgstr "Xem chi tiết"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "Year"
+msgstr "Năm"
+
+#. module: biz_cash_flows_report
+#. odoo-python
+#: code:addons/biz_cash_flows_report/models/statements_cash_flows_report.py:0
+#, python-format
+msgid "You cannot delete data in closed state"
+msgstr "Bạn không thể xoá dữ liệu trong trạng thái đã chốt sổ"
+
+#. module: biz_cash_flows_report
+#: model:ir.model,name:biz_cash_flows_report.model_cash_flows_line
+msgid "cash.flows.line"
+msgstr ""
+
+#. module: biz_cash_flows_report
+#: model:ir.model,name:biz_cash_flows_report.model_cash_flows_template
+msgid "cash.flows.template"
+msgstr ""
+
+#. module: biz_cash_flows_report
+#: model:ir.model,name:biz_cash_flows_report.model_cash_flows_template_line
+msgid "cash.flows.template.line"
+msgstr ""
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "month"
+msgstr "tháng"
+
+#. module: biz_cash_flows_report
+#: model:ir.model,name:biz_cash_flows_report.model_report_biz_cash_flows_report_report_statements_cash_flows_pdf
+msgid "report_statements_cash_flows"
+msgstr ""
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "scheduler"
+msgstr "Người lập biểu"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid "year"
+msgstr "năm"
+
+#. module: biz_cash_flows_report
+#: model_terms:ir.ui.view,arch_db:biz_cash_flows_report.report_statements_cash_flows
+msgid ""
+"Đối với người lập biểu là các đơn vị dịch vụ kế toán phải ghi rõ Số chứng "
+"chỉ hành nghề, tên và địa chỉ Đơn vị cung cấp dịch vụ kế toán. Người lập "
+"biểu là cá nhân ghi rõ Số chứng chỉ hành nghề."
+msgstr ""

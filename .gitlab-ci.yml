@@ -1,0 +1,27 @@
+deploy_to_development:
+  tags:
+    - shell
+  stage: deploy
+  environment:
+    name: development
+    url: https://tlip-dev.run-odoo.com
+  before_script:
+    - git config --global --add safe.directory /opt/odoo/addons
+  script:
+    - ./deploy_dev.sh development
+  only:
+    - development
+
+# deploy_to_staging:
+#   tags:
+#     - shell
+#   stage: deploy
+#   environment:
+#     name: staging
+#     url: https://tlip-stag.run-odoo.com
+#   before_script:
+#     - git config --global --add safe.directory /opt/odoo/addons
+#   script:
+#     - ./deploy_dev.sh staging
+#   only:
+#     - staging

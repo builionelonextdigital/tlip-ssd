@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_payment_request_payment_form" model="ir.ui.view">
+        <field name="name">view_payment_request_payment_form</field>
+        <field name="model">account.payment</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="tlip_account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <xpath expr="header" position="replace">
+                <header>
+                    <button name="action_create_request_payment_report" string="Generate Report"
+                        type="object"
+                        invisible="approval_state != 'draft'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <!-- Normal Approval Flow -->
+                    <button name="action_submit_approval" string="Submit" type="object"
+                        class="btn btn-primary"
+                        invisible="state != 'draft' or approval_state != 'draft' or not is_request_payment"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_approve_request" type="object" string="Approve"
+                        invisible="user_status != 'pending' or approval_state != 'wait_for_approval' or not is_request_payment"
+                        class="btn-primary" data-hotkey="v"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_reject_request" string="Refuse" type="object"
+                        invisible="user_status != 'pending' or approval_state != 'wait_for_approval' or not is_request_payment"
+                        data-hotkey="z"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_withdraw_approval" string="Withdraw" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="approval_state != 'wait_for_approval' or not is_request_payment" />
+                    <button name="action_reset_approval" string="Reset Approval" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="approval_state not in ('rejected', 'withdrawn') or not is_request_payment" />
+                    <!-- Accounting Approval Flow -->
+                    <button name="action_submit_approval" string="Submit" type="object"
+                        groups="account.group_account_basic"
+                        class="btn btn-primary"
+                        invisible="state != 'draft' or accounting_approval_state != 'draft' or (is_request_payment and approval_state != 'approved')"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_approve_request" type="object" string="Approve"
+                        invisible="user_status != 'pending' or accounting_approval_state != 'wait_for_approval' or (is_request_payment and approval_state != 'approved')"
+                        class="btn-primary" data-hotkey="v"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_reject_request" string="Accounting Refuse" type="object"
+                        invisible="user_status != 'pending' or accounting_approval_state != 'wait_for_approval' or (is_request_payment and approval_state != 'approved')"
+                        confirm="Are you sure that you want to do this action?"
+                        data-hotkey="z" />
+                    <button name="action_withdraw_approval" string="Accounting Withdraw"
+                        type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="accounting_approval_state != 'wait_for_approval' or (is_request_payment and approval_state != 'approved')" />
+                    <button name="action_accounting_reset_approval" string="Accounting Reset Approval"
+                        type="object"
+                        invisible="accounting_approval_state not in ('rejected', 'withdrawn')"
+                        confirm="Are you sure that you want to do this action?" />
+
+                    <button name="action_open_mail_composer"
+                        string="Send Email"
+                        invisible="approval_state != 'approved'"
+                        type="object" />
+                    <field name="approval_state"
+                        readonly="1" widget="statusbar"
+                        statusbar_visible="draft,wait_for_approval,approved"
+                        invisible="approval_state == 'approved' or state != 'draft' or not is_request_payment"
+                    />
+                    <field name="accounting_approval_state"
+                        readonly="1" widget="statusbar"
+                        statusbar_visible="draft,wait_for_approval,approved"
+                        invisible="(is_request_payment and approval_state != 'approved') or state != 'draft' or accounting_approval_state == 'approved'"
+                    />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_process,paid"
+                        invisible="accounting_approval_state != 'approved' and state == 'draft'" />
+                </header>
+            </xpath>
+
+            <xpath expr="//div[@class='oe_title']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//div[@class='oe_title']" position="after">
+                <div class="oe_title">
+                    <h1>
+                        <field name="request_payment_number" readonly="1" invisible="not request_payment_number"/>
+                        <span invisible="request_payment_number">Draft</span>
+                    </h1>
+                </div>
+            </xpath>
+
+            <field name="payment_type" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="memo" position="after">
+                <field name="is_request_payment" invisible="1" />
+                <field name="payment_reference" />
+            </field>
+            <field name="journal_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <!-- <field name="payment_method_line_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field> -->
+            <field name="destination_account_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_outbound_payment_request_payment_tree" model="ir.ui.view">
+        <field name="name">view_outbound_payment_request_payment_tree</field>
+        <field name="model">account.payment</field>
+        <field name="arch" type="xml">
+            <list string="">
+                <field name="payment_reference" />
+                <field name="partner_id" string="Vendor" />
+                <field name="vendor_code" string="Vendor Code" />
+                <field name="contract_number" />
+                <field name="memo" string="Description" />
+                <field name="due_date" />
+                <field name="approval_state" invisible="approval_state == 'cancel'" widget="badge"
+                    decoration-warning="approval_state=='wait_for_approval'"
+                    decoration-danger="approval_state in ('rejected', 'cancel')"
+                    decoration-success="approval_state=='approved'" optional="hide" />
+                <field name="state" widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-success="state == 'in_process'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_inbound_payment_request_payment_tree" model="ir.ui.view">
+        <field name="name">view_inbound_payment_request_payment_tree</field>
+        <field name="model">account.payment</field>
+        <field name="arch" type="xml">
+            <list string="">
+                <field name="payment_reference" />
+                <field name="partner_id" string="Customer" />
+                <field name="customer_code" string="Customer Code" />
+                <field name="contract_number" />
+                <field name="memo" string="Description" />
+                <field name="invoice_type_id" />
+                <field name="due_date" />
+                <field name="approval_state" invisible="approval_state == 'cancel'" widget="badge"
+                    decoration-warning="approval_state=='wait_for_approval'"
+                    decoration-danger="approval_state in ('rejected', 'cancel')"
+                    decoration-success="approval_state=='approved'" optional="hide" />
+                <field name="state" widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-success="state == 'in_process'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_outbound_payment_request_payment" model="ir.actions.act_window">
+        <field name="name">Request for Payment</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_account.view_outbound_payment_request_payment_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_account.view_payment_request_payment_form')})]" />
+        <field name="domain">[('payment_type', '=', 'outbound'), ('is_request_payment', '=', True)]</field>
+        <field name="context">{'create': 0, 'default_is_request_payment':
+            True,'default_partner_type': 'supplier', 'default_payment_type': 'outbound',
+            'default_move_journal_types': ('bank', 'cash'), 'display_account_trust': True}</field>
+    </record>
+
+    <record id="action_inbound_payment_request" model="ir.actions.act_window">
+        <field name="name">Request for Payment</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_account.view_inbound_payment_request_payment_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_account.view_payment_request_payment_form')})]" />
+        <field name="domain">[('payment_type', '=', 'inbound'), ('is_request_payment', '=', True)]</field>
+        <field name="context">{'default_is_request_payment': True,'default_partner_type':
+            'customer', 'default_payment_type': 'inbound', 'default_move_journal_types': ('bank',
+            'cash'), 'display_account_trust': True}</field>
+    </record>
+</odoo>

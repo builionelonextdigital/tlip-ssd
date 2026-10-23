@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_approval_category_option_user,access_approval_category_option_user,tlip_approval.model_approval_category_option,,1,0,0,0
+access_approval_category_option_manager,access_approval_category_option_manager,tlip_approval.model_approval_category_option,approvals.group_approval_manager,1,1,1,1
+access_submit_approval_wizard,access_submit_approval_wizard,tlip_approval.model_submit_approval_wizard,,1,1,1,1
+access_withdraw_approval_wizard,access_withdraw_approval_wizard,tlip_approval.model_withdraw_approval_wizard,,1,1,1,1
+access_review_access,access_review_access,tlip_approval.model_approval_review,,1,1,1,1

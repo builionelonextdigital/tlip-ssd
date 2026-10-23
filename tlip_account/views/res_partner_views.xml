@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_res_partner_action" model="ir.actions.act_window">
+        <field name="name">Partners</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids"
+                eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('base.view_partner_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_partner_form')})]" />
+        <field name="domain">[('customer_code', '=', False), ('vendor_code', '=', False), ('customer_state', '!=', False), ('vendor_state', '!=', False)]</field>
+        <field name="context">{'default_internal_approval_state': True}</field>
+    </record>
+
+     <record id="res_partner_form_view_direct_debit" model="ir.ui.view">
+        <field name="name">res.partner.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='property_account_payable_id']" position="after">
+                <field name="direct_debit" groups="tlip_access_rights.group_tlip_accountant"/>
+                <field name="internal_approval_state" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_tlip_account_part_inherit" model="ir.ui.view">
+        <field name="name">tlip.account.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="tlip_base.view_tlip_base_partner_form_custom" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="accounting" string="Accounting">
+                    <group>
+                        <group string="Accounting Entries" name="accounting_entries" invisible="not is_coa_installed" groups="account.group_account_readonly">
+                            <field name="is_coa_installed" invisible="1"/>
+                            <field name="property_account_receivable_id"
+                                required="is_coa_installed"
+                                readonly="customer_state != 'draft' or vendor_state != 'draft'" />
+                            <field name="property_account_payable_id"
+                                required="is_coa_installed"
+                                readonly="customer_state != 'draft' or vendor_state != 'draft'" />
+                        </group>
+                    </group>
+                    <group string="Payment Contacts">
+                        <field name="payment_contact_line_ids" nolabel="1" readonly="customer_state != 'draft' or vendor_state != 'draft'">
+                            <list editable="bottom">
+                                <field name="invoice_type_id" />
+                                <field name="contact_ids" widget="many2many_tags" />
+                            </list>
+                        </field>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <menuitem
+        id="account_partner_menu"
+        name="Partners"
+        action="account_res_partner_action"
+        parent="account.menu_finance_entries"
+        sequence="100"/>
+
+</odoo>

@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="supplemental_agreement_view_list" model="ir.ui.view">
+        <field name="name">supplemental_agreement_view_list</field>
+        <field name="model">leasing.supplement</field>
+        <field name="arch" type="xml">
+            <list create="0" delete="0">
+                <field name="name" string="Supplemental Agreement" />
+                <field name="land_plot_id" />
+                <field name="lessee_name" />
+                <field name="lessor_id" />
+                <field name="effective_date" />
+                <field name="user_id" />
+                <field name="create_date" widget="timeless_date" />
+                <field name="state"
+                    widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state == 'wait'"
+                    decoration-success="state in ('approve', 'complete')"
+                    decoration-muted="state == 'cancel'"
+                    decoration-danger="state == 'reject'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="supplemental_agreement_view_form" model="ir.ui.view">
+        <field name="name">supplemental_agreement_view_form</field>
+        <field name="model">leasing.supplement</field>
+        <field name="arch" type="xml">
+            <form create="0" delete="0">
+                <header>
+                    <button name="action_submit_changes" string="Submit" type="object"
+                        class="oe_highlight"
+                        invisible="state != 'draft'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_approve_request" type="object" string="Approve"
+                        invisible="user_status != 'pending' or state != 'wait_for_approval'"
+                        class="btn-primary" data-hotkey="v"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_reject_request" string="Refuse" type="object"
+                        invisible="user_status != 'pending' or state != 'wait_for_approval'"
+                        data-hotkey="z"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_withdraw_approval" string="Withdraw" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="btn btn-secondary"
+                        invisible="state != 'wait_for_approval'" />
+                    <button name="action_reset_approval" string="Reset Approval" type="object"
+                        invisible="state not in ('rejected', 'withdrawn')"
+                        confirm="Are you sure that you want to do this action?" />
+                    <widget name="attach_document" string="Upload Hardcopy"
+                        invisible="state != 'approve'" action="message_post" highlight="1" />
+                    <widget name="attach_document" string="Attach Document" action="message_post"
+                        highlight="1"
+                        invisible="state != 'draft'" />
+                    <button name="action_print" string="Print" type="object"
+                        class="oe_highlight" />
+                    <button name="action_cancel" string="Cancel" type="object"
+                        invisible="state == 'cancel'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_complete" string="Complete" class="oe_highlight"
+                        type="object"
+                        invisible="state != 'approve' or not is_hardcopy_upload" 
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_reject_document" string="Reject" type="object"
+                        invisible="state != 'approve' or not is_hardcopy_upload"
+                        confirm="Are you sure that you want to do this action?" />
+
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_get_agreement_view"
+                            class="oe_stat_button"
+                            icon="fa-envelope"
+                            type="object"
+                            invisible="agreement_type != 'reservation'">
+                            Reservation
+                        </button>
+                        <button name="action_get_agreement_view"
+                            class="oe_stat_button"
+                            icon="fa-envelope"
+                            type="object"
+                            invisible="agreement_type != 'contract'">
+                            Contract
+                        </button>
+                        <button name="action_get_attachment_view"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            type="object"
+                            invisible="attachment_number == 0">
+                            <field name="attachment_number" widget="statinfo" string="Documents"
+                                options="{'reload_on_button': true}" />
+                        </button>
+                        <button class="oe_stat_button" name="action_open_approval_history_ids"
+                            type="object"
+                            icon="fa-history">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Approval Histories
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                        invisible="active" />
+                    <field name="active" invisible="1" />
+                    <label for="name" />
+                    <h1>
+                        <field name="name" nolabel="1" />
+                    </h1>
+                    <group string="Supplemental Information">
+                        <group name="agreement_info">
+                            <field name="quotation_id" readonly="1" />
+                            <field name="contract_type_id" invisible="agreement_type != 'contract'" />
+                            <field name="effective_date" string="Effective date"
+                                required="state not in ('cancel', 'reject', 'terminate')"
+                                readonly="state not in ('draft', 'wait')" />
+                            <field name="reason" string="Reason"
+                                required="state not in ('cancel', 'reject', 'terminate')"
+                                readonly="state not in ('draft', 'wait')" />
+                        </group>
+                        <group>
+                            <field name="agreement_id" string="Reservation Agreement"
+                                invisible="agreement_type != 'reservation'"
+                                readonly="1" options="{'no_open': True}" />
+                            <field name="agreement_id" string="Lease Contract"
+                                invisible="agreement_type != 'contract'"
+                                readonly="1" options="{'no_open': True}" />
+                            <field name="agreement_expiry_date" string="Reservation Agreement Date"
+                                invisible="agreement_type != 'reservation'" />
+                            <field name="agreement_expiry_date" string="Lease Contract Date"
+                                invisible="agreement_type != 'contract'" />
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Lessor">
+                            <field name="lessor_id" string="Name"
+                                readonly="state not in ('draft', 'wait') or is_tariff" required="1" />
+                            <label for="lessor_street" string="Address" />
+                            <div class="o_address_format">
+                                <field name="lessor_street" placeholder="Street..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1" />
+                                <field name="lessor_street_2" placeholder="Street 2..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1" />
+                                <field name="lessor_district_id" placeholder="District"
+                                    options='{"no_open": True, "no_create": True}'
+                                    style="width: 35% !important" class="o_address_district"
+                                    readonly="1" />
+                                <field name="lessor_ward_id" placeholder="Ward"
+                                    options='{"no_open": True, "no_create": True}'
+                                    style="width: 35% !important" class="o_address_ward"
+                                    readonly="1" />
+                                <field name="lessor_state_id" class="o_address_state"
+                                    placeholder="City"
+                                    style="width: 35% !important"
+                                    options="{'no_open': True, 'no_quick_create': True}"
+                                    context="{'country_id': lessee_country_id, 'default_country_id': lessee_country_id}"
+                                    readonly="1" />
+                                <field name="lessor_country_id" placeholder="Country"
+                                    style="width: 34% !important" class="o_address_country"
+                                    options='{"no_open": True, "no_create": True}'
+                                    readonly="1" />
+                            </div>
+                        </group>
+                        <group string="Lessee">
+                            <field name="lessee_id" string="Customer Code"
+                                readonly="state not in ('draft', 'wait') or is_tariff" />
+                            <field name="lessee_name" string="Name" required="1"
+                                readonly="1" />
+                            <label for="lessee_street" string="Address" />
+                            <div class="o_address_format">
+                                <field name="lessee_street" placeholder="Street..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1" />
+                                <field name="lessee_street_2" placeholder="Street 2..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1" />
+                                <field name="lessee_district_id" placeholder="District"
+                                    options='{"no_open": True, "no_create": True}'
+                                    style="width: 35% !important" class="o_address_district"
+                                    readonly="1" />
+                                <field name="lessee_ward_id" placeholder="Ward"
+                                    options='{"no_open": True, "no_create": True}'
+                                    style="width: 35% !important" class="o_address_ward"
+                                    readonly="1" />
+                                <field name="lessee_state_id" class="o_address_state"
+                                    placeholder="City"
+                                    style="width: 35% !important"
+                                    options="{'no_open': True, 'no_quick_create': True}"
+                                    context="{'country_id': lessee_country_id, 'default_country_id': lessee_country_id}"
+                                    readonly="1" />
+                                <field name="lessee_country_id" placeholder="Country"
+                                    style="width: 34% !important" class="o_address_country"
+                                    options='{"no_open": True, "no_create": True}'
+                                    readonly="1" />
+                            </div>
+                            <field name="lessee_email" string="Email"
+                                readonly="1" />
+                            <field name="lessee_phone" string="Phone"
+                                readonly="1" />
+                            <field name="lessee_legal_partner_id"
+                                string="Legal / Authorized Representative"
+                                readonly="1" />
+                            <field name="lessee_title_id" readonly="1" />
+
+                        </group>
+                        <group string="Land Plot">
+                            <field name="land_plot_id"
+                                readonly="state not in ('draft', 'wait') or is_tariff"
+                                options='{"no_create": True, "no_edit": True}' />
+                            <field name="plot_view_id" readonly="1" />
+                            <field name="land_plot_category_id" force_save="1" readonly="1" />
+                            <label for="area" />
+                            <div>
+                                <field name="area" force_save="1" class="oe_inline" /> sqm </div>
+                            <label for="actual_area" />
+                            <div>
+                                <field name="actual_area" class="oe_inline"
+                                    readonly="state not in ('draft', 'wait') or is_tariff" /> sqm </div>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note" readonly="state not in ('draft', 'wait') or is_tariff" />
+                        <separator string="Summary of changes" />
+                        <field name="summary_change_ids" nolabel="1"
+                            readonly="state not in ('draft')" mode="list">
+                            <list editable="bottom">
+                                <field name="name" />
+                                <field name="current_value" />
+                                <field name="new_value" />
+                            </list>
+                        </field>
+                    </group>
+                    <notebook>
+                        <page string="Rental Fee &amp; Utilities"
+                            invisible="contract_type_classification in ('telecom', 'principle', 'construction')">
+                            <separator string="Rental Fee &amp; Utilities" />
+                            <field
+                                name="rental_fee_ids"
+                                nolabel="1"
+                                context="{'list_view_ref': 'tlip_leasing.rental_fee_list_view'}"
+                                readonly="state not in ('draft', 'wait')"
+                            />
+                            <group>
+                                <field name="currency_id" invisible="1" />
+                                <label for="total_fee_amount" string="Total Price"
+                                    invisible="contract_type_classification != 'land'" />
+                                <div invisible="contract_type_classification != 'land'">
+                                    <field name="total_fee_amount" class="oe_inline" /> for whole
+                                    period excluding VAT </div>
+                                <label for="adjusted_fee_amount" string="Adjusted Price"
+                                    invisible="contract_type_classification != 'land'" />
+                                <div invisible="contract_type_classification != 'land'">
+                                    <field name="adjusted_fee_amount"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        class="oe_inline" /> for whole period excluding VAT </div>
+                            </group>
+                        </page>
+                        <page string="Rental Fee &amp; Utilities"
+                            invisible="contract_type_classification != 'construction'">
+                            <separator string="1. Rental Fee &amp; Utilities" />
+                            <field
+                                name="rental_fee_ids"
+                                nolabel="1"
+                                context="{'list_view_ref': 'tlip_leasing.rental_fee_list_view'}"
+                                readonly="state not in ('draft', 'wait')"
+                            />
+                            <separator string="2. Rental Items" />
+                            <field name="rental_item_ids" nolabel="1"
+                                readonly="state not in ('draft', 'wait')">
+                                <list editable="bottom">
+                                    <field name="line_number" />
+                                    <field name="name" />
+                                    <field name="qty" />
+                                    <field name="description" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Rental Fee"
+                            invisible="contract_type_classification != 'telecom'">
+                            <separator string="Rental Fee" />
+                            <field
+                                name="rental_fee_ids"
+                                nolabel="1"
+                                context="{'list_view_ref': 'tlip_leasing.rental_fee_list_view_1'}"
+                                readonly="state not in ('draft', 'wait')"
+                            />
+                        </page>
+
+                        <page string="Rental Fee &amp; Deposit"
+                            invisible="agreement_type != 'reservation'">
+                            <group>
+                                <group>
+                                    <field name="currency_id" invisible="1" />
+                                    <label for="rental_fee" />
+                                    <div class="o_row">
+                                        <field name="rental_fee" nolabel="1"
+                                            readonly="state not in ('draft', 'wait') or is_tariff" />
+                                        <field name="rental_fee_unit" nolabel="1" required="1"
+                                            readonly="state not in ('draft', 'wait') or is_tariff" />
+                                    </div>
+                                    <label for="reservation_deposit" />
+                                    <div class="o_row">
+                                        <field name="reservation_deposit" nolabel="1"
+                                            readonly="state not in ('draft', 'wait') or is_tariff" />
+                                        <field name="reservation_deposit_type" nolabel="1"
+                                            required="1"
+                                            readonly="state not in ('draft', 'wait') or is_tariff" />
+                                    </div>
+                                    <field name="reservation_deposit_amount"
+                                        readonly="reservation_deposit_type != 'fixed' or state not in ('draft', 'wait')" />
+                                </group>
+                                <group>
+                                    <field name="exchange_rate_amount"
+                                        readonly="state not in ('draft', 'wait') or is_tariff" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="term" string="Terms and Conditions"
+                            invisible="agreement_type != 'contract'">
+                            <group>
+                                <group name="lease_term" string="Lease Term">
+                                    <label for="commence_date" string="Commence Date" />
+                                    <div>
+                                        <field name="commence_date" class="oe_inline"
+                                            readonly="state not in ('draft', 'wait') or is_tariff"
+                                            required="id" />
+                                        <field name="commence_time" class="oe_inline"
+                                            readonly="state not in ('draft', 'wait') or is_tariff"
+                                            widget="float_time"
+                                            invisible="contract_type_classification not in ('meeting_room', 'football_yard')" />
+                                    </div>
+                                    <label for="expiry_date" string="Expired Date" />
+                                    <div>
+                                        <field name="expiry_date" class="oe_inline"
+                                            readonly="state not in ('draft', 'wait') or is_tariff"
+                                            required="id" />
+                                        <field name="expiry_time" class="oe_inline"
+                                            readonly="state not in ('draft', 'wait') or is_tariff"
+                                            widget="float_time"
+                                            invisible="contract_type_classification not in ('meeting_room', 'football_yard')" />
+                                    </div>
+                                    <label for="lease_term_year"
+                                        string="Extension of Sub-lease term"
+                                        invisible="contract_type_classification not in ('land', 'office', 'factory')" />
+                                    <div
+                                        invisible="contract_type_classification not in ('land', 'office', 'factory')">
+                                        <field name="lease_term_year" class="oe_inline"
+                                            readonly="state not in ('draft', 'wait') or is_tariff"
+                                            required="contract_type_classification in ('land', 'office', 'factory')" />
+                                        Years <field name="lease_term_month" class="oe_inline"
+                                            readonly="state not in ('draft', 'wait') or is_tariff"
+                                            required="contract_type_classification in ('land', 'office', 'factory')" />
+                                        Months </div>
+                                </group>
+                                <group string=""
+                                    invisible="contract_type_classification not in ('construction', 'football_yard', 'parking')">
+                                    <field name="handover_date"
+                                        string="Time of handover of the Construction Work"
+                                        invisible="contract_type_classification != 'construction'"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        required="contract_type_classification == 'construction'" />
+                                    <field name="handover_date"
+                                        string="Time of handover of the Parking Spot"
+                                        invisible="contract_type_classification not in ('football_yard', 'parking')"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        required="contract_type_classification == 'football_yard'" />
+                                    <field name="using_time" string="Time of using the Parking Spot"
+                                        invisible="contract_type_classification not in ('football_yard', 'parking')"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        required="contract_type_classification == 'football_yard'" />
+                                </group>
+                                <group name="principle_info" string=""
+                                    invisible="contract_type_classification != 'principle'">
+                                    <field name="revenue_sharing_ratio"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        required="contract_type_classification == 'principle'" />
+                                </group>
+                                <group name="land_rent" string="Land Rent"
+                                    invisible="contract_type_classification != 'land'">
+                                    <div>
+                                        <div> Within ± 0.5 % of <field name="area_tolerance_within"
+                                                class="oe_inline"
+                                                readonly="state not in ('draft', 'wait') or is_tariff" />
+                                            m2, there will be no adjustment to the Price. </div>
+                                        <div> Exceed ± 0.5 % of <field name="area_tolerance_exceed"
+                                                class="oe_inline"
+                                                readonly="state not in ('draft', 'wait') or is_tariff" />
+                                            m2, the Price will be adjusted by VND <field
+                                                name="price_adjusted" class="oe_inline"
+                                                readonly="state not in ('draft', 'wait') or is_tariff" />
+                                            - per square meter for each square meter exceeding or
+                                            less than the total area for lease </div>
+                                    </div>
+                                </group>
+                                <group name="purpose_of_use" string="Purpose of use"
+                                    invisible="contract_type_classification != 'land'" colspan="2">
+                                    <label for="construction_date_from"
+                                        string="Completion of construction date" />
+                                    <div class="o_row">
+                                        <field name="construction_date_from" nolabel="1"
+                                            readonly="state not in ('draft', 'wait') or is_tariff" />
+                                        <span class="fa fa-arrow-right" title="Arrow Right" />
+                                        <field name="construction_date_to" nolabel="1"
+                                            readonly="state not in ('draft', 'wait') or is_tariff" />
+                                    </div>
+
+                                    <label for="installation_date_from"
+                                        string="Installation of machinery and equipment date" />
+                                    <div class="o_row">
+                                        <field name="installation_date_from" nolabel="1"
+                                            readonly="state not in ('draft', 'wait') or is_tariff" />
+                                        <span class="fa fa-arrow-right" title="Arrow Right" />
+                                        <field name="installation_date_to" nolabel="1"
+                                            readonly="state not in ('draft', 'wait') or is_tariff" />
+                                    </div>
+
+                                    <label for="trial_production_date_from"
+                                        string="Trial production" />
+                                    <div class="o_row">
+                                        <field name="trial_production_date_from" nolabel="1"
+                                            readonly="state not in ('draft', 'wait') or is_tariff" />
+                                        <span class="fa fa-arrow-right" title="Arrow Right" />
+                                        <field name="trial_production_date_to" nolabel="1"
+                                            readonly="state not in ('draft', 'wait') or is_tariff" />
+                                    </div>
+                                    <field name="official_production_date"
+                                        readonly="state not in ('draft', 'wait') or is_tariff" />
+                                </group>
+
+                                <group string="Utilities Condition"
+                                    invisible="contract_type_classification not in ('land', 'office', 'factory')">
+                                    <label for="max_industrial_water" />
+                                    <div>
+                                        <field name="max_industrial_water"
+                                            readonly="state not in ('draft', 'wait') or is_tariff"
+                                            class="oe_inline" /> m3/day </div>
+                                    <label for="max_electricity" />
+                                    <div>
+                                        <field name="max_electricity"
+                                            readonly="state not in ('draft', 'wait') or is_tariff"
+                                            class="oe_inline" /> MVA (megevolt-ampe) </div>
+                                </group>
+                                <group string="Payment Method">
+                                    <field name="payment_frequency"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        required="id" />
+                                    <field name="payment_term"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        required="id" />
+                                </group>
+                            </group>
+                        </page>
+
+                        <page name="legal_representative" string="Legal Representative"
+                            invisible="agreement_type != 'contract'">
+                            <group>
+                                <group string="Lessor">
+                                    <field name="lessor_legal_id" string="Legal Representative"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        required="id" />
+                                    <field name="lessor_legal_title_id" force_save="1"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        string="Position" required="id" />
+                                    <field name="lessor_legal_email" force_save="1"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        string="Email" required="id" />
+                                    <field name="lessor_legal_fax" force_save="1"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        string="Fax" required="id" />
+                                    <field name="lessor_legal_phone" string="Phone Number"
+                                        force_save="1"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        required="id" />
+                                    <field name="lessor_legal_account_number"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        string="Account Number" required="id" />
+                                    <field name="lessor_legal_bank_id"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        string="Bank" required="id" />
+                                    <field name="lessor_legal_vat" force_save="1" string="Tax Code"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        required="id" />
+                                </group>
+                                <group string="Lessee">
+                                    <field name="lessee_legal_id" string="Legal Representative"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        required="id" />
+                                    <field name="lessee_legal_title_id" force_save="1"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        string="Position" required="id" />
+                                    <field name="lessee_legal_email" force_save="1"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        string="Email" required="id" />
+                                    <field name="lessee_legal_fax" force_save="1"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        string="Fax" required="id" />
+                                    <field name="lessee_legal_phone" string="Phone Number"
+                                        force_save="1"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        required="id" />
+                                    <field name="lessee_legal_account_number"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        string="Account Number" required="id" />
+                                    <field name="lessee_legal_bank_id"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        string="Bank" required="id" />
+                                    <field name="lessee_legal_vat" force_save="1" string="Tax Code"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        required="id" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="other_info" string="Other Information">
+                            <group>
+                                <group>
+                                    <field name="user_id"
+                                        readonly="state not in ('draft', 'wait') or is_tariff"
+                                        options="{'no_create': True, 'no_open': True}" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="approval" string="Approval Information"
+                            invisible="not approver_ids">
+                            <field name="approver_ids" mode="list" readonly="1">
+                                <list editable="bottom" decoration-success="status=='approved'"
+                                    decoration-warning="status in ['pending', 'waiting']"
+                                    decoration-danger="status=='refused'" no_open="1">
+                                    <field name="existing_request_user_ids" column_invisible="True" />
+                                    <field name="sequence" column_invisible="True" />
+                                    <field name="user_id" string="Approver"
+                                        required="not job_id" />
+                                    <field name="job_id" required="not user_id" />
+                                    <field name="status" />
+                                    <field name="company_id" column_invisible="True" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="supplement_search_view" model="ir.ui.view">
+        <field name="name">supplement_search_view</field>
+        <field name="model">leasing.supplement</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="summary_change_ids" string="Summary of changes" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_supplemental_agreement_view">
+        <field name="name">Supplemental Agreement</field>
+        <field name="res_model">leasing.supplement</field>
+        <field name="search_view_id" ref="supplement_search_view" />
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_leasing.supplemental_agreement_view_list')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_leasing.supplemental_agreement_view_form')})]" />
+    </record>
+</odoo>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_request_purchase_expense" model="ir.ui.view">
+        <field name="name">view_request_purchase_expense</field>
+        <field name="model">account.move</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="tlip_account.view_invoice_request_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='area']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_from']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_to']" position="attributes">
+               <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_move_inherit_tlip_procurement" model="ir.ui.view">
+        <field name="name">account.move.view.form.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']//list//field[@name='product_id']" position="attributes">
+               <attribute name="options">{'no_create': 1, 'no_create_edit': 1}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']//list//field[@name='product_uom_id']" position="attributes">
+               <attribute name="options">{'no_create': 1, 'no_create_edit': 1}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='company_id']" position="after">
+                <field name="request_purchase_line_id" column_invisible="True"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/list/field[@name='company_id']" position="after">
+                <field name="request_purchase_line_id" column_invisible="True"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/list/field[@name='company_id']" position="after">
+                <field name="request_purchase_line_id" column_invisible="True"/>
+            </xpath>
+            <field name="development_project_id" position="after">
+                <field name="budget_department_responsible_job_id" invisible="1" />
+            </field>
+            <xpath expr="//notebook" position="inside">
+                <page string="E-Invoice" name="e_invoice" invisible="move_type in ['out_invoice', 'out_refund']">
+                    <div class="mb-2">
+                        <button name="open_import_einvoice_wizard"
+                                string="Import E-Invoice" type="object"
+                                invisible="approval_readonly"
+                                class="btn-primary"
+                                confirm="Are you sure that you want to do this action?" />
+                        <button name="action_copy_invoice_lines_to_einvoice"
+                                string="Copy from Invoice Lines" type="object"
+                                invisible="approval_readonly"
+                                class="btn-secondary ms-2"
+                                confirm="Are you sure that you want to do this action?" />
+                    </div>
+                    <field name="einvoice_line_ids" nolabel="1">
+                        <list editable="bottom" string="E-Invoice Lines">
+                            <field name="invoice_issuer" />
+                            <field name="tax_code" />
+                            <field name="form_no" />
+                            <field name="serial" />
+                            <field name="number" />
+                            <field name="invoice_date" />
+                            <field name="goods_name" />
+                            <field name="product_uom" />
+                            <field name="product_uom_qty" />
+                            <field name="price_unit" />
+                            <field name="taxes_id" widget="many2many_tags" string="Tax %" options="{'no_create': True}" />
+                            <field name="price_subtotal" />
+                            <field name="price_tax" string="Tax Amount" />
+                            <field name="price_total" string="Subtotal" />
+                            <field name="currency_id" column_invisible="1" />
+                        </list>
+                    </field>
+                    <group>
+                        <group />
+                        <group class="oe_subtotal_footer">
+                            <field name="einvoice_subtotals" readonly="1" />
+                            <field name="einvoice_total" readonly="1" />
+                        </group>
+                    </group>
+                    <div class="clearfix"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

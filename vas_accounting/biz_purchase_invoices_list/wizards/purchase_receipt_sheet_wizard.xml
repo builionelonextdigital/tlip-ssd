@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="purchase_receipt_sheet_wizard_form" model="ir.ui.view">
+            <field name="name">Invoice list</field>
+            <field name="model">purchase.receipt.sheet.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Invoice list">
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Print" name="%(biz_purchase_invoices_list.action_purchase_receipt_sheet)d" type="action" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_purchase_receipt_sheet_wizard" model="ir.actions.act_window">
+            <field name="name">Printed copy of purchase receipt</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.receipt.sheet.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem action="action_purchase_receipt_sheet_wizard" id="menu_purchase_receipt_sheet" parent="account.account_reports_legal_statements_menu" sequence="1"/>
+
+    </data>
+</odoo>

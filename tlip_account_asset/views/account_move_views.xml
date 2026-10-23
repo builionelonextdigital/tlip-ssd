@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_move_form_view_inherit" model="ir.ui.view">
+        <field name="name">account.move.form.view.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_open_asset_ids'][1]//field[@name='count_asset']"
+                position="after">
+                <field name="linked_asset_type" invisible="1" />
+                <field string="Allocation Revenues" name="count_asset"
+                    invisible="linked_asset_type != 'sale'" widget="statinfo" />
+                <field string="Def. Expenses" name="count_asset"
+                    invisible="linked_asset_type != 'expense'" widget="statinfo" />
+            </xpath>
+            <xpath expr="//button[@name='action_open_asset_ids'][2]//field[@name='count_asset']"
+                position="after">
+                <field string="Allocation Revenues" name="count_asset"
+                    invisible="linked_asset_type != 'sale'" widget="statinfo" />
+                <field string="Def. Expenses" name="count_asset"
+                    invisible="linked_asset_type != 'expense'" widget="statinfo" />
+            </xpath>
+            <xpath expr="//button[@name='action_open_asset_ids'][1]//field[@name='count_asset']"
+                position="attributes">
+                <attribute name="invisible">linked_asset_type != 'fixed_asset'</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_open_asset_ids'][2]//field[@name='count_asset']"
+                position="attributes">
+                <attribute name="invisible">linked_asset_type != 'fixed_asset'</attribute>
+            </xpath>
+            <xpath expr="//page[@id='other_tab']//group[@name='accounting_info_group']"
+                position="inside">
+                <field name="revaluation_reason_id" invisible="linked_asset_type != 'fixed_asset'"
+                    readonly="1" />
+            </xpath>
+            <xpath
+                expr="//page[@id='other_tab_entry']//group[@id='other_tab_entry_group']//group[@name='misc_group']"
+                position="inside">
+                <field name="revaluation_reason_id" invisible="linked_asset_type != 'fixed_asset'"
+                    readonly="1" />
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/list"
+                position="inside">
+                <field name="asset_name" optional="hide" />
+                <field name="asset_code" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

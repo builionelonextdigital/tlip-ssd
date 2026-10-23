@@ -1,0 +1,39 @@
+<odoo>
+    <record id="view_account_payment_form_fx_out" model="ir.ui.view">
+        <field name="name">account.payment.form.fx.out</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Add Compute FX Out button to the header -->
+            <xpath expr="//header" position="inside">
+                <button name="action_compute_fx_out"
+                        string="Compute FX Out"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="payment_type != 'outbound' or state != 'draft' or accounting_approval_state != 'draft' or company_currency_id == currency_id"/>
+            </xpath>
+
+            <!-- Insert FX fields right before the Memo field -->
+            <xpath expr="//field[@name='memo']" position="before">
+                <field name="fx_in" invisible="payment_type != 'inbound' or currency_id == company_currency_id"/>
+                <field name="fx_out" invisible="payment_type != 'outbound' or company_currency_id == currency_id"/>
+            </xpath>
+
+            <!-- hide label -->
+            <xpath expr="//label[@for='entry_amount_currency']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- hide entry amount field only -->
+            <xpath expr="//field[@name='entry_amount_currency']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- hide foreign currency selector -->
+            <xpath expr="//field[@name='foreign_currency_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

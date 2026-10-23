@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_leasing_quotation,access_leasing_quotation,model_leasing_quotation,base.group_user,1,0,0,0
+access_leasing_agreement,access_leasing_agreement,model_leasing_agreement,base.group_user,1,0,0,0
+access_leasing_supplement,access_leasing_supplement,model_leasing_supplement,base.group_user,1,0,0,0
+access_leasing_termination,access_leasing_termination,model_leasing_termination,base.group_user,1,0,0,0
+access_leasing_summary_changes,access_leasing_summary_changes,model_leasing_summary_changes,base.group_user,1,0,0,0
+access_summary_change_wizard,access_summary_change_wizard,model_summary_change_wizard,base.group_user,1,0,0,0
+access_summary_change_line,access_summary_change_line,model_summary_change_line,base.group_user,1,0,0,0
+access_contract_type,access_contract_type,model_contract_type,base.group_user,1,0,0,0
+access_leasing_rental_fee,access_leasing_rental_fee,model_leasing_rental_fee,base.group_user,1,0,0,0
+access_leasing_rental_item,access_leasing_rental_item,model_leasing_rental_item,base.group_user,1,0,0,0
+access_leasing_history,access_leasing_history,model_leasing_history,base.group_user,1,0,0,0
+access_stock_location_cr,access_stock_location_cr,model_stock_location_cr,base.group_user,1,0,0,0
+access_stock_location_merge_line,access_stock_location_merge_line,model_stock_location_merge_line,base.group_user,1,0,0,0
+access_stock_location_split_line,access_stock_location_split_line,model_stock_location_split_line,base.group_user,1,0,0,0

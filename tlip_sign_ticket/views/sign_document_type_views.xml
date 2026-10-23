@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sign_document_type_form_hide_code" model="ir.ui.view">
+        <field name="name">sign.document.type.form.hide.code</field>
+        <field name="model">sign.document.type</field>
+        <field name="inherit_id" ref="pcv_sign_ticket.view_sign_document_type_form"/>
+        <field name="arch" type="xml">
+            <field name="code" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_sign_document_type_list_hide_code" model="ir.ui.view">
+        <field name="name">sign.document.type.list.hide.code</field>
+        <field name="model">sign.document.type</field>
+        <field name="inherit_id" ref="pcv_sign_ticket.view_sign_document_type_list"/>
+        <field name="arch" type="xml">
+            <field name="code" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

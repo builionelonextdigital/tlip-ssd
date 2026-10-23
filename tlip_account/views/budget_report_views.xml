@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="analytic_reports_pivot_view" model="ir.ui.view">
+            <field name="name">budget.report.view.pivot.analytic.reports</field>
+            <field name="model">budget.report</field>
+            <field name="arch" type="xml">
+                <pivot string="Sales Report">
+                    <field name="budget_analytic_id" type="col" />
+                    <field name="account_id" />  <!-- do not copy the `type` with _patch_view -->
+                    <field name="budget_main_categ_code" type="row" />
+                    <field name="budget_2nd_categ_code" type="row" />
+                    <field name="budget_detailed_categ_code" type="row" />
+                    <field name="complete_code" type="row" />
+                    <field name="budget" type="measure" />
+                    <field name="achieved" type="measure" string="Actual"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.actions.server" id="action_analytic_report_sales_report">
+            <field name="name">Sales Report</field>
+            <field name="model_id" ref="account_budget.model_budget_report" />
+            <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]" />
+            <field name="state">code</field>
+            <field name="code">
+                action = model.with_user(env.uid).action_open_sales_report()
+            </field>
+        </record>
+
+        <record model="ir.actions.server" id="action_analytic_report_investment_plan_projection">
+            <field name="name">Investment Plan Projection</field>
+            <field name="model_id" ref="account_budget.model_budget_report" />
+            <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]" />
+            <field name="state">code</field>
+            <field name="code">
+                action = model.with_user(env.uid).action_open_investment_plan_projection()
+            </field>
+        </record>
+
+        <record model="ir.actions.server" id="action_analytic_report_operation_misc">
+            <field name="name">Operation &amp; Miscellaneous Expenses Report</field>
+            <field name="model_id" ref="account_budget.model_budget_report" />
+            <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]" />
+            <field name="state">code</field>
+            <field name="code">
+                action = model.with_user(env.uid).action_open_operation_misc()
+            </field>
+        </record>
+
+        <record model="ir.actions.server" id="action_analytic_report_direct_cost_report">
+            <field name="name">Direct Cost Report</field>
+            <field name="model_id" ref="account_budget.model_budget_report" />
+            <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]" />
+            <field name="state">code</field>
+            <field name="code">
+                action = model.with_user(env.uid).action_open_direct_cost_report()
+            </field>
+        </record>
+
+        <record id="action_analytic_report_window" model="ir.actions.act_window">
+            <field name="name">Budget Report</field>
+            <field name="res_model">budget.report</field>
+            <field name="view_mode">pivot,list,graph</field>
+            <field name="view_ids"
+                eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('tlip_account.analytic_reports_pivot_view')})]" />
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <openerp> -->
+<odoo>
+	<data>
+		<template id="report_statements_cash_flows">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.html_container">
+					<t t-call="web.basic_layout">
+						<div class="page" style="font-family: 'Times New Roman';font-size:14pt; line-height: 1.5;">
+							<div class="row">
+								<div class="col-6">
+									<div>
+										<strong>Reporting company: </strong>
+										<span t-field="o.env.company.name"/>
+									</div>
+									<div>
+										<strong>Address: </strong><span t-esc="get_company_address(o.env.company)"/>
+									</div>
+								</div>
+								<div class="col-6 text-center">
+									<div style="font-weight:bold">No. B03 - DN</div>
+									<div class="font-italic">(Issued under Circular No. 200/2014/TT-BTC dated December 22, 2014 of the Ministry of Finance)</div>
+								</div>
+							</div>
+							<div class="text-center" style="margin-top:30px !important;">
+								<h4 class="text-uppercase font-weight-bold">STATEMENTS OF CASH FLOWS</h4>
+								<p class="font-weight-bold font-italic" style="font-weight:bold">(By the direct method)(*)</p>
+								<p>Year <span t-esc="o.from_date.strftime('%Y')"/></p>
+							</div>
+							<div class="text-right font-italic" style="text-align:right;">
+								<p>Unit: <span t-field="o.env.company.currency_id"/></p>
+							</div>
+							<table class="table table-bordered">
+								<tbody>
+									<tr class="text-center">
+										<th style="width: 60%;">Targets</th>
+										<th style="width: 5%;">Code</th>
+										<th style="width: 5%;">Illustrate</th>
+										<th style="width: 15%;">This year</th>
+										<th style="width: 15%;">Last year</th>
+									</tr>
+									<t t-set="offers" t-value="o.mapped('line_ids').sorted('stt_calculate')"/>
+									<tr class="stt-td">
+										<td>1</td>
+										<td>2</td>
+										<td>3</td>
+										<td>4</td>
+										<td>5</td>
+									</tr>
+									<tr class="table-foreach" t-foreach="offers" t-as="offer" t-att-style="offer.balance_id.is_bold_report and 'font-weight:bold' or ''">
+										<t>
+											<t t-if="offer.balance_id.is_bold_report">
+												<t t-set="style" t-value="'font-weight:bold'"/>
+											</t>
+											<t t-if="offer.balance_id.is_italic_report">
+												<t t-set="style" t-value="'font-style:italic'"/>
+											</t>
+											<t t-else="">
+												<t t-set="style" t-value=""/>
+											</t>
+										</t>
+										<td style="width: 60%">
+											<span t-att-style="style" t-field="offer.balance_id"/>
+										</td>
+										<td t-att-style="style" class="text-center">
+											<span t-att-style="style" t-field="offer.code"/>
+										</td>
+										<td>
+											<span></span>
+										</td>
+										<td t-att-style="style">
+											<p style="text-align:right;" class="text-sm-end" t-esc="format_float_number(offer, offer.number_first_year)"/>
+										</td>
+										<td t-att-style="style" class="text-sm-end">
+											<p style="text-align:right;" class="text-sm-end" t-esc="format_float_number(offer, offer.number_last_year)"/>
+										</td>
+										<t t-set="style" t-value=""/>
+									</tr>
+									<tr class="tr-last">
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<p>Ghi chú: Các chỉ tiêu không có số liệu thì doanh nghiệp không phải trình bày nhưng không được đánh lại “Mã số” chỉ tiêu</p>
+							</div>
+							<div style="text-align:right;">
+								<p class="font-italic">Created on, date <span t-esc="datetime.datetime.now().strftime('%d')"/> month <span t-esc="datetime.datetime.now().strftime('%m')"/> year <span t-esc="datetime.datetime.now().strftime('%Y')"/></p>
+							</div>
+							<div class="row text-center table-parameter" style="page-break-inside:avoid;margin-bottom:100px;">
+								<div class="col-4" style="page-break-after: avoid;">
+									<div style="font-weight:bold;" class="text-uppercase">scheduler</div>
+									<div class="font-italic">(Sign, full name)</div>
+									<div class="certificate">
+										<span> - Số chứng chỉ hành nghề;</span><br/>
+										<span> - Đơn vị cung cấp dịch vụ kế toán</span>
+									</div>
+								</div>
+								<div class="col-4" style="page-break-after: avoid;">
+									<div style="font-weight:bold;">CHIEF ACCOUNTANT</div>
+									<div class="font-italic">(Sign, full name)</div>
+								</div>
+								<div class="col-4" style="page-break-after: avoid;">
+									<div style="font-weight:bold;">LEGAL REPRESENTATIVE</div>
+									<div class="font-italic">(Sign, full name, mark)</div>
+								</div>
+							</div>
+							<div class="note-footer">
+								<p class="font-italic">Đối với người lập biểu là các đơn vị dịch vụ kế toán phải ghi rõ Số chứng chỉ hành nghề, tên và địa chỉ Đơn vị cung cấp dịch vụ kế toán. Người lập biểu là cá nhân ghi rõ Số chứng chỉ hành nghề.</p>
+							</div>
+
+						</div>
+						<style>
+							.font-italic {
+								font-style: italic;
+							}
+							.text-uppercase {
+								font-weight: bold;
+							}
+							.table-bordered {
+								border: 1px solid #000000;
+							}
+							.table-bordered tbody .table-foreach{
+								border-bottom: 1px solid white;
+							}
+							.table-bordered tbody .stt-td{
+								text-align: center;
+								border-top: 1px solid white;
+							}
+							.certificate {
+								text-align: left;
+								margin-left: -15px;
+							}
+							.table-bordered tbody .tr-last{
+								border-top: 1px solid black;
+							}
+						</style>
+					</t>
+				</t>
+			</t>
+		</template>
+		
+		<template id="report_statements_cash_flows_pdf">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="biz_cash_flows_report.report_statements_cash_flows" t-lang="o.create_uid.partner_id.lang"/>
+			</t>
+		</template>  
+
+	</data>
+</odoo>

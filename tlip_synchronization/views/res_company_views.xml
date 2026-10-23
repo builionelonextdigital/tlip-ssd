@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_company_form_view_inherit_synchronization" model="ir.ui.view">
+        <field name="name">res_company.form.view.inherit.synchronization</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="model">res.company</field>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Power synchronization" name="power_synchronization"
+                    groups="base.group_no_one">
+                    <group>
+                        <field name="power_server" />
+                        <field name="power_database" />
+                        <field name="power_driver" />
+                        <field name="power_username" />
+                        <field name="power_password" password="True" />
+                    </group>
+                </page>
+                <page string="HRMS synchronization" name="hrms_synchronization"
+                    groups="base.group_no_one">
+                    <group>
+                        <field name="hrms_server" />
+                        <field name="hrms_database" />
+                        <field name="hrms_driver" />
+                        <field name="hrms_username" />
+                        <field name="hrms_password" password="True" />
+                        <field name="hrms_journal_id"
+                            required="hrms_server"
+                            options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                        <field name="hrms_company_id" required="hrms_server" />
+                    </group>
+                </page>
+                <page string="Water synchronization" name="water_synchronization"
+                    groups="base.group_no_one">
+                    <group>
+                        <field name="water_server" />
+                        <field name="water_database" />
+                        <field name="water_username" />
+                        <field name="water_password" password="True" />
+                    </group>
+                </page>
+                <page string="Utility Item Mapping">
+                    <field name="item_utility_mapping_ids" nolabel="1">
+                        <list editable="bottom">
+                            <field name="utility_type" />
+                            <field name="item_code" />
+                            <field name="product_id" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

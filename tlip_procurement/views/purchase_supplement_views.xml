@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="purchase_supplement_view_list" model="ir.ui.view">
+        <field name="name">purchase_supplement_view_list</field>
+        <field name="model">purchase.supplement</field>
+        <field name="arch" type="xml">
+            <list create="0" delete="0">
+                <field name="name" string="Purchase Supplement" />
+                <field name="purchase_contract_type_id" />
+                <field name="buyer_id" />
+                <field name="vendor_id" />
+                <field name="create_uid" string="Created by"/>
+                <field name="contract_appendix"/>
+                <field name="state"
+                    widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state == 'wait'"
+                    decoration-success="state == 'approve'"
+                    decoration-muted="state == 'cancel'"
+                    decoration-danger="state == 'reject'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="purchase_supplement_view_form" model="ir.ui.view">
+        <field name="name">purchase_supplement_view_form</field>
+        <field name="model">purchase.supplement</field>
+        <field name="arch" type="xml">
+            <form create="0" delete="0">
+                <header>
+                    <field name="contract_type_classification" invisible="1" />
+                    <field name="contract_appendix" invisible="1" />
+                    <button name="action_submit_changes" string="Submit" type="object"
+                        class="oe_highlight"
+                        invisible="state != 'draft' or contract_appendix" confirm="Are you sure that you want to do this action?" />
+                    <button name="action_complete" string="Complete" type="object"
+                        class="oe_highlight"
+                        invisible="not contract_appendix or state != 'draft'" />
+                    <button name="action_approve_request" type="object" string="Approve" invisible="user_status != 'pending' or state != 'wait'" class="btn-primary" data-hotkey="v" confirm="Are you sure that you want to do this action?"/>
+                    <button name="action_reject_request" string="Refuse" type="object" invisible="user_status != 'pending' or state != 'wait'" data-hotkey="z" confirm="Are you sure that you want to do this action?"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                        invisible="not active or state == 'cancel'" confirm="Are you sure that you want to do this action?" />
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Appendix" bg_color="text-bg-primary" invisible="not contract_appendix"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_open_approval_history_ids"
+                            type="object"
+                            icon="fa-history">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Approval Histories
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                        invisible="active" />
+                    <field name="active" invisible="1" />
+                    <label for="name" />
+                    <h1>
+                        <field name="name" nolabel="1" />
+                    </h1>
+                    <group name="contract_info" string="Purchase Supplement Information">
+                        <group>
+                            <field name="requisition_id" readonly="1"/>
+                            <field name="reason" string="Description" readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="purchase_contract_type_id" readonly="1" />
+                            <field name="purpose_vn" readonly="state != 'draft'" />
+                            <field name="purpose_en" readonly="state != 'draft'" />
+                            <field name="scope_vn" readonly="state != 'draft'"
+                                invisible="contract_type_classification not in ('consultant', 'construction')" />
+                            <field name="scope_en" readonly="state != 'draft'"
+                                invisible="contract_type_classification not in ('consultant', 'construction')" />
+                            <field name="desc_vn" readonly="state != 'draft'" />
+                            <field name="desc_en" readonly="state != 'draft'" />
+                            <field name="effective_date" readonly="state != 'draft'" required="id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Buyer">
+                            <field name="buyer_id" string="Name"
+                                context="{'form_view_ref': 'tlip_procurement.view_tlip_procurement_vendor_form'}"
+                                readonly="1" force_save="1" required="id" />
+                            <label for="buyer_street" string="Address" />
+                            <div class="o_address_format">
+                                <field name="buyer_street" placeholder="Street..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1" force_save="1" />
+                                <field name="buyer_street_2" placeholder="Street 2..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1" force_save="1" />
+                                <field name="buyer_district" placeholder="District"
+                                    style="width: 35% !important" class="o_address_district"
+                                    readonly="1" force_save="1" />
+                                <field name="buyer_state_id" class="o_address_state"
+                                    placeholder="City"
+                                    style="width: 35% !important"
+                                    options="{'no_open': True, 'no_quick_create': True}"
+                                    context="{'country_id': buyer_country_id, 'default_country_id': buyer_country_id}"
+                                    readonly="1" force_save="1" />
+                                <field name="buyer_country_id" placeholder="Country"
+                                    style="width: 34% !important" class="o_address_country"
+                                    options='{"no_open": True, "no_create": True}'
+                                    readonly="1" force_save="1" />
+                            </div>
+                        </group>
+                        <group string="Vendor">
+                            <field name="vendor_code" string="Vendor Code"
+                                readonly="1" force_save="1"/>
+                            <field name="vendor_id" string="Name" required="id"
+                                context="{'form_view_ref': 'tlip_procurement.view_tlip_procurement_vendor_form'}"
+                                readonly="1" force_save="1" />
+                            <label for="vendor_street" string="Address" />
+                            <div class="o_address_format">
+                                <field name="vendor_street" placeholder="Street..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1" force_save="1" />
+                                <field name="vendor_street_2" placeholder="Street 2..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1" force_save="1" />
+                                <field name="vendor_district" placeholder="District"
+                                    style="width: 35% !important" class="o_address_district"
+                                    readonly="1" force_save="1" />
+                                <field name="vendor_state_id" class="o_address_state"
+                                    placeholder="City"
+                                    style="width: 35% !important"
+                                    options="{'no_open': True, 'no_quick_create': True}"
+                                    context="{'country_id': vendor_country_id, 'default_country_id': vendor_country_id}"
+                                    readonly="1" force_save="1" />
+                                <field name="vendor_country_id" placeholder="Country"
+                                    style="width: 34% !important" class="o_address_country"
+                                    options='{"no_open": True, "no_create": True}'
+                                    readonly="1" force_save="1" />
+                            </div>
+                            <br/>
+                            <field name="vendor_vat" string="Tax Code" force_save="1" />
+                        </group>
+                    </group>
+                    <group name="contract_price" string="Contract Price">
+                        <group>
+                            <field name="quotation_no" string="Quotation No." />
+                            <field name="quotation_date" string="Dated" />
+                            <label for="total_amount_untaxed" string="Orignal Contract Amount"/>
+                            <div class="row">
+                                <div class="col-6">
+                                    <field name="total_amount_untaxed" string="Contract Amount" widget="monetary"/>
+                                    <field name="currency_id" invisible="1"/>
+                                </div>
+                            </div>                            
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note" readonly="state != 'draft'" />
+                        <separator string="Summary of changes" invisible="state == 'draft'" />
+                        <field name="summary_change_ids" nolabel="1"
+                            invisible="state == 'draft'"
+                            readonly="1" force_save="1" widget="one2many">
+                            <list editable="bottom">
+                                <field name="name" widget="text" />
+                                <field name="current_value" widget="text" />
+                                <field name="new_value" widget="html" />
+                            </list>
+                        </field>
+                    </group>
+                    <notebook>
+                        <page name="items" string="Items">
+                            <field name="line_ids" readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="product_id" />
+                                    <field name="specification" />
+                                    <field name="analytic_distribution"
+                                        string="Budget Code"
+                                        widget="analytic_distribution"
+                                        groups="analytic.group_analytic_accounting"
+                                        options="{'product_field': 'product_id', 'business_domain': 'purchase_order'}" />
+                                    <field name="product_uom_id" string="Unit"/>
+                                    <field name="product_qty" />
+                                    <field name="price_unit" string="Unit Price"/>
+                                    <field name="price_total" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="term" string="Terms and Conditions">
+                            <group>
+                                <group name="contract_period" string="Contract Period" invisible="contract_type_classification not in ('goods', 'service', 'construction', 'consultant')">
+                                    <field name="commence_date" string="Commence Date"
+                                        readonly="state != 'draft'"
+                                        required="id and contract_type_classification in ('goods', 'service', 'construction', 'consultant')" />
+                                    <field name="complete_date" string="Complete Date"
+                                        readonly="state != 'draft'"
+                                        required="id and contract_type_classification in ('goods', 'service', 'construction', 'consultant')" />
+                                    <field name="estimated_month" string="Estimate Time Schedule"
+                                        readonly="state != 'draft'"
+                                        required="contract_type_classification == 'consultant'"
+                                        invisible="contract_type_classification != 'consultant'" />
+                                </group>
+                                <group string="Delivery Term" invisible="contract_type_classification not in ('goods', 'principle')">
+                                    <label for="delivery_time" string="Delivery Time"/>
+                                    <div>
+                                        <field name="delivery_time" required="id" class="oe_inline"
+                                            readonly="state != 'draft'"/> working days from signing date of this Contract
+                                    </div>
+                                    <label for="delivery_street" string="Location of delivery" />
+                                    <div class="o_address_format">
+                                        <field name="delivery_street" placeholder="Street..."
+                                            class="o_address_state" style="width: 35% !important"
+                                            readonly="state != 'draft'" />
+                                        <field name="delivery_street_2" placeholder="Street 2..."
+                                            class="o_address_state" style="width: 35% !important"
+                                            readonly="state != 'draft'" />
+                                        <field name="delivery_district_id" placeholder="District"
+                                            style="width: 35% !important" class="o_address_city"
+                                            readonly="state != 'draft'" />
+                                        <field name="delivery_ward_id" placeholder="Ward"
+                                            style="width: 35% !important" class="o_address_city"
+                                            readonly="state != 'draft'" />
+                                        <field name="delivery_state_id" class="o_address_state"
+                                            placeholder="City"
+                                            style="width: 35% !important"
+                                            options="{'no_open': True, 'no_quick_create': True}"
+                                            context="{'country_id': delivery_country_id, 'default_country_id': delivery_country_id}"
+                                            readonly="state != 'draft'" />
+                                        <field name="delivery_country_id" placeholder="Country"
+                                            style="width: 34% !important" class="o_address_country"
+                                            options='{"no_open": True, "no_create": True}'
+                                            readonly="state != 'draft'" />
+                                    </div>
+                                </group>
+                                <group string="Goods Guaranty and Maintain" invisible="contract_type_classification != 'goods'">
+                                    <label for="guarantee_period"
+                                        required="id and contract_type_classification == 'goods'"
+                                        string="Guarantee Period" />
+                                    <div>
+                                        <field name="guarantee_period" class="oe_inline"
+                                            readonly="state != 'draft'" /> months
+                                    </div>
+                                </group>
+                                <group name="payment_method" string="Payment Method">
+                                    <field name="payment_frequency" readonly="state != 'draft'" required="id"/>
+                                    <label for="payment_term_days" string="Payment Term"/>
+                                    <div>
+                                        <field name="payment_term_days" class="oe_inline" readonly="state != 'draft'" /> days
+                                    </div>
+                                    <field name="payment_term_description" readonly="state != 'draft'" />
+                                </group>
+                            </group>
+                        </page>
+
+                        <page name="legal_representative" string="Legal Representative">
+                            <group>
+                                <group string="Buyer">
+                                    <field name="contract_signer_id"
+                                        required="state == 'draft'"
+                                        domain="[('job_id', 'in', available_hr_job_ids)]"
+                                        readonly="state != 'draft'"
+                                        options="{'no_open': True, 'no_quick_create': True}" />
+                                    <field name="buyer_legal_title" force_save="1"
+                                        string="Position" />
+                                    <field name="buyer_legal_attoney_no" force_save="1" readonly="state != 'draft'" string="Attorney Letter No." />
+                                    <field name="buyer_legal_email" force_save="1" readonly="state != 'draft'" string="Email" />
+                                    <field name="buyer_legal_fax" force_save="1" readonly="state != 'draft'" string="Fax" />
+                                    <field name="buyer_legal_phone" string="Phone Number" force_save="1" readonly="state != 'draft'" />
+                                    <field name="buyer_legal_account_number" readonly="state != 'draft'" string="Account Number" />
+                                    <field name="buyer_legal_beneficiary" readonly="state != 'draft'" string="Beneficiary" />
+                                    <field name="buyer_legal_bank_id" readonly="state != 'draft'" string="Bank" />
+                                    <field name="buyer_legal_vat" force_save="1" string="Tax Code" readonly="state != 'draft'" />
+                                </group>
+                                <group string="Vendor">
+                                    <field name="vendor_legal_name" string="Legal Representative" readonly="1" force_save="1" />
+                                    <field name="vendor_legal_title" force_save="1" readonly="1" string="Position" />
+                                    <field name="vendor_legal_attoney_no" force_save="1" readonly="state != 'draft'" string="Attorney Letter No." />
+                                    <field name="vendor_legal_email" force_save="1" readonly="state != 'draft'" string="Email" />
+                                    <field name="vendor_legal_fax" force_save="1" readonly="state != 'draft'" string="Fax" />
+                                    <field name="vendor_legal_phone" string="Phone Number" force_save="1" readonly="state != 'draft'" />
+                                    <field name="vendor_legal_account_number" readonly="state != 'draft'" string="Account Number" />
+                                    <field name="vendor_legal_beneficiary" readonly="state != 'draft'" string="Beneficiary" />
+                                    <field name="vendor_legal_bank_id" readonly="state != 'draft'" string="Bank" />
+                                    <field name="vendor_vat" force_save="1" string="Tax Code" readonly="1" />
+                                </group>
+                            </group>
+                        </page>
+
+                        <page name="other_info" string="Other Information">
+                            <group>
+                                <group>
+                                    <field name="user_id" readonly="state != 'draft'"
+                                        options="{'no_create': True, 'no_open': True}" />
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Approver(s)" name="approver" invisible="state == 'draft'">
+                            <field name="approver_ids" mode="list" readonly="1">
+                                <list editable="bottom" decoration-success="status=='approved'"
+                                    decoration-warning="status in ['pending', 'waiting']"
+                                    decoration-danger="status=='refused'" no_open="1">
+                                    <field name="existing_request_user_ids" column_invisible="True" />
+                                    <field name="sequence" column_invisible="True" />
+                                    <field name="user_id" string="Approver"
+                                        required="not job_id" />
+                                    <field name="job_id" required="not user_id" />
+                                    <field name="status" />
+                                    <field name="company_id" column_invisible="True" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+    
+    <record id="purchase_supplement_view_search" model="ir.ui.view">
+        <field name="name">purchase.supplement.view.search</field>
+        <field name="model">purchase.supplement</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="0" string="Group By">
+                    <filter name="my_approval" string="My Approvals to Review"
+                        domain="[('state', '=', 'wait'), '|', ('current_approver_id.job_id.employee_ids.user_id', 'in', [uid]), ('current_approver_id.user_id', '=', uid)]" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_purchase_supplement_view">
+        <field name="name">Purchase Supplement</field>
+        <field name="res_model">purchase.supplement</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_procurement.purchase_supplement_view_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_procurement.purchase_supplement_view_form')})]" />
+    </record>
+
+</odoo>

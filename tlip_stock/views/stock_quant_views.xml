@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_quant_package_form_inherit_tlip_stock" model="ir.ui.view">
+        <field name="name">stock.quant.package.view.form.inherit</field>
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.view_quant_package_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='pack_date']/parent::group" position="inside">
+                <field name="usage" string="Usages" />
+            </xpath>
+            <xpath expr="//button[@name='unpack']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//separator" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='quant_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//separator" position="before">
+                <notebook>
+                    <page name="content" string="Content">
+                        <field name="quant_ids">
+                            <list>
+                                <field name="product_id"/>
+                                <field name="lot_id" groups="stock.group_production_lot"/>
+                                <field name="quantity"/>
+                                <field name="product_uom_id" groups="uom.group_uom"/>
+                            </list>
+                            <kanban class="o_kanban_mobile">
+                                <templates>
+                                    <t t-name="card">
+                                        <field name="product_id" class="fw-bold"/>
+                                        <field name="lot_id"/>
+                                        <div class="d-flex">
+                                            <field name="quantity"/>
+                                            <field class="mx-2" name="product_uom_id" groups="uom.group_uom"/>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </field>
+                    </page>
+                    <page name="barcode" string="Barcode">
+                        <field name="stock_serial_ids" widget="many2many">
+                            <list create="0" editable="bottom">
+                                <field name="product_id" />
+                                <field name="display_name" string="Barcode" />
+                                <field name="quantity" />
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

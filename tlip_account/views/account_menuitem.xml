@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Accounting / Accounting / Analytic Budget Yearly -->
+    <menuitem id="menu_act_budget_analytic_year_view"
+        parent="account.menu_finance_entries"
+        name="Budget Yearly"
+        action="tlip_account.act_budget_analytic_year_action"
+        sequence="55"
+        groups="account.group_account_manager" />
+    <!-- Deactive -->
+    <menuitem id="account_budget.menu_act_budget_analytic_view"
+        parent="account.menu_finance_entries"
+        name="Budgets Monthly"
+        active="False" />
+    <menuitem id="account.menu_action_analytic_lines_tree"
+        name="Budget Items"
+        parent="account.menu_finance_entries"
+        active="False" />
+    <menuitem id="account.account_analytic_plan_menu"
+        parent="account.menu_analytic_accounting"
+        active="False" />
+    <menuitem
+        id="account_reports.menu_action_account_report_deferred_revenue"
+        parent="account.account_reports_management_menu"
+        active="False" />
+    <menuitem
+        id="account_reports.menu_action_account_report_deferred_expense"
+        parent="account.account_reports_management_menu"
+        active="False" />
+    <!-- Accounting / Accounting / Payment -->
+    <menuitem id="menu_accountant_account_payment_partner" name="Payments"
+        action="tlip_account.accountant_account_payment_partner_action"
+        parent="account.menu_finance_entries"
+        sequence="15" />
+    <!-- Accounting / Accounting / Month-end Closing -->
+    <menuitem id="accounting_period_closing_menuitem"
+        name="Month-end Closing"
+        action="tlip_account.accounting_period_closing_action"
+        parent="account.menu_finance_entries"
+        groups="account.group_account_user"
+        sequence="70" />
+    <record id="account_accountant.menu_action_change_lock_date" model="ir.ui.menu">
+        <field name="active" eval="False" />
+    </record>
+    <!-- Accounting / Configuration / Management / Analytic Reports -->
+    <menuitem id="analytic_reports_menuitem"
+        name="Analytic Reports"
+        action="tlip_account.analytic_reports_action"
+        sequence="5"
+        parent="account.account_management_menu" />
+    <!-- Accounting / Configuration / Bank Accounts -->
+    <menuitem id="menu_accounting_config_bank_accounts"
+        name="Bank Accounts"
+        parent="account.menu_finance_configuration"
+        sequence="6" />
+    <!-- Accounting / Configuration / Bank Accounts / Banks -->
+    <menuitem id="menu_accounting_action_res_bank_form"
+        action="base.action_res_bank_form"
+        parent="menu_accounting_config_bank_accounts"
+        sequence="1" />
+    <!-- Accounting / Configuration / Bank Accounts / Bank Accounts -->
+    <menuitem id="menu_accounting_action_res_partner_bank_form"
+        action="base.action_res_partner_bank_account_form"
+        parent="menu_accounting_config_bank_accounts"
+        sequence="2" />
+    <!-- Accounting / Reporting / Management / Sales Report -->
+    <menuitem id="menu_analytic_report_sales_report"
+        action="action_analytic_report_sales_report"
+        parent="account.account_reports_management_menu"
+        sequence="15" />
+    <!-- Accounting / Reporting / Management / Investment Plan Projection -->
+    <menuitem id="menu_analytic_report_investment_plan_projection"
+        action="action_analytic_report_investment_plan_projection"
+        parent="account.account_reports_management_menu"
+        sequence="16" />
+    <!-- Accounting / Reporting / Management / Operation &amp; Miscellaneous Expenses Report -->
+    <menuitem id="menu_analytic_report_operation_misc"
+        action="action_analytic_report_operation_misc"
+        parent="account.account_reports_management_menu"
+        sequence="17" />
+    <!-- Accounting / Reporting / Management / Direct Cost Report -->
+    <menuitem id="menu_analytic_report_direct_cost_report"
+        action="action_analytic_report_direct_cost_report"
+        parent="account.account_reports_management_menu"
+        sequence="18" />
+    <!-- Accounting / Reporting / Management / Bank Reconciliation Report -->
+    <menuitem id="menu_bank_reconciliation_report"
+        action="action_bank_reconciliation_report"
+        parent="account.account_reports_management_menu"
+        sequence="19" />
+    <!-- Accounting / Reporting / Management / Monthly Overdue Report -->
+    <menuitem id="menu_monthly_overdue_report"
+        action="tlip_account.action_monthly_overdue_report_wizard"
+        parent="account.account_reports_management_menu"
+        sequence="20" />
+    <!-- Accounting / Reporting / Audit Reports / Foreign Exchange Book -->
+    <menuitem id="menu_action_account_report_foreign_exchange_book" name="Foreign Exchange Book"
+        action="action_account_report_foreign_exchange_book"
+        parent="account_reports.account_reports_audit_reports_menu"
+        groups="account.group_account_readonly"
+        sequence="11" />
+
+    <!-- Accounting / Configuration / Accounting / OOS Mapping -->
+    <menuitem id="menu_accounting_configuration_oos"
+        parent="account.account_account_menu"
+        name="OOS" sequence="40">
+        <menuitem id="menu_accounting_configuration_oos_mapping"
+            action="tlip_account.oos_mapping_action"
+            sequence="10" />
+        <menuitem id="menu_accounting_configuration_oos_mapping_category"
+            action="tlip_account.oos_mapping_category_action"
+            sequence="20" />
+    </menuitem>
+
+    <!-- Menu item for CIP/WIP Summary Report -->
+    <menuitem id="menu_cip_wip_summary_report"
+              name="CIP/WIP Summary"
+              parent="account_reports.account_reports_audit_reports_menu"
+              action="tlip_account.action_cip_wip_summary_report"
+              groups="account.group_account_readonly"
+              sequence="12"/>
+
+    <!-- Accounting / Configuration / Accounting / Invoice Type -->
+    <menuitem id="menu_accounting_configuration_invoice_type"
+        action="tlip_account.invoice_type_action"
+        parent="account.account_account_menu"
+        sequence="13" />
+
+    <!-- Accounting / Vendor / Employee Expense -->
+    <menuitem id="menu_action_vendor_bill_employee_expense"
+        parent="account.menu_finance_payables"
+        name="Employee Expenses"
+        action="tlip_account.view_tlip_vendor_bill_employee_expense" sequence="2" />
+
+    <menuitem
+        id="batch_payment_menu"
+        name="Batch Payments"
+        action="tlip_account.batch_payment_action"
+        parent="account.menu_finance_entries"
+        sequence="18" />
+
+    <menuitem
+        id="menu_account_item_code"
+        name="Goods/Services"
+        action="action_item_code_view"
+        parent="account.menu_finance_entries"
+        sequence="20" />
+
+
+    <menuitem
+        id="budget_department_group_menu"
+        name="Budget Department Group"
+        action="tlip_account.budget_department_group_action"
+        parent="account.menu_analytic_accounting"
+        sequence="3" />
+
+    <menuitem
+        id="budget_department_menu"
+        name="Budget Department"
+        action="tlip_account.budget_department_action"
+        parent="account.menu_analytic_accounting"
+        sequence="2" />
+
+    <menuitem id="budget_reserved_menu"
+              name="Budget Reserved"
+              parent="account.menu_analytic_accounting"
+              action="action_budget_reserved"
+              sequence="4"/>
+
+    <menuitem id="menu_development_root"
+        name="Development"
+        parent="account.menu_finance_configuration" sequence="110" />
+    <menuitem id="menu_development_phase"
+        action="tlip_account.action_development_phase_view"
+        parent="tlip_account.menu_development_root" sequence="10" />
+    <menuitem id="menu_development_project"
+        action="tlip_account.development_project_action"
+        parent="tlip_account.menu_development_root" sequence="20" />
+</odoo>

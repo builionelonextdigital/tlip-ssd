@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="view_invoice_tree_inherit_pcv_minvoice" model="ir.ui.view">
+        <field name="name">account.invoice.tree.inherit.pcv.minvoice</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='status_in_payment']" position="after">
+                <field name="minvoice_state" widget="badge"
+                    decoration-info="minvoice_state == 'created'"
+                    decoration-warning="minvoice_state in ('adjusted', 'replaced')"
+                    decoration-muted="minvoice_state == 'uncreated'" />
+                <field name="minvoice_publish_state" widget="badge"
+                    decoration-success="minvoice_publish_state == 'published'"
+                    decoration-warning="minvoice_publish_state == 'unpublished'" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_move_form_inherit_pcv_minvoice" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.pcv.minvoice</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <button name="button_draft" position="replace">
+                <button name="button_draft" string="Đưa về dự thảo" type="object"
+                    groups="account.group_account_invoice"
+                    invisible="not show_reset_to_draft_button or minvoice_publish_state == 'published'"
+                    data-hotkey="q" />
+                <button name="button_reset_to_draft_minvoice" string="Đưa về dự thảo" type="object"
+                    groups="account.group_account_invoice"
+                    invisible="not show_reset_to_draft_button or minvoice_publish_state != 'published'"
+                    context="{'cancel_minvoice': True}" data-hotkey="q" />
+            </button>
+            <xpath expr="//field[@name='state']" position="before">
+                <button name="button_open_minvoice_wizard"
+                    invisible="state != 'posted' or move_type not in ['out_invoice', 'out_refund']"
+                    string="M-invoice" type="object" />
+                <button name="action_sync_tax_confirmation"
+                    string="Sync Tax Confirmation"
+                    type="object"
+                    class="btn-secondary"
+                    invisible="move_type != 'out_invoice' or not minvoice_index or tax_confirmation_status == 'success'"
+                    confirm="Are you sure you want to sync tax confirmation from the tax authority?" />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_minvoice" class="oe_stat_button" icon="fa-file-text-o"
+                    type="object"
+                    invisible="state not in ['posted', 'cancel'] or minvoice_state == 'uncreated' or move_type not in ['out_invoice', 'out_refund']"
+                    string="E-Invoice" />
+            </xpath>
+            <xpath expr="//group[@id='header_right_group']" position="inside">
+                <field name="minvoice_state" widget="badge"
+                    decoration-info="minvoice_state == 'created'"
+                    decoration-warning="minvoice_state in ('adjusted', 'replaced')"
+                    decoration-muted="minvoice_state == 'uncreated'"
+                    invisible="move_type not in ['out_invoice', 'out_refund']" />
+                <field name="minvoice_publish_state" widget="badge"
+                    decoration-success="minvoice_publish_state == 'published'"
+                    decoration-warning="minvoice_publish_state == 'unpublished'" 
+                    invisible="move_type not in ['out_invoice', 'out_refund']" />
+            </xpath>
+            <xpath expr="//page[@id='other_tab_entry']" position="after">
+                <field name="minvoice_account_id" invisible="1" />
+                <page id="minvoice_tab" name="minvoice_tab" string="M-invoice"
+                    invisible="move_type not in ['out_invoice', 'out_refund']" groups="base.group_no_one">
+                    <group>
+                        <group string="Thông tin hóa đơn">
+                            <field name="minvoice_template_code" readonly="1"
+                                invisible="state == 'draft'" />
+                            <field name="minvoice_template_code" widget="dynamic_dropdown"
+                                invisible="state != 'draft'"
+                                options="{'values':'get_minvoice_template_code_selection'}"
+                                context="{'minvoice_account_id': minvoice_account_id}" />
+                            <field name="minvoice_template_id"
+                                domain="[('code', '=?', minvoice_template_code), ('company_id', '=', company_id)]"
+                                readonly="state != 'draft'"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                            <field name="minvoice_template_payment_method"
+                                readonly="state != 'draft'" />
+                            <field name="minvoice_index" readonly="1" force_save="1" />
+                            <field name="minvoice_no" readonly="1" force_save="1" />
+                            <field name="minvoice_issued_date" readonly="1" force_save="1" />
+                            <field name="minvoice_email" readonly="1" force_save="1" />
+                            <field name="tax_confirmation_status" widget="badge"
+                                invisible="minvoice_publish_state != 'published'"
+                                decoration-success="tax_confirmation_status == 'success'"
+                                decoration-danger="tax_confirmation_status == 'rejected'"
+                                decoration-warning="tax_confirmation_status == 'pending'" />
+                            <field name="tax_note_error" readonly="1"
+                                invisible="minvoice_publish_state != 'published' or tax_confirmation_status != 'rejected'" />
+                            <field name="tax_macqt" readonly="1" />
+                            <field name="tax_lookup_code" readonly="1" />
+                            <field name="tax_response_data" invisible="1" />
+                            <field name="minvoice_signing_date" readonly="1"
+                                invisible="minvoice_publish_state != 'published'" />
+                            <field name="minvoice_signing_user" invisible="1" />
+                        </group>
+                        <group string="Thông tin hóa đơn gốc (nếu có)">
+                            <field name="original_invoice_id" readonly="state != 'draft'"
+                                options="{'no_create': True, 'no_create_edit': True}"
+                                domain="[('minvoice_publish_state', '=', 'published'), ('move_type', 'in', ['out_invoice', 'out_refund']), ('id', '!=', id)]" />
+                            <field name="original_minvoice_template_code" readonly="1"
+                                invisible="state == 'draft' and not original_invoice_id" />
+                            <field name="original_minvoice_template_code" widget="dynamic_dropdown"
+                                invisible="state != 'draft' or original_invoice_id"
+                                options="{'values':'get_minvoice_template_code_selection'}"
+                                context="{'minvoice_account_id': minvoice_account_id}" />
+                            <field name="original_minvoice_template_id" force_save="1"
+                                domain="[('code', '=?', original_minvoice_template_code), ('company_id', '=', company_id)]"
+                                readonly="state != 'draft' or original_invoice_id"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                            <field name="original_minvoice_no" force_save="1"
+                                readonly="state != 'draft' or original_invoice_id" />
+                            <field name="original_minvoice_issued_date" force_save="1"
+                                readonly="state != 'draft' or original_invoice_id" />
+                            <field name="minvoice_note" force_save="1" readonly="state != 'draft'" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_filter_inherit" model="ir.ui.view">
+        <field name="name">view_account_invoice_filter</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='cancel']" position="after">
+                <separator />
+                <filter name="minvoice_unpublished" string="Chưa phát hành"
+                    domain="[('minvoice_publish_state','=','unpublished')]" />
+                <filter name="minvoice_published" string="Đã phát hành"
+                    domain="[('minvoice_publish_state','!=','published')]" />
+                <separator />
+                <filter name="minvoice_uncreated" string="Chưa tạo hóa đơn"
+                    domain="[('minvoice_state','=','uncreated')]" />
+                <filter name="minvoice_created" string="Đã tạo hoá đơn"
+                    domain="[('minvoice_state','=','created')]" />
+                <filter name="minvoice_adjusted" string="Hóa đơn điều chỉnh"
+                    domain="[('minvoice_state','=','adjusted')]" />
+                <filter name="minvoice_replaced" string="Hóa đơn thay thế"
+                    domain="[('minvoice_state','=','replaced')]" />
+                <separator />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="action_view_account_move_send_minvoice_email">
+        <field name="name">Gửi M-invoice Email</field>
+        <field name="model_id" ref="pcv_minvoice.model_account_move" />
+        <field name="binding_model_id" ref="pcv_minvoice.model_account_move" />
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.action_send_minvoice_emails()
+        </field>
+    </record>
+
+</odoo>

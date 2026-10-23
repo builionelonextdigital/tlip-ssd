@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="document_preview_wizard_form_view" model="ir.ui.view">
+        <field name="name">document_preview_wizard_form_view</field>
+        <field name="model">document.preview</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="file" widget="pdf_viewer" readonly="1"/>
+                <footer>
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

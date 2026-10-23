@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order_inherit_tlip_procurement" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" name="action_generate_evaluation_survey" type="object" invisible="is_order" icon="fa-file-text-o" context="{'default_evaluation_type': 'rfq_vendor_selection'}">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">
+                            RFQ Evaluation
+                        </span>
+                    </div>
+                </button>
+                <button class="oe_stat_button" name="action_generate_evaluation_survey" type="object" invisible="not is_order or state not in ('purchase', 'done')" icon="fa-file-text-o" context="{'default_evaluation_type': 'post_transaction'}">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">
+                            PO Evaluation
+                        </span>
+                    </div>
+                </button>
+                <button class="oe_stat_button" name="action_view_account_payments"
+                    type="object" invisible="not payment_ids" icon="fa-list">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">
+                            Account Payments
+                        </span>
+                    </div>
+                </button>
+            </div>
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">0</attribute>
+            </xpath>
+            <button name="button_confirm" position="before">
+                <button name="action_request_payment"
+                    invisible="state != 'purchase' or not is_order"
+                    confirm="Are you sure that you want to do this action?"
+                    string="Create Payment" type="object" />
+            </button>
+            <xpath expr="//page[@name='purchase_delivery_invoice']//field[@name='user_id']"
+                position="before">
+                <field name="task_id" readonly="1" force_save="1"/>
+                <field name="is_advance_enabled" />
+                <field name="is_order" invisible="1" />
+            </xpath>
+            <xpath expr="//button[@name='button_confirm'][1]" position="attributes">
+                <attribute name="invisible">state != 'sent' or not is_order</attribute>
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_confirm'][2]" position="attributes">
+                <attribute name="invisible">state != 'draft' or not is_order</attribute>
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_draft']" position="attributes">
+                <attribute name="invisible">state != 'cancel' or not is_order</attribute>
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_cancel']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_approve']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_done']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_unlock']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_create_invoice'][1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_create_invoice'][2]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <field name="partner_id" position="attributes">
+                <attribute name="string">Supplier</attribute>
+            </field>
+            <field name="partner_ref" position="attributes">
+                <attribute name="string">Supplier Reference</attribute>
+            </field>
+            <field name="user_id" position="attributes">
+                <attribute name="string">Responsible</attribute>
+            </field>
+            <field name="origin" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <xpath expr="//field[@name='order_line']" position="attributes">
+                <attribute name="widget">section_and_note_one2many</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//list//field[@name='product_id']" position="attributes">
+                <attribute name="context">{'partner_id':parent.partner_id, 'quantity':product_qty, 'company_id': parent.company_id, 'default_sale_ok': False, 'default_purchase_ok': False}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//list//field[@name='taxes_id']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//list//field[@name='product_id']"
+                position="before">
+                <field name="available_request_line_ids" column_invisible="1" />
+                <field name="request_line_id" string="Request"
+                    domain="[('id', 'in', available_request_line_ids)]"
+                    required="not parent.requisition_id"
+                    column_invisible="parent.requisition_id" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']//list//field[@name='product_id']"
+                position="after">
+                <field name="product_categ_id" string="Category" optional="show" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']//list//field[@name='name']" position="after">
+                <field name="specification" />
+                <field name="warranty" readonly="is_downpayment"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//list//field[@name='product_id']"
+                position="attributes">
+                <attribute name="readonly">state in ('purchase', 'to approve', 'done', 'cancel') or is_downpayment</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//list//field[@name='product_uom'][2]"
+                position="attributes">
+                <attribute name="readonly">state in ('purchase', 'to approve', 'done', 'cancel') or is_downpayment</attribute>
+                <attribute name="options">{'no_create': 1, 'no_create_edit': 1}</attribute>
+            </xpath>
+            <field name="requisition_id" position="attributes">
+                <attribute name="invisible">not requisition_id</attribute>
+                <attribute name="readonly">1</attribute>
+                <attribute name="force_save">1</attribute>
+            </field>
+            <xpath expr="//field[@name='order_line']//list//field[@name='analytic_distribution']"
+                position="attributes">
+                <attribute name="string">Budget Code</attribute>
+                <attribute name="optional"></attribute>
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//list" position="inside">
+                <field name="origin" readonly="1" />
+            </xpath>
+            <field name="date_order" position="before">
+                <field name="select_bidding" readonly="1"
+                    widget="radio" options="{'horizontal': true}"
+                    invisible="not task_id"/>
+            </field>
+            <field name="fiscal_position_id" position="after">
+                <field name="payment_term_desc" readonly="state in ('done', 'cancel')" />
+                <field name="other_condition" readonly="state in ('done', 'cancel')" />
+            </field>
+            <field name="fiscal_position_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <page name="purchase_delivery_invoice" position="after">
+                <page string="General Requirements" name="general_requirement"
+                    invisible="select_bidding != 'bidding'">
+                    <field name="requirement_line_ids" mode="list"
+                        readonly="state != 'draft'">
+                        <list editable="bottom" no_open="1">
+                            <field name="name" required="1" />
+                            <field name="description" />
+                            <field name="vendor_comment" />
+                        </list>
+                    </field>
+                </page>
+            </page>
+            <field name="currency_id" position="after">
+                <div name="currency_conversion_div" class="d-flex text-muted float-start"
+                    invisible="currency_id == company_currency_id">
+                    <span class="mr-3">1 </span>
+                    <field name="currency_id" readonly="True" options="{'no_open': True}" />
+                    <span> = </span>
+                    <field name="currency_rate"
+                        readonly="state != 'draft'" />
+                    <span> </span>
+                    <field name="company_currency_id" readonly="True"
+                        options="{'no_open': True}" />
+                </div>
+            </field>
+        </field>
+    </record>
+
+    <record id="purchase_order_rfq_list_inherit_tlip_procurement" model="ir.ui.view">
+        <field name="name">tlip.procurement.rfq.list</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="js_class"></attribute>
+                <attribute name="create">0</attribute>
+            </xpath>
+            <xpath expr="//header//button[1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//header//button[2]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase.purchase_rfq" model="ir.actions.act_window">
+        <field name="name">RFQs</field>
+        <field name="domain">[('is_order', '=', False)]</field>
+        <field name="context">{'create': 0}</field>
+    </record>
+
+    <record id="purchase.purchase_form_action" model="ir.actions.act_window">
+        <field name="name">Procurement Orders</field>
+        <field name="domain">[('is_order', '=', True)]</field>
+        <field name="context">{'default_is_order': True, 'create': 0}</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_land_plot_category,access_land_plot_category,model_land_plot_category,base.group_user,1,1,1,1
+access_land_plot_group,access_land_plot_group,model_land_plot_group,base.group_user,1,1,1,1
+access_product_manufacturer,access_product_manufacturer,model_product_manufacturer,base.group_user,1,1,1,1
+access_product_specification,access_product_specification,model_product_specification,base.group_user,1,1,1,1
+access_tlip_stock_serial,access_tlip_stock_serial,model_tlip_stock_serial,base.group_user,1,1,1,1
+access_create_depreciation_wizard,access_create_depreciation_wizard,model_create_depreciation_wizard,base.group_user,1,1,1,1
+access_create_depreciation_wizard_line,access_create_depreciation_wizard_line,model_create_depreciation_wizard_line,base.group_user,1,1,1,1
+access_plot_coordinate,access_plot_coordinate,model_plot_coordinate,base.group_user,1,1,1,1

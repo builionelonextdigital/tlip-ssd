@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit stock_account.view_category_property_form -->
+    <record id="view_category_property_form_inherit" model="ir.ui.view">
+        <field name="name">product.category.form.inherit.tlip.stock</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="stock_account.view_category_property_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='account_stock_property']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

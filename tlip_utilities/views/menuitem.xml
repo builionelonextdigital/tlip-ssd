@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="utilities_menu_root"
+        web_icon="tlip_utilities,static/description/menu_icon.png"
+        name="Utilities">
+        <menuitem id="utilities_electric_menu" name="Electric" sequence="10">
+            <menuitem id="menu_utilities_electricity_consumption"
+                name="Electricity Consumption"
+                action="action_utilities_electricity_consumption_view"
+                sequence="20" />
+            <menuitem id="menu_utilities_electricity_points"
+                name="Electricity Points"
+                action="action_utilities_electricity_points_view"
+                sequence="30" />
+            <menuitem id="menu_utilities_electricity_pricelist"
+                name="Electricity Pricelists"
+                action="action_utilities_electricity_pricelists_view"
+                sequence="40" />
+        </menuitem>
+        <menuitem id="utilities_water_menu" name="Water" sequence="20">
+            <menuitem id="menu_utilities_water_consumption"
+                name="Water Consumption"
+                action="action_utilities_water_consumptions_view"
+                sequence="20" />
+            <menuitem id="menu_utilities_water_points"
+                name="Water Points"
+                action="action_utilities_water_points_view"
+                sequence="30" />
+            <menuitem id="menu_utilities_water_pricelists"
+                name="Water Pricelists"
+                action="action_utilities_water_pricelists_view"
+                sequence="40" />
+
+        </menuitem>
+        <menuitem id="utilities_operation_menu" name="Operations" sequence="50">
+            <menuitem
+                id="view_utility_payment_menu"
+                name="Request for Payment"
+                sequence="1">
+                <menuitem
+                    id="view_utility_deposit_payment_menu"
+                    name="Request for Deposit Payments"
+                    action="tlip_account.action_inbound_payment_request"
+                    sequence="10" />
+
+                <menuitem
+                    id="view_utility_invoice_menu"
+                    name="Request for Invoice Payments"
+                    action="tlip_utilities.action_request_payment_view"
+                    sequence="20" />
+            </menuitem>
+
+            <menuitem id="menu_utility_run"
+                name="Run"
+                action="utility_run_wizard_action"
+                sequence="100" />
+        </menuitem>
+
+        <menuitem id="utilities_configuration_menu" name="Configuration" sequence="100">
+            <menuitem id="menu_utilities_settings"
+                name="Settings"
+                action="action_utilities_electricity_settings_view"
+                sequence="10" />
+            <menuitem id="menu_utilities_electricity_categories"
+                name="Electricity Categories"
+                action="action_utilities_electricity_categories_view"
+                groups="tlip_utilities.group_electricity_manager"
+                sequence="20" />
+            <menuitem id="menu_utilities_electricity_kfactor"
+                name="Electricity K-factor"
+                action="action_utilities_electricity_kfactor_view"
+                groups="tlip_utilities.group_electricity_manager"
+                sequence="30" />
+        </menuitem>
+    </menuitem>
+
+</odoo>

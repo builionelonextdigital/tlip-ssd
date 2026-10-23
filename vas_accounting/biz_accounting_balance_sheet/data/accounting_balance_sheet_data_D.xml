@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="accounting_balance_sheet_case_98" model="accounting.balance.sheet">
+            <field name="categ_name">- Cổ phiếu phổ thông có quyền biểu quyết</field>
+            <field name="code">411a</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_97" model="accounting.balance.sheet">
+            <field name="categ_name">- Cổ phiếu ưu đãi</field>
+            <field name="code">411b</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_96" model="accounting.balance.sheet">
+            <field name="categ_name">1. Vốn góp của chủ sở hữu</field>
+            <field name="code">411</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_categ</field>
+            <field name="stt_calculate">1</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_case_97'),
+                ref('accounting_balance_sheet_case_98'),
+            ])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+
+        <record id="accounting_balance_sheet_case_99" model="accounting.balance.sheet">
+            <field name="categ_name">2. Thặng dư vốn cổ phần</field>
+            <field name="code">412</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_100" model="accounting.balance.sheet">
+            <field name="categ_name">3. Quyền chọn chuyển đổi trái phiếu</field>
+            <field name="code">413</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_101" model="accounting.balance.sheet">
+            <field name="categ_name">4. Vốn khác của chủ sở hữu</field>
+            <field name="code">414</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_102" model="accounting.balance.sheet">
+            <field name="categ_name">5. Cổ phiếu quỹ (*)</field>
+            <field name="code">415</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_103" model="accounting.balance.sheet">
+            <field name="categ_name">6. Chênh lệch đánh giá lại tài sản</field>
+            <field name="code">416</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_104" model="accounting.balance.sheet">
+            <field name="categ_name">7. Chênh lệch tỷ giá hối đoái</field>
+            <field name="code">417</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_105" model="accounting.balance.sheet">
+            <field name="categ_name">8. Quỹ đầu tư phát triển</field>
+            <field name="code">418</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_106" model="accounting.balance.sheet">
+            <field name="categ_name">9. Quỹ hỗ trợ sắp xếp doanh nghiệp</field>
+            <field name="code">419</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_107" model="accounting.balance.sheet">
+            <field name="categ_name">10. Quỹ khác thuộc vốn chủ sở hữu</field>
+            <field name="code">420</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+
+        <record id="accounting_balance_sheet_case_109" model="accounting.balance.sheet">
+            <field name="categ_name">- LNST chưa phân phối lũy kế đến cuối kỳ trước</field>
+            <field name="code">421a</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_110" model="accounting.balance.sheet">
+            <field name="categ_name">- LNST chưa phân phối kỳ này</field>
+            <field name="code">421b</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_108" model="accounting.balance.sheet">
+            <field name="categ_name">11. Lợi nhuận sau thuế chưa phân phối</field>
+            <field name="code">421</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_categ</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_case_109'),
+                ref('accounting_balance_sheet_case_110'),
+            ])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_111" model="accounting.balance.sheet">
+            <field name="categ_name">12. Nguồn vốn đầu tư XDCB</field>
+            <field name="code">422</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+
+        <record id="accounting_balance_sheet_case_95" model="accounting.balance.sheet">
+            <field name="categ_name">I. Vốn chủ sở hữu</field>
+            <field name="code">410</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_categ</field>
+            <field name="stt_calculate">2</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_case_96'),
+                ref('accounting_balance_sheet_case_99'),
+                ref('accounting_balance_sheet_case_100'),
+                ref('accounting_balance_sheet_case_101'),
+                ref('accounting_balance_sheet_case_102'),
+                ref('accounting_balance_sheet_case_103'),
+                ref('accounting_balance_sheet_case_104'),
+                ref('accounting_balance_sheet_case_105'),
+                ref('accounting_balance_sheet_case_106'),
+                ref('accounting_balance_sheet_case_107'),
+                ref('accounting_balance_sheet_case_110'),
+                ref('accounting_balance_sheet_case_111'),
+            ])]"/>
+            <field name="is_bold_report" eval="True"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+
+        <record id="accounting_balance_sheet_case_113" model="accounting.balance.sheet">
+            <field name="categ_name">1. Nguồn kinh phí</field>
+            <field name="code">431</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_114" model="accounting.balance.sheet">
+            <field name="categ_name">2. Nguồn kinh phí đã hình thành TSCĐ</field>
+            <field name="code">432</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_112" model="accounting.balance.sheet">
+            <field name="categ_name">II. Nguồn kinh phí và quỹ khác</field>
+            <field name="code">430</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_categ</field>
+            <field name="stt_calculate">2</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_case_113'),
+                ref('accounting_balance_sheet_case_114'),
+            ])]"/>
+            <field name="is_bold_report" eval="True"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+
+        <record id="accounting_balance_sheet_case_94" model="accounting.balance.sheet">
+            <field name="categ_name">D - VỐN CHỦ SỞ HỮU</field>
+            <field name="code">400</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_categ</field>
+            <field name="stt_calculate">3</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_case_95'),
+                ref('accounting_balance_sheet_case_112'),
+            ])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="is_bold_report" eval="True"/>
+        </record>
+
+        <record id="accounting_balance_sheet_case_115" model="accounting.balance.sheet">
+            <field name="categ_name">TỔNG CỘNG NGUỒN VỐN (440 = 300 + 400)</field>
+            <field name="code">440</field>
+            <!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_categ</field>
+            <field name="stt_calculate">4</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_case_64'),
+                ref('accounting_balance_sheet_case_94'),
+            ])]"/>
+            <field name="is_bold_report" eval="True"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <function model="accounting.balance.sheet" name="create_missing_field_ids">
+            <value eval="[
+                ref('accounting_balance_sheet_case_94'),
+                ref('accounting_balance_sheet_case_95'),
+                ref('accounting_balance_sheet_case_96'),
+                ref('accounting_balance_sheet_case_97'),
+                ref('accounting_balance_sheet_case_98'),
+                ref('accounting_balance_sheet_case_99'),
+                ref('accounting_balance_sheet_case_100'),
+                ref('accounting_balance_sheet_case_101'),
+                ref('accounting_balance_sheet_case_102'),
+                ref('accounting_balance_sheet_case_103'),
+                ref('accounting_balance_sheet_case_104'),
+                ref('accounting_balance_sheet_case_105'),
+                ref('accounting_balance_sheet_case_106'),
+                ref('accounting_balance_sheet_case_107'),
+                ref('accounting_balance_sheet_case_108'),
+                ref('accounting_balance_sheet_case_109'),
+                ref('accounting_balance_sheet_case_110'),
+                ref('accounting_balance_sheet_case_111'),
+                ref('accounting_balance_sheet_case_112'),
+                ref('accounting_balance_sheet_case_113'),
+                ref('accounting_balance_sheet_case_114'),
+                ref('accounting_balance_sheet_case_115'),
+            ]"/>
+        </function>
+    </data>
+</odoo>

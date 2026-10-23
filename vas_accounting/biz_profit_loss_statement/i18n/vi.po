@@ -1,0 +1,351 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* biz_profit_loss_statement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-04 06:23+0000\n"
+"PO-Revision-Date: 2024-03-04 06:23+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: biz_profit_loss_statement
+#: model:ir.actions.report,print_report_name:biz_profit_loss_statement.action_report_business_xlsx
+msgid "\"Template B02 - Profit loss statement (%s)\" %(object.compute_name())"
+msgstr ""
+"\"Mẫu số B02 - Báo cáo kết quả hoạt động kinh doanh (%s - %s)\" "
+"%(object.date_from.strftime('%d/%m/%Y'), "
+"object.date_to.strftime('%d/%m/%Y'))"
+
+#. module: biz_profit_loss_statement
+#: model_terms:ir.ui.view,arch_db:biz_profit_loss_statement.business_activities_results_form
+msgid "-&gt;"
+msgstr ""
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__active
+msgid "Active"
+msgstr "Kích hoạt"
+
+#. module: biz_profit_loss_statement
+#. odoo-python
+#: code:addons/biz_profit_loss_statement/report/report_business_excel.py:0
+#, python-format
+msgid "Business Activities Results"
+msgstr "Kết quả hoạt động kinh doanh"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__business_result_id
+msgid "Business Result"
+msgstr "Kết quả hoạt động kinh doanh"
+
+#. module: biz_profit_loss_statement
+#: model:ir.actions.act_window,name:biz_profit_loss_statement.action_business_activities_config
+#: model:ir.model,name:biz_profit_loss_statement.model_business_activities_config
+#: model:ir.ui.menu,name:biz_profit_loss_statement.business_activities_config
+msgid "Business activities config"
+msgstr "Cấu hình kết quả hoạt động kinh doanh"
+
+#. module: biz_profit_loss_statement
+#: model:ir.actions.act_window,name:biz_profit_loss_statement.action_business_activities_results
+#: model:ir.model,name:biz_profit_loss_statement.model_business_activities_results
+#: model:ir.ui.menu,name:biz_profit_loss_statement.business_activities_results
+msgid "Business activities results"
+msgstr "Kết quả hoạt động kinh doanh"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model,name:biz_profit_loss_statement.model_business_activities_results_line
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__business_activities_results_hide_ids
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__business_activities_results_line_ids
+msgid "Business activities results line"
+msgstr "Chi tiết kết quả hoạt động kinh doanh"
+
+#. module: biz_profit_loss_statement
+#: model_terms:ir.ui.view,arch_db:biz_profit_loss_statement.business_activities_results_form
+msgid "Calculate"
+msgstr "Tính toán"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__check_detail
+msgid "Check"
+msgstr ""
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__check_visible
+msgid "Check Visible"
+msgstr ""
+
+#. module: biz_profit_loss_statement
+#. odoo-python
+#: code:addons/biz_profit_loss_statement/models/business_activities_results.py:0
+#: code:addons/biz_profit_loss_statement/models/business_activities_results.py:0
+#: model_terms:ir.ui.view,arch_db:biz_profit_loss_statement.business_activities_results_form
+#, python-format
+msgid "Chi tiết"
+msgstr ""
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields.selection,name:biz_profit_loss_statement.selection__business_activities_results__state__closed
+#: model_terms:ir.ui.view,arch_db:biz_profit_loss_statement.business_activities_results_form
+msgid "Closed"
+msgstr "Chốt sổ"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__code
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__code
+msgid "Code"
+msgstr "Mã số"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__company_id
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__company_id
+msgid "Company"
+msgstr "Công ty"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model,name:biz_profit_loss_statement.model_res_config_settings
+msgid "Config Settings"
+msgstr "Cài đặt Cấu hình"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__corresponding_to_the_account_ids
+msgid "Corresponding to the account"
+msgstr "Đối ứng với tài khoản"
+
+#. module: biz_profit_loss_statement
+#: model_terms:ir.actions.act_window,help:biz_profit_loss_statement.action_business_activities_config
+#: model_terms:ir.actions.act_window,help:biz_profit_loss_statement.action_business_activities_results
+msgid "Create a new incoterm"
+msgstr "Tạo Điều khoản thương mại quốc tế mới"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__create_uid
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__create_uid
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__create_uid
+msgid "Created by"
+msgstr "Được tạo bởi"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__create_date
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__create_date
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__create_date
+msgid "Created on"
+msgstr "Được tạo vào"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__cumulative_number_of_arising
+msgid "Cumulative Number Of Arising"
+msgstr "Lũy kế số phát sinh"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__cumulative_account_arising_number_ids
+msgid "Cumulative account arising number"
+msgstr "Tài khoản lũy kế số phát sinh"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__date_from
+msgid "Date From"
+msgstr "Từ ngày"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__date_to
+msgid "Date to"
+msgstr "Đến ngày"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields.selection,name:biz_profit_loss_statement.selection__business_activities_config__cumulative_number_of_arising__debtor
+msgid "Debtor"
+msgstr "Bên nợ"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__default_formula
+#: model:ir.model.fields.selection,name:biz_profit_loss_statement.selection__business_activities_config__follow__default_formula
+msgid "Default Formula"
+msgstr "Công thức mặc định"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields.selection,name:biz_profit_loss_statement.selection__business_activities_config__follow__derivative_number_accumulation
+msgid "Derivative Number Accumulation"
+msgstr "Lũy kế số phát sinh"
+
+#. module: biz_profit_loss_statement
+#: model_terms:ir.ui.view,arch_db:biz_profit_loss_statement.business_activities_results_form
+#: model_terms:ir.ui.view,arch_db:biz_profit_loss_statement.business_activities_results_line_tree
+msgid "Detail"
+msgstr "Xem chi tiết"
+
+#. module: biz_profit_loss_statement
+#: model_terms:ir.ui.view,arch_db:biz_profit_loss_statement.business_activities_results_form
+msgid "Details"
+msgstr "Chi tiết"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__display_name
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__display_name
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields.selection,name:biz_profit_loss_statement.selection__business_activities_results__state__draft
+msgid "Draft"
+msgstr "Dự thảo"
+
+#. module: biz_profit_loss_statement
+#: model:ir.actions.report,name:biz_profit_loss_statement.action_report_business_xlsx
+#: model_terms:ir.ui.view,arch_db:biz_profit_loss_statement.business_activities_results_form
+msgid "Excel print publishing"
+msgstr "Xuất file excel"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__follow
+msgid "Follow"
+msgstr "Áp dụng theo"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__hide_view
+msgid "Hide View"
+msgstr "Ẩn trên báo cáo"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__hide_on_report
+msgid "Hide on report"
+msgstr "Ẩn trên báo cáo"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__id
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__id
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__id
+msgid "ID"
+msgstr ""
+
+#. module: biz_profit_loss_statement
+#: model_terms:ir.actions.act_window,help:biz_profit_loss_statement.action_business_activities_config
+#: model_terms:ir.actions.act_window,help:biz_profit_loss_statement.action_business_activities_results
+msgid ""
+"Incoterms are used to divide transaction costs and responsibilities between "
+"buyer and seller."
+msgstr ""
+"Điều khoản thương mại quốc tế được sử dụng để phân chia chi phí giao dịch và"
+" trách nhiệm giữa người mua và người bán."
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config____last_update
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results____last_update
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line____last_update
+msgid "Last Modified on"
+msgstr "Điều chỉnh lần cuối vào"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__write_uid
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__write_uid
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__write_date
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__write_date
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối vào"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__name
+msgid "Name report"
+msgstr ""
+
+#. module: biz_profit_loss_statement
+#: model_terms:ir.ui.view,arch_db:biz_profit_loss_statement.business_activities_results_form
+msgid "Name report..."
+msgstr ""
+
+#. module: biz_profit_loss_statement
+#: model_terms:ir.ui.view,arch_db:biz_profit_loss_statement.business_activities_results_form
+msgid "Open"
+msgstr "Mở"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__present
+msgid "Present"
+msgstr "Thuyết minh"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__previous_period_id
+msgid "Previous period"
+msgstr "Kỳ trước"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__number
+msgid "Sequence"
+msgstr "Trình tự"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__sequence_number_shown_on_report
+msgid "Sequence number shown on report"
+msgstr "Số thứ tự hiện trên báo cáo"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields.selection,name:biz_profit_loss_statement.selection__business_activities_config__cumulative_number_of_arising__side_has
+msgid "Side has"
+msgstr "Bên có"
+
+#. module: biz_profit_loss_statement
+#: model_terms:ir.ui.view,arch_db:biz_profit_loss_statement.business_activities_results_form
+msgid "Stage"
+msgstr "Giai đoạn"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__state
+msgid "State"
+msgstr "Trạng thái"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__target_config_id
+msgid "Target"
+msgstr "Chỉ tiêu"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results__target_count
+msgid "Target Count"
+msgstr ""
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_config__targets_name
+msgid "Targets Name"
+msgstr "Tên chỉ tiêu"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,help:biz_profit_loss_statement.field_business_activities_config__default_formula
+msgid ""
+"The formula must be configured as follows. Example: S01 - SO2. Explain: S01 "
+"in formula is code 01 based on the code configured with the criteria"
+msgstr ""
+"Công thức phải được cấu hình như sau. Ví dụ: S01 - S02. Giải thích: S01 "
+"trong công thức là mã số được cấu hình với chỉ tiêu"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__this_year
+msgid "This year"
+msgstr "Năm nay"
+
+#. module: biz_profit_loss_statement
+#: model_terms:ir.ui.view,arch_db:biz_profit_loss_statement.res_config_settings_view_form_profit_loss_statement
+msgid "Update Data profit loss statement"
+msgstr "Cập nhật dữ liệu cấu hình kết quả hoạt động kinh doanh"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model.fields,field_description:biz_profit_loss_statement.field_business_activities_results_line__year_ago
+msgid "Year Ago"
+msgstr "Năm trước"
+
+#. module: biz_profit_loss_statement
+#: model:ir.model,name:biz_profit_loss_statement.model_report_biz_profit_loss_statement_report_business_xlsx
+msgid "report.biz_profit_loss_statement.report_business_xlsx"
+msgstr ""

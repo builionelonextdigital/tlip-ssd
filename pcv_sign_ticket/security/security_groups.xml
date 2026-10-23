@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="module_category_sign_ticket_root" model="ir.module.category">
+        <field name="name">Sign Ticket</field>
+        <field name="sequence">400</field>
+    </record>
+
+    <record id="module_category_sign_ticket" model="ir.module.category">
+        <field name="name">Sign Ticket</field>
+        <field name="sequence">60</field>
+        <field name="parent_id" ref="pcv_sign_ticket.module_category_sign_ticket_root"/>
+    </record>
+
+    <record id="group_sign_ticket_read_only" model="res.groups">
+        <field name="name">E-Sign Read-only</field>
+        <field name="category_id" ref="pcv_sign_ticket.module_category_sign_ticket"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_sign_ticket_user" model="res.groups">
+        <field name="name">E-Sign User</field>
+        <field name="category_id" ref="pcv_sign_ticket.module_category_sign_ticket"/>
+        <field name="implied_ids" eval="[(4, ref('pcv_sign_ticket.group_sign_ticket_read_only'))]"/>
+    </record>
+
+    <record id="group_sign_ticket_admin" model="res.groups">
+        <field name="name">E-Sign Admin</field>
+        <field name="category_id" ref="pcv_sign_ticket.module_category_sign_ticket"/>
+        <field name="implied_ids" eval="[(4, ref('pcv_sign_ticket.group_sign_ticket_user'))]"/>
+    </record>
+
+</odoo>

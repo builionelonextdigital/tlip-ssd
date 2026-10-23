@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="electricity_consumption_view_form" model="ir.ui.view">
+        <field name="name">electricity.consumption.view.form</field>
+        <field name="model">electricity.consumption</field>
+        <field name="arch" type="xml">
+            <form string="Electricity Consumption">
+                <header>
+                    <button name="action_submit_approval" string="Submit" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="btn btn-primary"
+                        invisible="state != 'draft'" />
+                    <button name="action_approve_request" type="object" string="Approve"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="user_status != 'pending' or state != 'wait_for_approval'" class="btn-primary" data-hotkey="v" />
+                    <button name="action_reject_request" string="Refuse" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="user_status != 'pending' or state != 'wait_for_approval'" data-hotkey="z" />
+                    <button name="action_withdraw_approval" string="Withdraw" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="approval_state != 'wait_for_approval'" />
+                    <button name="action_reset" string="Reset" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="btn btn-secondary"
+                        invisible="state not in ('rejected', 'cancel') or invoice_ids" />
+                    <button name="action_create_request_payment" string="Generate Report"
+                        type="object"
+                        invisible="state != 'draft'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,wait_for_approval,approved" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <field name="invoice_ids" invisible="1" />
+                        <field name="history_approvals_count" invisible="1" />
+                        <button class="oe_stat_button" name="action_view_request_payment"
+                            type="object"
+                            invisible="not invoice_ids"
+                            icon="fa-file-text-o">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Payment Request
+                                </span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button" name="action_open_approval_history_ids"
+                            type="object"
+                            invisible="history_approvals_count == 0"
+                            icon="fa-history">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Approval Requests
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <label for="name" />
+                    <h1>
+                        <field name="name" string="Reference" readonly="1" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="electricity_point_id"
+                                readonly="state != 'draft' or source != 'manual'"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                            <field name="partner_id"
+                                readonly="1" force_save="1"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                            <field name="record_date"
+                                readonly="state != 'draft' or source != 'manual'" />
+                            <label for="date_from" string="Period" />
+                            <div class="o_row">
+                                <field name="date_from" nolabel="1" class="oe_inline"
+                                    readonly="state != 'draft' or source != 'manual'"
+                                    widget="daterange"
+                                    options="{'end_date_field': 'date_to'}" />
+                                <field name="date_to" nolabel="1" class="oe_inline"
+                                    readonly="state != 'draft' or source != 'manual'" invisible="1" />
+                            </div>
+                        </group>
+                        <group>
+                            <field name="invoice_due_date" readonly="state != 'draft'" />
+                            <field name="currency_id"
+                                readonly="state != 'draft' or source != 'manual'"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                            <field name="cosphi"
+                                readonly="state != 'draft' or source != 'manual'" />
+                            <field name="kfactor" force_save="1"
+                                readonly="state != 'draft' or source != 'manual'" />
+                            <field name="reative_power_quantity"
+                                readonly="state != 'draft' or source != 'manual'" />
+                            <field name="connection_rate"
+                                readonly="state != 'draft' or source != 'manual'" />
+                            <field name="electricity_connection_charge"
+                                readonly="state != 'draft' or source != 'manual'" />
+                            <field name="company_id"
+                                invisible="1"
+                                readonly="state != 'draft' or source != 'manual'"
+                                options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Consumption">
+                            <field name="line_ids"
+                                readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="product_id" readonly="parent.source != 'manual'"
+                                        options="{'no_create': True, 'no_create_edit': True}" />
+                                    <field name="analytic_distribution" widget="analytic_distribution"/>
+                                    <field name="name" />
+                                    <field name="start_meter_reading"
+                                        readonly="parent.source != 'manual'" />
+                                    <field name="end_meter_reading"
+                                        readonly="parent.source != 'manual'" />
+                                    <field name="multiplier" readonly="parent.source != 'manual'" />
+                                    <field name="uom_id" readonly="parent.source != 'manual'"
+                                        options="{'no_create': True, 'no_create_edit': True}" />
+                                    <field name="quantity" readonly="parent.source != 'manual'" />
+                                    <field name="modify_quantity" />
+                                    <field name="currency_id" column_invisible="1"
+                                        readonly="parent.source != 'manual'" />
+                                    <field name="unit_price" readonly="parent.source != 'manual'" />
+                                    <field name="tax_id" column_invisible="1" />
+                                    <field name="amount" readonly="parent.source != 'manual'"
+                                        force_save="1" />
+                                </list>
+                                <form>
+                                    <group>
+                                        <field name="product_id" />
+                                        <field name="uom_id" />
+                                        <field name="unit_price" />
+                                    </group>
+                                </form>
+                            </field>
+                            <group col="12" class="overflow-hidden">
+                                <group colspan="8"/>
+                                <group colspan="4">
+                                    <group class="oe_subtotal_footer">
+                                        <field name="total_quantity" colspan="2" />
+                                        <field name="total_amount" colspan="2" />
+                                    </group>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Approver(s)" name="approver"
+                            invisible="not approver_ids">
+                            <field name="approver_ids" mode="list" readonly="1">
+                                <list editable="bottom" decoration-success="status=='approved'"
+                                    decoration-warning="status in ['pending', 'wait_for_approval']"
+                                    decoration-danger="status=='refused'" no_open="1">
+                                    <field name="existing_request_user_ids" column_invisible="True" />
+                                    <field name="sequence" column_invisible="True" />
+                                    <field name="user_id" string="Approver"
+                                        required="not job_id" />
+                                    <field name="job_id" required="not user_id" />
+                                    <field name="status" />
+                                    <field name="company_id" column_invisible="True" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="electricity_consumption_view_tree" model="ir.ui.view">
+        <field name="name">electricity.consumption.view.tree</field>
+        <field name="model">electricity.consumption</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="partner_id" />
+                <field name="electricity_point_id" />
+                <field name="electricity_type" optional="show" />
+                <field name="currency_id" column_invisible="1" />
+                <field name="company_id" optional="hide" />
+                <field name="record_date" optional="show" />
+                <field name="date_from" />
+                <field name="date_to" />
+                <field name="total_quantity" sum="Consummption Quantity" />
+                <field name="total_amount" sum="Amount" />
+                <field name="cosphi" optional="show" />
+                <field name="kfactor" optional="show" />
+                <field name="total_reactive_power" sum="Reactive Power Quantity" />
+                <field name="total_connection_charge" sum="Connection Charge Fee" />
+                <field name="state" widget="badge"
+                    decoration-danger="state == 'rejected'"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state == 'wait_for_approval'"
+                    decoration-success="state == 'approved'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="electricity_consumption_view_search" model="ir.ui.view">
+        <field name="name">electricity_consumption.view.search</field>
+        <field name="model">electricity.consumption</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="electricity_point_id"  />
+                <field name="partner_id" />
+                <filter name="filter_normal" string="Normal"
+                    domain="[('electricity_type', '=', 'normal')]" />
+                <filter name="filter_solar" string="Solar"
+                    domain="[('electricity_type', '=', 'solar')]" />
+                
+                <filter name="filter_draft" string="Draft"
+                    domain="[('state', '=', 'draft')]" />
+                <filter name="filter_wait_for_approve" string="Waiting for Approval"
+                    domain="[('state', '=', 'wait_for_approval')]" />
+                <filter name="filter_approved" string="Approved"
+                    domain="[('state', '=', 'approved')]" />
+                <separator/>
+                <filter string="My Approvals to Review" name="filter_approvals_to_review"
+                    domain="[('state', '=', 'wait_for_approval'), '|', ('current_approver_id.job_id.employee_ids.user_id', 'in', [uid]), ('current_approver_id.user_id', '=', uid)]" />
+                <group expand="0" string="Group By">
+                    <filter string="Electricity Point" name="groupby_point"
+                        domain="[]" context="{'group_by': 'electricity_point_id'}" />
+                    <filter string="Partner" name="groupby_partner"
+                        domain="[]" context="{'group_by': 'partner_id'}" />
+                    <filter string="State" name="groupby_state" domain="[]"
+                        context="{'group_by': 'state'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_utilities_electricity_consumption_view" model="ir.actions.act_window">
+        <field name="name">Electricity Consumptions</field>
+        <field name="res_model">electricity.consumption</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="electricity_consumption_action_multi_submit_approval" model="ir.actions.server">
+        <field name="name">Submit</field>
+        <field name="model_id" ref="model_electricity_consumption" />
+        <field name="binding_model_id" ref="model_electricity_consumption" />
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+            records.action_multi_submit_approval()
+        </field>
+    </record>
+
+    <record id="electricity_consumption_action_multi_approve_approval" model="ir.actions.server">
+        <field name="name">Approve</field>
+        <field name="model_id" ref="model_electricity_consumption" />
+        <field name="binding_model_id" ref="model_electricity_consumption" />
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+            records.action_multi_approve_approval()
+        </field>
+    </record>
+</odoo>

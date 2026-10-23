@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_minvoice_template,access_minvoice_template,model_minvoice_template,base.group_user,1,1,1,1
+access_minvoice_base,access_minvoice_base,model_minvoice_base,base.group_user,1,1,1,1
+access_minvoice_action_wizard,access_minvoice_action_wizard,model_minvoice_action_wizard,base.group_user,1,1,1,1
+access_minvoice_account,access_minvoice_account,model_minvoice_account,base.group_user,1,1,1,1

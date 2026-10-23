@@ -1,0 +1,11 @@
+python-docx
+python-docx-replace
+html2text
+unidecode
+pyodbc
+mysql-connector-python
+pdfplumber
+pikepdf
+pyhanko[async_http]
+pyhanko-certvalidator
+asn1crypto

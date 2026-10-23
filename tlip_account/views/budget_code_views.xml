@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="budget_code_view_tree" model="ir.ui.view">
+        <field name="name">budget.code.view.tree</field>
+        <field name="model">budget.code</field>
+        <field name="arch" type="xml">
+            <list string="">
+                <field name="name" />
+                <field name="code" />
+                <field name="budget_category_id" />
+                <field name="default_account_id" />
+            </list>
+        </field>
+    </record>
+
+    <record id="budget_code_view_form" model="ir.ui.view">
+        <field name="name">budget.code.view.form</field>
+        <field name="model">budget.code</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group name="main">
+                        <group>
+                            <field name="active" invisible="1"/>
+                            <field name="budget_category_id"
+                                options='{"no_create": True}'/>
+                            <field name="code"/>
+                            <field name="default_account_ids" widget="many2many_tags" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="budget_code_action" model="ir.actions.act_window">
+        <field name="name">Budget Codes</field>
+        <field name="res_model">budget.code</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="budget_code_menu"
+        name="Budget Codes"
+        action="tlip_account.budget_code_action"
+        parent="account.menu_analytic_accounting"
+        sequence="0"/>
+
+</odoo>

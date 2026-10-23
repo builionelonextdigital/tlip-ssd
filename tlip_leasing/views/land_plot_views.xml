@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="plot_view_kanban" model="ir.ui.view">
+        <field name="name">plot_view_kanban</field>
+        <field name="model">stock.location</field>
+        <field name="arch" type="xml">
+            <kanban create="0" edit="0" delete="0">
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex align-items-baseline gap-1 ms-2 justify-content-between">
+                            <div class="o_kanban_card_header_title d-flex flex-column">
+                                <field name="name" class="fw-bold fs-4"/>
+                            </div>
+                            <button class="btn btn-primary" name="action_view_land_plot_detail" type="object" string="View detail"/>
+                        </div>
+                        <div class="row g-0 mt-0 mt-sm-3 ms-2">
+                            <div class="col-10">
+                                <div class="row">
+                                    <div class="col-7">
+                                        Saleable Area
+                                    </div>
+                                    <div class="col-5">
+                                        <field name="saleable_area"/> m2
+                                    </div>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-7">
+                                        Occupied Area
+                                    </div>
+                                    <div class="col-5">
+                                        <field name="occupied_area"/> m2
+                                    </div>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-7">
+                                        Reserved Area
+                                    </div>
+                                    <div class="col-5">
+                                        <field name="reserved_area"/> m2
+                                    </div>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-7">
+                                        Internal Used Area
+                                    </div>
+                                    <div class="col-5">
+                                        <field name="internal_usage_area"/> m2
+                                    </div>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-7">
+                                        Vacant Area
+                                    </div>
+                                     <div class="col-5">
+                                        <field name="vacant_area"/> m2
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="land_plot_view_form_inherit" model="ir.ui.view">
+        <field name="name">land_plot_view_form_inherit</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="tlip_stock.land_plot_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other_info']" position="before">
+                <page name="current_leasing" string="Current Leasing">
+                    <group>
+                        <group>
+                            <field name="current_lessee_id" string="Customer"/>
+                            <field name="lease_period" />
+                            <field name="current_contract_id" string="Contract"/>
+                        </group>
+                        <group>
+                            <field name="registered_power_capacity" />
+                            <field name="registered_water_consumption" />
+                            <field name="registered_sprinkler_rent" />
+                        </group>
+                    </group>
+                </page>
+                <page name="leasing_history" string="Leasing History">
+                    <field name="leasing_history_ids" readonly="1">
+                        <list>
+                            <field name="lessee_id" />
+                            <field name="agreement_id" />
+                            <field name="lease_period" />
+                            <field name="price_unit" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+            <field name="longitude" position="after">
+                <field name="merge_split_parent_ids"
+                    string="Parent Land Plot(s)"
+                    invisible="not merge_split_parent_ids"
+                    widget="many2many_tags" readonly="1" />
+            </field>
+        </field>
+    </record>
+
+    <record id="land_plot_dashboard_detail_view_list" model="ir.ui.view">
+        <field name="name">land_plot_dashboard_detail_view_list</field>
+        <field name="model">stock.location</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0" delete="0">
+                <field name="complete_name" string="Land Plot" />
+                <field name="current_tenant_count" string="Tenant Number"/>
+                <field name="lease_state" string="Leased Status"/>
+                <field name="merge_split_remark" string="Merge/Split" optional="1" />
+                <field name="current_tenant_id" string="Tenant"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="land_plot_view_list_inherit_tlip_leasing" model="ir.ui.view">
+        <field name="name">stock.location.view.list.inherit</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="tlip_stock.land_plot_view_list"/>
+        <field name="arch" type="xml">
+            <field name="longitude" position="after">
+                <field name="merge_split_remark"  optional="hide"
+                    decoration-danger="merge_split_remark == 'merge'"
+                    decoration-warning="merge_split_remark == 'split'" widget="badge" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_plot_view_dashboard">
+        <field name="name">Land Plot Overview</field>
+        <field name="res_model">stock.location</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('tlip_leasing.plot_view_kanban')})]"/>
+        <field name="domain">[('is_plot_view', '=', True)]</field>
+    </record>
+
+     <record model="ir.actions.act_window" id="action_land_plot_detail">
+        <field name="name">Land Plot Detail</field>
+        <field name="res_model">stock.location</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_leasing.land_plot_dashboard_detail_view_list')})]"/>
+        <field name="search_view_id" ref="tlip_stock.plot_view_search" />
+        <field name="context">{'search_default_groupby_land_plot_group': 1}</field>
+    </record>
+    
+</odoo>

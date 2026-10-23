@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="request_purchase_view_form" model="ir.ui.view">
+        <field name="name">request.purchase.view.form</field>
+        <field name="model">request.purchase</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="payment_ids" invisible="1" />
+                    <field name="move_ids" invisible="1" />
+                    <field name="hide_cancel_button" invisible="1" />
+                    <field name="is_locked" invisible="1" />
+                    <widget name="attach_document" string="Attach Document" action="message_post"
+                        invisible="state != 'draft'"
+                        highlight="1" />
+                    <button name="action_submit_approval" string="Submit" type="object"
+                        class="btn btn-primary"
+                        invisible="state != 'draft'" confirm="Are you sure that you want to do this action?" />
+                    <button name="action_approve_request" type="object" string="Approve" invisible="user_status != 'pending' or state != 'wait_for_approval'" class="btn-primary" data-hotkey="v" confirm="Are you sure that you want to do this action?"/>
+                    <button name="action_reject_request" string="Refuse" type="object" invisible="user_status != 'pending' or state != 'wait_for_approval'" data-hotkey="z" confirm="Are you sure that you want to do this action?"/>
+                    <button name="action_generate_vendor_bill" string="Request Vendor Bill"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'approved' or category != 'entertainment' or move_ids or is_locked" />
+                    <button name="action_generate_account_payment" string="Request for Payment"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'approved' or category != 'entertainment' or is_locked" />
+                    <button name="action_withdraw_approval" string="Withdraw" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="btn btn-secondary"
+                        invisible="state != 'wait_for_approval'" />
+                    <button name="action_cancel" string="Cancel" type="object"
+                        class="btn btn-secondary"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="state in ('wait_for_approval', 'rejected', 'cancel') or hide_cancel_button" />
+                    <button name="action_reset" string="Reset" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="btn btn-secondary"
+                        invisible="state not in ('rejected', 'cancel')" />
+                    <button name="action_lock_budget" type="object" string="Lock"
+                        invisible="is_locked or state != 'approved' or category != 'entertainment'"
+                        groups="tlip_procurement.group_tlip_lock_contract"
+                        confirm="Are you sure that you want to do this action?" />
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,wait_for_approval,approved" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_open_approval_history_ids"
+                            type="object"
+                            icon="fa-history">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Approval Requests
+                                </span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button" name="action_view_account_payments"
+                            type="object"
+                            invisible="state != 'approved' or category != 'entertainment'"
+                            icon="fa-list">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Account Payments
+                                </span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button" name="action_view_expenses"
+                            type="object"
+                            invisible="state != 'approved' or category != 'entertainment'"
+                            icon="fa-list">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Vendor Bill
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Locked" bg_color="text-bg-danger" invisible="not is_locked"/>
+                    <div class="oe_title">
+                        <span class="o_form_label">Request for Purchasing</span>
+                        <h1 class="d-flex">
+                            <field name="priority" widget="priority" class="me-3" />
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="category" required="1"
+                                widget="radio" options="{'horizontal': true}"
+                                readonly="state != 'draft'" />
+                            <field name="select_bidding" required="1"
+                                widget="radio" options="{'horizontal': true}"
+                                invisible="category == 'entertainment'"
+                                readonly="state != 'draft'" />
+                            <field name="request_type" required="1"
+                                readonly="state != 'draft' or (select_bidding == 'bidding' and category != 'entertainment')"
+                                force_save="1" />
+                            <field name="date_expected_activity" required="1"
+                                invisible="category != 'entertainment'"
+                                readonly="state != 'draft'" />
+                            <field name="number_of_participants" required="1"
+                                invisible="category != 'entertainment'"
+                                readonly="state != 'draft'" />
+                            <field name="show_explanation" invisible="1" />
+                            <field name="exceed_amount_explanation"
+                                invisible="not show_explanation"
+                                required="show_explanation"
+                            />
+                            <label for="frequency" invisible="frequency != 'recursive'" />
+                            <div name="procurement_frequency" invisible="frequency != 'recursive'">
+                                <field name="frequency" class="oe_inline" required="1"
+                                    readonly="state != 'draft'" />
+                                <span name="frequency_span"> every <field name="number_of_months"
+                                        class="oe_inline" required="1" readonly="state != 'draft'" />
+                                    months </span>
+                            </div>
+                            <field name="frequency" required="1"
+                                invisible="frequency == 'recursive'"
+                                readonly="state != 'draft'" />
+                            <field name="purpose" required="1" readonly="state != 'draft'" />
+                        </group>
+                        <group>
+                            <field name="user_id" required="1"
+                                options="{'no_create': True}"
+                                readonly="1" force_save="1" />
+                            <field name="budget_department_id" required="1"
+                                options="{'no_create': True}"
+                                readonly="state != 'draft'" />
+                            <field name="issue_date" required="1" readonly="state != 'draft'" />
+                            <field name="date_order"
+                                required="select_bidding == 'bidding' and category != 'entertainment'"
+                                readonly="state != 'draft'"/>
+                            <field name="date_planned"
+                                required="select_bidding == 'bidding' and category != 'entertainment'"
+                                readonly="state != 'draft'"/>
+                            <field name="vendor_id"
+                                options="{'no_create': True}"
+                                required="category == 'entertainment'"
+                                readonly="state != 'draft'"
+                                context="{'form_view_ref': 'tlip_procurement.view_tlip_procurement_vendor_form'}" />
+                            <field name="is_advance_required"
+                                readonly="state != 'draft'" invisible="category != 'entertainment'" />
+                            <field name="advance_amount"
+                                required="is_advance_required" invisible="category != 'entertainment' or not is_advance_required"
+                                readonly="state != 'draft'" />
+                            <!-- Temporarily hide the following fields, no longer needed in phase 1 -->
+                            <!-- <field name="to_apply_tender"
+                                invisible="amount_total &lt;= 1000000000"
+                                readonly="state != 'draft'" />
+                            <field name="tender_reason"
+                                required="amount_total &gt;= 1000000000 and to_apply_tender"
+                                invisible="amount_total &lt; 1000000000 or not to_apply_tender"
+                                readonly="state != 'draft'" /> -->
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="request_product" string="Request Items">
+                            <field name="request_line_ids" readonly="state != 'draft'">
+                                <list editable="bottom" mode="list">
+                                    <field name="currency_id" column_invisible="1" />
+                                    <field name="request_id" column_invisible="1" />
+                                    <field name="company_id" column_invisible="1" />
+                                    <field name="state" column_invisible="1" />
+                                    <field name="budget_department_id" column_invisible="1" />
+                                    <field name="available_product_uom_ids" column_invisible="1" />
+                                    <field name="required_project" column_invisible="1"/>
+                                    <field name="product_id" options='{"no_create": True}' />
+                                    <field name="product_categ_id" required="1"
+                                        readonly="product_id" force_save="1"
+                                        options='{"no_create": True}' />
+                                    <field name="description" required="1" />
+                                    <field name="project_id"
+                                        required="required_project"
+                                        options='{"no_create": True, "no_open": True}' />
+                                    <field name="development_phase_id"
+                                        options='{"no_create": True, "no_open": True}' />
+                                    <field name="qty_demand" required="1" />
+                                    <field name="price_unit" required="1" />
+                                    <field name="product_uom_id" required="1"
+                                        domain="[('id', 'in', available_product_uom_ids)]"
+                                        options='{"no_create": True}' />
+                                    <field name="analytic_account_id"
+                                        options='{"no_create": True, "no_open": True}' required="1"
+                                        domain="[('budget_department_id', '=', budget_department_id)]" />
+                                    <button name="action_view_budget_code_info" type="object"
+                                        icon="fa-info-circle" title="Budget Info" class="btn-link pt-0"
+                                        invisible="not analytic_account_id" />
+                                    <field name="price_total" />
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer">
+                                <field name="currency_id" invisible="1" />
+                                <field name="amount_total" string="Total" />
+                            </group>
+                        </page>
+                        <page string="Approver(s)" name="approver" invisible="state == 'draft'">
+                            <field name="approver_ids" mode="list" readonly="1">
+                                <list editable="bottom" decoration-success="status=='approved'"
+                                    decoration-warning="status in ['pending', 'waiting']"
+                                    decoration-danger="status=='refused'" no_open="1">
+                                    <field name="existing_request_user_ids" column_invisible="True" />
+                                    <field name="sequence" column_invisible="True" />
+                                    <field name="user_id" string="Approver"
+                                        required="not job_id" />
+                                    <field name="job_id" required="not user_id" />
+                                    <field name="status" />
+                                    <field name="company_id" column_invisible="True" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="General Requirements" name="general_requirement"
+                            invisible="select_bidding != 'bidding'">
+                            <field name="requirement_line_ids" mode="list"
+                                readonly="state != 'draft'">
+                                <list editable="bottom" no_open="1">
+                                    <field name="name" required="1" />
+                                    <field name="description" />
+                                    <field name="vendor_comment" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Checklist" name="checklist"
+                            invisible="request_type != 'special_auth' or category != 'entertainment'">
+                            <field name="checklist" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="request_purchase_view_tree" model="ir.ui.view">
+        <field name="name">request.purchase.view.tree</field>
+        <field name="model">request.purchase</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="currency_id" column_invisible="1" />
+                <field name="priority" optional="show" widget="priority" nolabel="1" />
+                <field name="name" string="Reference" />
+                <field name="user_id" />
+                <field name="budget_department_id" />
+                <field name="category" />
+                <field name="select_bidding" />
+                <field name="request_type" />
+                <field name="purpose" />
+                <field name="issue_date" />
+                <field name="date_order" optional="hide" />
+                <field name="date_planned" optional="hide" />
+                <field name="amount_total" string="Total Amount" />
+                <field name="invoice_status" widget="badge" 
+                    decoration-success="invoice_status == 'invoiced'" 
+                    decoration-info="invoice_status == 'to invoice'" optional="hide" />
+                <field name="state" widget="badge"
+                    decoration-danger="state == 'rejected'"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state == 'wait_for_approval'"
+                    decoration-success="state == 'approved'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_request_purchase_filter" model="ir.ui.view">
+        <field name="name">request.purchase.view.search</field>
+        <field name="model">request.purchase</field>
+        <field name="arch" type="xml">
+            <search string="Search Request for Goods/Service">
+                <field name="name" string="Request" />
+                <field name="user_id" />
+                <field name="budget_department_id" />
+                <filter name="my_requests" string="My Request " domain="[('user_id', '=', uid)]" />
+                <filter name="filter_approvals_to_review" string="My Approvals to Review"
+                    domain="[('state', '=', 'wait_for_approval'), '|', ('current_approver_id.job_id.employee_ids.user_id', 'in', [uid]), ('current_approver_id.user_id', '=', uid)]" />
+                <filter string="Starred" name="starred" domain="[('priority', '=', '1')]" />
+                <separator />
+                <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]" />
+                <separator />
+                <separator />
+                <filter name="approved" string="Confirmed" domain="[('state', '=', 'approved')]" />
+                <filter name="to_approve" string="Waiting for Approval"
+                    domain="[('state', '=', 'wait_for_approval')]" />
+                <separator />
+                <filter name="order_date" string="Order Date" date="date_order" />
+                <group expand="0" string="Group By">
+                    <filter string="Supplier" name="supplier" domain="[]"
+                        context="{'group_by': 'vendor_id'}" />
+                    <filter string="Requester" name="requester" domain="[]"
+                        context="{'group_by': 'user_id'}" />
+                    <filter string="Department" name="department" domain="[]"
+                        context="{'group_by': 'budget_department_id'}" />
+                    <filter string="Order Date" name="order_date" domain="[]"
+                        context="{'group_by': 'date_order'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="request_purchase_action" model="ir.actions.act_window">
+        <field name="name">Request for Goods/Service</field>
+        <field name="res_model">request.purchase</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="request_purchase_action_multi_submit_approval" model="ir.actions.server">
+        <field name="name">Submit</field>
+        <field name="model_id" ref="model_request_purchase"/>
+        <field name="binding_model_id" ref="model_request_purchase"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                records.action_multi_submit_approval()
+        </field>
+    </record>
+
+    <record id="request_purchase_action_multi_approve_approval" model="ir.actions.server">
+        <field name="name">Approve</field>
+        <field name="model_id" ref="model_request_purchase"/>
+        <field name="binding_model_id" ref="model_request_purchase"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                records.action_multi_approve_approval()
+        </field>
+    </record>
+
+</odoo>

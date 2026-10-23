@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_business_activities_results,business_activities_results,model_business_activities_results,account.group_account_manager,1,1,1,1
+access_business_activities_config,business_activities_config,model_business_activities_config,account.group_account_manager,1,1,1,1
+access_business_activities_results_line,business_activities_results_line,model_business_activities_results_line,account.group_account_manager,1,1,1,1
+

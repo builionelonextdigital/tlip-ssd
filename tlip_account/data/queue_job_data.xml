@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="job_function_oos_sync" model="queue.job.function">
+        <field name="model_id" ref="account.model_account_move" />
+        <field name="method">_run_oos_sync</field>
+        <field name="channel_id" ref="queue_job.channel_root"/>
+        <field name="related_action" eval='{"func_name": "_run_oos_sync"}' />
+        <field name="retry_pattern" eval="{1: 60, 2: 180, 3: 10, 5: 300}" />
+    </record>
+
+    <record id="job_function_push_minvoice" model="queue.job.function">
+        <field name="model_id" ref="account.model_account_move" />
+        <field name="method">publish_minvoices</field>
+        <field name="channel_id" ref="queue_job.channel_root"/>
+        <field name="related_action" eval='{"func_name": "publish_minvoices"}' />
+        <field name="retry_pattern" eval="{1: 60, 2: 180, 3: 10, 5: 300}" />
+    </record>
+
+    <record id="job_function__generate_pdf_report" model="queue.job.function">
+        <field name="model_id" ref="account.model_account_move" />
+        <field name="method">_generate_pdf_report</field>
+        <field name="channel_id" ref="queue_job.channel_root"/>
+        <field name="related_action" eval='{"func_name": "_generate_pdf_report"}' />
+        <field name="retry_pattern" eval="{1: 60, 2: 180, 3: 10, 5: 300}" />
+    </record>
+    
+</odoo>

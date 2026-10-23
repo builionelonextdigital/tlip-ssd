@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sign_ticket_form" model="ir.ui.view">
+        <field name="name">sign.ticket.form</field>
+        <field name="model">sign.ticket</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_submit"
+                        string="Submit"
+                        type="object"
+                        class="btn btn-primary"
+                        invisible="state != 'draft'"/>
+                    <button name="action_approve"
+                        string="Approve"
+                        type="object"
+                        class="btn-primary" data-hotkey="v"
+                        invisible="not is_allow_to_approve_reject"/>
+                    <button name="action_reject"
+                        string="Reject"
+                        type="object"
+                        data-hotkey="z"
+                        invisible="not is_allow_to_approve_reject"/>
+                    <button name="action_cancel"
+                        string="Cancel"
+                        type="object"
+                        invisible="state not in ('draft', 'rejected')" />
+                    <button name="action_withdraw"
+                        string="Withdraw"
+                        type="object"
+                        invisible="state != 'in_progress'" />
+                    <button name="action_reset_to_draft"
+                        string="Reset to Draft"
+                        type="object"
+                        invisible="state not in ('rejected', 'cancelled', 'withdraw')"/>
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,in_progress,approved"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="signing_type"
+                            readonly="state != 'draft'"/>
+                            <field name="document_type_id"
+                            readonly="state != 'draft'"/>
+                            <field name="company_id"
+                            readonly="state != 'draft'"/>
+                            <field name="res_model_id"
+                                readonly="state != 'draft' or document_type_id.model_id"
+                                options="{'no_create': True, 'no_create_edit': True}"/>
+                            <field name="res_model" invisible="1"/>
+                            <field name="res_id"
+                                readonly="state != 'draft'"
+                                invisible="not res_model_id"/>
+                            <field name="reference" widget="reference" string="Record" invisible="not res_model_id or not res_id"/>
+                            <field name="note" readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="user_id"
+                                readonly="state != 'draft'" />
+                            <field name="deadline"
+                                readonly="state != 'draft'"
+                                decoration-danger="deadline and deadline &lt; context_today()
+                                    and state not in ('approved', 'cancelled')"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="sign_documents" string="Documents">
+                            <field name="sign_document_ids"
+                                readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="filename" column_invisible="1"/>
+                                    <field name="file" widget="binary"
+                                        filename="filename"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="signers" string="Signers">
+                            <field name="signer_line_ids"
+                                readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="user_id"/>
+                                    <field name="reject_reason" invisible="parent.state != 'rejected'"/>
+                                    <field name="state" widget="badge"
+                                        decoration-success="state == 'signed'"
+                                        decoration-danger="state == 'rejected'"
+                                        decoration-warning="state == 'waiting_mysign'"
+                                        decoration-muted="state == 'waiting'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="other" string="Other">
+                            <group>
+                                <field name="use_cell_positioning" readonly="1"/>
+                                <field name="placeholder_text"
+                                    readonly="1"
+                                    invisible="not use_cell_positioning"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sign_ticket_list" model="ir.ui.view">
+        <field name="name">sign.ticket.list</field>
+        <field name="model">sign.ticket</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="deadline and deadline &lt; context_today()
+                    and state not in ('approved', 'cancelled')">
+                <field name="name"/>
+                <field name="document_type_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="deadline" />
+                <field name="state" widget="badge"
+                    decoration-success="state == 'approved'"
+                    decoration-warning="state == 'in_progress'"
+                    decoration-danger="state == 'cancelled'"
+                    decoration-muted="state == 'draft'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_sign_ticket_search" model="ir.ui.view">
+        <field name="name">sign.ticket.search</field>
+        <field name="model">sign.ticket</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="document_type_id"/>
+                <field name="company_id"/>
+                <separator/>
+                <filter name="filter_draft" string="Draft"
+                    domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_in_progress" string="In Progress"
+                    domain="[('state', '=', 'in_progress')]"/>
+                <filter name="filter_approved" string="Approved"
+                    domain="[('state', '=', 'approved')]"/>
+                <filter name="filter_overdue" string="Overdue"
+                    domain="[('deadline', '&lt;', context_today().strftime('%Y-%m-%d')),
+                              ('state', 'not in', ['approved', 'cancelled'])]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_state" string="Status"
+                        context="{'group_by': 'state'}"/>
+                    <filter name="group_document_type" string="Document Type"
+                        context="{'group_by': 'document_type_id'}"/>
+                    <filter name="group_company" string="Company"
+                        context="{'group_by': 'company_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_server_multi_approve_sign_ticket" model="ir.actions.server">
+        <field name="name">Approve</field>
+        <field name="model_id" ref="model_sign_ticket"/>
+        <field name="binding_model_id" ref="model_sign_ticket"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.action_approve()</field>
+    </record>
+
+    <record id="action_sign_ticket" model="ir.actions.act_window">
+        <field name="name">Sign Tickets</field>
+        <field name="res_model">sign.ticket</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_sign_ticket_search"/>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>

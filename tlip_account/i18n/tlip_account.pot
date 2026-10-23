@@ -1,0 +1,90 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tlip_account
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-12 00:00+0000\n"
+"PO-Revision-Date: 2025-12-12 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: tlip_account
+#: model_terms:ir.ui.view,arch_db:tlip_account.batch_payment_view_form
+#: model_terms:ir.ui.view,arch_db:tlip_account.budget_allocation_approval_view_form
+#: model_terms:ir.ui.view,arch_db:tlip_account.budget_analytic_year_view_form
+#: model_terms:ir.ui.view,arch_db:tlip_account.budget_code_inherit_analytic_account_form
+#: model_terms:ir.ui.view,arch_db:tlip_account.view_account_payment_form
+#: model_terms:ir.ui.view,arch_db:tlip_account.view_invoice_request_payment_form
+#: model_terms:ir.ui.view,arch_db:tlip_account.view_move_form_inherit_pcv_minvoice_inherit_tlip_account
+#: model_terms:ir.ui.view,arch_db:tlip_account.view_payment_request_payment_form
+#: model_terms:ir.ui.view,arch_db:tlip_account.view_tlip_request_account_move_approval_form_inherit_account
+#: model_terms:ir.ui.view,arch_db:tlip_account.accounting_period_closing_view_form
+msgid "Are you sure that you want to do this action?"
+msgstr ""
+
+#. module: tlip_account
+#: model:account.report,name:tlip_account.cip_wip_summary_report
+#: model:ir.actions.client,name:tlip_account.action_cip_wip_summary_report
+#: model:ir.ui.menu,name:tlip_account.menu_cip_wip_summary_report
+msgid "CIP/WIP Summary"
+msgstr "Báo cáo CIP"
+
+#. module: tlip_account
+#: model:ir.model,name:tlip_account.model_cip_wip_summary_report_handler
+msgid "CIP/WIP Summary Report Custom Handler"
+msgstr "Báo cáo CIP"
+
+#. module: tlip_account
+#: model:ir.model,name:tlip_account.model_cip_wip_summary_wizard
+msgid "CIP/WIP Summary Report Wizard"
+msgstr "Báo cáo CIP"
+
+#. module: tlip_account
+#. odoo-python
+#: code:addons/tlip_account/wizards/cip_wip_summary_wizard.py:0
+msgid "CIP/WIP Summary: %s to %s"
+msgstr "Báo cáo CIP: %s đến %s"
+
+#. module: tlip_account
+#: model:ir.actions.act_window,name:tlip_account.debit_credit_report_wizard_action
+#: model:ir.ui.menu,name:tlip_account.debit_credit_report_wizard_menu
+msgid "Print Debit and Credit Control List"
+msgstr "Báo cáo Debit/ Credit"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_cip_wip_summary_wizard__date_from
+#: model_terms:ir.ui.view,arch_db:tlip_account.view_monthly_overdue_report_wizard_form
+msgid "From Date"
+msgstr "Từ ngày"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_debit_credit_report_wizard__from_date
+msgid "From date"
+msgstr "Từ ngày"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_cip_wip_summary_wizard__date_to
+#: model_terms:ir.ui.view,arch_db:tlip_account.view_monthly_overdue_report_wizard_form
+msgid "To Date"
+msgstr "Đến ngày"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_debit_credit_report_wizard__to_date
+msgid "To date"
+msgstr "Đến ngày"
+
+#. module: tlip_account
+#: model:ir.model,name:tlip_account.model_debit_credit_report_wizard
+msgid "Debit Credit Report Wizard"
+msgstr "Báo cáo Debit/ Credit"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_account_account__use_for_cip
+msgid "Use for CIP"
+msgstr "Dùng cho CIP"

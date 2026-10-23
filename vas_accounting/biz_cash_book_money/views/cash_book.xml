@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_cash_book" model="ir.actions.client">
+        <field name="name">Cash Book (S07-DN)</field>
+        <field name="tag">account_report</field>
+        <field name="context" eval="{'report_id': ref('biz_cash_book_money.cash_book_report')}"/>
+    </record>
+
+        <menuitem id="menu_action_account_report_cash_book" name="Cash Book (S07-DN)" action="action_cash_book" groups="account.group_account_readonly" parent="account.account_reports_partners_reports_menu"/>
+
+</odoo>

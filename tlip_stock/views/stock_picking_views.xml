@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_picking_form_inherit_tlip_stock" model="ir.ui.view">
+        <field name="name">stock.picking.view.form.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <button name="action_confirm" position="before">
+                <button name="action_submit_approval" string="Submit" type="object"
+                    class="btn btn-primary"
+                    invisible="state != 'assigned' or approval_state != 'draft'"  confirm="Are you sure that you want to do this action?" />
+                <button name="action_approve_request" type="object" string="Approve"
+                    invisible="user_status != 'pending' or approval_state != 'wait_for_approval'"
+                    class="btn-primary" data-hotkey="v" />
+                <button name="action_reject_request" string="Refuse" type="object"
+                    invisible="user_status != 'pending' or approval_state != 'wait_for_approval'"
+                    data-hotkey="z"  confirm="Are you sure that you want to do this action?" />
+                <button name="action_withdraw_approval" string="Withdraw" type="object"
+                    confirm="Are you sure that you want to do this action?"
+                    invisible="approval_state != 'wait_for_approval'" />
+                <button name="action_reset_approval" string="Reset Approval" type="object"
+                    confirm="Are you sure that you want to do this action?"
+                    invisible="state in ('done', 'cancel') or approval_state not in ('rejected', 'withdrawn')" />
+            </button>
+            <xpath expr="//div[hasclass('o_td_label')]" position="before">
+                <field name="user_id" domain="[('share', '=', False)]" readonly="state in ['cancel', 'done']"/>
+            </xpath>
+            <xpath expr="//button[@name='action_put_in_pack']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='%(stock.act_stock_return_picking)d']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_see_move_scrap']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_validate']" position="after">
+                <!-- <field name="asset_ids" invisible="1" /> -->
+                <field name="approval_readonly" invisible="1" />
+                <!-- <field name="is_ready_validate" invisible="1" /> -->
+                <!-- <field name="is_wh_to_usage" invisible="1" /> -->
+                <!-- <field name="display_fa_depreciation" invisible="1" /> -->
+                <!-- <field name="is_to_wh" invisible="1" />
+                <button name="action_generate_asset_depreciation"
+                    string="Depreciation" class="oe_highlight" type="object"
+                    invisible="not display_fa_depreciation or is_to_wh or approval_state != 'approved' or state != 'assigned'" />
+                <button name="action_generate_asset_depreciation"
+                    string="Depreciation" type="object"
+                    invisible="not display_fa_depreciation or not is_to_wh or approval_state != 'approved' or state != 'assigned'" /> -->
+            </xpath>
+            <xpath expr="//button[@name='button_validate'][hasclass('oe_highlight')]" position="attributes">
+                <attribute name="invisible">approval_state != 'approved' or state != 'assigned'</attribute>
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_validate'][hasclass('o_btn_validate')]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_confirm']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_assign']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//div[@name='button_box']//button[1]" position="before">
+                <!-- <button name="action_view_account_assets" class="oe_stat_button" icon="fa-file-text-o" type="object" invisible="picking_internal_code == 'inspect' or state in ('draft', 'cancel', 'done') or approval_state == 'rejected'">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text">Assets</span>
+                    </div>
+                </button> -->
+                <button class="oe_stat_button" name="action_open_approval_history_ids"
+                    type="object"
+                    icon="fa-history">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">
+                            Approval Requests
+                        </span>
+                    </div>
+                </button>
+            </xpath>
+            <field name="state" position="after">
+                <field name="approval_state"
+                    widget="statusbar"
+                    statusbar_visible="wait_for_approval,approved,rejected"
+                    invisible="approval_state == 'approved' or state in ('done', 'cancel')" />
+            </field>
+            <xpath expr="//field[@name='state'][1]" position="attributes">
+                <attribute name="invisible">picking_type_code != 'incoming' or (approval_state != 'approved' and state not in ('done', 'cancel'))</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state'][2]" position="attributes">
+                <attribute name="invisible">picking_type_code == 'incoming' or (approval_state != 'approved' and state not in ('done', 'cancel'))</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="invisible">state not in ('assigned', 'confirmed', 'draft', 'waiting') or approval_state in ('wait_for_approval', 'withdrawn', 'rejected')</attribute>
+            </xpath>
+            <xpath expr="//page[@name='note']" position="after">
+                <page string="Approver(s)" name="approver" invisible="not approver_ids">
+                    <field name="approver_ids" mode="list" readonly="1">
+                        <list editable="bottom" decoration-success="status=='approved'"
+                            decoration-warning="status in ['pending', 'waiting']"
+                            decoration-danger="status=='refused'" no_open="1">
+                            <field name="existing_request_user_ids" column_invisible="True" />
+                            <field name="sequence" column_invisible="True" />
+                            <field name="user_id" string="Approver"
+                                required="not job_id" />
+                            <field name="job_id" required="not user_id" />
+                            <field name="status" />
+                            <field name="company_id" column_invisible="True" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+            <field name="location_dest_id" position="after">
+                <field name="available_location_dest_ids" invisible="1" />
+                <field name="picking_internal_code" invisible="1" />
+            </field>
+            <field name="origin" position="after">
+                <field name="is_exported_for_use" invisible="1" />
+                <field name="analytic_distribution" invisible="not is_exported_for_use" required="is_exported_for_use" readonly="state == 'done'" widget="analytic_distribution" />
+            </field>
+            <xpath expr="//field[@name='location_dest_id' and @groups='stock.group_stock_multi_locations']" position="attributes">
+                <attribute name="domain">[('id', 'in', available_location_dest_ids)]</attribute>
+                <attribute name="invisible">picking_type_code == 'outgoing' or picking_internal_code == 'inspect'</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_assign']" position="attributes">
+                <attribute name="invisible">not show_check_availability or approval_state != 'draft'</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_see_packages']" position="attributes">
+                <attribute name="string">Asset Codes</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_vpicktree_inherit_tlip_stock" model="ir.ui.view">
+        <field name="name">stock.picking.list.tlip.stock.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="approval_state" invisible="approval_state in (False, 'cancel')" optional="show" widget="badge" decoration-warning="approval_state=='wait_for_approval'" decoration-danger="approval_state in ('rejected', 'cancel')" decoration-success="approval_state=='approved'"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_picking_internal_search_inherit_stock_picking" model="ir.ui.view">
+        <field name="name">stock.picking.view.form.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='internal']" position="attributes">
+                <attribute name="domain">[('picking_type_code', '=', 'internal'), ('picking_internal_code', '=', 'internal')]</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='internal']" position="after">
+                <filter name="dispose" string="Dispose" domain="[('picking_type_code', '=', 'internal'), ('picking_internal_code', '=', 'dispose')]"/>
+                <filter name="damage" string="Damage" domain="[('picking_type_code', '=', 'internal'), ('picking_internal_code', '=', 'damage')]"/>
+                <filter name="maintenance" string="Maintenance" domain="[('picking_type_code', '=', 'internal'), ('picking_internal_code', '=', 'maintenance')]"/>
+                <filter name="inspect" string="Inspect" domain="[('picking_type_code', '=', 'internal'), ('picking_internal_code', '=', 'inspect')]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="ir_actions_server_generate_product_transfer_sequence" model="ir.actions.server">
+        <field name="name">Generate QR</field>
+        <field name="model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_view_types">form</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.generate_product_transfer_sequence()
+        </field>
+    </record>
+
+    <record id="stock.action_picking_tree_internal" model="ir.actions.act_window">
+        <field name="context">{'contact_display': 'partner_address', 'restricted_picking_type_code': 'internal', 'internal_type_code': 'internal', 'search_default_internal': 1}</field>
+    </record>
+
+    <record id="stock_picking_view_kanban_inherit_tlip_stock_barcode" model="ir.ui.view">
+        <field name="name">stock.picking.view.kanban.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_barcode.stock_picking_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="state" widget="badge"
+                       decoration-success="state in ['confirmed', 'assigned'] and approval_state == 'approved'"
+                       decoration-info="state in ['draft', 'waiting']"
+                       decoration-warning="state in ['confirmed', 'assigned'] and approval_state != 'approved'" class="ms-auto" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_picking_tree_dispose" model="ir.actions.act_window">
+        <field name="name">Dispose Transfers</field>
+        <field name="res_model">stock.picking</field>
+        <field name="path">dispose</field>
+        <field name="view_mode">list,kanban,form,calendar,activity</field>
+        <field name="domain"></field>
+        <field name="context">{'contact_display': 'partner_address', 'restricted_picking_type_code': 'internal', 'internal_type_code': 'dispose', 'search_default_dispose': 1}</field>
+        <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+    </record>
+
+    <record id="action_picking_tree_damage" model="ir.actions.act_window">
+        <field name="name">Damage Transfers</field>
+        <field name="res_model">stock.picking</field>
+        <field name="path">damage</field>
+        <field name="view_mode">list,kanban,form,calendar,activity</field>
+        <field name="domain"></field>
+        <field name="context">{'contact_display': 'partner_address', 'restricted_picking_type_code': 'internal', 'internal_type_code': 'damage', 'search_default_damage': 1}</field>
+        <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+    </record>
+
+    <record id="action_picking_tree_maintenance" model="ir.actions.act_window">
+        <field name="name">Maintenance Transfers</field>
+        <field name="res_model">stock.picking</field>
+        <field name="path">maintenance</field>
+        <field name="view_mode">list,kanban,form,calendar,activity</field>
+        <field name="domain"></field>
+        <field name="context">{'contact_display': 'partner_address', 'restricted_picking_type_code': 'internal', 'internal_type_code': 'maintenance', 'search_default_maintenance': 1}</field>
+        <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+    </record>
+
+    <record id="action_picking_tree_inspect" model="ir.actions.act_window">
+        <field name="name">Inspect Transfers</field>
+        <field name="res_model">stock.picking</field>
+        <field name="path">inspect</field>
+        <field name="view_mode">list,kanban,form,calendar,activity</field>
+        <field name="domain"></field>
+        <field name="context">{'contact_display': 'partner_address', 'restricted_picking_type_code': 'internal', 'internal_type_code': 'inspect', 'search_default_inspect': 1}</field>
+        <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+    </record>
+</odoo>

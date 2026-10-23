@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form view for adding statement lines on the fly in a popup-->
+        <record id="view_bank_statement_line_form_bank_rec_widget" model="ir.ui.view">
+            <field name="name">account.bank.statement.line.form.bank_rec_widget</field>
+            <field name="model">account.bank.statement.line</field>
+            <field name="arch" type="xml">
+                <form string="Add a Transaction">
+                    <field invisible="1" name="state"/>
+                    <field invisible="1" name="statement_complete"/>
+                    <field invisible="1" name="statement_valid"/>
+                    <field invisible="1" name="is_reconciled"/>
+                    <field invisible="1" name="suitable_journal_ids"/>
+                    <field invisible="1" name="currency_id"/>
+                    <field invisible="1" name="company_id"/>
+                    <group>
+                        <group>
+                            <field name="date" readonly="is_reconciled == True and amount != 0"/>
+                            <field name="payment_ref" readonly="is_reconciled == True and amount != 0" required="1"/>
+                            <field name="partner_id" readonly="is_reconciled == True and amount != 0"/>
+                        </group>
+                        <group>
+                            <field name="amount" readonly="is_reconciled == True and amount != 0"/>
+                            <field domain="[('id', '!=', currency_id)]" groups="base.group_multi_currency" name="foreign_currency_id" options="{'no_open': True, 'no_create': True}" readonly="is_reconciled == True and amount != 0"/>
+                            <field groups="base.group_multi_currency" invisible="foreign_currency_id == False" name="amount_currency" readonly="is_reconciled == True and amount != 0"/>
+                            <field domain="[('type', 'in', ['bank', 'cash'])]" name="journal_id" readonly="is_reconciled == True and amount != 0"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button class="btn btn-primary" data-hotkey="c" name="action_save_close" string="Save &amp; Close" type="object"/>
+                        <button class="btn btn-primary" data-hotkey="n" name="action_save_new" string="Save &amp; New" type="object"/>
+                        <button class="btn-secondary" data-hotkey="z" special="cancel" string="Cancel"/>
+                    </footer>
+                </form></field>
+        </record>
+        <record id="action_bank_statement_line_form_bank_rec_widget" model="ir.actions.act_window">
+            <field name="name">Add a Transaction</field>
+            <field name="res_model">account.bank.statement.line</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_bank_statement_line_form_bank_rec_widget"/>
+            <field name="target">new</field>
+        </record>
+        <record id="view_move_form_bank_rec_widget" model="ir.ui.view">
+            <field name="name">account.move.form.bank_rec_widget</field>
+            <field name="model">account.move</field>
+            <field name="priority">999</field>
+            <field name="arch" type="xml">
+                <form>
+                    <div class="oe_chatter">
+                        <field groups="base.group_user" name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form></field>
+        </record>
+        <!--
+        Form view injected inside the form (view_bank_rec_widget) to perform the reconciliation for a single
+        statement line.
+        -->
+        
+        <!-- TODO: check migration -->
+        <!-- <record id="view_bank_rec_widget_form_inherit_purchase_list" model="ir.ui.view">
+            <field name="name">bank.rec.widget.form.inherit.purchase.list</field>
+            <field name="model">bank.rec.widget</field>
+            <field name="inherit_id" ref="account_accountant.view_bank_rec_widget_form"/>
+            <field name="arch" type="xml">
+                <field name="form_account_id" position="after">
+                    <field name="product_id" options="{'no_create': True}" required="True" string="Product"/></field></field>
+        </record> -->
+    </data>
+</odoo>

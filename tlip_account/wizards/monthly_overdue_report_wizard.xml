@@ -1,0 +1,47 @@
+<odoo>
+    <record id="action_print_overdue_invoice_report_xlsx" model="ir.actions.report">
+        <field name="name">Monthly Overdue Report Name</field>
+        <field name="model">monthly.overdue.report.wizard</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">tlip_account.monthly_overdue_report</field>
+        <field name="report_file">tlip_account.monthly_overdue_report_file</field>
+        <field name="attachment_use" eval="False"/>
+    </record>
+
+    <record id="view_monthly_overdue_report_wizard_form" model="ir.ui.view">
+        <field name="name">monthly.overdue.report.wizard.form</field>
+        <field name="model">monthly.overdue.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Monthly Overdue Report">
+                <group>
+                    <div class="row" style="display: flex; align-items: center;">
+                        <div class="col-5">
+                            <label for="start_date" string="From Date"/>
+                            <field name="start_date"/>
+                        </div>
+                        <div class="col-1" style="text-align: center;">
+                            <span>-</span>
+                        </div>
+                        <div class="col-5">
+                            <label for="end_date" string="To Date"/>
+                            <field name="end_date"/>
+                        </div>
+                    </div>
+                </group>
+                <footer>
+                    <button string="Generate Report" type="object" name="action_generate_overdue_report" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_monthly_overdue_report_wizard" model="ir.actions.act_window">
+        <field name="name">Monthly Overdue Report</field>
+        <field name="res_model">monthly.overdue.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'dialog_size': 'medium'}</field>
+    </record>
+
+</odoo>

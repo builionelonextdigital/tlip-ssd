@@ -1,0 +1,807 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* biz_account_counterpart
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-17 09:59+0000\n"
+"PO-Revision-Date: 2023-11-17 09:59+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_move_line.py:0
+#, python-format
+msgid " [Zero Value]"
+msgstr " [Giá trị Không]"
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_trial_balance_report.py:0
+#, python-format
+msgid "%s to %s"
+msgstr "%s đến %s"
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid "<br/><span class=\"s06-dn-title-small\">Company unit:</span>"
+msgstr "<br/><span class=\"s06-dn-title-small\">Đơn vị:</span>"
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid "<br/><span class=\"s06-dn-title-small\">Street: </span>"
+msgstr "<br/><span class=\"s06-dn-title-small\">Địa chỉ: </span>"
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid ""
+"<span class=\"s06-dn-text-italic\">Day ..... month ..... year .....</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s06-dn-title-small\">Manager</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s06-dn-text-italic\">(Sign, full name, stamp)</span>"
+msgstr ""
+"<span class=\"s06-dn-text-italic\">Ngày ..... tháng ..... năm .....</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s06-dn-title-small\">Giám đốc</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s06-dn-text-italic\">(Ký, họ tên, đóng dấu)</span>"
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid ""
+"<span class=\"s06-dn-title \">Application form No. S06-DN</span>\n"
+"                                    <br/>\n"
+"                                    <span>(Issued according to Circular No. 200/2014/TT-BTC</span>\n"
+"                                    <br/>\n"
+"                                    <span>22/12/2014 of the Ministry of Finance)</span>"
+msgstr ""
+"<span class=\"s06-dn-title \">Mẫu số S06-DN</span>\n"
+"                                    <br/>\n"
+"                                    <span>(Ban hành theo Thông tư số 200/2014/TT-BTC)</span>\n"
+"                                    <br/>\n"
+"                                    <span>Ngày 22/12/2014 của Bộ Tài chính</span>"
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid ""
+"<span class=\"s06-dn-title-small\">Bookkeeper</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s06-dn-text-italic\">(Sign, full name, stamp)</span>"
+msgstr ""
+"<span class=\"s06-dn-title-small\">Người ghi sổ</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s06-dn-text-italic\">(Ký, họ tên)</span>"
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid ""
+"<span class=\"s06-dn-title-small\">Chief accountant</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s06-dn-text-italic\">(Sign, full name, stamp)</span>"
+msgstr ""
+"<span class=\"s06-dn-title-small\">Kế toán trưởng</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s06-dn-text-italic\">(Ký, họ tên)</span>"
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid "<span class=\"s06-dn-title-small\">Company unit: </span>"
+msgstr "<span class=\"s06-dn-title-small\">Đơn vị: </span>"
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.wizard_account_counterpart_generator_view_form
+msgid "<span>Journal Items</span>"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid "<strong>Balance sheet of arising books</strong>"
+msgstr "<strong>Bảng cân đối số phát sinh</strong>"
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_bank_statement_line__countered_status
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move__countered_status
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_payment__countered_status
+msgid ""
+"A technical field to indicate that this journal entry has either countered "
+"fully or partially or not-yet-countered"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line__countered_status
+msgid ""
+"A technical field to indicate that this journal item has either countered "
+"fully or partially or not-yet-countered"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model,name:biz_account_counterpart.model_wizard_account_counterpart_generator
+msgid "Account Counterpart Generating Wizard"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.actions.act_window,name:biz_account_counterpart.action_counterpart_generator_form
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.wizard_account_counterpart_generator_view_form
+msgid "Account Counterparts Generator"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model,name:biz_account_counterpart.model_account_group
+msgid "Account Group"
+msgstr "Nhóm tài khoản"
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid "Account number"
+msgstr "Số hiệu tài khoản"
+
+#. module: biz_account_counterpart
+#: model:ir.model,name:biz_account_counterpart.model_account_report
+msgid "Accounting Report"
+msgstr "Báo cáo kế toán"
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid "Accounting account name"
+msgstr "Tên tài khoản kế toán"
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid "All"
+msgstr ""
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_move_line.py:0
+#, python-format
+msgid ""
+"An Journal Item must not have both both credit and debit counterparts. It "
+"should have either only."
+msgstr ""
+"Một phát sinh kế toán không thể có đối ứng ở cả bên Nợ và bên Có. Nó chỉ có "
+"thể có đối ứng Nợ hoặc Có."
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid "Balance at the beginning of the month"
+msgstr "Số dư đầu tháng"
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid "Balance at the end of the month"
+msgstr "Số dư cuối tháng"
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_move_line_ctp.py:0
+#, python-format
+msgid ""
+"Both the journal items of the same counterpart must be in the same account "
+"journal entry"
+msgstr ""
+"Cả hai Phát sinh Kế toán của cùng một liên kết đối ứng phải thuộc cùng một "
+"bút toán kế toán"
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_move_line_ctp.py:0
+#, python-format
+msgid ""
+"Both the journal items of the same counterpart must have the journal entry "
+"defined"
+msgstr ""
+"Cả hai Phát sinh Kế toán của cùng một liên kết đối ứng phải có liên kết đến "
+"một bút toán"
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__cr_account_id
+msgid "CR Account"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.wizard_account_counterpart_generator_view_form
+msgid "Cancel"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_group__code
+msgid "Code"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__company_currency_id
+msgid "Company Currency"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line__ctp_account_ids
+msgid "Countered Accounts"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line__countered_amt
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__countered_amt
+msgid "Countered Amount"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line__countered_amt_currency
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__countered_amt_currency
+msgid "Countered Amount Currency"
+msgstr ""
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_move_line_ctp.py:0
+#, python-format
+msgid ""
+"Countered Amount for the Journal Item '%s' and the Journal Item '%s' must "
+"not be greater than %s"
+msgstr "Giá trị Đối ứng cho Phát sinh '%s' và '%s' phải nhỏ hơn hoặc bằng %s"
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_move_line_ctp.py:0
+#, python-format
+msgid ""
+"Countered Amount must not be bigger than the debit and credit amounts. Debugging information:\n"
+"Countered Amount: %s\n"
+"Debit Line: %s, Debit: %s\n"
+"Credit Line: %s, Credit: %s\n"
+msgstr ""
+"Giá trị Đối ứng không thể lớn hơn giá trị Nợ và Có của các phát sinh kế toán. Thông tin gỡ lỗi:\n"
+"Giá trị Đối ứng: %s\n"
+"Phát sinh Nợ: %s, Nợ: %s\n"
+"Phát sinh Có: %s, Có: %s\n"
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line__ctp_aml_ids
+msgid "Countered Journal Items"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_bank_statement_line__countered_status
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move__countered_status
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line__countered_status
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_payment__countered_status
+msgid "Countered Status"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.account_move_line_ctp_form_view
+msgid "Counterpart Matching"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line__ctp_ids
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.move_line_form_inherit_view
+msgid "Counterparts"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_bank_statement_line__ctp_ids
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move__ctp_ids
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_payment__ctp_ids
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_move_form
+msgid "Counterparts Mapping"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.actions.server,name:biz_account_counterpart.ir_cron_scheduler_create_counterparts_ir_actions_server
+#: model:ir.cron,cron_name:biz_account_counterpart.ir_cron_scheduler_create_counterparts
+msgid "Create Counterpart scheduler"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_move_form
+msgid "Create Counterparts"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__create_uid
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__create_date
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_move_line.py:0
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__cr_aml_credit
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.account_move_line_ctp_form_view
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+#, python-format
+msgid "Credit"
+msgstr "Có"
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line__cr_ctp_ids
+msgid "Credit Counterparts"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__cr_aml_id
+msgid "Credit Move Line"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__dr_account_id
+msgid "DR Account"
+msgstr ""
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_move_line.py:0
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__dr_aml_debit
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.account_move_line_ctp_form_view
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+#, python-format
+msgid "Debit"
+msgstr "Nợ"
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line__dr_ctp_ids
+msgid "Debit Counterparts"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__dr_aml_id
+msgid "Debit Move Line"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.actions.server,name:biz_account_counterpart.action_server_delete_counterparts
+msgid "Delete Counterparts"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__display_name
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator__from_date
+msgid "From Date"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields.selection,name:biz_account_counterpart.selection__account_move__countered_status__fully
+#: model:ir.model.fields.selection,name:biz_account_counterpart.selection__account_move_line__countered_status__fully
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_account_move_filter
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_account_move_line_filter
+msgid "Fully Countered"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.actions.server,name:biz_account_counterpart.action_server_create_counterparts
+#: model:ir.ui.menu,name:biz_account_counterpart.menu_action_counterpart_generator_form
+msgid "Generate Counterparts"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator__type
+msgid "Generation Type"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__id
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator__id
+msgid "ID"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_wizard_account_counterpart_generator__ignore_if_lines_count_larger_than
+msgid ""
+"If a positive is set, the Journal Entries having a number of Journal Items "
+"larger then this will be ignored. Set zero (0) to disable this feature"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line_ctp__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line_ctp__message_has_error
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line_ctp__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator__ignore_if_lines_count_larger_than
+msgid "Ignore if more than"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model,name:biz_account_counterpart.model_account_move
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__move_id
+msgid "Journal Entry"
+msgstr "Bút toán sổ nhật ký"
+
+#. module: biz_account_counterpart
+#: model:ir.model,name:biz_account_counterpart.model_account_move_line
+msgid "Journal Item"
+msgstr "Bút toán"
+
+#. module: biz_account_counterpart
+#: model:ir.model,name:biz_account_counterpart.model_account_move_line_ctp
+msgid "Journal Item Counterpart"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.account_move_line_ctp_form_view
+msgid "Journal Items Counterpart"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.actions.act_window,name:biz_account_counterpart.action_aml_counterpart
+#: model:ir.ui.menu,name:biz_account_counterpart.menu_action_aml_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.account_move_line_ctp_tree_view
+msgid "Journal Items Counterparts"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator__journal_ids
+msgid "Journals"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp____last_update
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__write_uid
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__write_date
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator__rec_limit
+msgid "Limit Number of Journal Entries"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields.selection,name:biz_account_counterpart.selection__wizard_account_counterpart_generator__type__missing_only
+msgid "Missing Only"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields.selection,name:biz_account_counterpart.selection__account_move__countered_status__none
+#: model:ir.model.fields.selection,name:biz_account_counterpart.selection__account_move_line__countered_status__none
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_account_move_filter
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_account_move_line_filter
+msgid "Not Countered"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.s06_dn_pdf
+msgid "Number arising during the month"
+msgstr "Số phát sinh trong tháng"
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line_ctp__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line_ctp__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_trial_balance_report.py:0
+#, python-format
+msgid "PDF"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields.selection,name:biz_account_counterpart.selection__account_move__countered_status__partially
+#: model:ir.model.fields.selection,name:biz_account_counterpart.selection__account_move_line__countered_status__partially
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_account_move_filter
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_account_move_line_filter
+msgid "Partially Countered"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator__recreate_for_the_partially
+msgid "Recreate for Partially Countered Entries"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields.selection,name:biz_account_counterpart.selection__wizard_account_counterpart_generator__type__regeneration
+msgid "Regeneration"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_move_form
+msgid "Remove Counterparts"
+msgstr ""
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_trial_balance_report.py:0
+#, python-format
+msgid "S06-DN(PDF)"
+msgstr ""
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_trial_balance_report.py:0
+#, python-format
+msgid "S06-DN(XLSX)"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_wizard_account_counterpart_generator__journal_ids
+msgid ""
+"Select one or more journals, or leave empty to generate counterparts for the"
+" whole accounting data available"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_account_move_filter
+msgid ""
+"Show Journal entries that have counterpart(s) but not fully countered yet"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_account_move_filter
+msgid "Show Journal entries that have fully countered"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_account_move_filter
+msgid "Show Journal entries that have no counterpart"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_account_move_line_filter
+msgid ""
+"Show Journal items that have counterpart(s) but not fully countered yet"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_account_move_line_filter
+msgid "Show Journal items that have fully countered"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.view_account_move_line_filter
+msgid "Show Journal items that have no counterpart"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.wizard_account_counterpart_generator_view_form
+msgid "Start"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line__cr_ctp_ids
+msgid "Technical field to link credit counterparts with this journal item"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line__dr_ctp_ids
+msgid "Technical field to link debit counterparts with this journal item"
+msgstr ""
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/wizard/wizard_account_counterpart_generator.py:0
+#, python-format
+msgid "The 'From Date' must not be later than the 'To Date'"
+msgstr "'Từ Ngày' không được muộn hơn 'Đến Ngày'"
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line__ctp_account_ids
+msgid "The Accounts that are countered with the account of this Journal Item"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line__ctp_aml_ids
+msgid "The Journal Items that are countered with this Journal Item"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line_ctp__countered_amt
+msgid ""
+"The amount in company's currency that matches the two lines in a counterpart"
+" operation."
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line__countered_amt_currency
+msgid ""
+"The amount in the original currency that has been countered for this journal"
+" item"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line_ctp__countered_amt_currency
+msgid ""
+"The amount in the original currency that matches the two lines in a "
+"counterpart operation."
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line__countered_amt
+msgid "The amount that has been countered for this journal item"
+msgstr ""
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_move_line_ctp.py:0
+#, python-format
+msgid "The credit move line in the Journal Item Counterpart has zero credit"
+msgstr ""
+"Phát sinh Có trong Liên kết đối ứng có giá trị bằng Không (0) ở bên Có"
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line_ctp__cr_aml_credit
+msgid "The credit value of the credit journal item"
+msgstr ""
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_move_line_ctp.py:0
+#, python-format
+msgid "The debit move line in the Journal Item Counterpart has zero debit"
+msgstr "Phát sinh Nợ của Liên kết Đối ứng chứa giá trị Không (0) ở bên Nợ"
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line_ctp__dr_aml_debit
+msgid "The debit value of the debit journal item"
+msgstr ""
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_move_line.py:0
+#, python-format
+msgid "The journal item '%s' could not be countered with the journal item %s"
+msgstr "Phát sinh '%s' không thể được đối ứng với phát sinh %s"
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_wizard_account_counterpart_generator__rec_limit
+msgid ""
+"This is to limit the number of journal entries to process to avoid CPU "
+"timeout"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.wizard_account_counterpart_generator_view_form
+msgid ""
+"This wizard may take long time for a system with large number\n"
+"\t\t\t\t\t\tof accounting journal items (e.g. a million item)..."
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_wizard_account_counterpart_generator__to_date
+msgid "To Date"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model,name:biz_account_counterpart.model_account_trial_balance_report_handler
+msgid "Trial Balance Custom Handler"
+msgstr "Trình xử lý tùy chỉnh số dư dùng thử"
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,field_description:biz_account_counterpart.field_account_move_line_ctp__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: biz_account_counterpart
+#: model:ir.model.fields,help:biz_account_counterpart.field_account_move_line_ctp__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_trial_balance_report.py:0
+#, python-format
+msgid "XLSX"
+msgstr ""
+
+#. module: biz_account_counterpart
+#. odoo-python
+#: code:addons/biz_account_counterpart/model/account_move_line_ctp.py:0
+#: code:addons/biz_account_counterpart/model/account_move_line_ctp.py:0
+#, python-format
+msgid ""
+"You cannot delete counterparts of a posted journal entry (%s). Please cancel"
+" the entry to get the counterparts deleted."
+msgstr ""
+"Bạn không thể xoá một liên kết đối ứng của một bút toán sổ nhật ký đã vào sổ"
+" (%s). Vui lòng huỷ bút toán để xoá tự động các liên kết đối ứng liên quan."
+
+#. module: biz_account_counterpart
+#: model_terms:ir.ui.view,arch_db:biz_account_counterpart.wizard_account_counterpart_generator_view_form
+msgid "or"
+msgstr ""

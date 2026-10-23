@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="S03B_DN_template">
+        <div class='o_account_reports_body_custom' style="font-size:16px">
+            <div class="row row-header">
+                <div class="col-6">
+                   <div style="margin-bottom:10px;"><b>Đơn vị:</b> <span class="bold-span" t-esc="docs.env.company.name if docs.env.company.name else ''"/></div>
+                   <div><b>Địa chỉ:</b> <span t-esc="docs.get_address_by(docs.env.company) if docs.env.company else ''"/></div>
+                </div>
+                <div class="col-6 text-center">
+                    <div class="title">
+                        Mẫu số S03b-DN
+                    </div>
+                    <div>
+                        <p><i>(Ban hành theo Thông tư số 200/2014/TT-BTC</i></p>
+                        <p><i>Ngày 22/12/2014 của Bộ Tài chính)</i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="body-s03_dn">
+                <div class="text-center">
+                    <p><b class="b-title">SỔ CÁI</b></p>
+                    <p><b>(Dùng cho hình thức kế toán Nhật ký chung)</b></p>
+                    <p><b><t t-esc="docs.get_string_filter(date)"/></b></p>
+                    <p><b><t t-esc="account_name"/></b></p>
+                    <p><b><t t-esc="account_code"/></b></p>
+                </div>
+                <div class="contain-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                              <th rowspan="2">Ngày, tháng ghi sổ</th>
+                              <th colspan="2">Chứng từ</th>
+                              <th rowspan="2">Diễn giải</th>
+                              <th colspan="2">Nhật ký chung</th>
+                              <th>Số hiệu</th>
+                              <th colspan="2">Số tiền</th>
+                            </tr>
+                            <tr>
+                              <th>Số hiệu</th>
+                              <th>Ngày tháng</th>
+                              <th>Trang sổ</th>
+                              <th>STT dòng</th>
+                              <th>TK đối ứng</th>
+                              <th>Nợ</th>
+                              <th>Có</th>
+                            </tr>
+                            <tr>
+                              <th>A</th>
+                              <th>B</th>
+                              <th>C</th>
+                              <th>D</th>
+                              <th>E</th>
+                              <th>G</th>
+                              <th>H</th>
+                              <th>1</th>
+                              <th>2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="line_show" t-as="line">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><div>-Số dư đầu năm</div><div>-Số phát sinh trong tháng</div></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><div><t t-esc="abs(line[0]) if line[0] and line[0] > 0 else ''"/></div><div></div></td>
+                                    <td><div><t t-esc="abs(line[0]) if line[0] and not line[0] > 0 and not line[0] == 0 else ''"/></div><div></div></td>
+                                </tr>
+                                
+                                <t t-foreach="line[1]" t-as="vals">
+                                    <tr>
+                                        <t t-foreach="vals.values()" t-as="val">
+                                            <td><t t-esc="val"/></td>
+                                        </t>
+                                    </tr>
+                                </t>
+                                <t t-foreach="line[2]" t-as="totals">
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><t t-esc="totals[0]"/></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><t t-esc="totals[1][0]"/></td>
+                                        <td><t t-esc="totals[1][1]"/></td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="page-break-inside: avoid;">
+                    <div style="margin-top:50px;">
+                        <p>- Sổ này có .... trang, đánh số từ trang số 01 đến trang ....</p>
+                        <p>- Ngày mở sổ:....</p>
+                    </div>
+                    <div style="text-align:right;margin-top:20px;margin-bottom:20px;">
+                        <i>Ngày.... tháng.... năm.......</i>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 text-center">
+                            <p><b>Người ghi sổ</b></p>
+                            <p><i>(Ký, họ tên)</i></p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <p><b>Kế toán trưởng</b></p>
+                            <p><i>(Ký, họ tên)</i></p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <p><b>Giám đốc</b></p>
+                            <p><i>(Ký, họ tên, đóng dấu)</i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+            .contain-table {
+                margin-top: 30px;
+            }
+            th {
+                text-align: center;
+                vertical-align: middle;
+                font-weight: bold;
+                color: #1242E5;
+            }
+            p {
+                margin: 4px 0;
+                padding: 0;
+            }
+            .b-title {
+                font-size: 26px;
+            }
+            .row-header {
+                margin-bottom: 50px;
+            }
+            .title {
+                font-weight: bold;
+                margin-bottom:10px;
+            }
+            .bold-span {
+                font-weight: bold;
+                color: #1242E5;
+            }                    
+        </style>
+    </template>
+</odoo>

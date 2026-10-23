@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="asset_modify_cr_form_view" model="ir.ui.view">
+        <field name="name">asset.modify.cr.form</field>
+        <field name="model">asset.modify.cr</field>
+        <field name="arch" type="xml">
+            <form string="Modify Information">
+                <header>
+                    <field name="user_status" invisible="1" />
+                    <button name="action_submit_approval"
+                        string="Submit"
+                        type="object"
+                        class="btn btn-primary"
+                        invisible="state != 'draft'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="pause"
+                        string="Pause"
+                        type="object"
+                        class="btn-primary"
+                        invisible="modify_action != 'pause' or state != 'approved'" />
+                    <button name="modify"
+                        string="Modify"
+                        type="object"
+                        class="btn-primary"
+                        context="{'tlip_custom_asset': True}"
+                        invisible="modify_action != 'modify' or state != 'approved'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="modify"
+                        string="Resume"
+                        type="object"
+                        class="btn-primary"
+                        invisible="modify_action != 'resume' or state != 'approved'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="sell_dispose"
+                        string="Sell"
+                        type="object"
+                        class="btn-primary"
+                        invisible="modify_action != 'sell' or state != 'approved'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="sell_dispose"
+                        string="Dispose"
+                        type="object"
+                        class="btn-primary"
+                        invisible="modify_action != 'dispose' or state != 'approved'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_cancel"
+                        string="Cancel"
+                        type="object"
+                        invisible="state != 'draft'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_approve_request" type="object" string="Approve"
+                        invisible="user_status != 'pending'"
+                        class="btn-primary" data-hotkey="v"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_reject_request" string="Refuse" type="object"
+                        invisible="user_status != 'pending'"
+                        data-hotkey="z"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_withdraw_approval"
+                        string="Withdraw"
+                        type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="state != 'wait_for_approval'" />
+                    <button name="action_reset_approval"
+                        string="Reset Approval"
+                        type="object"
+                        invisible="state not in ('approved', 'rejected', 'cancel')"
+                        confirm="Are you sure that you want to do this action?" />
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,wait_for_approval,approved,completed" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_open_approval_history_ids"
+                            type="object" icon="fa-history">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Approval Histories
+                                </span>
+                            </div>
+                        </button>
+                        <button name="open_asset_view" invisible="not asset_id"
+                            class="oe_stat_button" icon="fa-cube" type="object">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Asset
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <span class="o_form_label">Name</span>
+                        <h1 class="d-flex">
+                            <field name="cr_name" readonly="1" />
+                        </h1>
+                    </div>
+                    <field name="asset_id" invisible="1" />
+                    <field name="gain_value" invisible="1" />
+                    <field name="select_invoice_line_id" invisible="1" />
+                    <field name="gain_or_loss" invisible="1" />
+                    <field name="company_id" invisible="1" />
+                    <group col="2" invisible="modify_action == 'resume'">
+                        <field name="modify_action" widget="radio" required="1"
+                            readonly="approval_readonly"
+                            options="{'horizontal': true}" />
+                    </group>
+                    <group invisible="not modify_action">
+                        <group>
+                            <field name="date" readonly="approval_readonly" />
+
+                            <label for="method_number"
+                                invisible="modify_action not in ('modify', 'resume')" />
+                            <div class="o_row" invisible="modify_action not in ('modify', 'resume')">
+                                <field name="method_number" required="1" readonly="approval_readonly" />
+                                <field name="method_period" required="1" nolabel="1" readonly="approval_readonly" />
+                            </div>
+
+                            <field name="invoice_ids"
+                                readonly="approval_readonly"
+                                options="{'no_quick_create': True}"
+                                context="{'default_move_type': 'out_invoice', 'input_full_display_name': True}"
+                                invisible="modify_action != 'sell'"
+                                required="modify_action == 'sell'"
+                                widget="many2many_tags" />
+
+                            <field name="invoice_line_ids"
+                                readonly="approval_readonly"
+                                options="{'no_create': True, 'no_quick_create': True}"
+                                invisible="modify_action != 'sell' and not select_invoice_line_id"
+                                required="select_invoice_line_id"
+                                domain="[('move_id', 'in', invoice_ids), ('display_type', '=', 'product')]"
+                                widget="many2many_tags" />
+
+                            <field name="gain_account_id"
+                                readonly="approval_readonly"
+                                options="{'no_create': True, 'no_quick_create': True}"
+                                invisible="gain_or_loss != 'gain'"
+                                required="gain_or_loss == 'gain'" />
+
+                            <field name="loss_account_id"
+                                readonly="approval_readonly"
+                                options="{'no_create': True, 'no_quick_create': True}"
+                                invisible="gain_or_loss != 'loss'"
+                                required="gain_or_loss == 'loss'" />
+
+                            <field name="value_residual"
+                                readonly="approval_readonly"
+                                invisible="modify_action not in ('modify', 'resume')" />
+                            <field name="salvage_value"
+                                readonly="approval_readonly"
+                                invisible="modify_action not in ('modify', 'resume')" />
+                            <field name="account_asset_id"
+                                readonly="approval_readonly"
+                                options="{'no_create': True, 'no_quick_create': True}"
+                                invisible="modify_action != 'modify'" required="gain_value" />
+                            <field name="account_asset_counterpart_id"
+                                readonly="approval_readonly"
+                                options="{'no_create': True, 'no_quick_create': True}"
+                                invisible="modify_action != 'modify' or not gain_value"
+                                required="gain_value" />
+                            <field name="account_depreciation_id"
+                                readonly="approval_readonly"
+                                invisible="modify_action != 'modify'" required="gain_value" />
+                            <field name="account_depreciation_expense_id" invisible="1"
+                                readonly="approval_readonly"
+                                required="gain_value" />
+
+                            <field name="name"
+                                readonly="approval_readonly"
+                                placeholder="Add an internal note"
+                                required="modify_action in ('modify', 'resume')" />
+                        </group>
+                        <group>
+                            <field name="informational_text" nolabel="1" readonly="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Approver(s)" name="approver"
+                            invisible="state in ('draft', 'cancel')">
+                            <field name="approver_ids" mode="list" readonly="1">
+                                <list editable="bottom" decoration-success="status=='approved'"
+                                    decoration-warning="status in ['pending', 'waiting']"
+                                    decoration-danger="status=='refused'" no_open="1">
+                                    <field name="existing_request_user_ids" column_invisible="True" />
+                                    <field name="sequence" column_invisible="True" />
+                                    <field name="user_id" string="Approver"
+                                        required="not job_id" />
+                                    <field name="job_id" required="not user_id" />
+                                    <field name="status" />
+                                    <field name="company_id" column_invisible="True" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="asset_modify_cr_tree_view" model="ir.ui.view">
+        <field name="name">asset.modify.cr.tree</field>
+        <field name="model">asset.modify.cr</field>
+        <field name="arch" type="xml">
+            <list string="Asset Modifies">
+                <field name="cr_name" />
+                <field name="asset_id" />
+                <field name="date" />
+                <field name="modify_action" />
+                <field name="value_residual" />
+                <field name="salvage_value" />
+                <field name="method_number" />
+                <field name="method_period" />
+                <field name="state" widget="badge"
+                    decoration-danger="state == 'rejected'"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state == 'wait_for_approval'"
+                    decoration-success="state in ('approved', 'completed')" />
+            </list>
+        </field>
+    </record>
+
+    <record id="asset_modify_cr_search_view" model="ir.ui.view">
+        <field name="name">asset.modify.cr.search</field>
+        <field name="model">asset.modify.cr</field>
+        <field name="arch" type="xml">
+            <search string="Asset Modifies">
+                <field name="name" />
+                <field name="asset_id" />
+                <field name="date" />
+                <field name="modify_action" />
+                <field name="value_residual" />
+                <field name="salvage_value" />
+                <field name="method_number" />
+                <field name="method_period" />
+            </search>
+        </field>
+    </record>
+
+    <record id="asset_modify_cr_action" model="ir.actions.act_window">
+        <field name="name">Modify Information</field>
+        <field name="res_model">asset.modify.cr</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'create': 0, 'delete': 0}</field>
+    </record>
+
+</odoo>

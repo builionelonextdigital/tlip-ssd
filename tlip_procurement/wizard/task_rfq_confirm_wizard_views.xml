@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="task_rfq_confirm_wizard_view_form" model="ir.ui.view">
+        <field name="name">task_rfq_confirm_wizard_view_form</field>
+        <field name="model">task.rfq.confirm.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="rfq_selection_id" invisible="1" />
+                    <field name="reason" required="1" />
+                    <field name="bypass_contract" invisible="context.get('disable_bypass_contract')" />
+                    <!-- <div invisible="not context.get('disable_bypass_contract', False)">Option "Bypass Contract" is disabled because the value of Proposed RFQ
+                        bigger than Maximum Amount By Pass Purchase Contract</div> -->
+                </group>
+                <footer>
+                    <button name="button_confirm" type="object"
+                        data-hotkey="q" string="Confirm" class="oe_highlight" />
+                    <button special="cancel" data-hotkey="z" string="Cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

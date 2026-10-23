@@ -1,0 +1,172 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* biz_purchase_invoices_list
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-27 03:55+0000\n"
+"PO-Revision-Date: 2023-11-27 03:55+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.actions.report,print_report_name:biz_purchase_invoices_list.action_purchase_receipt_sheet
+msgid "'Purchase receipt sheet'"
+msgstr ""
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model,name:biz_purchase_invoices_list.model_account_account
+msgid "Account"
+msgstr "Tài khoản"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.actions.act_window,name:biz_purchase_invoices_list.action_bank_statement_line_form_bank_rec_widget
+#: model_terms:ir.ui.view,arch_db:biz_purchase_invoices_list.view_bank_statement_line_form_bank_rec_widget
+msgid "Add a Transaction"
+msgstr ""
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model,name:biz_purchase_invoices_list.model_bank_rec_widget
+msgid "Bank reconciliation widget for a single statement line"
+msgstr "Tiện ích đối chiếu ngân hàng cho một dòng sao kê"
+
+#. module: biz_purchase_invoices_list
+#: model_terms:ir.ui.view,arch_db:biz_purchase_invoices_list.purchase_receipt_sheet_wizard_form
+#: model_terms:ir.ui.view,arch_db:biz_purchase_invoices_list.view_bank_statement_line_form_bank_rec_widget
+msgid "Cancel"
+msgstr "Hủy"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_purchase_receipt_sheet_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_purchase_receipt_sheet_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_purchase_receipt_sheet_wizard__date_from
+msgid "Date From"
+msgstr "Từ ngày"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_purchase_receipt_sheet_wizard__date_to
+msgid "Date To"
+msgstr "Đến ngày"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_purchase_receipt_sheet_wizard__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_product_product__general_product
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_product_template__general_product
+msgid "General Product"
+msgstr "Là HHDV dùng chung"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_account_move_line__product_shared
+msgid "HHDV Shared"
+msgstr "HHDV dùng chung"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_purchase_receipt_sheet_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: biz_purchase_invoices_list
+#: model_terms:ir.ui.view,arch_db:biz_purchase_invoices_list.purchase_receipt_sheet_wizard_form
+msgid "Invoice list"
+msgstr "Bảng kê hóa đơn"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_account_account__is_vat_account
+msgid "Is the VAT account"
+msgstr "Thuế GTGT đầu vào"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model,name:biz_purchase_invoices_list.model_account_move_line
+msgid "Journal Item"
+msgstr "Hạng mục bút toán"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_purchase_receipt_sheet_wizard____last_update
+msgid "Last Modified on"
+msgstr "Sửa lần cuối vào"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_purchase_receipt_sheet_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_purchase_receipt_sheet_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: biz_purchase_invoices_list
+#: model_terms:ir.ui.view,arch_db:biz_purchase_invoices_list.purchase_receipt_sheet_wizard_form
+msgid "Print"
+msgstr "In"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.actions.act_window,name:biz_purchase_invoices_list.action_purchase_receipt_sheet_wizard
+#: model:ir.ui.menu,name:biz_purchase_invoices_list.menu_purchase_receipt_sheet
+msgid "Printed copy of purchase receipt"
+msgstr "Bản in hóa đơn mua vào"
+
+#. module: biz_purchase_invoices_list
+#. odoo-javascript
+#: code:addons/biz_purchase_invoices_list/static/src/xml/account_reconciliation.xml:0
+#: model:ir.model,name:biz_purchase_invoices_list.model_product_template
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_bank_rec_widget__product_id
+#: model_terms:ir.ui.view,arch_db:biz_purchase_invoices_list.view_bank_rec_widget_form_inherit_purchase_list
+#, python-format
+msgid "Product"
+msgstr "Sản phẩm"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.actions.report,name:biz_purchase_invoices_list.action_purchase_receipt_sheet
+msgid "Purchase receipt sheet"
+msgstr "Bảng kê hóa đơn mua"
+
+#. module: biz_purchase_invoices_list
+#: model_terms:ir.ui.view,arch_db:biz_purchase_invoices_list.view_bank_statement_line_form_bank_rec_widget
+msgid "Save & Close"
+msgstr ""
+
+#. module: biz_purchase_invoices_list
+#: model_terms:ir.ui.view,arch_db:biz_purchase_invoices_list.view_bank_statement_line_form_bank_rec_widget
+msgid "Save & New"
+msgstr ""
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_product_product__taxable_product
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_product_template__taxable_product
+msgid "Taxable Product"
+msgstr "Sản phẩm chịu thuế"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_product_product__untaxable_products
+#: model:ir.model.fields,field_description:biz_purchase_invoices_list.field_product_template__untaxable_products
+msgid "Untaxable Product"
+msgstr "Sản phẩm không chịu thuế"
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model,name:biz_purchase_invoices_list.model_purchase_receipt_sheet_wizard
+msgid "purchase.receipt.sheet.wizard"
+msgstr ""
+
+#. module: biz_purchase_invoices_list
+#: model:ir.model,name:biz_purchase_invoices_list.model_report_biz_purchase_invoices_list_purchase_receipt_sheet_xlsx
+msgid "report.biz_purchase_invoices_list.purchase_receipt_sheet_xlsx"
+msgstr ""

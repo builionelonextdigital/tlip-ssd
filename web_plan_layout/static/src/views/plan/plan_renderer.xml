@@ -1,0 +1,34 @@
+<?xml version ="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="web_plan_layout.PlanRenderer" owl="1">
+        <t t-if="props.isParentLocation">
+            <t t-call="web_plan_layout.LocationSelection"/>
+        </t>
+        
+        <div class="o_plan_renderer o_renderer" t-ref="root">
+            <div class="o_plan_renderer_container col-md-12 col-lg-10" t-ref="planContainer"/>
+        </div>
+    </t>
+
+    <t t-name="web_plan_layout.LocationSelection" owl="1">
+        <div id="location-selection">
+            <div class="select-container">
+                <select class="form-select" aria-label="Select Location" t-ref="locationSelector" t-on-change.stop="onSelectLocation">
+                    <option disabled="1" value="" selected="1">Select Land Plot</option>
+                    <t t-foreach="props.locationList" t-as="location" t-key="location.id">
+                        <option t-att-value="location.id"><t t-esc="location.name"/></option>
+                    </t>
+                </select>
+            </div>
+        </div>
+    </t>
+
+
+    <t t-name="web_plan_layout.Tooltip" owl="1">
+        <div class="o_location_tooltip"/>
+    </t>
+
+    <t t-name="web_plan_layout.Label" owl="1">
+        <div class="o_label_overlay"/>
+    </t>
+</templates>

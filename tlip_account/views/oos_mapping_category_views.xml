@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="oos_mapping_category_view_tree" model="ir.ui.view">
+        <field name="name">oos.mapping.category.view.tree</field>
+        <field name="model">oos.mapping.category</field>
+        <field name="arch" type="xml">
+            <list string="OOS Mapping Category" editable="bottom">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="parent_id" domain="[('parent_id', '=', False)]"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+            </list>
+        </field>
+    </record>
+
+    <record id="oos_mapping_category_action" model="ir.actions.act_window">
+        <field name="name">OOS Mapping Category</field>
+        <field name="res_model">oos.mapping.category</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_business_pdf_document">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <div class="page business-results-pdf">
+                        <div class="row report-header">
+                            <div class="col-6">
+                                <div class="company-line">
+                                    <strong>Đơn vị báo cáo: </strong>
+                                    <span t-field="o.env.company.name"/>
+                                </div>
+                                <div class="company-address">
+                                    <strong>Địa chỉ: </strong>
+                                    <span t-esc="get_company_address(o.env.company)"/>
+                                </div>
+                            </div>
+                            <div class="col-6 legal-reference">
+                                <div><strong>Mẫu số B 02 - DN</strong></div>
+                                <div>(Ban hành theo Thông tư số 200/2014/TT-BTC</div>
+                                <div>Ngày 22/12/2014 của Bộ Tài chính)</div>
+                            </div>
+                        </div>
+
+                        <div class="report-title">
+                            <h4>BÁO CÁO KẾT QỦA HOẠT ĐỘNG SẢN XUẤT KINH DOANH (Mẫu số B 02 - DN )</h4>
+                            <p>Năm <span t-esc="o.date_from.strftime('%Y')"/></p>
+                        </div>
+
+                        <div class="currency-line">
+                            Đơn vị tính:
+                            <span t-esc="o.env.company.currency_id.name or '..........'"/>
+                        </div>
+
+                        <table class="table table-bordered result-table">
+                            <thead>
+                                <tr>
+                                    <th>CHỈ TIÊU</th>
+                                    <th>Mã số</th>
+                                    <th>Thuyết minh</th>
+                                    <th>Năm nay</th>
+                                    <th>Năm trước</th>
+                                </tr>
+                                <tr>
+                                    <th>1</th>
+                                    <th>2</th>
+                                    <th>3</th>
+                                    <th>4</th>
+                                    <th>5</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="get_lines(o)" t-as="line">
+                                    <td class="indicator" t-esc="line['chi_tieu']"/>
+                                    <td class="text-center" t-esc="line['ma_so']"/>
+                                    <td class="text-center" t-esc="line['thuyet_minh']"/>
+                                    <td class="number" t-esc="line['nam_nay']"/>
+                                    <td class="number" t-esc="line['nam_truoc']"/>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="stock-company-note">(*)Chỉ áp dụng tại công ty cổ phần</div>
+                        <div class="date-line">
+                            Lập ngày <span t-esc="date_now.day"/> tháng <span t-esc="date_now.month"/> năm <span t-esc="date_now.year"/>
+                        </div>
+
+                        <div class="row signature-block">
+                            <div class="col-4">
+                                <div><strong>Người lập biểu</strong></div>
+                                <div class="font-italic">(Ký, họ tên)</div>
+                            </div>
+                            <div class="col-4">
+                                <div><strong>Kế toán trưởng</strong></div>
+                                <div class="font-italic">(Ký, họ tên)</div>
+                            </div>
+                            <div class="col-4">
+                                <div><strong>Giám đốc</strong></div>
+                                <div class="font-italic">(Ký, họ tên, đóng dấu)</div>
+                            </div>
+                        </div>
+
+                        <div class="certificate-note">
+                            <p>- Số chứng chỉ hành nghề;</p>
+                            <p>- Đơn vị cung cấp dịch vụ kế toán;</p>
+                            <p class="font-italic">
+                                Đối với người lập biểu là các đơn vị dịch vụ kế toán phải ghi rõ Số chứng chỉ hành nghề,
+                                tên và địa chỉ Đơn vị cung cấp dịch vụ kế toán. Người lập biểu là cá nhân ghi rõ Số chứng chỉ hành nghề
+                            </p>
+                        </div>
+                    </div>
+                    <style>
+                        .business-results-pdf {
+                            font-family: "Times New Roman", serif;
+                            font-size: 14pt;
+                            line-height: 1.35;
+                        }
+                        .business-results-pdf .report-header {
+                            margin-bottom: 26px;
+                        }
+                        .business-results-pdf .company-line,
+                        .business-results-pdf .company-address {
+                            font-size: 14pt;
+                            font-weight: bold;
+                        }
+                        .business-results-pdf .legal-reference,
+                        .business-results-pdf .report-title,
+                        .business-results-pdf .signature-block {
+                            text-align: center;
+                        }
+                        .business-results-pdf .report-title h4 {
+                            font-size: 16pt;
+                            font-weight: bold;
+                            margin: 0 0 8px 0;
+                            text-transform: uppercase;
+                        }
+                        .business-results-pdf .report-title p {
+                            font-size: 16pt;
+                            font-style: italic;
+                            margin-bottom: 14px;
+                        }
+                        .business-results-pdf .currency-line {
+                            text-align: right;
+                            font-size: 14pt;
+                            font-style: italic;
+                            margin-bottom: 6px;
+                        }
+                        .business-results-pdf .result-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-bottom: 0;
+                        }
+                        .business-results-pdf .result-table th {
+                            text-align: center;
+                            vertical-align: middle;
+                            font-weight: bold;
+                        }
+                        .business-results-pdf .result-table th,
+                        .business-results-pdf .result-table td {
+                            border: 1px solid #000;
+                            padding: 5px 6px;
+                        }
+                        .business-results-pdf .result-table .indicator {
+                            text-align: left;
+                        }
+                        .business-results-pdf .result-table .number {
+                            text-align: right;
+                        }
+                        .business-results-pdf .stock-company-note {
+                            border-top: 1px solid #000;
+                            padding-top: 5px;
+                        }
+                        .business-results-pdf .date-line {
+                            text-align: right;
+                            font-weight: bold;
+                            margin-top: 8px;
+                        }
+                        .business-results-pdf .signature-block {
+                            page-break-inside: avoid;
+                            margin-top: 20px;
+                            margin-bottom: 85px;
+                        }
+                        .business-results-pdf .certificate-note p {
+                            margin: 0 0 6px 0;
+                        }
+                        .business-results-pdf .font-italic {
+                            font-style: italic;
+                        }
+                    </style>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_business_pdf">
+        <t t-call="biz_profit_loss_statement.report_business_pdf_document"/>
+    </template>
+</odoo>

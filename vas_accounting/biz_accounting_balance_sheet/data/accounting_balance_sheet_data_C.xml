@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="accounting_balance_sheet_case_66" model="accounting.balance.sheet">
+            <field name="categ_name">1. Phải trả người bán ngắn hạn</field>
+            <field name="code">311</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">residual_value_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_67" model="accounting.balance.sheet">
+            <field name="categ_name">2. Người mua trả tiền trước ngắn hạn</field>
+            <field name="code">312</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_68" model="accounting.balance.sheet">
+            <field name="categ_name">3. Thuế và các khoản phải nộp Nhà nước</field>
+            <field name="code">313</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_69" model="accounting.balance.sheet">
+            <field name="categ_name">4. Phải trả người lao động</field>
+            <field name="code">314</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">residual_value_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_70" model="accounting.balance.sheet">
+            <field name="categ_name">5. Chi phí phải trả ngắn hạn</field>
+            <field name="code">315</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">residual_value_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_71" model="accounting.balance.sheet">
+            <field name="categ_name">6. Phải trả nội bộ ngắn hạn</field>
+            <field name="code">316</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">residual_value_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_72" model="accounting.balance.sheet">
+            <field name="categ_name">7. Phải trả theo tiến độ kế hoạch hợp đồng xây dựng</field>
+            <field name="code">317</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_73" model="accounting.balance.sheet">
+            <field name="categ_name">8. Doanh thu chưa thực hiện ngắn hạn</field>
+            <field name="code">318</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_74" model="accounting.balance.sheet">
+            <field name="categ_name">9. Phải trả ngắn hạn khác</field>
+            <field name="code">319</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">residual_value_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_75" model="accounting.balance.sheet">
+            <field name="categ_name">10. Vay và nợ thuê tài chính ngắn hạn</field>
+            <field name="code">320</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">residual_value_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_76" model="accounting.balance.sheet">
+            <field name="categ_name">11. Dự phòng phải trả ngắn hạn</field>
+            <field name="code">321</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_77" model="accounting.balance.sheet">
+            <field name="categ_name">12. Quỹ khen thưởng phúc lợi</field>
+            <field name="code">322</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_78" model="accounting.balance.sheet">
+            <field name="categ_name">13. Quỹ bình ổn giá</field>
+            <field name="code">323</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_79" model="accounting.balance.sheet">
+            <field name="categ_name">14. Giao dịch mua bán lại trái phiếu Chính phủ</field>
+            <field name="code">324</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+        </record>
+        <record id="accounting_balance_sheet_case_65" model="accounting.balance.sheet">
+            <field name="categ_name">I. Nợ ngắn hạn</field>
+            <field name="code">310</field>
+<!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_categ</field>
+            <field name="stt_calculate">2</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_case_66'),
+                ref('accounting_balance_sheet_case_67'),
+                ref('accounting_balance_sheet_case_68'),
+                ref('accounting_balance_sheet_case_69'),
+                ref('accounting_balance_sheet_case_70'),
+                ref('accounting_balance_sheet_case_71'),
+                ref('accounting_balance_sheet_case_72'),
+                ref('accounting_balance_sheet_case_73'),
+                ref('accounting_balance_sheet_case_74'),
+                ref('accounting_balance_sheet_case_75'),
+                ref('accounting_balance_sheet_case_76'),
+                ref('accounting_balance_sheet_case_77'),
+                ref('accounting_balance_sheet_case_78'),
+                ref('accounting_balance_sheet_case_79')
+            ])]"/>
+            <field name="is_bold_report" eval="True"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+
+        <record id="accounting_balance_sheet_case_81" model="accounting.balance.sheet">
+            <field name="categ_name">1. Phải trả người bán dài hạn</field>
+            <field name="code">331</field>
+<!--            <field name="parent_level"></field>-->
+            <field name="apply_by">residual_value_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_82" model="accounting.balance.sheet">
+            <field name="categ_name">2. Người mua trả tiền trước dài hạn</field>
+            <field name="code">332</field>
+<!--            <field name="parent_level"></field>-->
+            <field name="apply_by">residual_value_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_83" model="accounting.balance.sheet">
+            <field name="categ_name">3. Chi phí phải trả dài hạn</field>
+            <field name="code">333</field>
+<!--            <field name="parent_level"></field>-->
+            <field name="apply_by">residual_value_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_84" model="accounting.balance.sheet">
+            <field name="categ_name">4. Phải trả nội bộ về vốn kinh doanh</field>
+            <field name="code">334</field>
+<!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_85" model="accounting.balance.sheet">
+            <field name="categ_name">5. Phải trả nội bộ dài hạn</field>
+            <field name="code">335</field>
+<!--            <field name="parent_level"></field>-->
+            <field name="apply_by">residual_value_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_86" model="accounting.balance.sheet">
+            <field name="categ_name">6. Doanh thu chưa thực hiện dài hạn</field>
+            <field name="code">336</field>
+<!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_87" model="accounting.balance.sheet">
+            <field name="categ_name">7. Phải trả dài hạn khác</field>
+            <field name="code">337</field>
+<!--            <field name="parent_level"></field>-->
+            <field name="apply_by">residual_value_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_88" model="accounting.balance.sheet">
+            <field name="categ_name">8. Vay và nợ thuê tài chính dài hạn</field>
+            <field name="code">338</field>
+<!--            <field name="parent_level"></field>-->
+            <field name="apply_by">residual_value_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_89" model="accounting.balance.sheet">
+            <field name="categ_name">9. Trái phiếu chuyển đổi</field>
+            <field name="code">339</field>
+<!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_90" model="accounting.balance.sheet">
+            <field name="categ_name">10. Cổ phiếu ưu đãi</field>
+            <field name="code">340</field>
+<!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_91" model="accounting.balance.sheet">
+            <field name="categ_name">11. Thuế thu nhập hoãn lại phải trả</field>
+            <field name="code">341</field>
+<!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_92" model="accounting.balance.sheet">
+            <field name="categ_name">12. Dự phòng phải trả dài hạn</field>
+            <field name="code">342</field>
+<!--            <field name="parent_level"></field>-->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_93" model="accounting.balance.sheet">
+            <field name="categ_name">13. Quỹ phát triển khoa học và công nghệ</field>
+            <field name="code">343</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">total_debit_credit</field>
+            <field name="stt_calculate">0</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+        <record id="accounting_balance_sheet_case_80" model="accounting.balance.sheet">
+            <field name="categ_name">II. Nợ dài hạn</field>
+            <field name="code">330</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">total_categ</field>
+            <field name="stt_calculate">2</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_case_81'),
+                ref('accounting_balance_sheet_case_82'),
+                ref('accounting_balance_sheet_case_83'),
+                ref('accounting_balance_sheet_case_84'),
+                ref('accounting_balance_sheet_case_85'),
+                ref('accounting_balance_sheet_case_86'),
+                ref('accounting_balance_sheet_case_87'),
+                ref('accounting_balance_sheet_case_88'),
+                ref('accounting_balance_sheet_case_89'),
+                ref('accounting_balance_sheet_case_90'),
+                ref('accounting_balance_sheet_case_91'),
+                ref('accounting_balance_sheet_case_92'),
+                ref('accounting_balance_sheet_case_93')
+            ])]"/>
+            <field name="is_bold_report" eval="True"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+
+        <record id="accounting_balance_sheet_case_64" model="accounting.balance.sheet">
+            <field name="categ_name">C - NỢ PHẢI TRẢ</field>
+            <field name="code">300</field>
+                        <!--            <field name="parent_level"></field> -->
+            <field name="apply_by">total_categ</field>
+            <field name="stt_calculate">3</field>
+            <field name="account_ids" eval="[(6, 0, [])]"/>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_case_65'),
+                ref('accounting_balance_sheet_case_80'),
+            ])]"/>
+            <field name="is_bold_report" eval="True"/>
+            <field name="in_business_cycle">False</field>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <function model="accounting.balance.sheet" name="create_missing_field_ids">
+            <value eval="[
+                ref('accounting_balance_sheet_case_64'),
+                ref('accounting_balance_sheet_case_65'),
+                ref('accounting_balance_sheet_case_66'),
+                ref('accounting_balance_sheet_case_67'),
+                ref('accounting_balance_sheet_case_68'),
+                ref('accounting_balance_sheet_case_69'),
+                ref('accounting_balance_sheet_case_70'),
+                ref('accounting_balance_sheet_case_71'),
+                ref('accounting_balance_sheet_case_72'),
+                ref('accounting_balance_sheet_case_73'),
+                ref('accounting_balance_sheet_case_74'),
+                ref('accounting_balance_sheet_case_75'),
+                ref('accounting_balance_sheet_case_76'),
+                ref('accounting_balance_sheet_case_77'),
+                ref('accounting_balance_sheet_case_78'),
+                ref('accounting_balance_sheet_case_79'),
+                ref('accounting_balance_sheet_case_80'),
+                ref('accounting_balance_sheet_case_81'),
+                ref('accounting_balance_sheet_case_82'),
+                ref('accounting_balance_sheet_case_83'),
+                ref('accounting_balance_sheet_case_84'),
+                ref('accounting_balance_sheet_case_85'),
+                ref('accounting_balance_sheet_case_86'),
+                ref('accounting_balance_sheet_case_87'),
+                ref('accounting_balance_sheet_case_88'),
+                ref('accounting_balance_sheet_case_89'),
+                ref('accounting_balance_sheet_case_90'),
+                ref('accounting_balance_sheet_case_91'),
+                ref('accounting_balance_sheet_case_92'),
+                ref('accounting_balance_sheet_case_93'),
+            ]"/>
+        </function>
+    </data>
+</odoo>

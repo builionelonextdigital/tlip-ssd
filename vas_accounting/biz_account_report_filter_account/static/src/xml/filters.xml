@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-inherit="account_reports.AccountReportFiltersCustomizable" t-inherit-mode="extension">
+        <xpath expr="." position="inside">
+            <!-- Account Account filter -->
+            <t t-if="controller.filters.show_accounts">
+                <div id="filter_accounts" class="filter_accounts">
+                    <t t-call="account_report_filter_account.AccountReportFilterAccounts" />
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>

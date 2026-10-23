@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_tlip_procurement_vendor_cr_tree" model="ir.ui.view">
+        <field name="name">tlip.procurement.vendor.cr.tree</field>
+        <field name="model">res.partner.cr</field>
+        <field name="inherit_id" ref="tlip_base.view_tlip_base_res_partner_cr_tree" />
+        <field name="mode">primary</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="vendor_code" />
+                <field name="vendor_type_ids" widget="many2many_tags" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_tlip_procurement_vendor_cr_form" model="ir.ui.view">
+        <field name="name">tlip.procurement.vendor.cr.form</field>
+        <field name="model">res.partner.cr</field>
+        <field name="inherit_id"
+            ref="tlip_approval.view_tlip_base_res_partner_cr_form_inherit_approval" />
+        <field name="mode">primary</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="string">Vendors</attribute>
+            </xpath>
+            <xpath expr="//group[@name='register_address_vn']/span[@name='address_name']"
+                position="before">
+                <field name="vendor_code" readonly="1"  />
+            </xpath>
+            <xpath expr="//group[@name='register_address_en']/span[@name='address_name']"
+                position="before">
+                <field name="vendor_type_ids" widget="many2many_tags"
+                    options="{'no_create': True, 'no_create_edit': True}"
+                    required="1" readonly="state != 'draft'" />
+            </xpath>
+            <xpath expr="//group[@name='detail_company_info']/field[@name='function']"
+                position="before">
+                <field name="vendor_type_ids" widget="many2many_tags"
+                    options="{'no_create': True, 'no_create_edit': True}" required="1"
+                    readonly="state != 'draft'" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_cr_view_search" model="ir.ui.view">
+        <field name="name">res.partner.cr.view.search</field>
+        <field name="model">res.partner.cr</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="0" string="Group By">
+                    <filter name="my_approval" string="My Approvals"
+                        domain="[('current_approver_id.job_id.employee_ids.user_id', 'in', [uid]), ('state', '=', 'to_approve')]" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="tlip_procurement_vendor_cr_action" model="ir.actions.act_window">
+        <field name="name">Vendor Change Requests</field>
+        <field name="res_model">res.partner.cr</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_procurement.view_tlip_procurement_vendor_cr_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_procurement.view_tlip_procurement_vendor_cr_form')})]" />
+        <field name="search_view_id" ref="tlip_base.view_tlip_base_res_partner_cr_search" />
+        <field name="domain">[]</field>
+        <field name="context">{'create': 0, 'delete': 0}</field>
+    </record>
+</odoo>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="preference_check_view_form" model="ir.ui.view">
+        <field name="name">task.order.selection.view.form</field>
+        <field name="model">task.order.selection</field>
+        <field name="arch" type="xml">
+            <form string="Preference Check">
+                <sheet>
+                    <group>
+                        <field name="fs_annual_sales" widget="monetary"
+                            string="Upto date FS information: Annual Sales" />
+                        <field name="fs_annual_pat" widget="monetary"
+                            string="Upto date FS information: Annual PAT" />
+                        <field name="fs_total_assets" widget="monetary"
+                            string="Upto date FS information: Total Assets" />
+                        <field name="copy_fs_file"
+                            filename="copy_fs_filename" />
+                        <field name="copy_fs_filename"
+                            invisible="1" />
+                        <field name="copy_client_file" filename="copy_client_filename" />
+                        <field name="copy_client_filename"
+                            invisible="1" />
+                        <field name="site_check_file" filename="site_check_filename" />
+                        <field name="result_site_check" />
+                        <field name="site_check_filename"
+                            invisible="1" />
+                        <field name="other_notes" />
+                        <field name="currency_id" invisible="1" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_submit_approval"
+                        type="object"
+                        data-hotkey="q" string="Submit Approval" class="oe_highlight" />
+                    <button special="cancel" data-hotkey="z" string="Cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="preference_check_action" model="ir.actions.act_window">
+        <field name="name">Preference Check</field>
+        <field name="res_model">task.order.selection</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="preference_check_view_form" />
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>

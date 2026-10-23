@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="sequence_leasing_quotation" model="ir.sequence">
+            <field name="name">Leasing Quotation</field>
+            <field name="code">leasing.quotation.sequence</field>
+            <field name="prefix">QUOTE-</field>
+            <field name="padding">2</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="sequence_reservation_agreement" model="ir.sequence">
+            <field name="name">Reservation Agreement</field>
+            <field name="code">reservation.agreement.sequence</field>
+            <field name="prefix">RA-%(year)s%(month)s/</field>
+            <field name="padding">2</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="sequence_lease_contract" model="ir.sequence">
+            <field name="name">Lease Contract</field>
+            <field name="code">lease.contract.sequence</field>
+            <field name="prefix">LC</field>
+            <field name="padding">2</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="sequence_supplemental_agreement" model="ir.sequence">
+            <field name="name">Supplemental Agreement</field>
+            <field name="code">supplemental.agreement.sequence</field>
+            <field name="prefix">SA/</field>
+            <field name="padding">2</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="sequence_termination_agreement" model="ir.sequence">
+            <field name="name">Termination Agreement</field>
+            <field name="code">termination.agreement.sequence</field>
+            <field name="prefix">TA/</field>
+            <field name="padding">2</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="sequence_change_land_plot" model="ir.sequence">
+            <field name="name">Change Land Plot</field>
+            <field name="code">change.land.plot</field>
+            <field name="prefix">CLL</field>
+            <field name="padding">2</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

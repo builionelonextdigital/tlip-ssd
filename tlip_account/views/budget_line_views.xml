@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_budget_line_form_detail_line" model="ir.ui.view">
+        <field name="name">budget.line.view.form.detail.line</field>
+        <field name="model">budget.line</field>
+        <field name="priority">999</field>
+        <field name="arch" type="xml">
+            <form string="Budget Code Details">
+                <field name="budget_line_detail_ids">
+                    <list string="Budget Code Details" editable="bottom">
+                        <field name="budget_line_id" column_invisible="True" />
+                        <field name="currency_id" column_invisible="True" />
+                        <field name="product_categ_id"
+                            options="{'no_create': True, 'no_create_edit': True}" />
+                        <field name="budget_amount" sum="Budget" />
+                        <field name="committed_amount"
+                            sum="Reserved" />
+                        <field name="achieved_amount"
+                            sum="Used" />
+                    </list>
+                </field>
+            </form>
+        </field>
+    </record>
+</odoo>

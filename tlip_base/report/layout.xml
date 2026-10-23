@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="tlip_layout_standard">
+        <div class="header o_report_layout_standard">
+            <div class="row logo mb-1" style="position: relative">
+                <div class="logo col-2">
+                    <img t-if="company.logo" class="o_company_logo_big" t-att-src="image_data_uri(company.logo)" style="height: auto; width:85%" alt="Logo"/>
+                </div>
+                <div class="company_name col-10" style="position: relative">
+                    <div style="position: absolute; top: 50%; left: -2%">
+                        <h1 style="font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif'; font-size: 28px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px; "><t t-esc="company.name"/></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="article o_report_layout_standard" style="margin-top:-10px" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-out="0"/>
+        </div>
+
+        <div class="footer o_report_layout_standard">
+            <div style="border-bottom: 2px solid black;"></div>
+        </div>
+    </template>
+
+    <template id="tlip_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <t t-call="tlip_base.tlip_layout_standard"><t t-out="0"/></t>
+    </template>
+
+</odoo>

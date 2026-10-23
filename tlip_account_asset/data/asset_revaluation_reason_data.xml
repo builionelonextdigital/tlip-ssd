@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="asset_revaluation_reason_other_increase" model="asset.revaluation.reason">
+            <field name="name">Tăng Khác - Other Increase</field>
+            <field name="type">increase</field>
+        </record>
+        <record id="asset_revaluation_reason_construction_increase" model="asset.revaluation.reason">
+            <field name="name">Tăng do xây dựng lắp đặt - Construction</field>
+            <field name="type">increase</field>
+        </record>
+        <record id="asset_revaluation_reason_purchase_increase" model="asset.revaluation.reason">
+            <field name="name">Tăng do mua sắm - Purchase</field>
+            <field name="type">increase</field>
+        </record>
+        <record id="asset_revaluation_reason_other_decrease" model="asset.revaluation.reason">
+            <field name="name">Giảm khác - Other Decrease</field>
+            <field name="type">decrease</field>
+        </record>
+        <record id="asset_revaluation_reason_liquidation_decrease" model="asset.revaluation.reason">
+            <field name="name">Giảm do thanh lý - Liquidation</field>
+            <field name="type">decrease</field>
+        </record>
+    </data>
+</odoo>

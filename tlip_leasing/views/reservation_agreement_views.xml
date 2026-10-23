@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="reservation_agreement_view_list" model="ir.ui.view">
+        <field name="name">reservation_agreement_view_list</field>
+        <field name="model">leasing.agreement</field>
+        <field name="arch" type="xml">
+            <list create="0" delete="0">
+                <field name="name" string="Reservation Agreement" />
+                <field name="land_plot_id" />
+                <field name="lessee_name" />
+                <field name="lessor_id" />
+                <field name="expiry_date" string="Target Date" />
+                <field name="create_date" widget="timeless_date" />
+                <field name="state"
+                    widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state == 'wait'"
+                    decoration-success="state in ('approve', 'complete')"
+                    decoration-primary="state == 'terminate'"
+                    decoration-muted="state == 'cancel'"
+                    decoration-danger="state == 'reject'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="reservation_agreement_view_form" model="ir.ui.view">
+        <field name="name">reservation_agreement_view_form</field>
+        <field name="model">leasing.agreement</field>
+        <field name="arch" type="xml">
+            <form create="0" delete="0">
+                <header>
+                    <button name="action_submit_approval" string="Submit" type="object"
+                        class="oe_highlight" invisible="not active or state != 'draft'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_approve_request" type="object" string="Approve"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="user_status != 'pending' or state != 'wait_for_approval'"
+                        class="btn-primary" data-hotkey="v" />
+                    <button name="action_reject_request" string="Refuse" type="object"
+                        invisible="user_status != 'pending' or state != 'wait_for_approval'"
+                        data-hotkey="z"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_withdraw_approval" string="Withdraw" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="btn btn-secondary"
+                        invisible="state != 'wait_for_approval'" />
+                    <button name="action_reset_approval" string="Reset Approval" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="state not in ('rejected', 'withdrawn')" />
+                    <widget name="attach_document" string="Upload Hard Copy"
+                        invisible="not active or state != 'approve'" action="message_post"
+                        highlight="1" />
+                    <button name="action_payment" string="Create Payment Request" type="object"
+                        class="oe_highlight"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="not active or state != 'approve' or payment_state == 'paid'" />
+                    <button name="action_create_contract" string="Create Contract"
+                        type="object" class="oe_highlight"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="not active or state != 'complete'" />
+                    <button name="action_create_supplemental_agreement" string="Create Supplement"
+                        type="object" invisible="not active or state != 'approve'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_create_termination_agreement" string="Create Termination"
+                        type="object"
+                        invisible="not active or state != 'approve'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_print" string="Print" type="object"
+                        class="oe_highlight" />
+                    <button name="action_preview" string="Preview" type="object"
+                        class="oe_highlight" />
+                    <widget name="attach_document" string="Attach Document"
+                        action="message_post" highlight="1"
+                        invisible="not active or state in ('draft', 'wait', 'cancel', 'approve')" />
+                    <button name="action_cancel" string="Cancel" type="object"
+                        invisible="not active or state == 'cancel'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,wait,approve,complete" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_get_quotation_view"
+                            class="oe_stat_button"
+                            icon="fa-envelope"
+                            type="object">
+                            Quotation
+                        </button>
+                        <button name="action_get_contract_view"
+                            class="oe_stat_button"
+                            icon="fa-envelope"
+                            type="object"
+                            invisible="state in ['draft', 'wait']">
+                            <field name="contract_count" widget="statinfo"
+                                string="Contract" />
+                        </button>
+                        <button name="action_get_supplement_agreement_view"
+                            class="oe_stat_button"
+                            icon="fa-envelope"
+                            type="object"
+                            invisible="state in ['draft', 'wait']">
+                            <field name="supplement_agreement_count" widget="statinfo"
+                                string="Supplement" />
+                        </button>
+                        <button name="action_get_termination_agreement_view"
+                            class="oe_stat_button"
+                            icon="fa-envelope"
+                            type="object"
+                            invisible="state in ['draft', 'wait']">
+                            <field name="termination_agreement_count" widget="statinfo"
+                                string="Termination" />
+                        </button>
+                        <button name="action_get_attachment_view"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            type="object"
+                            invisible="attachment_number == 0">
+                            <field name="attachment_number" widget="statinfo" string="Documents"
+                                options="{'reload_on_button': true}" />
+                        </button>
+                        <button class="oe_stat_button" name="action_open_approval_history_ids"
+                            type="object"
+                            icon="fa-history">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Approval Histories
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                        invisible="active" />
+                    <field name="active" invisible="1" />
+                    <label for="name" />
+                    <h1>
+                        <field name="name" nolabel="1" />
+                    </h1>
+                    <group name="agreement_info" string="Reservation Information">
+                        <group>
+                            <field name="issued_date" readonly="state not in ('draft', 'wait')"
+                                required="1" />
+                            <field name="expiry_date" readonly="state not in ('draft', 'wait')"
+                                string="Target Date"
+                                required="1" />
+                            <field name="due_date" readonly="state not in ('draft', 'wait')"
+                                string="Payment Due"/>
+                        </group>
+                        <group>
+                            <field name="quotation_id" readonly="1" />
+                            <field name="quotation_issued_date" />
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Lessor">
+                            <field name="lessor_id" string="Name"
+                                readonly="state not in ('draft', 'wait')" required="1" />
+                            <label for="lessor_street" string="Address" />
+                            <div class="o_address_format">
+                                <field name="lessor_street" placeholder="Street..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1" />
+                                <field name="lessor_street_2" placeholder="Street 2..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1" />
+                                <field name="lessor_district_id" placeholder="District"
+                                    options='{"no_open": True, "no_create": True}'
+                                    style="width: 35% !important" class="o_address_district"
+                                    readonly="1" />
+                                <field name="lessor_ward_id" placeholder="Ward"
+                                    options='{"no_open": True, "no_create": True}'
+                                    style="width: 35% !important" class="o_address_ward"
+                                    readonly="1" />
+                                <field name="lessor_state_id" class="o_address_state"
+                                    placeholder="City"
+                                    style="width: 35% !important"
+                                    options="{'no_open': True, 'no_quick_create': True}"
+                                    context="{'country_id': lessee_country_id, 'default_country_id': lessee_country_id}"
+                                    readonly="1" />
+                                <field name="lessor_country_id" placeholder="Country"
+                                    style="width: 34% !important" class="o_address_country"
+                                    options='{"no_open": True, "no_create": True}'
+                                    readonly="1" />
+                            </div>
+                        </group>
+                        <group string="Lessee">
+                            <field name="lessee_id" string="Customer Code"
+                                readonly="state not in ('draft', 'wait')" />
+                            <field name="lessee_name" string="Name" required="1"
+                                readonly="1" />
+                            <label for="lessee_street" string="Address" />
+                            <div class="o_address_format">
+                                <field name="lessee_street" placeholder="Street..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1" />
+                                <field name="lessee_street_2" placeholder="Street 2..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1" />
+                                <field name="lessee_district_id" placeholder="District"
+                                    options='{"no_open": True, "no_create": True}'
+                                    style="width: 35% !important" class="o_address_district"
+                                    readonly="1" />
+                                <field name="lessee_ward_id" placeholder="Ward"
+                                    options='{"no_open": True, "no_create": True}'
+                                    style="width: 35% !important" class="o_address_ward"
+                                    readonly="1" />
+                                <field name="lessee_state_id" class="o_address_state"
+                                    placeholder="City"
+                                    style="width: 35% !important"
+                                    options="{'no_open': True, 'no_quick_create': True}"
+                                    context="{'country_id': lessee_country_id, 'default_country_id': lessee_country_id}"
+                                    readonly="1" />
+                                <field name="lessee_country_id" placeholder="Country"
+                                    style="width: 34% !important" class="o_address_country"
+                                    options='{"no_open": True, "no_create": True}'
+                                    readonly="1" />
+                            </div>
+                            <field name="lessee_email" string="Email"
+                                readonly="1" />
+                            <field name="lessee_phone" string="Phone"
+                                readonly="1" />
+                            <field name="lessee_legal_partner_id"
+                                string="Legal / Authorized Representative"
+                                readonly="1" />
+                            <field name="lessee_title_id" readonly="1" />
+
+                        </group>
+                        <group string="Land Plot">
+                            <field name="land_plot_id" readonly="state not in ('draft', 'wait')"
+                                options='{"no_create": True, "no_edit": True}' />
+                            <field name="plot_view_id" readonly="1" />
+                            <field name="land_plot_category_id" force_save="1" readonly="1" />
+                            <label for="area" />
+                            <div>
+                                <field name="area" force_save="1" class="oe_inline" /> sqm </div>
+                            <label for="actual_area" />
+                            <div>
+                                <field name="actual_area" class="oe_inline"
+                                    readonly="state not in ('draft', 'wait')" /> sqm </div>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note" readonly="state not in ('draft', 'wait')" />
+                    </group>
+                    <notebook>
+                        <page string="Rental Fee &amp; Deposit">
+                            <group>
+                                <group>
+                                    <field name="currency_id" invisible="1" />
+                                    <label for="rental_fee" />
+                                    <div class="o_row">
+                                        <field name="rental_fee" nolabel="1"
+                                            readonly="state not in ('draft', 'wait')" />
+                                        <field name="rental_fee_unit" nolabel="1" required="1"
+                                            readonly="state not in ('draft', 'wait')" />
+                                    </div>
+                                    <label for="reservation_deposit" />
+                                    <div class="o_row">
+                                        <field name="reservation_deposit" nolabel="1"
+                                            readonly="state not in ('draft', 'wait')" />
+                                        <field name="reservation_deposit_type" nolabel="1"
+                                            required="1" readonly="state not in ('draft', 'wait')" />
+                                    </div>
+                                    <field name="reservation_deposit_amount" />
+                                </group>
+                                <group>
+                                    <field name="exchange_rate_amount"
+                                        readonly="state not in ('draft', 'wait')" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="other_info" string="Other Information">
+                            <group>
+                                <group>
+                                    <field name="user_id" readonly="state not in ('draft', 'wait')"
+                                        options="{'no_create': True, 'no_open': True}" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="approval" string="Approval Information"
+                            invisible="not approver_ids">
+                            <field name="approver_ids" mode="list" readonly="1">
+                                <list editable="bottom" decoration-success="status=='approved'"
+                                    decoration-warning="status in ['pending', 'waiting']"
+                                    decoration-danger="status=='refused'" no_open="1">
+                                    <field name="existing_request_user_ids" column_invisible="True" />
+                                    <field name="sequence" column_invisible="True" />
+                                    <field name="user_id" string="Approver"
+                                        required="not job_id" />
+                                    <field name="job_id" required="not user_id" />
+                                    <field name="status" />
+                                    <field name="company_id" column_invisible="True" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_reservation_agreement_view">
+        <field name="name">Reservation Agreement</field>
+        <field name="res_model">leasing.agreement</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_leasing.reservation_agreement_view_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_leasing.reservation_agreement_view_form')})]" />
+        <field name="domain">[('agreement_type', '=', 'reservation')]</field>
+    </record>
+</odoo>

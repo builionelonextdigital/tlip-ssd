@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_statements_cash_flows_report_tree" model="ir.ui.view">
+            <field name="name">statements.cash.flows.report.tree</field>
+            <field name="model">statements.cash.flows.report</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="previous_id"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="template_id"/>
+                    <field name="state"/>
+                </list></field>
+        </record>
+        <record id="view_statements_cash_flows_report_form" model="ir.ui.view">
+            <field name="name">statements.cash.flows.report.form</field>
+            <field name="model">statements.cash.flows.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button class="btn-primary" name="action_calculate" string="Calculate" type="object"/>
+                        <button invisible="state not in ['draft']" name="action_closed" string="Closing" type="object"/>
+                        <button invisible="state not in ['closed']" name="action_open" string="Open" type="object"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" readonly="state == 'closed'"/>
+                                <field name="previous_id" readonly="state == 'closed'"/>
+                                <field name="from_date" readonly="state == 'closed'"/>
+                                <field name="to_date" readonly="state == 'closed'"/>
+                                <field domain="[('template_type', '=', 'statements_cash_flows')]" name="template_id" readonly="state == 'closed'"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field colspan="2" name="line_ids" nolabel="1" readonly="state == 'closed'">
+                                <list default_order="stt_calculate asc" editable="bottom">
+                                    <field domain="[('report_type', '=', 'statements_cash_flows')]" name="balance_id"/>
+                                    <field name="code"/>
+                                    <field invisible="1" name="stt_calculate"/>
+                                    <field name="number_first_year"/>
+                                    <field name="number_last_year"/>
+                                    <field invisible="1" name="apply_by"/>
+                                    <button class="btn-primary" invisible="apply_by == 'total_categ'" name="view_move_line" string="View detail" type="object"/>
+                                </list></field>
+                        </group>
+                    </sheet>
+                </form></field>
+        </record>
+        <record id="view_statements_cash_flows_report_line_tree" model="ir.ui.view">
+            <field name="name">statements.cash.flows.report.line.tree</field>
+            <field name="model">statements.cash.flows.report.line</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="balance_id"/>
+                    <field name="code"/>
+                    <field name="number_first_year"/>
+                    <field name="number_last_year"/>
+                    <field invisible="1" name="apply_by"/>
+                    <button class="btn-primary" invisible="apply_by == 'total_categ'" name="view_move_line" string="View detail" type="object"/>
+                </list></field>
+        </record>
+        <record id="action_statements_cash_flows" model="ir.actions.act_window">
+            <field name="name">Statements Of Cash Flows Report</field>
+            <field name="res_model">statements.cash.flows.report</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('template_id.template_type','=','statements_cash_flows')]</field>
+            <field name="context">{'statements_cash_flows': True}</field>
+        </record>
+    </data>
+</odoo>

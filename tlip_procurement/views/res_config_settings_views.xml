@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_inherit_procurement" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.procurement</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase" />
+            <field name="arch" type="xml">
+                <xpath expr="//block[@name='matrix_setting_container']" position="after">
+                    <block title="Bidding" name="bidding_settings_container">
+                        <setting id="minimum_bidding_amount" string="Minimum Bidding Amount" help="Request to confirm if tender assignment is required for purchases above the minimum threshold">
+                            <div class="row mt16">
+                                <label for="minimum_biding_amount" string="Default Amount" class="col-4"/>
+                                <field name="minimum_biding_amount" string="Minimum Bidding Amount"/>
+                            </div>
+                        </setting>
+                    </block>
+                    <block title="Preference Check" name="preference_check_settings_container">
+                        <setting id="minimum_preference_check_amount" string="Minimum Preference Check Amount" help="Request to confirm if vendor verification of first-time purchases above the minimum threshold is required">
+                            <div class="row mt16">
+                                <label for="minimum_preference_check_amount" string="Default Amount" class="col-4"/>
+                                <field name="minimum_preference_check_amount" string="Minimum Preference Check Amount"/>
+                            </div>
+                        </setting>
+                    </block>
+                </xpath>
+            <xpath expr="//app[@name='purchase']/block[@name='purchase_setting_container']" position="after">
+                <block title="Purchase Contract" name="purchase_contract_settings_container">
+                    <setting id="purchase_contract_bypass_maximum" string="Maximum Amount By Pass Purchase Contract" company_dependent="1" help="if the amount of purchase contract bigger than the maximum, the option Bypass Contract will be disable.">
+                        <div class="row mt16">
+                            <label for="purchase_contract_bypass_maximum" string="Maximum Amount" class="col-4"/>
+                            <field name="purchase_contract_bypass_maximum" string="Maximum Amount"/>
+                        </div>
+                    </setting>
+                </block>
+                <block title="Entertainment Budget Alert" name="purchase_entertainment_settings_container">
+                    <setting id="entertainment_budget_alert" string="Maximum Entertainment Budget Amount" company_dependent="1" help="Alert if the budget per participant exceeds the threshold, requiring explanation.">
+                        <div class="row mt16">
+                            <label for="employee_purchase_quota" string="Default Amount" class="col-4"/>
+                            <field name="employee_purchase_quota" string="Maximum Entertainment Budget Amount"/>
+                        </div>
+                    </setting>
+                </block>
+            </xpath>
+            </field>
+    </record>
+
+</odoo>

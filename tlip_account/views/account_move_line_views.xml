@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_move_line_tree" model="ir.ui.view">
+        <field name="name">account.move.line.tree</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_maturity']" position="after">
+                <field name="payment_note" optional="hide" />
+            </xpath>
+            <xpath expr="//field[@name='date']" position="before">
+                <field name="request_payment_number" />
+                <field name="request_payment_date" />
+            </xpath>
+            <xpath expr="//list" position="inside">
+                <field name="entry_currency_rate" optional="hide" />
+                <field name="land_plot_id" optional="hide" />
+                <field name="development_project_id" optional="hide" />
+                <field name="development_phase_id" optional="hide" />
+                <field name="development_project_code" optional="hide" />
+                <field name="contract_number" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_cip_wip_summary_view_detail" model="ir.actions.act_window">
+        <field name="context">{'journal_type':'general', 'search_default_posted':1}</field>
+        <field name="name">Journal Items</field>
+        <field name="res_model">account.move.line</field>
+        <field name="domain">[('display_type', 'not in', ('line_section', 'line_note')), ('parent_state', '!=', 'cancel')]</field>
+        <field name="view_id" ref="view_move_line_tree"/>
+        <field name="view_mode">list,pivot,graph,kanban</field>
+    </record>
+
+</odoo>

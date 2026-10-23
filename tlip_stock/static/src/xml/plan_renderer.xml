@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="web_plan_layout.Tooltip" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_location_tooltip')]" position="replace">
+            <div class="o_location_tooltip">
+                <h6>Location name: <t t-esc="data.location_name or ''"/></h6>
+                <h6>Lease status: <t t-esc="data.lease_state or ''"/></h6>
+            </div>
+        </xpath>
+    </t>
+
+    <t t-inherit="web_plan_layout.Label" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_label_overlay')]" position="replace">
+            <div class="o_label_overlay">
+                <div><t t-esc="data.location_name or ''"/></div>
+            </div>
+        </xpath>
+    </t>
+</templates>

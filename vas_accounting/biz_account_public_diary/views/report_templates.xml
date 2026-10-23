@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s03a_dn_pdf">
+        <style>
+            * {
+                font-size: 15px;
+            }
+            .s03a-dn-text-right {
+                text-align: right;
+            }
+            .s03a-dn-title-small {
+                font-weight: bold;
+            }
+            .s03a-dn-header-title {
+                font-weight: bold;
+                font-size: 15px;
+            }
+            .s03a-dn-title {
+                font-weight: bold;
+                font-size: 20px;
+            }
+            .s03a-dn-text-center {
+                text-align: center;
+            }
+            .s03a-dn-header {
+                line-height: 1.6;
+            }
+            .s03a-dn-text-italic {
+                font-style: italic;
+            }
+            .s03a-dn-flex-container {
+                display: -webkit-box; /* wkhtmltopdf uses this one */
+                -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+                page-break-inside: avoid;
+            }
+            .s03a-dn-flex-container > div {
+                width: 230px;
+            }
+            .s03a-dn-table {
+                border-right: 1px solid black;
+            }
+            .s03a-dn-table > thead > tr:not(#no-border) {
+                border: 1px solid black;
+            }
+            .s03a-dn-table > thead > tr:not(#no-border) > th {
+                border: 1px solid black;
+            }
+            .s03a-dn-table > tbody > tr{
+                border: 1px solid black;
+            }
+            .s03a-dn-table > tbody > tr > td {
+                border: 1px solid black;
+            }
+        </style>
+        <div class='o_account_reports_body'>
+            <div class="o_account_reports_page o_account_reports_no_print o_account_trial_balance_s03a_dn_report">
+                <div class="o_account_reports_header print_only s03a-dn-header">
+                    <div class="row">
+                        <div class="col-8">
+                            <br/><span class="s03a-dn-title-small">Đơn vị:</span><t t-out="report_company_name"/>
+                            <br/><span class="s03a-dn-title-small">Địa chỉ: </span><t t-out="report_s03a_dn_company_street"/>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-12 s03a-dn-text-center">
+                                    <span class="s03a-dn-header-title">Mẫu số S03a-DN</span>
+                                    <br/>
+                                    <span class="s03a-dn-text-italic">(Ban hành theo Thông tư số 200/2014/TT-BTC</span>
+                                    <br/>
+                                    <span class="s03a-dn-text-italic">Ngày 22/12/2014 của Bộ Tài chính)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="s03a-dn-text-center">
+                    <p class="s03a-dn-title">SỔ NHẬT KÝ CHUNG</p>
+                    <t t-if="report_s03a_dn_date">
+                        <t t-out="report_s03a_dn_date"/>
+                    </t>
+                </div>
+                <br/><br/>
+                <div class="">
+                    <t t-set="stt" t-value="1"/>
+                    <table class="o_account_reports_table table-hover s03a-dn-table">
+                        <thead>
+                            <tr id="no-border">
+                                <th class="s03a-dn-text-right" colspan="100%" style="font-style: italic;">Đơn vị tính: Đồng</th>
+                            </tr>
+                            <tr>
+                                <th rowspan="2">Ngày, tháng ghi sổ</th>
+                                <th colspan="2">Chứng từ</th>
+                                <th rowspan="2">Diễn giải</th>
+                                <th rowspan="2">Đã ghi sổ cái</th>
+                                <th rowspan="2">STT dòng</th>
+                                <th rowspan="2">Số hiệu TK đối ứng</th>
+                                <th colspan="2">Số phát sinh</th>
+                            </tr>
+                            <tr>
+                                <th>Số hiệu</th>
+                                <th>Ngày, tháng</th>
+                                <th>Nợ</th>
+                                <th>Có</th>
+                            </tr>
+                            <tr>
+                                <th>A</th>
+                                <th>B</th>
+                                <th>C</th>
+                                <th>D</th>
+                                <th>E</th>
+                                <th>G</th>
+                                <th>H</th>
+                                <th>1</th>
+                                <th>2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="lines">
+                                <t t-if="lines[1]">
+                                    <t t-foreach="lines[1]" t-as="line" >
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="s03a-dn-title-small">Số trang trước chuyển sang</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <t t-foreach="line.get('columns')" t-as="cell">
+                                                <td class="s03a-dn-text-right">
+                                                    <t t-out="model._get_s03a_dn_format_float_number(cell.get('name'))"/>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="s03a-dn-title-small">Số trang trước chuyển sang</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                </t>
+
+                                <t t-foreach="lines[0]" t-as="line">
+                                    <t t-set="show" t-value="True"/>
+                                    <t t-set="is_total" t-value="line.get('name') and line.get('name') == 'total'"/>
+                                    <t t-foreach="line.get('columns')" t-as="cell">
+                                        <t t-set="show" t-value="cell.get('stt') and cell.get('stt') == 1"/>
+                                        <tr>
+                                            <td>
+                                                <t t-if="show" t-out="model._get_s03a_dn_format_date(line.get('date'))"/>
+                                            </td>
+                                            <td style="min-width: 155px">
+                                                <t t-if="show" t-out="line.get('name')"/>
+                                            </td>
+                                            <td style="width: 90px;">
+                                                <t t-if="show" t-out="model._get_s03a_dn_format_date(line.get('date'))"/>
+                                            </td>
+                                            <td style="width: 350px;">
+                                                <t t-if="show" t-out="line.get('ref')"/>
+                                                <t t-elif="is_total">
+                                                    <span class="s03a-dn-title-small">Cộng chuyển sang trang sau</span>
+                                                </t>
+                                                <t t-if="not show" t-out="cell.get('diengiai')"/>
+                                            </td>
+                                            <td class="s03a-dn-text-center">
+                                                <span>x</span>
+                                            </td>
+                                            <td class="s03a-dn-text-center">
+                                                <t t-if="not is_total">
+                                                    <t t-out="stt"/>
+                                                    <t t-set="stt" t-value="stt+1"/>
+                                                </t>
+                                                <t t-elif="is_total">
+                                                    <span>x</span>
+                                                </t>
+                                            </td>
+                                            <td t-attf-class="{{'s03a-dn-text-center' if is_total else ''}}">
+                                                <t t-if="not is_total" t-out="cell.get('name')"/>
+                                                <t t-elif="is_total">
+                                                    <span>x</span>
+                                                </t>
+                                            </td>
+                                            <td class="s03a-dn-text-right" style="min-width: 130px;">
+                                                <t t-if="cell.get('debit') and cell.get('debit') > 0" t-out="model._get_s03a_dn_format_float_number(cell.get('debit'))"/>
+                                                <t t-else="">
+                                                    <span>0</span>
+                                                </t>
+                                            </td>
+                                            <td class="s03a-dn-text-right" style="min-width: 130px;">
+                                                <t t-if="cell.get('credit') and cell.get('credit') > 0" t-out="model._get_s03a_dn_format_float_number(cell.get('credit'))"/>
+                                                <t t-else="">
+                                                    <span>0</span>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                    <p>- Số này có .... trang, đánh số từ trang số 01 đến trang ....</p>
+                    <p>- Ngày mở sổ: ....</p>
+                </div>
+                <br/>
+                <div class="s03a-dn-flex-container s03a-dn-text-center">
+                    <div>
+                        <span style="font-style: italic;">Ngày .... tháng .... năm ....</span>
+                        <br/>
+                        <span class="s03a-dn-title-small">Người lập biểu</span>
+                        <br/>
+                        <span>(Ký, họ tên)</span>
+                    </div>
+                    <div>
+                        <span style="font-style: italic;">Ngày .... tháng .... năm ....</span>
+                        <br/>
+                        <span class="s03a-dn-title-small">Kế toán trưởng</span>
+                        <br/>
+                        <span>(Ký, họ tên)</span>
+                    </div>
+                    <div style="padding-right: 30px;">
+                        <span style="font-style: italic;">Ngày .... tháng .... năm ....</span>
+                        <span></span>
+                        <br/>
+                        <span class="s03a-dn-title-small">Người đại diện theo pháp luật</span>
+                        <br/>
+                        <span>(Ký, họ tên, đóng dấu)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

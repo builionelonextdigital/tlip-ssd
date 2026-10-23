@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="vas_debt_currency_report.AccountReportFiltersCustomizable" t-inherit="account_reports.AccountReportFiltersCustomizable" t-inherit-mode="primary">
+        <xpath expr="//t[@t-if='controller.filters.show_accounts']" position="replace">
+            <!-- Account Account filter -->
+            <t t-if="controller.filters.show_accounts">
+                <div id="filter_accounts" class="filter_accounts">
+                    <t t-call="vas_debt_currency_report.AccountReportFilterAccounts" />
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>

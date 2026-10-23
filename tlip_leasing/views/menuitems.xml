@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="leasing_menu_root"
+        web_icon="tlip_leasing,static/description/menu_icon.png"
+        name="Sales">
+        <!-- Sales / Customer -->
+        <menuitem id="leasing_customer_menu" name="Customers" sequence="5">
+            <menuitem id="menu_leasing_management_customer_name" name="Customers"
+                action="tlip_leasing.tlip_leasing_customer_action"
+                sequence="5" />
+            <menuitem id="leasing_customer_registration_menu" name="Tenant Registration"
+                action="tlip_leasing.tlip_leasing_customer_registration_action"
+                sequence="10" />
+        </menuitem>
+        <!-- Sales / Operations -->
+        <menuitem id="leasing_operations" name="Operations" sequence="10">
+            <menuitem id="menu_tlip_leasing_register_vendor" name="Register Customer"
+                action="tlip_leasing.tlip_leasing_register_customer_action"
+                sequence="5" />
+        </menuitem>
+        <!-- Sales / Contract -->
+        <menuitem id="leasing_contract_menu" name="Contract" sequence="15">
+            <menuitem id="menu_leasing_quotations"
+                name="Quotations"
+                action="action_leasing_quotation_view"
+                sequence="10" />
+            <menuitem id="menu_reservation_agreement"
+                name="Reservation Agreements"
+                action="action_reservation_agreement_view"
+                sequence="20" />
+            <menuitem id="menu_supplement_agreement"
+                name="Supplemental Agreements"
+                action="action_supplemental_agreement_view"
+                sequence="30" />
+            <menuitem id="menu_lease_contract"
+                name="Contracts"
+                action="action_contract_agreement_view"
+                sequence="40" />
+            <menuitem id="menu_termination_agreement"
+                name="Termination Agreements"
+                action="action_termination_agreement_view"
+                sequence="50" />
+        </menuitem>
+
+        <!-- Sales / Request for payments -->
+        <menuitem
+            id="view_leasing_tlip_request_payment_sales_menu"
+            name="Request for Payment"
+            sequence="60">
+            <menuitem
+                id="view_deposit_request_payment_menu"
+                name="Deposit Payments"
+                action="tlip_account.action_inbound_payment_request"
+                sequence="10" />
+
+            <menuitem
+                id="view_sales_request_payment_menu"
+                name="Request for Invoice Payments"
+                action="tlip_leasing.action_leasing_invoice_payment_request"
+                sequence="20" />
+        </menuitem>
+
+        <!-- Sales / Configuration -->
+        <menuitem id="leasing_configuration_menu" name="Configuration" sequence="100">
+            <menuitem id="menu_contract_type"
+                name="Contract Type"
+                action="action_contract_type_view"
+                sequence="10" />
+            <menuitem id="menu_customer_type"
+                name="Customer Type"
+                action="tlip_leasing_customer_type_action"
+                sequence="20" />
+        </menuitem>
+    </menuitem>
+
+    <menuitem
+        action="action_plot_view_dashboard"
+        id="stock.stock_picking_type_menu"
+        parent="stock.menu_stock_root"
+        sequence="0"
+        name="Overview" />
+
+    <menuitem
+        id="menu_change_land_plot"
+        name="Change Land Plots"
+        action="tlip_leasing.stock_location_cr_action"
+        parent="stock.menu_stock_warehouse_mgmt"
+        sequence="0" />
+</odoo>

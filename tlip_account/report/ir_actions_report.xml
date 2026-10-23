@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_rq_rental_factory" model="ir.actions.report">
+        <field name="name">MF-RQ</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tlip_account.mf_rq</field>
+        <field name="report_file">tlip_account.mf_rq</field>
+        <field name="print_report_name">'RQ - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref='tlip_base.tlip_paper_format' />
+    </record>
+    <record id="action_report_rq_power_1" model="ir.actions.report">
+        <field name="name">Power 1</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tlip_account.report_power_1</field>
+        <field name="report_file">tlip_account.report_power_1</field>
+        <field name="print_report_name">'Power 2 - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref='tlip_base.tlip_paper_format' />
+    </record>
+    <record id="action_report_rq_power_2" model="ir.actions.report">
+        <field name="name">Power 2</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tlip_account.report_power_2</field>
+        <field name="report_file">tlip_account.report_power_2</field>
+        <field name="print_report_name">'Power 2 - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref='tlip_base.tlip_paper_format' />
+    </record>
+    <record id="action_report_rq_power_3" model="ir.actions.report">
+        <field name="name">Power 3</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tlip_account.report_power_3</field>
+        <field name="report_file">tlip_account.report_power_3</field>
+        <field name="print_report_name">'Power 3 - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref='tlip_base.tlip_paper_format' />
+    </record>
+    <record id="action_report_rq_power_4" model="ir.actions.report">
+        <field name="name">Power 4</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tlip_account.report_power_4</field>
+        <field name="report_file">tlip_account.report_power_4</field>
+        <field name="print_report_name">'Power 4 - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref='tlip_base.tlip_paper_format' />
+    </record>
+    <record id="action_report_rq_water" model="ir.actions.report">
+        <field name="name">Water</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tlip_account.report_water</field>
+        <field name="report_file">tlip_account.report_water</field>
+        <field name="print_report_name">'Water - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref='tlip_base.tlip_paper_format' />
+    </record>
+    <record id="action_report_other_turnover" model="ir.actions.report">
+        <field name="name">Other Turnover</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tlip_account.report_other_turnover</field>
+        <field name="report_file">tlip_account.report_other_turnover</field>
+        <field name="print_report_name">'Other Turnover - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref='tlip_base.tlip_paper_format' />
+    </record>
+    <record id="action_report_other_request" model="ir.actions.report">
+        <field name="name">Other Request</field>
+        <field name="model">account.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tlip_account.report_other_rq_payment</field>
+        <field name="report_file">tlip_account.report_other_rq_payment</field>
+        <field name="print_report_name">'Other Turnover - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_account_payment" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref='tlip_base.tlip_paper_format' />
+    </record>
+    <record id="action_report_rq_power_2_1" model="ir.actions.report">
+        <field name="name">Power 2.1</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tlip_account.report_power_2_1</field>
+        <field name="report_file">tlip_account.report_power_2_1</field>
+        <field name="print_report_name">'Power 2.1 - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref='tlip_base.tlip_paper_format' />
+    </record>
+    <record id="action_report_rq_power_2_2" model="ir.actions.report">
+        <field name="name">Power 2.2</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tlip_account.report_power_2_2</field>
+        <field name="report_file">tlip_account.report_power_2_2</field>
+        <field name="print_report_name">'Power 2.2 - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref='tlip_base.tlip_paper_format' />
+    </record>
+    <record id="action_report_land_rent" model="ir.actions.report">
+        <field name="name">Land Rent</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tlip_account.report_land_rent</field>
+        <field name="report_file">tlip_account.report_land_rent</field>
+        <field name="print_report_name">'Other Turnover - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref='tlip_base.tlip_paper_format' />
+    </record>
+    <record id="action_accounting_voucher_xlsx" model="ir.actions.report">
+        <field name="name">Accounting Voucher (Excel)</field>
+        <field name="model">account.move.line</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">tlip_account.accounting_voucher_xlsx</field>
+        <field name="report_file">tlip_account.accounting_voucher_xlsx</field>
+        <field name="print_report_name">'Accounting Voucher (Excel).xlsx'</field>
+        <field name="binding_type">report</field>
+        <field name="binding_model_id" ref="model_account_move_line" />
+    </record>
+    <record id="action_asset_increasing_xlsx" model="ir.actions.report">
+        <field name="name">Increase Asset Voucher (Excel)</field>
+        <field name="model">account.asset</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">tlip_account.increase_asset_voucher_xlsx</field>
+        <field name="report_file">tlip_account.increase_asset_voucher_xlsx</field>
+        <field name="print_report_name">'Increase Asset Voucher (Excel).xlsx'</field>
+        <field name="binding_type">report</field>
+        <field name="binding_view_types">form</field>
+        <field name="binding_model_id" ref="account_asset.model_account_asset" />
+    </record>
+    <record id="action_asset_increasing_decreasing_xlsx" model="ir.actions.report">
+        <field name="name">Increase/Decrease Asset Voucher (Excel)</field>
+        <field name="model">account.asset</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">tlip_account.increase_decrease_asset_voucher_xlsx</field>
+        <field name="report_file">tlip_account.increase_decrease_asset_voucher_xlsx</field>
+        <field name="print_report_name">'Increase/Decrease Asset Voucher (Excel).xlsx'</field>
+        <field name="binding_type">report</field>
+        <field name="binding_view_types">list</field>
+        <field name="binding_model_id" ref="account_asset.model_account_asset" />
+    </record>
+</odoo>

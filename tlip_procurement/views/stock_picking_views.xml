@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_form_inherit" model="ir.ui.view">
+        <field name="name">view_picking_form_inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='partner_id'][2]" position="replace" />
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="invisible">picking_type_code == 'incoming'</attribute>
+            </xpath>
+            <!-- Phase 1 Temporarily not used
+            <xpath expr="//field[@name='partner_id']" position="before">
+                <field name="contract" invisible="picking_type_code != 'incoming'" readonly="state in ['cancel', 'done']"/>
+                <field name="contract_no" invisible="picking_type_code != 'incoming'" readonly="state in ['cancel', 'done']"/>
+            </xpath> -->
+            <xpath expr="//div[@name='button_box']//button[1]" position="before">
+                <button name="action_view_bill" class="oe_stat_button" icon="fa-file-text-o" type="object" invisible="not bill_id">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text">Vendor Bill</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//notebook" position="before">
+                <group invisible="picking_type_code != 'incoming'">
+                    <group string="Deliverer">
+                        <field name="partner_id" string="Supplier"
+                            context="{'form_view_ref': 'tlip_procurement.view_tlip_procurement_vendor_form'}"
+                            readonly="state in ['cancel', 'done']"/>
+                        <field name="vendor_legal_name" string="Representative"
+                            force_save="1" readonly="1" />
+                        <field name="vendor_legal_title" string="Position" 
+                            force_save="1" readonly="1" />
+                        <field name="vendor_legal_phone" string="Phone"
+                            force_save="1" readonly="1" />
+                        <field name="vendor_legal_fax" string="Fax"
+                            force_save="1" readonly="1" />
+                    </group>
+                    <group string="Receiver">
+                        <field name="buyer_id" string="Receiver"
+                            context="{'form_view_ref': 'tlip_procurement.view_tlip_procurement_vendor_form'}"
+                            readonly="state in ['cancel', 'done']" />
+                        <field name="buyer_legal_name" string="Representative"
+                            force_save="1" readonly="1" />
+                        <field name="buyer_legal_title" string="Position"
+                            force_save="1" readonly="1" />
+                        <field name="buyer_legal_phone" string="Number"
+                            force_save="1" readonly="1" />
+                        <field name="buyer_legal_fax" string="Fax"
+                            force_save="1" readonly="1" />
+                    </group>
+                </group>
+            </xpath>
+            <field name="owner_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="origin" position="after">
+                <field name="budget_department_responsible_job_id" invisible="1" />
+            </field>
+            <field name="group_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

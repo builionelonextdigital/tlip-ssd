@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_land_plots"
+        name="Land Plots"
+        parent="stock.menu_stock_root"
+        action="action_land_plot_view"
+        sequence="1" />
+
+    <menuitem id="menu_non_land_plots"
+        name="Goods/Service"
+        parent="stock.menu_stock_root"
+        sequence="1" />
+
+    <menuitem id="menu_non_land_plot_item"
+        name="Goods/Service"
+        parent="menu_non_land_plots"
+        action="action_non_land_plot_item_view"
+        sequence="1" />
+
+    <menuitem id="stock.menu_package"
+        name="Packages"
+        parent="tlip_stock.menu_non_land_plots"
+        sequence="5" />
+
+    <menuitem id="menu_land_plot_config"
+        name="Land Plot Management"
+        parent="stock.menu_stock_config_settings"
+        groups="stock.group_stock_manager"
+        sequence="0" />
+
+    <menuitem id="menu_plot_view_config"
+        name="Plot Views"
+        parent="menu_land_plot_config"
+        action="action_plot_view"
+        sequence="0" />
+
+    <menuitem id="menu_land_plot_category_config"
+        name="Land Plot Category"
+        parent="menu_land_plot_config"
+        action="action_land_plot_category_view"
+        sequence="0" />
+
+    <menuitem id="menu_land_plot_group_config"
+        name="Land Plot Groups"
+        parent="menu_land_plot_config"
+        action="action_land_plot_group_view"
+        sequence="0" />
+
+    <menuitem id="menu_development_phase_config"
+        name="Development Phases"
+        parent="menu_land_plot_config"
+        action="tlip_account.action_development_phase_view"
+        sequence="0" />
+
+    <menuitem id="menu_manufacturer_config"
+        name="Manufacturers"
+        parent="stock.menu_stock_config_settings"
+        action="action_product_manufacturer_view"
+        sequence="0" />
+
+    <menuitem
+        id="stock_dispose"
+        name="Dispose"
+        action="tlip_stock.action_picking_tree_dispose"
+        parent="stock.menu_stock_transfers"
+        sequence="25" />
+
+    <menuitem
+        id="stock_damage"
+        name="Damage"
+        action="tlip_stock.action_picking_tree_damage"
+        parent="stock.menu_stock_transfers"
+        sequence="30" />
+
+    <menuitem
+        id="stock_maintenance"
+        name="Maintenance"
+        action="tlip_stock.action_picking_tree_maintenance"
+        parent="stock.menu_stock_transfers"
+        sequence="35" />
+
+    <menuitem
+        id="stock_inspect"
+        name="Inspect"
+        action="tlip_stock.action_picking_tree_inspect"
+        parent="stock.menu_stock_transfers"
+        sequence="40" />
+
+    <record id="stock.menu_stock_inventory_control" model="ir.ui.menu">
+        <field name="active" eval="False" />
+    </record>
+
+    <record id="stock.menu_package" model="ir.ui.menu">
+        <field name="name">Asset Codes</field>
+    </record>
+
+    <record id="stock.menu_packaging_types" model="ir.ui.menu">
+        <field name="name">Asset Code Types</field>
+    </record>
+</odoo>

@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_tlip_base_partner_form_custom" model="ir.ui.view">
+        <field name="name">tlip.base.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Partners" duplicate="0">
+                <header>
+                    <widget name="attach_document" string="Attach Document" action="message_post"
+                        highlight="1" invisible="vendor_state != 'draft' or customer_state != 'draft'"/>
+                    <button name="action_update_contact_info" string="Update Info" type="object"
+                        class="btn btn-secondary"
+                        invisible="vendor_state != 'approved' and customer_state != 'approved'" 
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_block" string="Block" type="object"
+                        class="btn btn-secondary"
+                        invisible="(vendor_state != 'approved' and customer_state != 'approved') or is_blocked"
+                        confirm="If you block this record, you will be unable to use this contact for any operation in your system, including procurement, sales, invoicing, etc. Are you sure ?&#13;&#10;&#10;Think twice before you click that 'Block' button!" />
+                    <button name="action_unblock" string="Unblock" type="object"
+                        class="btn btn-secondary"
+                        invisible="(vendor_state != 'approved' and customer_state != 'approved') or not is_blocked"
+                        confirm="Are you sure that you want to do this action?" />
+                    <field name="vendor_state" invisible="1" />
+                    <field name="customer_state" invisible="1" />
+                </header>
+                <sheet>
+                    <group invisible="1">
+                        <field name="is_blocked" />
+                    </group>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_get_attachment_view"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            type="object"
+                            invisible="attachment_number == 0">
+                            <field name="attachment_number" widget="statinfo" string="Documents"
+                                options="{'reload_on_button': true}" />
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                        invisible="active" />
+                    <widget name="web_ribbon" title="Blocked" bg_color="text-bg-danger"
+                        invisible="not is_blocked" />
+                    <field name="image_1920" widget='image' class="oe_avatar"
+                        options='{"preview_image": "avatar_128"}' readonly="customer_state != 'draft' or vendor_state != 'draft'" />
+                    <div class="oe_title mb24">
+                        <field name="company_type" widget="radio" options="{'horizontal': true}"
+                            readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                        <h1>
+                            <field id="company" options="{'line_breaks': False}" widget="text"
+                                class="text-break" name="name" default_focus="1"
+                                placeholder="e.g. Lumber Inc" invisible="not is_company"
+                                required="type == 'contact'"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                            <field id="individual" options="{'line_breaks': False}" widget="text"
+                                class="text-break" name="name" default_focus="1"
+                                placeholder="e.g. Brandon Freeman" invisible="is_company"
+                                required="type == 'contact'"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group col="4">
+                            <field name="name_en" required="1" string="Name (EN)"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                            <field name="short_name"
+                                invisible="not is_company"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                        </group>
+                    </group>
+                    <group>
+                        <group name="register_address_vn">
+                            <span class="o_form_label o_td_label o_address_type" name="address_name">
+                                <field name="type" invisible="is_company"
+                                    readonly="user_ids or vendor_state != 'draft' or customer_state != 'draft'"
+                                    required="not is_company" class="fw-bold" />
+                                <span invisible="not is_company">Register Address (VN)</span>
+                            </span>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Street..."
+                                    class="o_address_street"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <field name="street2" placeholder="Street 2..."
+                                    class="o_address_street"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <field name="district_id" class="o_address_city"
+                                    style="width: 48% !important"
+                                    invisible="country_code not in (False, 'VN')"
+                                    placeholder="District"
+                                    options="{'no_open': True, 'no_create': True}"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <field name="ward_id" class="o_address_city"
+                                    style="width: 48% !important"
+                                    invisible="country_code not in (False, 'VN')" placeholder="Ward"
+                                    options="{'no_open': True, 'no_create': True}"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <field name="city" placeholder="City" class="o_address_city"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <field name="state_id" class="o_address_state" placeholder="State"
+                                    options="{'no_open': True, 'no_quick_create': True}"
+                                    context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <div name="partner_address_country"
+                                    class="d-flex justify-content-between">
+                                    <field name="country_id" placeholder="Country"
+                                        class="o_address_country"
+                                        options='{"no_open": True, "no_create": True}'
+                                        readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                </div>
+                            </div>
+                            <field name="vat" required="is_company"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                        </group>
+                        <group invisible="not is_company" name="register_address_en">
+                            <span class="o_form_label o_td_label o_address_type" name="address_name">
+                                <span>Register Address (EN)</span>
+                            </span>
+                            <div class="o_address_format">
+                                <field name="street_en" placeholder="Street..."
+                                    class="o_address_street"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <field name="street2_en" placeholder="Street 2..."
+                                    class="o_address_street"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <field name="district_en_id" class="o_address_city"
+                                    style="width: 48% !important"
+                                    context="{'show_plain_name': True}"
+                                    invisible="country_code_en not in (False, 'VN')"
+                                    placeholder="District"
+                                    options="{'no_open': True, 'no_create': True}"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <field name="ward_en_id" class="o_address_city"
+                                    style="width: 48% !important"
+                                    context="{'show_plain_name': True}"
+                                    invisible="country_code_en not in (False, 'VN')"
+                                    placeholder="Ward"
+                                    options="{'no_open': True, 'no_create': True}"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <field name="city_en" class="o_address_city"
+                                    placeholder="City"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <field name="state_en_id" class="o_address_state"
+                                    placeholder="State"
+                                    options="{'no_open': True, 'no_quick_create': True}"
+                                    context="{'country_id': country_en_id, 'default_country_id': country_en_id, 'zip': zip_en, 'show_plain_name': True}"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <field name="zip_en" placeholder="ZIP" class="o_address_zip"
+                                    readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                <div name="partner_address_country"
+                                    class="d-flex justify-content-between">
+                                    <field name="country_en_id" placeholder="Country"
+                                        class="o_address_country"
+                                        options='{"no_open": True, "no_create": True}'
+                                        readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                </div>
+                            </div>
+                        </group>
+                        <group invisible="is_company" name="detail_company_info">
+                            <field name="function" placeholder="e.g. Sales Director"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                            <field name="phone" widget="phone"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                            <field name="mobile" widget="phone"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                            <field name="email" widget="email" context="{'gravatar_image': True}"
+                                required="user_ids"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                            <field name="website" string="Website" widget="url"
+                                placeholder="e.g. https://www.odoo.com"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                            <field name="title" options='{"no_open": True}'
+                                placeholder="e.g. Mister"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                            <field name="lang" invisible="active_lang_count &lt;= 1"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                            <field name="category_id" widget="many2many_tags"
+                                options="{'color_field': 'color'}"
+                                placeholder='e.g. "B2B", "VIP", "Consulting", ...'
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                        </group>
+                    </group>
+                    <group invisible="not is_company">
+                        <group>
+                            <field name="legal_representative_name_vn" required="is_company"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                            <field name="legal_representative_title_vn" required="is_company"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                            <field name="category_id" widget="many2many_tags" string="Business Type"
+                                options="{'color_field': 'color'}"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                        </group>
+                        <group>
+                            <field name="legal_representative_name_en" required="is_company"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                            <field name="legal_representative_title_en" required="is_company"
+                                readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="other_info" string="Other Info">
+                            <group>
+                                <group string="Company Info">
+                                    <field name="parent_company_nationality_id"
+                                        options='{"no_open": True, "no_create": True}'
+                                        readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                    <field name="parent_company_client_id"
+                                        options='{"no_open": True, "no_create": True}'
+                                        domain="[('vendor_code', '!=', False), ('vendor_code', '=', vendor_code), ('id', '!=', id)]"
+                                        readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                    <field name="related_company_check" required="1"
+                                        readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                    <field name="emp_fam_related_company"
+                                        readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                    <field name="id_number" required="not is_company"
+                                        invisible="is_company"
+                                        readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                </group>
+                                <group string="Referral Info">
+                                    <field name="fs_annual_sales" widget="monetary"
+                                        string="Upto date FS information: Annual Sales"
+                                        readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                    <field name="fs_annual_pat" widget="monetary"
+                                        string="Upto date FS information: Annual PAT"
+                                        readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                    <field name="fs_total_assets" widget="monetary"
+                                        string="Upto date FS information: Total Assets"
+                                        readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+
+                                    <field name="compliance_letter_submission" widget="url"
+                                        readonly="vendor_state != 'draft' or customer_state != 'draft'" />
+                                    <field name="notarized_bank_act_detail" widget="url"
+                                        required="'foreign' in vendor_type_ids.name and related_company_check != 'affiliated'"
+                                        readonly="customer_state != 'draft' or vendor_state != 'draft'" />
+                                    <field name="copy_fs_file"
+                                        filename="copy_fs_filename"
+                                        readonly="customer_state != 'draft' or vendor_state != 'draft'" />
+                                    <field name="copy_fs_filename"
+                                        invisible="1"
+                                        readonly="customer_state != 'draft' or vendor_state != 'draft'" />
+                                    <field name="copy_client_file" filename="copy_client_filename"
+                                        readonly="customer_state != 'draft' or vendor_state != 'draft'" />
+                                    <field name="copy_client_filename"
+                                        invisible="1" />
+                                    <field name="site_check_file" filename="site_check_filename"
+                                        readonly="customer_state != 'draft' or vendor_state != 'draft'" />
+                                    <field name="site_check_filename"
+                                        invisible="1" />
+                                    <field name="result_site_check"
+                                        readonly="customer_state != 'draft' or vendor_state != 'draft'" />
+                                    <field name="other_notes"
+                                        readonly="customer_state != 'draft' or vendor_state != 'draft'" />
+                                </group>
+                            </group>
+                            <group string="Bank Accounts" name="banks"
+                                groups="account.group_account_invoice,account.group_account_readonly">
+                                <field name="bank_ids" nolabel="1"
+                                    context="{'default_partner_id': id}"
+                                    widget="auto_save_res_partner"
+                                    readonly="customer_state != 'draft' or vendor_state != 'draft'">
+                                    <list>
+                                        <field name="bank_id" string="Bank/Branch" />
+                                        <field name="acc_number" string="Bank Account Number" />
+                                        <field name="acc_holder_name" string="Beneficiary Name"
+                                            required="1" />
+                                        <field name="bank_address" />
+                                        <field name="bank_bic" string="SWIFT code" />
+                                    </list>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Contacts &amp; Addresses" name="contact_addresses">
+                            <field name="child_ids" mode="kanban"
+                                readonly="customer_state != 'draft' or vendor_state != 'draft'"
+                                context="{'default_parent_id': id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_lang': lang, 'default_user_id': user_id, 'default_type': 'other'}">
+                                <kanban color="color">
+                                    <field name="color" />
+                                    <field name="type" />
+                                    <field name="is_company" />
+                                    <templates>
+                                        <t t-name="card" class="flex-row">
+                                            <aside class="o_kanban_aside_full">
+                                                <field name="avatar_128"
+                                                    class="o_kanban_image_fill w-100" widget="image"
+                                                    options="{'img_class': 'object-fit-cover'}"
+                                                    alt="Contact image" />
+                                            </aside>
+                                            <main class="ps-2 ps-md-0">
+                                                <field name="name" class="fw-bold" />
+                                                <field name="function" />
+                                                <field name="email" widget="email" />
+                                                <div t-if="record.type.raw_value != 'contact'">
+                                                    <div>
+                                                        <field class="me-1" name="zip" />
+                                                        <field name="city" />
+                                                    </div>
+                                                    <field class="me-1" name="state_id" />
+                                                    <field name="country_id" />
+                                                </div>
+                                                <div t-if="record.phone.raw_value">Phone: <field
+                                                        name="phone" /></div>
+                                                <div t-if="record.mobile.raw_value">Mobile: <field
+                                                        name="mobile" /></div>
+                                            </main>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                                <form string="Contact / Address">
+                                    <sheet>
+                                        <field name="type" required="1" widget="radio"
+                                            options="{'horizontal': true}" />
+                                        <div class="text-muted oe_edit_only">
+                                            <p class="mb-0" invisible="type != 'contact'">
+                                                <span>Use this to organize the contact details of
+                                                    employees of a given company (e.g. CEO, CFO,
+                                                    ...).</span>
+                                            </p>
+                                            <p class="mb-0" invisible="type != 'invoice'">
+                                                <span>Preferred address for all invoices. Selected
+                                                    by default when you invoice an order that
+                                                    belongs to this company.</span>
+                                            </p>
+                                            <p class="mb-0" invisible="type != 'delivery'">
+                                                <span>Preferred address for all deliveries. Selected
+                                                    by default when you deliver an order that
+                                                    belongs to this company.</span>
+                                            </p>
+                                            <p class="mb-0" invisible="type != 'other'">
+                                                <span>Other address for the company (e.g.
+                                                    subsidiary, ...)</span>
+                                            </p>
+                                        </div>
+                                        <hr />
+                                        <group>
+                                            <group>
+                                                <field name="name" string="Contact Name"
+                                                    required="type == 'contact'"
+                                                    placeholder="e.g. New Address" />
+                                                <field name="title" options="{'no_open': True}"
+                                                    placeholder="e.g. Mr."
+                                                    invisible="type != 'contact'" />
+                                                <field name="function"
+                                                    placeholder="e.g. Sales Director"
+                                                    invisible="type != 'contact'" />
+                                                <label for="street" string="Address"
+                                                    invisible="type == 'contact'" />
+                                                <div invisible="type == 'contact'">
+                                                    <div class="o_address_format" name="div_address">
+                                                        <field name="street" placeholder="Street..."
+                                                            class="o_address_street" />
+                                                        <field name="street2"
+                                                            placeholder="Street 2..."
+                                                            class="o_address_street" />
+                                                        <field name="city" placeholder="City"
+                                                            class="o_address_city" />
+                                                        <field name="state_id"
+                                                            class="o_address_state"
+                                                            placeholder="State"
+                                                            options="{'no_open': True, 'no_quick_create': True}"
+                                                            context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}" />
+                                                        <field name="zip" placeholder="ZIP"
+                                                            class="o_address_zip" />
+                                                        <field name="country_id"
+                                                            placeholder="Country"
+                                                            class="o_address_country"
+                                                            options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                                                    </div>
+                                                </div>
+                                            </group>
+                                            <group>
+                                                <field name="email" widget="email" />
+                                                <field name="phone" widget="phone" />
+                                                <field name="mobile" widget="phone" />
+                                            </group>
+                                        </group>
+                                        <group>
+                                            <field name="comment" placeholder="Internal notes..."
+                                                nolabel="1" />
+                                        </group>
+                                        <field name="lang" invisible="True" />  <!-- Need to add lang
+                                        to save default value from parented record -->
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="view_partner_search_inherit_tlip_base" model="ir.ui.view">
+        <field name="name">tlip.base.partner.search.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <filter name="inactive" position="before">
+                <filter name="last_cr_date" string="Last Modified Date" date="last_cr_date" />
+                <separator />
+                <filter name="vendor_registration_date" string="Vendor Registration Date"
+                    date="vendor_registration_date" />
+                <separator />
+                <filter name="customer_registration_date" string="Customer Registration Date"
+                    date="customer_registration_date" />
+                <separator />
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_tlip_base_partner_tree" model="ir.ui.view">
+        <field name="name">tlip.base.partner.tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="duplicate">0</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_tlip_base_partner_form_inherit" model="ir.ui.view">
+        <field name="name">tlip.base.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="duplicate">0</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="base.view_partner_form" model="ir.ui.view">
+        <field name="priority">10</field>
+    </record>
+
+</odoo>

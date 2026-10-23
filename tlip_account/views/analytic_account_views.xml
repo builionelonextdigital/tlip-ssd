@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="budget_code_inherit_analytic_account_list" model="ir.ui.view">
+        <field name="name">budget.code.view.list.analytic.account.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_list"/>
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="budget_amount" />
+                <field name="committed_amount" />
+                <field name="achieved_amount" />
+                <field name="additional_amount" />
+                <field name="remained_amount" />
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
+            <field name="plan_id" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
+            <field name="debit" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
+            <field name="credit" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
+            <field name="balance" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
+            <field name="plan_id" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
+            <xpath expr="//field[@name='company_id'][2]" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="budget_code_inherit_analytic_account_form" model="ir.ui.view">
+        <field name="name">budget.code.view.form.analytic.account.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_title']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <field name="code" position="after">
+                <field name="budget_code_id" options='{"no_create": True}' readonly="state != 'draft'"/>
+                <field name="budget_category_id"
+                    force_save="1"
+                    options='{"no_create": True}'/>
+                <field name="default_account_ids" widget="many2many_tags" readonly="state != 'draft'"/>
+            </field>
+            <field name="code" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="plan_id" position="after">
+                <field name="budget_department_id"
+                    options='{"no_create": True}'
+                    readonly="state != 'draft'" />
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="plan_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="name" position="attributes">
+                <attribute name="readonly">state != 'draft'</attribute>
+            </field>
+            <field name="code" position="attributes">
+                <attribute name="readonly">state != 'draft'</attribute>
+            </field>
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <widget name="attach_document" string="Attach Document" action="message_post"
+                        invisible="state != 'draft'"
+                        highlight="1" />
+                    <button name="action_submit_approval" string="Submit" type="object"
+                        class="btn btn-primary"
+                        invisible="state != 'draft'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_withdraw_approval" string="Withdraw" type="object" class="btn btn-secondary"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="state not in ('wait_for_approval', 'draft')" />
+                    <button name="action_reset" string="Reset" type="object" class="btn btn-secondary"
+                        confirm="Are you sure that you want to do this action?"
+                        invisible="state not in ('rejected', 'cancel')" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,wait_for_approval,approved"/>
+                </header>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" name="action_open_approval_history_ids"
+                    type="object"
+                    icon="fa-history">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">
+                            Approval Requests
+                        </span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//group[@name='main']//field[@name='company_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="budget_code_inherit_account_budget_form" model="ir.ui.view">
+        <field name="name">account.analytic.account.form.inherit.account.budget</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="account_budget.view_account_analytic_account_form_inherit_budget"/>
+        <field name="arch" type="xml">
+            <field name="budget_analytic_state" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
+            <field name="achieved_amount" position="after">
+                <field name="additional_amount" />
+                <field name="remained_amount" />
+            </field>
+        </field>
+    </record>
+
+    <menuitem
+        id="account.account_analytic_def_account"
+        name="Analytic Accounts"
+        parent="account.menu_analytic_accounting"
+        sequence="2" />
+
+</odoo>

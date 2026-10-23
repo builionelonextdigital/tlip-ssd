@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_department_form_inherit_hr_department" model="ir.ui.view">
+        <field name="name">hr.department.view.form.inherit</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form" />
+        <field name="mode">primary</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="replace">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                        invisible="active" />
+                    <field name="active" invisible="1" />
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="code" />
+                            <field name="manager_id" widget="many2one_avatar_employee"
+                                options="{'no_create': True}" />
+                            <field name="company_id" options="{'no_create': True}"
+                                groups="base.group_multi_company" />
+                            <field name="budget_department_id" string="Budget Department"
+                                options="{'no_create': True, 'no_edit': True}" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Member" name="member">
+                            <field name="member_ids" mode="kanban"
+                                class="w-100">
+                                <kanban>
+                                    <templates>
+                                        <t t-name="card" class="flex-row">
+                                            <aside>
+                                                <field name="avatar_128" widget="image"
+                                                    class="o_image_64_cover" alt="Avatar" />
+                                            </aside>
+                                            <main class="ms-3">
+                                                <field name="name" class="fw-bold fs-5" />
+                                                <div class="d-flex align-items-baseline text-break">
+                                                    <i class="fa fa-envelope me-1" role="img"
+                                                        aria-label="Email" title="Email" />
+                                                    <field name="email" />
+                                                </div>
+                                            </main>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_department_tree_inherit_hr_department" model="ir.ui.view">
+        <field name="name">hr.department.view.tree.inherit</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_tree" />
+        <field name="mode">primary</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="replace">
+                <list string="Companies" multi_edit="1">
+                    <field name="name" />
+                    <field name="code" />
+                    <field name="company_id" groups="base.group_multi_company" readonly="1" />
+                    <field name="manager_id" widget="many2one_avatar_employee"
+                        options="{'no_create': True}" />
+                </list>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tlip_account_department_action" model="ir.actions.act_window">
+        <field name="name">Departments</field>
+        <field name="res_model">hr.department</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_account.view_department_tree_inherit_hr_department')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_account.view_department_form_inherit_hr_department')})]" />
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem
+        id="tlip_account_department_menu"
+        name="Departments"
+        action="tlip_account.tlip_account_department_action"
+        parent="account.menu_analytic_accounting"
+        sequence="1" />
+
+</odoo>

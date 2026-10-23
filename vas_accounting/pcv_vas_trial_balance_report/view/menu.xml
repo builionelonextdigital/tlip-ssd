@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>        
+        <menuitem id="menu_action_vas_trial_balance_report"
+        name="VAS - Trial Balance"
+            parent="biz_vietnamese_accounting_menu.menu_accounting_vn_report"
+                sequence="50"
+                action="pcv_vas_trial_balance_report.action_vas_trial_balance_report"/>
+</odoo>

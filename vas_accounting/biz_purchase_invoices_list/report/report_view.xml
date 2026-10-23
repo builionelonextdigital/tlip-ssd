@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_purchase_receipt_sheet" model="ir.actions.report">
+        <field name="name">Purchase receipt sheet</field>
+        <field name="model">purchase.receipt.sheet.wizard</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">biz_purchase_invoices_list.purchase_receipt_sheet_xlsx</field>
+        <field name="report_file">biz_purchase_invoices_list.purchase_receipt_sheet_xlsx</field>
+        <field name="print_report_name">'BẢNG KÊ HÓA ĐƠN, CHỨNG TỪ HÀNG HÓA, DỊCH VỤ MUA VÀO'</field>
+        <field name="binding_model_id" eval="False"/>
+    </record>
+</odoo>

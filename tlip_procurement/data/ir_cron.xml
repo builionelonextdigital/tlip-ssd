@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_cron_activate_partner_change_request" model="ir.cron">
+            <field name="name">Activate Partner Change Request</field>
+            <field name="model_id" ref="tlip_procurement.model_res_partner_cr"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_activate_change_request()</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+        <record id="ir_cron_activate_purchase_supplement" model="ir.cron">
+            <field name="name">Activate Purchase Supplement</field>
+            <field name="model_id" ref="tlip_procurement.model_purchase_supplement"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_activate_purchase_supplement()</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+    </data>
+</odoo>

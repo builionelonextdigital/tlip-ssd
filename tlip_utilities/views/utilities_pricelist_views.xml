@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="utilities_pricelist_view_form" model="ir.ui.view">
+        <field name="name">utilities.pricelist.view.form</field>
+        <field name="model">utilities.pricelist</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="btn btn-primary"
+                        invisible="state != 'draft'" />
+                    <button name="action_send_by_email" string="Send by Email" type="object"
+                        class="btn btn-primary"
+                        invisible="state != 'draft'" />
+                    <button name="action_reset" string="Reset to Draft" type="object"
+                        confirm="Are you sure that you want to do this action?"
+                        class="btn btn-secondary"
+                        invisible="state == 'draft'" />
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,confirm" />
+                </header>
+                <sheet>
+                    <label for="name" />
+                    <h1>
+                        <field name="name" string="Name" readonly="state != 'draft'" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="utility_type" force_save="1" readonly="1" />
+                            <field name="electricity_type" readonly="state != 'draft'"
+                                invisible="utility_type == 'water'"
+                                required="utility_type == 'electricity'" />
+                            <field name="electricity_categ_id" readonly="state != 'draft'"
+                                required="utility_type == 'electricity'"
+                                options="{'no_create': True, 'no_create_edit': True}"
+                                invisible="utility_type == 'water'" />
+                            <label for="date_from" string="Period" />
+                            <div class="o_row">
+                                <field name="date_from" nolabel="1" class="oe_inline"
+                                    readonly="state != 'draft'" widget="daterange"
+                                    options="{'end_date_field': 'date_to'}" />
+                                <field name="date_to" nolabel="1" class="oe_inline"
+                                    readonly="state != 'draft'" invisible="1" />
+                            </div>
+                        </group>
+                        <group>
+                            <field name="partner_ids" widget="many2many_tags"
+                                readonly="state != 'draft'"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                            <field name="development_phase_ids" widget="many2many_tags"
+                                readonly="state != 'draft'" />
+                            <field name="currency_id" readonly="state != 'draft'"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                            <field name="company_id" readonly="state != 'draft'"
+                                options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="pricelist_items" string="Price Rules">
+                            <field name="pricelist_item_ids" readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="product_id"
+                                        options="{'no_create': True, 'no_create_edit': True}"
+                                        domain="[('utility_type', '=', parent.utility_type)]" />
+                                    <field name="uom_id"
+                                        options="{'no_create': True, 'no_create_edit': True}" />
+                                    <field name="unit_price" />
+                                    <field name="budget_code_id" />
+                                </list>
+                                <form>
+                                    <group>
+                                        <field name="product_id" />
+                                        <field name="uom_id" />
+                                        <field name="unit_price" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <!-- Electricity -->
+
+    <record id="utilities_pricelist_view_tree_electricity" model="ir.ui.view">
+        <field name="name">utilities.pricelist.view.tree</field>
+        <field name="model">utilities.pricelist</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="utility_type" invisible="1" />
+                <field name="electricity_type" />
+                <field name="electricity_categ_id" />
+                <field name="company_id" />
+                <field name="partner_ids" widget="many2many_tags" />
+                <field name="development_phase_ids" widget="many2many_tags" />
+                <field name="state" widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-success="state == 'confirm'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_utilities_electricity_pricelists_view" model="ir.actions.act_window">
+        <field name="name">Electricity Pricelists</field>
+        <field name="res_model">utilities.pricelist</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('utility_type', '=', 'electricity')]</field>
+        <field name="context">{'default_utility_type': 'electricity'}</field>
+    </record>
+
+    <record id="action_utilities_electricity_pricelists_view_list"
+        model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="utilities_pricelist_view_tree_electricity" />
+        <field name="act_window_id" ref="action_utilities_electricity_pricelists_view" />
+    </record>
+
+    <!-- Water -->
+
+    <record id="utilities_pricelist_view_tree_water" model="ir.ui.view">
+        <field name="name">utilities.pricelist.view.tree</field>
+        <field name="model">utilities.pricelist</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="utility_type" invisible="1" />
+                <field name="company_id" />
+                <field name="partner_ids" widget="many2many_tags" />
+                <field name="development_phase_ids" widget="many2many_tags" />
+                <field name="state" widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-success="state == 'confirm'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_utilities_water_pricelists_view" model="ir.actions.act_window">
+        <field name="name">Water Pricelists</field>
+        <field name="res_model">utilities.pricelist</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('utility_type', '=', 'water')]</field>
+        <field name="context">{'default_utility_type': 'water'}</field>
+    </record>
+
+    <record id="action_utilities_water_pricelists_view_list"
+        model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="utilities_pricelist_view_tree_water" />
+        <field name="act_window_id" ref="action_utilities_water_pricelists_view" />
+    </record>
+
+</odoo>

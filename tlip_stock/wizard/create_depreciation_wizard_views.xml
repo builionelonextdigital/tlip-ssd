@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="create_depreciation_wizard_view_form" model="ir.ui.view">
+        <field name="name">create.depreciation.wizard.view.form</field>
+        <field name="model">create.depreciation.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Depreciation">
+                <sheet>
+                    <group>
+                        <field name="wizard_line_ids" nolabel="1">
+                            <list editable="bottom" create="0" delete="0">
+                                <field name="move_line_id" column_invisible="1" />
+                                <field name="product_id" />
+                                <field name="result_package_id" />
+                                <field name="quantity" readonly="1" />
+                                <field name="price_unit" />
+                            </list>
+                        </field>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Confirm" class="btn-primary"
+                        name="action_confirm" type="object" />
+                    <button string="Cancel" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

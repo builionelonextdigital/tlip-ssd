@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bank_reconciliation_report_view_tree" model="ir.ui.view">
+        <field name="name">bank.reconciliation.report.view.tree</field>
+        <field name="model">bank.reconciliation.report</field>
+        <field name="arch" type="xml">
+            <list string="Bank Reconciliation Report" editable="bottom">
+                <field name="account_id" />
+                <field name="currency_id" />
+                <field name="company_id" groups="base.group_multi_company" optional="hide" />
+                <field name="buying_exchange_rate" />
+                <field name="selling_exchange_rate" />
+                <field name="total_per_book" />
+                <field name="total_per_bank" />
+                <field name="amount_diff" />
+                <field name="amount_equivalent" />
+            </list>
+        </field>
+    </record>
+
+    <record id="bank_reconciliation_report_view_search" model="ir.ui.view">
+        <field name="name">bank.reconciliation.report.search</field>
+        <field name="model">bank.reconciliation.report</field>
+        <field name="arch" type="xml">
+            <search string="Bank Reconciliation Report">
+                <field name="name" string="Bank Account" />
+                <field name="partner_bank_id" />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_by_name"
+                        string="Bank Account"
+                        context="{'group_by': 'name'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

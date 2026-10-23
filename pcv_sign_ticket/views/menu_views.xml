@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_sign_ticket_root"
+        groups="pcv_sign_ticket.group_sign_ticket_user"
+        name="Sign Ticket"
+        sequence="90"
+        web_icon="pcv_sign_ticket,static/description/icon.svg"/>
+
+    <menuitem
+        name="Overview"
+        id="menu_e_signature_overview"
+        parent="menu_sign_ticket_root"
+        action="action_sign_ticket"
+        sequence="10"/>
+
+    <menuitem
+        id="menu_sign_ticket_config"
+        name="Configuration"
+        parent="menu_sign_ticket_root"
+        groups="pcv_sign_ticket.group_sign_ticket_admin"
+        sequence="90"/>
+
+    <menuitem
+        id="menu_sign_document_type"
+        name="Document Types"
+        parent="menu_sign_ticket_config"
+        action="action_sign_document_type"
+        sequence="10"/>
+
+</odoo>

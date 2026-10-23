@@ -1,0 +1,284 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* biz_bank_deposit_book
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-06 01:41+0000\n"
+"PO-Revision-Date: 2024-01-06 01:41+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: biz_bank_deposit_book
+#: model:ir.actions.report,print_report_name:biz_bank_deposit_book.action_rp_bank_deposit_book
+#: model:ir.actions.report,print_report_name:biz_bank_deposit_book.action_rp_bank_deposit_book_xlsx
+msgid "'%s' % (object.get_report_name(),)"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "(Ban hành theo Thông tư số 200/2024/TT-BTC"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "- Cộng phát sinh trong kỳ"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "- Ngày mở sổ: ..."
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "- Số dư cuối kỳ"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "- Số dư đầu kỳ"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "- Số phát sinh trong kỳ"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "- Sổ này có ... trang, đánh số từ trang 01 đến trang..."
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "<b>Giám đốc</b>"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "<b>Kế toán trưởng</b>"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "<b>Mẫu số: S08-DN</b>"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "<b>Người ghi sổ</b>"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "<i>(Ký, họ tên)</i>"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "<i>(Ký, họ tên, đóng dấu)</i>"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model:ir.model,name:biz_bank_deposit_book.model_report_biz_bank_deposit_book_rp_bank_deposit_book_pdf
+msgid "Bank Deposit Book Report"
+msgstr "Báo cáo sổ tiền gửi ngân hàng"
+
+#. module: biz_bank_deposit_book
+#: model:ir.actions.act_window,name:biz_bank_deposit_book.bank_deposit_book_action
+msgid "Bank deposit book"
+msgstr "Sổ tiền gửi ngân hàng"
+
+#. module: biz_bank_deposit_book
+#: model:ir.actions.report,name:biz_bank_deposit_book.action_rp_bank_deposit_book_xlsx
+msgid "Bank deposit book (Excel)"
+msgstr "Sổ tiền gửi ngân hàng (Excel)"
+
+#. module: biz_bank_deposit_book
+#: model:ir.actions.report,name:biz_bank_deposit_book.action_rp_bank_deposit_book
+msgid "Bank deposit book (PDF)"
+msgstr "Sổ tiền gửi ngân hàng (PDF)"
+
+#. module: biz_bank_deposit_book
+#: model:ir.ui.menu,name:biz_bank_deposit_book.bank_deposit_book_menu
+msgid "Bank deposit book (S08-DN)"
+msgstr "Sổ tiền gửi ngân hàng (S08-DN)"
+
+#. module: biz_bank_deposit_book
+#: model:ir.model.fields,field_description:biz_bank_deposit_book.field_bank_deposit_book__journal_id
+msgid "Bank journal"
+msgstr "Sổ ngân hàng"
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.bank_deposit_book_form
+msgid "Cancel"
+msgstr "Hủy"
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Chi (rút ra)"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Chứng từ"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model:ir.model.fields,field_description:biz_bank_deposit_book.field_bank_deposit_book__create_uid
+msgid "Created by"
+msgstr "Tạo bởi"
+
+#. module: biz_bank_deposit_book
+#: model:ir.model.fields,field_description:biz_bank_deposit_book.field_bank_deposit_book__create_date
+msgid "Created on"
+msgstr "Được tạo vào"
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Còn lại"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model:ir.model.fields,field_description:biz_bank_deposit_book.field_bank_deposit_book__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Diễn giải"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.bank_deposit_book_form
+msgid "Export Excel"
+msgstr "Xuất Excel"
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.bank_deposit_book_form
+msgid "Export PDF"
+msgstr "Xuất PDF"
+
+#. module: biz_bank_deposit_book
+#: model:ir.model.fields,field_description:biz_bank_deposit_book.field_bank_deposit_book__from_date
+msgid "From date"
+msgstr "Từ ngày"
+
+#. module: biz_bank_deposit_book
+#. odoo-python
+#: code:addons/biz_bank_deposit_book/models/bank_deposit_book.py:0
+#, python-format
+msgid "From date can not greater than to date"
+msgstr "Từ ngày không thể lớn hơn đến ngày"
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Ghi chú"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model:ir.model.fields,field_description:biz_bank_deposit_book.field_bank_deposit_book__id
+msgid "ID"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model:ir.model.fields,field_description:biz_bank_deposit_book.field_bank_deposit_book____last_update
+msgid "Last Modified on"
+msgstr "Sửa lần cuối vào"
+
+#. module: biz_bank_deposit_book
+#: model:ir.model.fields,field_description:biz_bank_deposit_book.field_bank_deposit_book__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: biz_bank_deposit_book
+#: model:ir.model.fields,field_description:biz_bank_deposit_book.field_bank_deposit_book__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối vào"
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Ngày 22/12/2014 của Bộ Tài chính)"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Ngày, tháng"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Ngày, tháng ghi sổ"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Nơi mở tài khoản giao dịch:"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr "Trang: <span class=\"page\"/> / <span class=\"topage\"/>"
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Số hiệu"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Số hiệu tài khoản tại nơi gửi:"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Số tiền"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "SỔ TIỀN GỬI NGÂN HÀNG"
+msgstr "SỔ TIỀN GỬI NGÂN HÀNG"
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "TK đối ứng"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Thu (gửi vào)"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model:ir.model.fields,field_description:biz_bank_deposit_book.field_bank_deposit_book__to_date
+msgid "To date"
+msgstr "Đến ngày"
+
+#. module: biz_bank_deposit_book
+#: model:ir.model,name:biz_bank_deposit_book.model_bank_deposit_book
+msgid "bank.deposit.book"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model:ir.model,name:biz_bank_deposit_book.model_report_biz_bank_deposit_book_rp_bank_deposit_book_xlsx
+msgid "rp_bank_deposit_book_xlsx"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Đơn vị:"
+msgstr ""
+
+#. module: biz_bank_deposit_book
+#: model_terms:ir.ui.view,arch_db:biz_bank_deposit_book.rp_bank_deposit_book_pdf_document
+msgid "Địa chỉ:"
+msgstr ""

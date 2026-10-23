@@ -1,0 +1,288 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* biz_details_of_account_books
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-25 03:51+0000\n"
+"PO-Revision-Date: 2023-11-25 10:52+0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: vi_VN\n"
+"X-Generator: Poedit 2.3\n"
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "(Ban hành theo Thông tư số 200/2014/TT-BTC"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "(Ký, họ tên)"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "(Ký, họ tên, đóng dấu)"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "- Ngày mở sổ ..."
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "- Sổ này có ... trang, đánh số từ trang 01 đến trang ..."
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "<b>Mẫu số S38-DN</b>"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model:ir.model,name:biz_details_of_account_books.model_account_report
+msgid "Accounting Report"
+msgstr "Báo cáo kế toán"
+
+#. module: biz_details_of_account_books
+#: model:account.report.column,name:biz_details_of_account_books.general_ledger_report_balance
+msgid "Balance"
+msgstr "Số dư"
+
+#. module: biz_details_of_account_books
+#. odoo-python
+#: code:addons/biz_details_of_account_books/models/detail_book_account.py:0
+#, python-format
+msgid "Base Amount"
+msgstr "Tổng cơ bản"
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Chứng từ"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model:account.report.column,name:biz_details_of_account_books.general_ledger_report_countered_accounts
+msgid "Countered Accounts"
+msgstr "TK đối ứng"
+
+#. module: biz_details_of_account_books
+#: model:account.report.column,name:biz_details_of_account_books.general_ledger_report_credit
+msgid "Credit"
+msgstr "Có"
+
+#. module: biz_details_of_account_books
+#: model:ir.model.fields,field_description:biz_details_of_account_books.field_account_report__custom_button
+msgid "Custom button"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Có"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model:account.report.column,name:biz_details_of_account_books.general_ledger_report_date
+msgid "Date"
+msgstr "Ngày"
+
+#. module: biz_details_of_account_books
+#: model:account.report.column,name:biz_details_of_account_books.general_ledger_report_date_numbered
+msgid "Date numbered"
+msgstr "Ngày tháng ghi sổ"
+
+#. module: biz_details_of_account_books
+#: model:account.report.column,name:biz_details_of_account_books.general_ledger_report_debit
+msgid "Debit"
+msgstr "Nợ"
+
+#. module: biz_details_of_account_books
+#: model:ir.actions.report,name:biz_details_of_account_books.action_print_detail_book_pdf
+msgid "Detail book account"
+msgstr "Sổ chi tiết các tài khoản"
+
+#. module: biz_details_of_account_books
+#: model:account.report,name:biz_details_of_account_books.detail_book_report
+#: model:ir.model,name:biz_details_of_account_books.model_detail_book_account
+msgid "Detail of book account BTC (S38-DN)"
+msgstr "Sổ chi tiết các tài khoản BTC (S38-DN)"
+
+#. module: biz_details_of_account_books
+#: model:ir.actions.client,name:biz_details_of_account_books.action_detail_book_account
+#: model:ir.ui.menu,name:biz_details_of_account_books.menu_action_detail_book_account
+msgid "Detailed of book account BTC (S38-DN)"
+msgstr "Sổ chi tiết các tài khoản BTC (S38-DN)"
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Diễn giải"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model:account.report.column,name:biz_details_of_account_books.general_ledger_report_explain
+msgid "Explain"
+msgstr "Diễn giải"
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Giám đốc"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Kế toán trưởng"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Loại tiền: VNĐ"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#. odoo-python
+#: code:addons/biz_details_of_account_books/models/detail_book_account.py:0
+#, python-format
+msgid "Name"
+msgstr "Tên"
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Ngày 22/12/2014 của Bộ Tài chính)"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Ngày tháng"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Ngày tháng ghi sổ"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Ngày...tháng...năm..."
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Người ghi sổ"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model:account.report.column,name:biz_details_of_account_books.general_ledger_report_number
+msgid "Number"
+msgstr "Số hiệu"
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Nợ"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#. odoo-python
+#: code:addons/biz_details_of_account_books/models/account_report.py:0
+#, python-format
+msgid "PDF"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#. odoo-python
+#: code:addons/biz_details_of_account_books/models/account_report.py:0
+#, python-format
+msgid "Save"
+msgstr "Lưu"
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Số dư"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Số hiệu"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "SỔ CHI TIẾT CÁC TÀI KHOẢN"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Sổ phát sinh"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "TK đối ứng"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#. odoo-python
+#: code:addons/biz_details_of_account_books/models/detail_book_account.py:0
+#, python-format
+msgid "Tax Amount"
+msgstr "Số tiền thuế"
+
+#. module: biz_details_of_account_books
+#. odoo-python
+#: code:addons/biz_details_of_account_books/models/detail_book_account.py:0
+#, python-format
+msgid "Tax Declaration"
+msgstr "Khai báo Thuế"
+
+#. module: biz_details_of_account_books
+#. odoo-python
+#: code:addons/biz_details_of_account_books/models/detail_book_account.py:0
+#, python-format
+msgid "Total"
+msgstr "Tổng"
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Tài khoản:"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#. odoo-python
+#: code:addons/biz_details_of_account_books/models/detail_book_account.py:0
+#, python-format
+msgid "Wrong ID for general ledger line to expand: %s"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#. odoo-python
+#: code:addons/biz_details_of_account_books/models/account_report.py:0
+#, python-format
+msgid "XLSX"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model:ir.model,name:biz_details_of_account_books.model_report_biz_details_of_account_books_rp_detail_book_pdf
+msgid "rp_detail_book_pdf"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Đơn vị:"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Địa chỉ:"
+msgstr ""
+
+#. module: biz_details_of_account_books
+#: model_terms:ir.ui.view,arch_db:biz_details_of_account_books.rp_detail_book_pdf
+msgid "Đối tượng:"
+msgstr ""

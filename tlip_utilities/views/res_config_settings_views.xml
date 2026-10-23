@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_config_settings_view_form_inherit_utilities" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.utilities</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="50" />
+            <field name="inherit_id" ref="base.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <app data-string="Utilities" string="Utilities" name="utilities"
+                        logo="/tlip_utilities/static/description/menu_icon.png">
+                        <block title="Consumption Data"
+                            name="consumption_setting_container">
+                            <setting string="Automatic Consumption Data Confirmation"
+                                company_dependent="1"
+                                help="Confirm Electricity/Water Consumption automatically">
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <div class="row">
+                                            <label string="From" for="consumption_from"
+                                                class="col-lg-1 o_light_label" />
+                                            <div
+                                                class="col-lg-3 content-group">
+                                                <field
+                                                    name="consumption_from" widget="float_time" />
+                                            </div>
+                                            <label
+                                                string="To" for="consumption_to"
+                                                class="col-lg-1 o_light_label" />
+                                            <div
+                                                class="col-lg-3 content-group">
+                                                <field
+                                                    name="consumption_to" widget="float_time" />
+                                            </div>
+                                            <div
+                                                class="col-lg-4 content-group">on
+                                                the last day of the month </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                        </block>
+                        <block title="Electricity"
+                            name="electric_setting_container">
+                            <setting string="Payment Due Date" company_dependent="1"
+                                help="Due Date for Electricity Payment">
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <div>
+                                            <field name="electricity_payment_due_date" class="col-2" />
+                                            days after record date </div>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting string="Journal" company_dependent="1"
+                                help="Journal for Electricity Invoices">
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <div>
+                                            <field name="electrict_journal_id" class="col-2" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting string="Consumtion Invoice Type" company_dependent="1" help="Consumption Invoice Type">
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <div>
+                                            <field name="electrict_consumption_invoice_type_id" class="col-2" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting string="Reactive Power Invoice Type" company_dependent="1" help="Reactive Power Invoice Type">
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <div>
+                                            <field name="electrict_reactive_power_invoice_type_id" class="col-2" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting string="Connection Charge Invoice Type" company_dependent="1" help="Connection Charge Invoice Type">
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <div>
+                                            <field name="electrict_connection_invoice_type_id" class="col-2" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting string="Reactive Power" company_dependent="1"
+                                help="Item Code for Reactive Power Fee">
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <div>
+                                            <field name="reactive_power_product_id" class="col-2" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting string="Connection Charge" company_dependent="1"
+                                help="Item Code for Connection Charge">
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <div>
+                                            <field name="power_connection_product_id" class="col-2" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                        </block>
+                        <block title="Water"
+                            name="water_setting_container">
+                            <setting string="Payment Due Date" company_dependent="1"
+                                help="Due Date for Water Payment">
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <div>
+                                            <div>
+                                                <field name="water_payment_due_date"
+                                                    class="col-2" /> day of the next month </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting string="Journal" company_dependent="1"
+                                help="Journal for Water Invoices">
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <div>
+                                            <field name="water_journal_id" class="col-2" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting string="Consumtion Invoice Type" company_dependent="1" help="Consumption Invoice Type">
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <div>
+                                            <field name="water_consumption_invoice_type_id" class="col-2" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting string="Connection Charge" company_dependent="1">
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <div>
+                                            <field name="water_connection_invoice_type_id" class="col-2" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                        </block>
+                    </app>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_utilities_electricity_settings_view" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'tlip_utilities', 'bin_size': False}</field>
+        </record>
+    </data>
+</odoo>

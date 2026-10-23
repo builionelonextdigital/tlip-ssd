@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sign_ticket_esign_user,sign.ticket esign_user,model_sign_ticket,pcv_sign_ticket.group_sign_ticket_user,1,1,1,0
+access_sign_ticket_esign_admin,sign.ticket esign_admin,model_sign_ticket,pcv_sign_ticket.group_sign_ticket_admin,1,1,1,1
+access_sign_ticket_signer_esign_user,sign.ticket.signer esign_user,model_sign_ticket_signer,pcv_sign_ticket.group_sign_ticket_user,1,1,1,1
+access_sign_ticket_signer_esign_admin,sign.ticket.signer esign_admin,model_sign_ticket_signer,pcv_sign_ticket.group_sign_ticket_admin,1,1,1,1
+access_sign_document_type_esign_user,sign.document.type esign_user,model_sign_document_type,pcv_sign_ticket.group_sign_ticket_user,1,0,0,0
+access_sign_document_type_esign_admin,sign.document.type esign_admin,model_sign_document_type,pcv_sign_ticket.group_sign_ticket_admin,1,1,1,1
+access_sign_document_esign_user,sign.document esign_user,model_sign_document,pcv_sign_ticket.group_sign_ticket_user,1,1,1,1
+access_sign_document_esign_admin,sign.document esign_admin,model_sign_document,pcv_sign_ticket.group_sign_ticket_admin,1,0,0,0
+access_sign_ticket_reject_wizard_user,sign.ticket.reject.wizard user,model_sign_ticket_reject_wizard,pcv_sign_ticket.group_sign_ticket_user,1,1,1,1
+access_sign_ticket_reject_wizard_admin,sign.ticket.reject.wizard admin,model_sign_ticket_reject_wizard,pcv_sign_ticket.group_sign_ticket_admin,1,1,1,1
+access_sign_ticket_read_only,sign.ticket read_only,model_sign_ticket,pcv_sign_ticket.group_sign_ticket_read_only,1,0,0,0
+access_sign_ticket_signer_read_only,sign.ticket.signer read_only,model_sign_ticket_signer,pcv_sign_ticket.group_sign_ticket_read_only,1,0,0,0
+access_sign_document_type_read_only,sign.document.type read_only,model_sign_document_type,pcv_sign_ticket.group_sign_ticket_read_only,1,0,0,0
+access_sign_document_read_only,sign.document read_only,model_sign_document,pcv_sign_ticket.group_sign_ticket_read_only,1,0,0,0

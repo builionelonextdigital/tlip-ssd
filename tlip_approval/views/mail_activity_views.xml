@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mail_activity_view_tree_inherit_mail" model="ir.ui.view">
+        <field name="name">mail.activity.view.list.inherit</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header//button[@name='action_done']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//header//button[@name='action_cancel']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//header//button[@name='action_snooze']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="button[@name='action_done'][1]" position="attributes">
+                <attribute name="invisible">active == False or not can_write</attribute>
+            </xpath>
+            <xpath expr="button[@name='unlink']" position="attributes">
+                <attribute name="invisible">active == False or not can_write</attribute>
+            </xpath>
+            <xpath expr="button[@name='action_snooze'][1]" position="attributes">
+                <attribute name="invisible">active == False or not can_write</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="stock_picking_type_inherit_tlip_stock" model="ir.ui.view">
+        <field name="name">stock.picking.type.view.form.inherit</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="internal_code" invisible="code != 'internal'" required="code == 'internal'" />
+            </field>
+            <field name="default_location_dest_id" position="attributes">
+                <attribute name="invisible">internal_code == 'inspect'</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="land_plot_category_view_list" model="ir.ui.view">
+        <field name="name">land_plot_category.view.list</field>
+        <field name="model">land.plot.category</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name" />
+                <field name="parent_id" />
+            </list>
+        </field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="action_land_plot_category_view">
+        <field name="name">Land Plot Category</field>
+        <field name="res_model">land.plot.category</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

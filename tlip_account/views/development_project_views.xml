@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="development_project_view_tree" model="ir.ui.view">
+        <field name="name">development.project.view.tree</field>
+        <field name="model">development.project</field>
+        <field name="arch" type="xml">
+            <list string="">
+                <field name="name" string="Project"/>
+                <field name="company_id" />
+                <field name="active" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="development_project_view_form" model="ir.ui.view">
+        <field name="name">development.project.view.form</field>
+        <field name="model">development.project</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="code" />
+                            <field name="active" invisible="True"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="development_project_action" model="ir.actions.act_window">
+        <field name="name">Development Projects</field>
+        <field name="res_model">development.project</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>

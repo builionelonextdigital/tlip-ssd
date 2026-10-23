@@ -1,0 +1,4 @@
+#!/bin/sh
+# git submodule update --init --recursive
+docker login registry.gitlab.com
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="job_function_water_consumption_sync" model="queue.job.function">
+        <field name="model_id" ref="tlip_utilities.model_water_point" />
+        <field name="method">_run</field>
+        <field name="channel_id" ref="queue_job.channel_root"/>
+        <field name="related_action" eval='{"func_name": "_run"}' />
+        <field name="retry_pattern" eval="{1: 60, 2: 180, 3: 10, 5: 300}" />
+    </record>
+    <record id="job_function_electricity_consumption_sync" model="queue.job.function">
+        <field name="model_id" ref="tlip_utilities.model_electricity_point" />
+        <field name="method">_run</field>
+        <field name="channel_id" ref="queue_job.channel_root"/>
+        <field name="related_action" eval='{"func_name": "_run"}' />
+        <field name="retry_pattern" eval="{1: 60, 2: 180, 3: 10, 5: 300}" />
+    </record>
+</odoo>

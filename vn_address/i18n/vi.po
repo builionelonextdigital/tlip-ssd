@@ -1,0 +1,58 @@
+# Translation of Port Cities.
+# This file contains the translation of the following modules:
+# 	* vn_address
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: vn_address
+#: model:ir.actions.act_window,name:vn_address.vn_address_district_action
+#: model:ir.model.fields,field_description:vn_address.field_res_country_ward__district_id
+msgid "District"
+msgstr "Quận"
+
+#. module: vn_address
+#: model:ir.actions.act_window,name:vn_address.vn_address_ward_action
+msgid "Ward"
+msgstr "Phường"
+
+#. module: vn_address
+#: model:ir.model.fields,field_description:vn_address.field_res_country_ward__name
+msgid "Ward Name"
+msgstr "Tên"
+
+#. module: vn_address
+#: model:ir.model.fields,field_description:vn_address.field_res_country_ward__code
+msgid "Ward Code"
+msgstr "Số hiệu"
+
+#. module: vn_address
+#: model:ir.model.fields,field_description:vn_address.field_res_country_district__country_state_id
+msgid "Province"
+msgstr "Tỉnh/TP"
+
+#. module: vn_address
+#: model:ir.model.fields,field_description:vn_address.field_res_country_district__name
+msgid "District Name"
+msgstr "Tên"
+
+#. module: vn_address
+#: model:ir.model.fields,field_description:vn_address.field_res_country_district__code
+msgid "District Code"
+msgstr "Số hiệu"
+
+#. module: base
+#: model:ir.actions.act_window,name:base.action_country_state
+msgid "Fed. States"
+msgstr "Tỉnh/TP"
+
+#. module: vn_address
+#: model:ir.actions.act_window,name:vn_address.vn_address_region_action
+#: model:ir.model,name:vn_address.model_res_country_region
+#: model:ir.model.fields,field_description:vn_address.field_res_country_state__region_id
+msgid "Region"
+msgstr "Vùng"

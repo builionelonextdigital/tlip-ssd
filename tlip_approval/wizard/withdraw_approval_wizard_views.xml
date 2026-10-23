@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="withdraw_approval_wizard_form" model="ir.ui.view">
+            <field name="name">Withdraw Approval</field>
+            <field name="model">withdraw.approval.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Withdraw Approval">
+                    <sheet>
+                        <group>
+                            <field name="reason" />
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Withdraw" class="btn-primary" name="action_confirm"
+                            type="object" />
+                        <button string="Discard" special="cancel" data-hotkey="z" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

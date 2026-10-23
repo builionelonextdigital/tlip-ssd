@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_sign_ticket_e_sign" model="ir.sequence">
+            <field name="name">Sign Ticket E-Sign</field>
+            <field name="code">pcv.sign.ticket.e.sign</field>
+            <field name="prefix">ESIGN/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_sign_ticket" model="ir.sequence">
+            <field name="name">Sign Ticket Hard Copy</field>
+            <field name="code">pcv.sign.ticket.hard.copy</field>
+            <field name="prefix">SIGN/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

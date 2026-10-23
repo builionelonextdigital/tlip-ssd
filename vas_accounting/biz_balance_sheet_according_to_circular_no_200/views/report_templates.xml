@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="custom_internal_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <div class="header" style="font-size: 13px;">
+            <div class="row">
+                <div class="col-3">
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                </div>
+                <div class="col-2 offset-2 text-center">
+                    <span t-esc="company.name"/>
+                </div>
+                <div class="col-2 offset-3 text-end">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><span class="page"/></li>
+                        <li class="list-inline-item">/</li>
+                        <li class="list-inline-item"><span class="topage"/></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+          <t t-out="0"/>
+        </div>
+    </template>
+
+    <template id="s06_dn_pdf">
+        <style>
+            * {
+                font-family: "Times New Roman" !important;
+            }
+            .s06-dn-text-italic {
+                font-style: italic;
+            }
+            .s06-dn-title-small {
+                font-weight: bold;
+            }
+            .s06-dn-title {
+                font-weight: bold;
+                font-size: 20px;
+            }
+            .s06-dn-text-center {
+                text-align: center;
+            }
+            .s06-dn-header {
+                line-height: 1.6;
+            }
+            .s06-dn-flex-container {
+                display: -webkit-box; /* wkhtmltopdf uses this one */
+                -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+            }
+            .s06-dn-flex-container > div {
+                width: 150px;
+            }
+            .s06-dn-table {
+                border: 1px solid black;
+            }
+            .s06-dn-table > thead > tr {
+                border: 1px solid black;
+            }
+            .s06-dn-table > thead > tr > th {
+                border: 1px solid black;
+            }
+            .s06-dn-table > tbody > tr{
+                border: 1px solid black;
+            }
+            .s06-dn-table > tbody > tr > td {
+                border: 1px solid black;
+            }
+        </style>
+        <div class='o_account_reports_body'>
+            <div class="o_account_reports_page o_account_reports_no_print o_account_trial_balance_s06_dn_report">
+                <div class="o_account_reports_header print_only s06-dn-header">
+                    <div class="row">
+                        <div class="col-8">
+                            <t t-if="not options.get('multi_company')">
+                                <span class="s06-dn-title-small">Đơn vị: </span><t t-out="report_company_name"/>
+                            </t>
+                            <t t-else="">
+                                <br/><span class="s06-dn-title-small">Đơn vị:</span>
+                                <t t-set="company_value">Tất cả</t>
+                                <t t-foreach="options['multi_company']" t-as="c">
+                                    <t t-set="company_value" t-value="''"/>
+                                    <t t-if="not c_last">
+                                        <t t-out="c.get('name')"/>,
+                                    </t>
+                                    <t t-else="">
+                                        <t t-out="c.get('name')"/>
+                                    </t>
+                                </t>
+                                <t t-out="company_value"/>
+                            </t>
+                            <t t-if="report_s06_dn_company_street">
+                                <br/><span class="s06-dn-title-small">Địa chỉ: </span><t t-out="report_s06_dn_company_street"/>
+                            </t>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-12 s06-dn-text-center">
+                                    <h2 style="font-weight: bold; font-size: 20px;">Mẫu số S06-DN</h2>
+                                    <span>(Ban hành theo Thông tư số 200/2014/TT-BTC</span>
+                                    <br/>
+                                    <span>Ngày 22/12/2014 của Bộ Tài Chính)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="s06-dn-text-center">
+                    <h2 style="font-weight: bold; font-size: 20px;">
+                        Bảng cân đối số phát sinh
+                    </h2>
+                    <t t-if="report_s06_dn_date">
+                        <t t-out="report_s06_dn_date"/>
+                    </t>
+                </div>
+                <br/><br/>
+                <div class="table-responsive">
+                    <table class="o_account_reports_table table-hover s06-dn-table">
+                        <thead class="o_account_reports_header_hierarchy">
+                            <tr>
+                                <th rowspan="2">Số hiệu tài khoản</th>
+                                <th rowspan="2">Tên tài khoản kế toán</th>
+                                <th colspan="2">Số dư đầu tháng</th>
+                                <th colspan="2">Số phát sinh trong tháng</th>
+                                <th colspan="2">Số dư cuối tháng</th>
+                            </tr>
+                            <tr>
+                                <th>Nợ</th>
+                                <th>Có</th>
+                                <th>Nợ</th>
+                                <th>Có</th>
+                                <th>Nợ</th>
+                                <th>Có</th>
+                            </tr>
+                            <tr>
+                                <th>A</th>
+                                <th>B</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="lines">
+                                <t t-foreach="lines" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <t t-if="line.get('account_group_id_code') or 'account_group_id_code' in line">
+                                                <span class="s06-dn-title-small">
+                                                    <t t-out="line.get('account_group_id_code')"/>
+                                                </span>
+                                            </t>
+                                            <t t-elif="line.get('account_code')">
+                                                <t t-out="line.get('account_code')"/>
+                                            </t>
+                                            <t t-elif="line.get('class') == ' o_account_coa_column_contrast_hierarchy'">
+                                                <span class="s06-dn-title-small">
+                                                    <t t-out="line.get('name')"/>
+                                                </span>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-if="line.get('class') != 'total'">
+                                                    <t t-out="line.get('name')"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <t t-if="line.get('account_group_id_name')">
+                                                <span class="s06-dn-title-small">
+                                                    <t t-out="line.get('account_group_id_name')"/>
+                                                </span>
+                                            </t>
+                                            <t t-elif="line.get('account_name')">
+                                                <t t-out="line.get('account_name')"/>
+                                            </t>
+                                            <t t-elif="line.get('class') == ' o_account_coa_column_contrast_hierarchy'">
+                                                <span class="s06-dn-title-small">
+                                                    <t t-out="line.get('name')"/>
+                                                </span>
+                                            </t>
+                                            <t t-elif="line.get('class') == 'total'">
+                                                <span class="s06-dn-title-small">
+                                                    <t t-out="line.get('name')"/>
+                                                </span>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-out="line.get('name')"/>
+                                            </t>
+                                        </td>
+                                        <t t-foreach="line.get('columns')" t-as="cell">
+                                            <t t-set="cell_classes" t-value="(cell.get('class', '') + (line.get('unfoldable') and ' o_foldable_total' or ''))"/>
+                                            <td>
+                                                <div class="o_account_report_column_value">
+                                                    <t t-call="{{cell.get('template', 'account_reports.cell_template')}}">
+                                                        <t t-set="calling_line_dict_id" t-value="line['id']"/>
+                                                        <t t-set="style" t-value="cell.get('style')"/>
+                                                        <t t-set="title" t-value="cell.get('title')"/>
+                                                        <t t-set="classes" t-value="'o_account_report_line ' + cell_classes"/>
+                                                        <t t-set="context" t-value="context"/>
+                                                    </t>
+                                                </div>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="s06-dn-flex-container s06-dn-text-center">
+                    <div>
+                        <span class="s06-dn-title-small">Người ghi sổ</span>
+                        <br/>
+                        <span class="s06-dn-text-italic">(Ký, họ tên)</span>
+                    </div>
+                    <div>
+                        <span class="s06-dn-title-small">Kế toán trưởng</span>
+                        <br/>
+                        <span class="s06-dn-text-italic">(Ký, họ tên)</span>
+                    </div>
+                    <div>
+                        <span class="s06-dn-text-italic"><t t-out="report_so6_dn_date_now"/></span>
+                        <br/>
+                        <span class="s06-dn-title-small">Giám đốc</span>
+                        <br/>
+                        <span class="s06-dn-text-italic">(Ký, họ tên, đóng dấu)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

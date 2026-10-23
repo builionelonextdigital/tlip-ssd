@@ -1,0 +1,27 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tlip_procurement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-12 00:00+0000\n"
+"PO-Revision-Date: 2025-12-12 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: tlip_procurement
+#: model_terms:ir.ui.view,arch_db:tlip_procurement.checklist_template_view_form
+#: model_terms:ir.ui.view,arch_db:tlip_procurement.procurement_task_cancel_reason_view_form
+#: model_terms:ir.ui.view,arch_db:tlip_procurement.procurement_task_view_form
+#: model_terms:ir.ui.view,arch_db:tlip_procurement.purchase_contract_view_form
+#: model_terms:ir.ui.view,arch_db:tlip_procurement.purchase_order_inherit_tlip_procurement
+#: model_terms:ir.ui.view,arch_db:tlip_procurement.purchase_supplement_view_form
+#: model_terms:ir.ui.view,arch_db:tlip_procurement.request_purchase_view_form
+#: model_terms:ir.ui.view,arch_db:tlip_procurement.view_tlip_procurement_vendor_form
+msgid "Are you sure that you want to do this action?"
+msgstr ""

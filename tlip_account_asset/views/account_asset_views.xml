@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_account_asset_form_inherit_tlip_account">
+        <field name="name">account.asset.form.inherit.tlip.account</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_form" />
+        <field name="arch" type="xml">
+            <button name="action_asset_modify" position="attributes">
+                <attribute name="string">Modify</attribute>
+                <attribute name="invisible">state != 'open' or parent_id</attribute>
+            </button>
+            <xpath expr="//header//field[@name='state']" position="attributes">
+                <attribute name="invisible">(approval_state != 'approved' and state == 'draft') or (state == 'model')</attribute>
+            </xpath>
+            <xpath expr="//header//field[@name='state']" position="after">
+                <field name="approval_state"
+                    readonly="1" widget="statusbar"
+                    statusbar_visible="draft,wait_for_approval,approved"
+                    invisible="approval_state == 'approved' or state != 'draft'"
+                />
+            </xpath>
+            <field name="prorata_date" position="after">
+                <field name="prorata_end_date" readonly="approval_readonly"
+                    invisible="prorata_computation_type != 'daily_computation'" />
+            </field>
+            <xpath expr="//form/header/button[@name='set_to_cancelled']" position="attributes">
+                <attribute name="groups">account.group_account_manager</attribute>
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='validate']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='action_asset_modify']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='action_save_model']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='set_to_draft']" position="attributes">
+                <attribute name="confirm">Are you sure that you want to do this action?</attribute>
+            </xpath>
+            <field name="model_id" position="attributes">
+                <attribute name="domain">[('state', '=', 'model'), ('asset_type', '=',
+                    'fixed_asset')]</attribute>
+                <attribute name="readonly">approval_readonly</attribute>
+            </field>
+            <field name="original_move_line_ids" position="attributes">
+                <!-- <attribute name="domain">[('parent_state', '=', 'posted'), ('company_id', '=',
+                company_id), ('account_id.account_type', 'in', ('asset_fixed', 'asset_non_current',
+                'asset_current')), ('move_id.move_type', 'in', ('in_invoice', 'in_refund',
+                'in_receipt')), ('move_id.asset_id', '=', False)]</attribute> -->
+                <attribute name="readonly">approval_readonly</attribute>
+            </field>
+            <xpath expr="//div[hasclass('oe_title')]" position="before">
+                <field name="image" class="oe_avatar" widget="image"
+                    readonly="approval_readonly"
+                    options="{'preview_image': 'image'}" />
+            </xpath>
+            <field name="model_id" position="after">
+                <field name="asset_code" string="Code" invisible="asset_type == 'model'"
+                    readonly="approval_readonly"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                <field name="asset_type" invisible="1" />
+                <field name="approval_readonly" invisible="1" />
+            </field>
+            <label for="salvage_value_pct" position="before">
+                <field name="asset_code" string="Code" invisible="asset_type == 'model'"
+                    readonly="approval_readonly" />
+                <field name="asset_type" invisible="1" />
+            </label>
+            <field name="account_depreciation_expense_id" position="attributes">
+                <attribute name="required">state == 'model'</attribute>
+                <attribute name="readonly">approval_readonly</attribute>
+            </field>
+            <xpath
+                expr="//field[@name='analytic_distribution']/../field[@name='account_depreciation_expense_id']"
+                position="attributes">
+                <attribute name="required">False</attribute>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//group[@name='current_values']" position="inside">
+                <field name="asset_quantity" invisible="asset_type != 'fixed_asset'"
+                    readonly="approval_readonly" />
+                <field name="asset_supplier_id" invisible="asset_type != 'fixed_asset'"
+                    readonly="approval_readonly"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" />
+                <field name="asset_purchase_date" invisible="asset_type != 'fixed_asset'"
+                    readonly="approval_readonly" />
+                <field name="revaluation_reason_id" invisible="asset_type != 'fixed_asset'"
+                    readonly="approval_readonly" domain="[('type', '=', 'increase')]"/>
+            </xpath>
+            <field name="analytic_distribution" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="analytic_distribution" position="after">
+                <field name="depreciation_line_ids" required="state != 'model'"
+                    readonly="approval_readonly">
+                    <list editable="bottom">
+                        <field name="account_depreciation_expense_id" />
+                        <field name="analytic_account_id" />
+                        <field name="percentage" />
+                    </list>
+                </field>
+            </field>
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" name="action_view_journal_entries"
+                    type="object"
+                    icon="fa-bars"
+                    invisible="not move_line_ids">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">
+                            Journal Entries
+                        </span>
+                    </div>
+                </button>
+                <button class="oe_stat_button" name="action_open_approval_history_ids"
+                    type="object"
+                    icon="fa-history">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">
+                            Approval Histories
+                        </span>
+                    </div>
+                </button>
+                <button name="action_open_asset_modify_crs" invisible="not asset_modify_cr_ids"
+                    class="oe_stat_button" icon="fa-file-text-o" type="object">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">
+                            Modify Information
+                        </span>
+                    </div>
+                </button>
+            </div>
+            <xpath expr="//button[@name='validate']" position="attributes">
+                <attribute name="invisible">state != 'draft' or approval_state != 'approved'</attribute>
+            </xpath>
+            <xpath expr="//button[@name='compute_depreciation_board']" position="attributes">
+                <attribute name="invisible">state != 'draft' or approval_state != 'draft'</attribute>
+            </xpath>
+            <xpath expr="//button[@name='validate']" position="after">
+                <field name="user_status" invisible="1" />
+                <button name="action_submit_approval" string="Submit" type="object"
+                    class="btn btn-primary"
+                    invisible="state != 'draft' or approval_state != 'draft'"
+                    confirm="Are you sure that you want to do this action?" />
+                <button name="action_approve_request" type="object" string="Approve"
+                    invisible="user_status != 'pending' or approval_state != 'wait_for_approval'"
+                    class="btn-primary" data-hotkey="v"
+                    confirm="Are you sure that you want to do this action?" />
+                <button name="action_reject_request" string="Refuse" type="object"
+                    invisible="user_status != 'pending' or approval_state != 'wait_for_approval'"
+                    data-hotkey="z"
+                    confirm="Are you sure that you want to do this action?" />
+                <button name="action_withdraw_approval" string="Withdraw" type="object"
+                    confirm="Are you sure that you want to do this action?"
+                    invisible="approval_state != 'wait_for_approval'" />
+                <button name="action_reset_approval" string="Reset Approval" type="object"
+                    confirm="Are you sure that you want to do this action?"
+                    invisible="approval_state not in ('rejected', 'withdrawn') and not (approval_state == 'approved' and state == 'draft')" />
+            </xpath>
+            <notebook position="inside">
+                <page string="Approval" name="approval" invisible="not approver_ids">
+                    <field name="approver_ids" mode="list" readonly="1">
+                        <list editable="bottom" decoration-success="status=='approved'"
+                            decoration-warning="status in ['pending', 'waiting']"
+                            decoration-danger="status=='refused'" no_open="1">
+                            <field name="existing_request_user_ids" column_invisible="True" />
+                            <field name="sequence" column_invisible="True" />
+                            <field name="user_id" string="Approver"
+                                required="not job_id" />
+                            <field name="job_id" required="not user_id" />
+                            <field name="status" />
+                            <field name="company_id" column_invisible="True" />
+                        </list>
+                    </field>
+                </page>
+            </notebook>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//field[@name='original_value']" position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//field[@name='acquisition_date']" position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//field[@name='asset_group_id']" position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//field[@name='salvage_value']" position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//field[@name='book_value']" position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//field[@name='value_residual']" position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//page[@name='main_page']//field[@name='method']" position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//page[@name='main_page']//field[@name='method_number']"
+                position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//page[@name='main_page']//field[@name='method_period']"
+                position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//page[@name='main_page']//field[@name='prorata_computation_type']"
+                position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//page[@name='main_page']//field[@name='prorata_date']"
+                position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//page[@name='main_page']//field[@name='company_id']" position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//page[@name='main_page']//field[@name='account_asset_id']"
+                position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//page[@name='main_page']//field[@name='account_depreciation_id']"
+                position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//page[@name='main_page']//field[@name='journal_id']" position="attributes">
+                <attribute name="readonly">approval_readonly</attribute>
+            </xpath>
+            <xpath expr="//field[@name='original_move_line_ids']//list" position="inside">
+                <field name="entry_currency_rate" optional="hide" />
+                <field name="asset_name" optional="hide" />
+                <field name="asset_code" optional="hide" />
+                <field name="development_project_id" optional="hide" options="{'no_open': 1, 'no_create': 1}" />
+                <field name="development_phase_id" optional="hide" options="{'no_open': 1, 'no_create': 1}" />
+                <field name="development_project_code" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_account_asset_tree_inherit">
+        <field name="name">view.account.asset.tree.inherit</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="approval_state" widget="badge"
+                    decoration-info="approval_state=='draft'"
+                    decoration-warning="approval_state=='wait_for_approval'"
+                    decoration-danger="approval_state in ('rejected', 'cancel')"
+                    decoration-success="approval_state=='approved'" />
+                <field name="cancel_reason" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_asset_search_inherit_tlip_account_asset" model="ir.ui.view">
+        <field name="name">account.asset.view.form.inherit</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_search" />
+        <field name="arch" type="xml">
+            <field name="asset_properties" position="after">
+                <filter string="My Approvals to Review" name="filter_approvals_to_review"
+                    domain="[('approval_state', '=', 'wait_for_approval'), '|', ('current_approver_id.job_id.employee_ids.user_id', 'in', [uid]), ('current_approver_id.user_id', '=', uid)]" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="account_asset.action_account_asset_model_form">
+        <field name="domain">[('asset_type', '=', 'fixed_asset'), ('state', '=', 'model')]</field>
+        <field name="context">{'asset_type': 'fixed_asset', 'default_asset_type': 'fixed_asset',
+            'default_state': 'model'}</field>
+    </record>
+    <record model="ir.actions.act_window" id="account_asset.action_account_asset_form">
+        <field name="domain">[('asset_type', '=', 'fixed_asset'), ('state', '!=', 'model'),
+            ('parent_id', '=', False)]</field>
+        <field name="context">{'asset_type': 'fixed_asset', 'default_asset_type': 'fixed_asset'}</field>
+    </record>
+
+    <record model="ir.ui.view" id="view_asset_modify_form_inherit_tlip_account">
+        <field name="name">asset.modify.form.inherit.tlip.account</field>
+        <field name="model">asset.modify</field>
+        <field name="inherit_id" ref="account_asset.asset_modify_form" />
+        <field name="arch" type="xml">
+            <field name="asset_id" position="after">
+                <field name="asset_type" invisible="1" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="account_asset.action_account_asset_compute_depreciations">
+        <field name="binding_model_id" eval="False"/>
+    </record>
+
+    <record model="ir.actions.server" id="account_asset.action_account_asset_run">
+        <field name="binding_model_id" eval="False"/>
+    </record>
+</odoo>

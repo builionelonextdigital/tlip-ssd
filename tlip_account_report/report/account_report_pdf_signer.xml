@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="pdf_export_main_signer" inherit_id="account_reports.pdf_export_main">
+        <xpath expr="//ol[hasclass('o_annotation')]" position="after">
+            <t>
+                <div class="row" style="margin-top: 100px;">
+                    <div class="col-4 text-center">
+                        <p style="color: white;">{{USER-SIGNATURE}}</p>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>

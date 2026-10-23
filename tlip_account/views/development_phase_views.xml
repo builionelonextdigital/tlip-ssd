@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="development_phase_view_list" model="ir.ui.view">
+        <field name="name">development_phase.view.list</field>
+        <field name="model">development.phase</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name" string="Phase"/>
+                <field name="company_id" />
+            </list>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_development_phase_view">
+        <field name="name">Development Phases</field>
+        <field name="res_model">development.phase</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+    <t t-name="pcv_vas_trial_balance_report.AccountReportLineNameCustomizable" t-inherit="account_reports.AccountReportLineNameCustomizable" t-inherit-mode="extension">
+        <xpath expr="//td[@data-id='line_name']" position="after">
+            <td
+                t-if="props.line.account_code &#38;&#38; controller.action.xml_id == 'pcv_vas_trial_balance_report.action_vas_trial_balance_report'"
+                data-id="props.line.account_code"
+                class="line_name"
+                t-att-class="lineNameClasses"
+                t-on-click=""
+                t-att-colspan="props.line.colspan || 1"
+                tabindex="-1"
+                t-ref="props.line.account_code"
+            >
+                <div class="wrapper">
+                    <div data-id="content" class="content">
+                        <t t-component="env.component('AccountReportEllipsis')"
+                            t-props="{
+                            name: props.line.account_code?.toString(),
+                            type: 'string',
+                            maxCharacters: 80,
+                        }" />
+                    </div>
+                </div>
+            </td>
+        </xpath>
+    </t>
+</templates>

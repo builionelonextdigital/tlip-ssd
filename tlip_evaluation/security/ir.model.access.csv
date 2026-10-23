@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_evaluation_criteria,access_evaluation_criteria,model_evaluation_criteria,base.group_user,1,0,0,0
+access_evaluation_criteria,access_evaluation_criteria,model_evaluation_criteria,purchase.group_purchase_manager,1,1,1,1
+access_evaluation_question,access_evaluation_question,model_evaluation_question,base.group_user,1,0,0,0
+access_evaluation_question,access_evaluation_question,model_evaluation_question,purchase.group_purchase_manager,1,1,1,1
+access_evaluation_survey,access_evaluation_survey,model_evaluation_survey,base.group_user,1,1,1,1
+access_evaluation_survey_criteria,access_evaluation_survey_criteria,model_evaluation_survey_criteria,base.group_user,1,1,1,1
+access_evaluation_survey_question,access_evaluation_survey_question,model_evaluation_survey_question,base.group_user,1,1,1,1

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+<!--		<report-->
+<!--		    id="action_report_business_xlsx"-->
+<!--		    model="business.activities.results"-->
+<!--		    string="Business Activities Results Report xlsx"-->
+<!--		    report_type="xlsx"-->
+<!--		    name="biz_profit_loss_statement.report_business_xlsx"-->
+<!--		    file="biz_profit_loss_statement.report_business_xlsx"-->
+<!--		    attachment_use="False"-->
+<!--		/>-->
+
+        <record id="action_report_business_xlsx" model="ir.actions.report">
+            <field name="name">Excel print publishing</field>
+            <field name="model">business.activities.results</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">biz_profit_loss_statement.report_business_xlsx</field>
+            <field name="report_file">biz_profit_loss_statement.report_business_xlsx</field>
+            <field name="print_report_name">"Template B02 - Profit loss statement (%s)" %(object.compute_name())</field>
+            <field name="binding_model_id" ref="model_business_activities_results"/>
+            <field name="binding_type">report</field>
+            <field name="attachment_use">False</field>
+        </record>
+
+        <record id="action_report_business_pdf" model="ir.actions.report">
+            <field name="name">PDF print publishing</field>
+            <field name="model">business.activities.results</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">biz_profit_loss_statement.report_business_pdf</field>
+            <field name="report_file">biz_profit_loss_statement.report_business_pdf</field>
+            <field name="print_report_name">"Template B02 - Profit loss statement (%s)" %(object.name)</field>
+            <field name="binding_model_id" ref="model_business_activities_results"/>
+            <field name="binding_type">report</field>
+            <field name="attachment_use">False</field>
+        </record>
+
+	</data>
+</odoo>

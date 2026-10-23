@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_requisition.menu_purchase_requisition_pro_mgt" model="ir.ui.menu">
+        <field name="active" eval="False" />
+    </record>
+
+    <record id="purchase.menu_procurement_management" model="ir.ui.menu">
+        <field name="name">Requests</field>
+    </record>
+
+    <menuitem id="purchase.menu_purchase_root"
+        name="Procurement" />
+    <!-- Procurement / Vendor -->
+    <menuitem id="menu_procurement_vendor_management" name="Vendors"
+        parent="purchase.menu_purchase_root" sequence="0">
+        <menuitem id="purchase.menu_procurement_management_supplier_name" name="Vendors"
+            action="tlip_procurement.tlip_procurement_vendor_action"
+            sequence="1" />
+
+        <menuitem id="menu_tlip_procurement_vendor_registration" name="Vendor Registration"
+            action="tlip_procurement.tlip_procurement_vendor_registration_action"
+            sequence="5" />
+        <!-- Procurement / Vendor / Goods/Services -->
+        <menuitem name="Goods/Services"
+            id="purchase.menu_procurement_partner_contact_form"
+            action="purchase.product_normal_action_puchased"
+            sequence="20" />
+        <!-- Procurement / Vendor / Vendor Pricelists -->
+        <menuitem id="purchase.menu_product_pricelist_action2_purchase"
+            action="product.product_supplierinfo_type_action"
+            sequence="30" />
+    </menuitem>
+    <!-- Procurement / Operations -->
+    <menuitem id="procurement_operations" name="Operations"
+        parent="purchase.menu_purchase_root" sequence="3">
+        <menuitem id="menu_tlip_procurement_register_vendor" name="Register Vendor"
+            action="tlip_procurement.tlip_procurement_register_vendor_action"
+            sequence="1" />
+        <menuitem id="menu_tlip_procurement_procurement_collection"
+            name="Procurement Collections"
+            action="tlip_procurement.request_procurement_collection_action"
+            sequence="2" />
+        <menuitem id="menu_tlip_procurement_task" name="Procurement Tasks (F2)"
+            action="tlip_procurement.procurement_task_action"
+            sequence="3" />
+        <menuitem id="menu_periodical_survey" name="Periodical Evaluation"
+            action="tlip_procurement.action_periodical_survey_wizard"
+            sequence="10" />
+    </menuitem>
+    <!-- Procurement / Contract -->
+    <menuitem id="menu_contract" name="Contract"
+        parent="purchase.menu_purchase_root" sequence="4">
+        <menuitem id="menu_purchase_contract"
+            action="tlip_procurement.action_purchase_contract_view"
+            sequence="10" />
+
+        <menuitem id="menu_purchase_supplement"
+            action="tlip_procurement.action_purchase_supplement_view"
+            sequence="20" />
+    </menuitem>
+    <!-- Procurement / Requests / Request for Goods/Service (F1) -->
+    <menuitem id="menu_tlip_procurement_request_purchase" name="Request for Goods/Service (F1)"
+        parent="purchase.menu_procurement_management"
+        action="tlip_procurement.request_purchase_action"
+        sequence="1" />
+    <menuitem id="view_tlip_request_payment_procurement_menu" name="Request for Payments (F3)"
+        action="tlip_account.action_outbound_payment_request_payment"
+        parent="purchase.menu_procurement_management"
+        sequence="2" />
+    <!-- Procurement / Requests / Request for Quotation -->
+    <menuitem id="purchase.menu_purchase_rfq" name="Requests for Quotation"
+        parent="purchase.menu_procurement_management"
+        active="False" />
+    <!-- Procurement / Requests / Procurement Orders -->
+    <menuitem id="purchase.menu_purchase_form_action" name="Procurement Orders"
+        parent="purchase.menu_procurement_management"
+        sequence="3"
+        active="True" />
+    <!-- Procurement / Requests / Budget Approval -->
+    <menuitem id="menu_budget_approval_allocation_view"
+        parent="purchase.menu_procurement_management"
+        name="Budget Approval"
+        action="tlip_account.budget_approval_allocation_action"
+        sequence="5" />
+    <!-- Procurement / Configuration / Purchase Contract Type -->
+    <menuitem id="menu_purchase_contract_type"
+        action="tlip_procurement.action_purchase_contract_type_view"
+        parent="purchase.menu_purchase_config" sequence="70" />
+    <!-- Procurement / Configuration / Vendor Type -->
+    <menuitem id="menu_purchase_vendor_type"
+        action="tlip_procurement.tlip_procurement_vendor_type_action"
+        parent="purchase.menu_purchase_config" sequence="80" />
+    <!-- Procurement / Configuration / Checklist Templates -->
+    <menuitem id="menu_purchase_checklist_template"
+        action="tlip_procurement.action_checklist_template_view"
+        parent="purchase.menu_purchase_config" sequence="90" />
+    <!-- Procurement / Configuration / Vendor Selection Rules -->
+    <menuitem id="menu_purchase_vendor_selection_rule"
+        action="tlip_procurement.vendor_selection_rule_action"
+        parent="purchase.menu_purchase_config" sequence="100" />
+    <!-- Procurement / Configuration / Contract Sign Rules -->
+    <menuitem id="menu_purchase_contract_sign_rule"
+        action="tlip_procurement.contract_sign_rule_action"
+        parent="purchase.menu_purchase_config" sequence="105" />
+    <!-- Procurement / Configuration / Project -->
+    <menuitem id="menu_purchase_development_root"
+        name="Development"
+        parent="purchase.menu_purchase_config" sequence="110" />
+    <menuitem id="menu_purchase_development_project"
+        action="tlip_account.development_project_action"
+        parent="tlip_procurement.menu_purchase_development_root" sequence="10" />
+    <!-- Procurement / Reporting / Evaluation Survey -->
+    <menuitem id="menu_evaluation_survey"
+        name="Supplier Evaluation"
+        parent="purchase.purchase_report_main"
+        action="tlip_evaluation.evaluation_survey_action"
+        sequence="10" />
+</odoo>

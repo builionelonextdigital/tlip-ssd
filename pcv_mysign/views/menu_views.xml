@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_mysign_config"
+        name="MySign Configuration"
+        parent="pcv_sign_ticket.menu_sign_ticket_config"
+        action="action_mysign_config"
+        sequence="99"/>
+
+</odoo>

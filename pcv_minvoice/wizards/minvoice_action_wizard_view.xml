@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="minvoice_action_wizard_view_form" model="ir.ui.view">
+        <field name="name">minvoice.action.wizard.view.form</field>
+        <field name="model">minvoice.action.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <field name="minvoice_action" widget="radio" options="{'horizontal': true}" />
+                <hr />
+                <group>
+                    <group string="Thông tin hóa đơn">
+                        <group colspan="4">
+                            <field name="minvoice_account_id" invisible="1" />
+                            <field name="minvoice_template_code" required="1" force_save="1"
+                                options="{'values':'get_minvoice_template_code_selection'}"
+                                readonly="minvoice_action == 'cancel'"
+                                invisible="minvoice_action != 'cancel'" />
+                            <field name="minvoice_template_code" required="1"
+                                widget="dynamic_dropdown"
+                                options="{'values':'get_minvoice_template_code_selection'}"
+                                invisible="minvoice_action == 'cancel'"
+                                context="{'minvoice_account_id': minvoice_account_id}" />
+                            <field name="minvoice_template_id" required="1"
+                                readonly="minvoice_action == 'cancel'"
+                                domain="[('code', '=?', minvoice_template_code)]"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                        </group>
+                        <group colspan="4" invisible="minvoice_action == 'cancel'">
+                            <field name="minvoice_template_payment_method"
+                                required="minvoice_action != 'cancel'" />
+                            <field name="minvoice_issued_date"
+                                required="minvoice_action != 'cancel'" />
+                        </group>
+                        <group colspan="4" invisible="minvoice_action != 'cancel'">
+                            <field name="agreement_document" required="minvoice_action == 'cancel'" />
+                            <field name="agreement_date" />
+                            <field name="cancel_reason" required="minvoice_action == 'cancel'" />
+                        </group>
+                    </group>
+                    <group string="Thông tin hóa đơn gốc (nếu có)"
+                        invisible="minvoice_action not in ['adjust', 'replace']">
+                        <field name="move_id" invisible="1" />
+                        <field name="minvoice_account_id" invisible="1" />
+                        <field name="original_invoice_id"
+                            options="{'no_create': True, 'no_create_edit': True}"
+                            domain="[('minvoice_publish_state', '=', 'published'), ('move_type', '=', 'out_invoice'), ('id', '!=', move_id)]" />
+                        <field name="original_minvoice_template_code" readonly="1"
+                            invisible="not original_invoice_id" />
+                        <field name="original_minvoice_template_code" widget="dynamic_dropdown"
+                            options="{'values':'get_minvoice_template_code_selection'}"
+                            context="{'minvoice_account_id': minvoice_account_id}"
+                            invisible="original_invoice_id"
+                            required="minvoice_action in ['adjust', 'replace']" />
+                        <field name="original_minvoice_template_id" force_save="1"
+                            domain="[('code', '=?', original_minvoice_template_code)]"
+                            readonly="original_invoice_id"
+                            required="minvoice_action in ['adjust', 'replace']"
+                            options="{'no_create': True, 'no_create_edit': True}" />
+                        <field name="original_minvoice_no" force_save="1"
+                            readonly="original_invoice_id"
+                            required="minvoice_action in ['adjust', 'replace']" />
+                        <field name="original_minvoice_issued_date" force_save="1"
+                            readonly="original_invoice_id"
+                            required="minvoice_action in ['adjust', 'replace']" />
+                        <field name="minvoice_note" force_save="1"
+                            required="minvoice_action in ['adjust', 'replace']" />
+                    </group>
+                </group>
+                <field name="minvoice_print_file" widget="pdf_viewer" readonly="1" />
+                <footer>
+                    <button special="cancel" data-hotkey="z" string="Quay lại" />
+                    <button name="button_do_action_minvoice" type="object" string="Lưu hóa đơn"
+                        class="oe_highlight" invisible="minvoice_action in ('cancel', 'publish')" />
+                    <button name="button_do_action_minvoice" type="object" string="Phát hành HĐ"
+                        class="oe_highlight" invisible="minvoice_action != 'publish'" />
+                    <button name="button_do_action_minvoice" type="object" string="Hủy hóa đơn"
+                        class="oe_highlight" invisible="minvoice_action != 'cancel'"
+                        confirm="Bạn có chắc chắn muốn hủy bỏ hóa đơn này trên hệ thống M-invoice?" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="minvoice_cancelled_wizard_view_form" model="ir.ui.view">
+        <field name="name">minvoice.cancelled.wizard.view.form</field>
+        <field name="model">minvoice.action.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <p>HĐ này đã được phát hành HĐ điện tử. Bạn có chắc muốn đưa về dự thảo và hủy HĐ
+                    điện tử trước đó không?</p>
+                <field name="minvoice_action" invisible="1" />
+                <group string="Thông tin hóa đơn">
+                    <group colspan="4">
+                        <field name="move_id" invisible="1" force_save="1" />
+                        <field name="minvoice_account_id" invisible="1" />
+                        <field name="minvoice_template_code" required="1" force_save="1"
+                            options="{'values':'get_minvoice_template_code_selection'}"
+                            readonly="minvoice_action == 'cancel'"
+                            invisible="minvoice_action != 'cancel'" />
+                        <field name="minvoice_template_id" required="1"
+                            readonly="minvoice_action == 'cancel'"
+                            domain="[('code', '=?', minvoice_template_code)]"
+                            options="{'no_create': True, 'no_create_edit': True}" />
+                    </group>
+                    <group colspan="4" invisible="minvoice_action == 'cancel'">
+                        <field name="minvoice_template_payment_method"
+                            required="minvoice_action != 'cancel'" />
+                        <field name="minvoice_issued_date" required="minvoice_action != 'cancel'" />
+                    </group>
+                    <group colspan="4" invisible="minvoice_action != 'cancel'">
+                        <field name="agreement_document" required="minvoice_action == 'cancel'" />
+                        <field name="agreement_date" />
+                        <field name="cancel_reason" required="minvoice_action == 'cancel'" />
+                    </group>
+                </group>
+                <footer>
+                    <button special="cancel" data-hotkey="z" string="Quay lại" />
+                    <button name="button_do_action_minvoice" type="object" string="Hủy hóa đơn"
+                        class="oe_highlight" invisible="minvoice_action != 'cancel'" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="minvoice_action_wizard_view_exported_einvoice" model="ir.ui.view">
+        <field name="name">minvoice.action.wizard.view.exported.einvoice.form</field>
+        <field name="model">minvoice.action.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="move_id" invisible="1" force_save="1" />
+                <field name="minvoice_print_file" widget="pdf_viewer" readonly="1" />
+                <footer>
+                    <button name="button_send_minvoice_email" type="object" string="Gửi Email"
+                        class="oe_highlight" />
+                    <button name="button_update_minvoice" type="object" string="Cập nhật HĐ chờ ký"
+                        invisible="not can_update_minvoice" />
+                    <button special="cancel" data-hotkey="z" string="Quay lại" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

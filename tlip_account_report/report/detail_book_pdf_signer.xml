@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="rp_detail_book_pdf_signer" inherit_id="biz_details_of_account_books.rp_detail_book_pdf">
+        <xpath expr="//div[@class='footer']" position="before">
+            <div class="row" style="margin-top: 100px;">
+                <div class="col-4 text-center">
+                    <p style="color: white;">{{USER-SIGNATURE}}</p>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

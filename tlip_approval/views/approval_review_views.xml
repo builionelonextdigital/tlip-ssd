@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="approval_review_view_tree" model="ir.ui.view">
+        <field name="name">approval.review.view.tree</field>
+        <field name="model">approval.review</field>
+        <field name="arch" type="xml">
+            <list string="Approval Review">
+                <field name="create_uid" string="Approver" />
+                <field name="old_value" readonly="1" />
+                <field name="new_value" readonly="1" />
+                <field name="reason" readonly="1" />
+                <field name="approval_request_id" column_invisible="1" />
+            </list>
+        </field>
+    </record>
+</odoo>

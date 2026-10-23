@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<record id="paperformat_a4_contract" model="report.paperformat">
+		<field name="name">A4 Portrait Contract</field>
+		<field name="default" eval="True"/>
+		<field name="format">A4</field>
+		<field name="page_height">0</field>
+		<field name="page_width">0</field>
+		<field name="orientation">Portrait</field>
+		<field name="margin_top">17.50</field>
+		<field name="margin_bottom">30</field>
+		<field name="margin_left">5</field>
+		<field name="margin_right">5</field>
+		<field name="header_line" eval="False"/>
+		<field name="header_spacing">5</field>
+		<field name="dpi">90</field>
+	</record>
+	<record id="accounting_balance_sheet_report_pdf" model="ir.actions.report">
+		<field name="name">Bảng cân đối kế toán PDF</field>
+		<field name="model">accounting.balance.sheet.report</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">biz_accounting_balance_sheet.rp_account_balance_pdf</field>
+		<field name="report_file">biz_accounting_balance_sheet.rp_account_balance_pdf</field>
+		<field name="binding_model_id" ref="model_accounting_balance_sheet_report"/>
+		<field name="binding_type">report</field>
+		<field name="paperformat_id" ref="paperformat_a4_contract"/>
+	</record>
+	<record id="action_report_accounting_balance_xlsx" model="ir.actions.report">
+		 <field name="name">Report accounting balance</field>
+		 <field name="model">accounting.balance.sheet.report</field>
+		 <field name="report_type">xlsx</field>
+		 <field name="report_name">biz_accounting_balance_sheet.rp_account_balance_sheet</field>
+		 <field name="report_file">biz_accounting_balance_sheet.rp_account_balance_sheet</field>
+		<field name="print_report_name">'Bảng cân đối kế toán (Excel) - %s' % (object.id)</field>
+		 <field name="binding_model_id" ref="model_accounting_balance_sheet_report"/>
+		 <field name="binding_type">report</field>
+    </record>
+</odoo>

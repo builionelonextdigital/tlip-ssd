@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_account_debt_report_view" model="ir.actions.client">
+            <field name="name">Account Debt Report</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'report_id': ref('vas_debt_report.account_debt_report_data')}"/>
+        </record>
+    </data>
+</odoo>

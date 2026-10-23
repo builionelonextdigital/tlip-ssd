@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_docx_template,access_docx_template,dynamic_docx_pdf_reports_omax.model_docx_template,base.group_user,1,1,1,1
+access_docx_template_wiz,access_docx_template_wiz,dynamic_docx_pdf_reports_omax.model_docx_template_wiz,base.group_user,1,1,1,1

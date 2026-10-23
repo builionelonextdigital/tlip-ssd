@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mysign_config_view_form" model="ir.ui.view">
+        <field name="name">mysign.config.view.form</field>
+        <field name="model">mysign.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Test Connection" name="test_mysign_connection" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Configuration Name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Connection">
+                            <field name="company_id"
+                                options="{'no_create': True, 'no_create_edit': True}"/>
+                            <field name="url_api"/>
+                            <field name="client_id"/>
+                            <field name="client_secret" password="True"/>
+                            <field name="profile_id"/>
+                        </group>
+                        <group string="Timestamp Authority (TSA)">
+                            <field name="tsa_url"
+                                placeholder="e.g. http://timestamp.digicert.com"
+                                help="RFC 3161 TSA endpoint. When set, an embedded trusted timestamp replaces the local-clock warning in PDF readers."/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="registered_accounts" string="Registered Accounts">
+                            <field name="mysign_account_ids">
+                                <list editable="bottom">
+                                    <field name="code"/>
+                                    <field name="state" widget="badge"
+                                        decoration-success="state == 'connected'"
+                                        decoration-warning="state == 'idle'"/>
+                                    <field name="expires_in" />
+                                    <button string="Login" name="action_login" class="oe_stat_button" type="object" />
+                                    <button string="Disconnect" name="disconnect" class="oe_stat_button" type="object" invisible="state != 'connected'"/>
+                                    <button string="Open" name="action_open_form"
+                                        type="object" icon="fa-external-link"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="mysign_config_view_list" model="ir.ui.view">
+        <field name="name">mysign.config.view.list</field>
+        <field name="model">mysign.config</field>
+        <field name="arch" type="xml">
+            <list string="MySign Configurations">
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="client_id"/>
+                <field name="active" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_mysign_config" model="ir.actions.act_window">
+        <field name="name">MySign Configurations</field>
+        <field name="res_model">mysign.config</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

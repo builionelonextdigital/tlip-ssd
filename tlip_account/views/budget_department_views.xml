@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="budget_department_view_tree" model="ir.ui.view">
+        <field name="name">budget.department.view.tree</field>
+        <field name="model">budget.department</field>
+        <field name="arch" type="xml">
+            <list string="">
+                <field name="name" />
+                <field name="code" />
+            </list>
+        </field>
+    </record>
+
+    <record id="budget_department_view_form" model="ir.ui.view">
+        <field name="name">budget.department.view.form</field>
+        <field name="model">budget.department</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_view_budget_codes"
+                            icon="fa-list">
+                            <field name="count_budget_code" widget="statinfo" string="Budget Codes" />
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="code" />
+                            <field name="job_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="budget_department_view_search" model="ir.ui.view">
+        <field name="name">budget.department.view.search</field>
+        <field name="model">budget.department</field>
+        <field name="arch" type="xml">
+            <search string="Departments">
+                <field name="name" string="Department"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="budget_department_action" model="ir.actions.act_window">
+        <field name="name">Budget Departments</field>
+        <field name="res_model">budget.department</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>

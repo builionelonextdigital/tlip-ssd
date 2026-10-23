@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="non_land_plot_item_kanban_view" model="ir.ui.view">
+        <field name="name">non_land_plot_item_kanban_view</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <kanban sample="1">
+                <field name="currency_id"/>
+                <field name="activity_state"/>
+                <field name="categ_id"/>
+                <progressbar field="activity_state" colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
+                <templates>
+                    <t t-name="card" class="flex-row">
+                        <main class="pe-2">
+                            <div class="mb-1">
+                                <div class="d-flex mb-0 h5">
+                                    <field class="me-1" name="is_favorite" widget="boolean_favorite" nolabel="1"/>
+                                    <field name="name"/>
+                                </div>
+                                <span t-if="record.default_code.value">
+                                    [<field name="default_code"/>]
+                                </span>
+                                <strong t-if="record.product_variant_count.value &gt; 1">
+                                    <field name="product_variant_count"/> Variants
+                                </strong>
+                            </div>
+                            <span>
+                                Price: <field name="list_price" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                            </span>
+                            <field name="product_properties" widget="properties"/>
+                        </main>
+                        <aside>
+                            <field
+                                name="image_128"
+                                widget="image"
+                                alt="Product"
+                                options="{'img_class': 'w-100 object-fit-contain'}"
+                                invisible="not image_128"
+                            />
+                        </aside>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="non_land_plot_item_list_view" model="ir.ui.view">
+        <field name="name">non_land_plot_item_list_viewt</field>
+        <field name="model">product.template</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <list multi_edit="1" sample="1">
+            <header>
+                <button string="Print Labels" type="object" name="action_open_label_layout"/>
+            </header>
+                <field name="product_variant_count" column_invisible="True"/>
+                <field name="sale_ok" column_invisible="True"/>
+                <field name="currency_id" column_invisible="True"/>
+                <field name="cost_currency_id" column_invisible="True"/>
+                <field name="is_favorite" widget="boolean_favorite" optional="show" nolabel="1"/>
+                <field name="name" string="Product Name"/>
+                <field name="default_code" optional="show"/>
+                <field name="product_tag_ids" widget="many2many_tags" optional="show"/>
+                <field name="company_id" options="{'no_create': True}"
+                    groups="base.group_multi_company" optional="hide"/>
+                <field name="list_price" string="Sales Price" widget='monetary' options="{'currency_field': 'currency_id'}" optional="show" decoration-muted="not sale_ok"/>
+                <field name="standard_price" widget='monetary' options="{'currency_field': 'cost_currency_id'}" optional="show" readonly="1"/>
+                <field name="categ_id" optional="hide"/>
+                <field name="type" optional="hide" readonly="1"/>
+                <field name="uom_id" string="Unit" readonly="1" optional="show"/>
+                <field name="active" column_invisible="True"/>
+                <field name="activity_exception_decoration" widget="activity_exception"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="non_land_plot_item_form_view" model="ir.ui.view">
+        <field name="name">non_land_plot_item_form_view</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Print Labels"
+                        type="object"
+                        name="action_open_label_layout"
+                        invisible="type == 'service'"
+                    />
+                </header>
+                <sheet>
+                    <field name='product_variant_count' invisible='1'/>
+                    <field name='is_product_variant' invisible='1'/>
+                    <field name='attribute_line_ids' invisible='1'/>
+                    <field name="company_id" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <field name="id" invisible="True"/>
+                    <div class="oe_title">
+                        <label for="name" string="Product"/>
+                        <h1>
+                            <div class="d-flex">
+                                <field name="is_favorite" widget="boolean_favorite" class="me-3" nolabel="1"/>
+                                <field class="text-break" name="name" options="{'line_breaks': False}" widget="text"/>
+                            </div>
+                        </h1>
+                    </div>
+                    <div name="options">
+                        <span class="d-inline-block">
+                            <field name="sale_ok"/>
+                            <label for="sale_ok"/>
+                        </span>
+                        <span class="d-inline-block">
+                            <field name="purchase_ok"/>
+                            <label for="purchase_ok"/>
+                        </span>
+                    </div>
+                    <notebook>
+                        <page string="General Information" name="general_information">
+                            <group>
+                                <group name="group_general">
+                                    <field name="active" invisible="1"/>
+                                    <field name="type" widget="radio" options="{'horizontal': True}"/>
+                                    <label for="is_storable" class="oe_inline" invisible="type != 'consu'"/>
+                                    <div class="o_row w-100" invisible="type != 'consu'">
+                                        <field name="is_storable"/>
+                                        <field name="tracking" invisible="not is_storable" groups="stock.group_production_lot"/>
+                                    </div>
+                                    <field name="model" />
+                                    <field name="manufacturer_id" />
+                                    <separator colspan="2" string="Specification"/>
+                                    <field name="specification_ids" nolabel="1">
+                                        <list editable="bottom">
+                                            <field name="name" />
+                                            <field name="value" />
+                                        </list>
+                                    </field>
+                                </group>
+                                <group name="group_standard_price">
+                                    <label for="list_price"/>
+                                    <div name="list_price_uom">
+                                        <field name="list_price"
+                                            class="oe_inline"
+                                            widget="monetary"
+                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                        <span name="uom_span">
+                                            per
+                                            <field
+                                                name="uom_id"
+                                                class="oe_inline" style="max-width:136px"
+                                                options="{'no_create': True}"
+                                            />
+                                        </span>
+                                    </div>
+                                    <label for="taxes_id"/>
+                                    <div name="taxes_div" class="o_row">
+                                        <field
+                                            name="taxes_id"
+                                            widget="many2many_tags"
+                                            class="oe_inline"
+                                            context="{
+                                                'default_type_tax_use': 'sale',
+                                                'search_default_sale': 1,
+                                                'search_default_service': type == 'service',
+                                                'search_default_goods': type == 'consu',
+                                            }"
+                                        />
+                                        <field name="tax_string" class="oe_inline"/>
+                                    </div>
+                                    <label
+                                        for="standard_price"
+                                        invisible="(id and product_variant_count != 1
+                                                    and not is_product_variant)"
+                                        id="standard_price_label"
+                                    />
+                                    <div
+                                        name="standard_price_uom"
+                                        invisible="(id and product_variant_count != 1
+                                                    and not is_product_variant)"
+                                    >
+                                        <field
+                                            name="standard_price"
+                                            class="oe_inline"
+                                            widget="monetary"
+                                            options="{
+                                                'currency_field': 'cost_currency_id',
+                                                'field_digits': True,
+                                            }"
+                                        />
+                                        <span>
+                                            per
+                                            <field name="uom_name" class="oe_inline"/>
+                                        </span>
+                                    </div>
+                                    <field name="supplier_taxes_id"
+                                        invisible="not purchase_ok"
+                                        widget="many2many_tags"
+                                        context="{
+                                            'default_type_tax_use':'purchase',
+                                            'search_default_purchase': 1,
+                                            'search_default_service': type == 'service',
+                                            'search_default_goods': type == 'consu',
+                                        }"
+                                    />
+                                    <field name="categ_id" string="Category"/>
+                                    <field name="default_code" />
+                                    <label for="qr_code"/>
+                                    <div name="qr_code">
+                                        <field name="qr_code" widget="image" readonly="1" options="{'size': [150, 150]}"/>
+                                        <button string="Generate QR Code" type="object" name="generate_qr_code" class="btn-link" icon="fa-qrcode"/>
+                                    </div>
+                                    <field name="company_id"
+                                        groups="base.group_multi_company"
+                                        options="{'no_create': True}"
+                                        placeholder="Visible to all"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="cost_currency_id" invisible="1"/>
+                                    <field name="product_variant_id" invisible="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Inventory" name="inventory">
+                            <group name="inventory">
+                                <field name="has_available_route_ids" invisible="1"/>
+                                <group string="Operations" name="operations">
+                                    <label for="route_ids" invisible="type == 'service'"/>
+                                    <div>
+                                        <field name="route_ids" class="mb-0" widget="many2many_checkboxes" invisible="not has_available_route_ids or type == 'service'"/>
+                                        <button id="stock.view_diagram_button" string="View Diagram" type="action" name="%(stock.action_open_routes)d" icon="oi-arrow-right"
+                                            invisible="type != 'consu'"
+                                            class="btn btn-link pt-0" context="{'default_product_tmpl_id': id}"/>
+                                    </div>
+                                    <field name="route_from_categ_ids" widget="many2many_tags" invisible="not route_from_categ_ids"/>
+                                </group>
+                                <group name="group_lots_and_weight" string="Logistics" invisible="type != 'consu'">
+                                    <label for="weight" invisible="product_variant_count &gt; 1 and not is_product_variant"/>
+                                    <div class="o_row" name="weight" invisible="product_variant_count &gt; 1 and not is_product_variant">
+                                        <field name="weight" class="oe_inline"/>
+                                        <field name="weight_uom_name"/>
+                                    </div>
+                                    <label for="volume" invisible="product_variant_count &gt; 1 and not is_product_variant"/>
+                                    <div class="o_row" name="volume" invisible="product_variant_count &gt; 1 and not is_product_variant">
+                                        <field name="volume" string="Volume" class="oe_inline"/>
+                                        <field name="volume_uom_name"/>
+                                    </div>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Description for Receipts">
+                                    <field name="description_pickingin" nolabel="1" placeholder="This note is added to receipt orders (e.g. where to store the product in the warehouse)."/>
+                                </group>
+                                <group string="Description for Delivery Orders">
+                                    <field name="description_pickingout" nolabel="1" placeholder="This note is added to delivery orders."/>
+                                </group>
+                                <group string="Description for Internal Transfers">
+                                    <field name="description_picking" nolabel="1" placeholder="This note is added to internal transfer orders (e.g. where to pick the product in the warehouse)."/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_non_land_plot_item_view">
+        <field name="name">Goods/Service</field>
+        <field name="res_model">product.template</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('tlip_stock.non_land_plot_item_kanban_view')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_stock.non_land_plot_item_list_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_stock.non_land_plot_item_form_view')})]"/>
+    </record>
+
+</odoo>

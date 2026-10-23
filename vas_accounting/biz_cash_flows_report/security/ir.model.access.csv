@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cash_flows,access_cash_flows,model_cash_flows,,1,1,1,1
+access_cash_flows_line,access_cash_flows_line,model_cash_flows,,1,1,1,1
+access_cash_flows_template,access_cash_flows_template,model_cash_flows_template,,1,1,1,1
+access_statements_cash_flows_report,access_statements_cash_flows_report,model_statements_cash_flows_report,,1,1,1,1
+access_statements_cash_flows_report_line,access_statements_cash_flows_report_line,model_statements_cash_flows_report_line,,1,1,1,1
+access_cash_flows_template_line,access_cash_flows_template_line,model_cash_flows_template_line,,1,1,1,1
+access_cash_flows_line,access_cash_flows_line,model_cash_flows_line,,1,1,1,1

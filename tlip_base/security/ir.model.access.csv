@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_document_preview,access_document_preview,model_document_preview,,1,1,1,1
+access_res_partner_cr,access_res_partner_cr,model_res_partner_cr,base.group_user,1,1,1,1
+access_res_partner_type,access_res_partner_type,model_res_partner_type,base.group_user,1,1,1,1
+access_partner_summary_change,access_partner_summary_change,model_partner_summary_change,base.group_user,1,1,1,1
+access_partner_summary_change_wizard,access_partner_summary_change_wizard,model_partner_summary_change_wizard,base.group_user,1,1,1,1
+access_partner_summary_change_line,access_partner_summary_change_line,model_partner_summary_change_line,base.group_user,1,1,1,1
+access_check_partner_exist_wizard,access_check_partner_exist_wizard,model_check_partner_exist_wizard,base.group_user,1,1,1,1
+access_hr_job_user,access_hr_job_user,hr.model_hr_job,base.group_user,1,0,0,0
+access_pdf_review_wizard,access_pdf_review_wizard,model_pdf_review_wizard,base.group_user,1,1,1,1

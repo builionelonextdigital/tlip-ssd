@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Viet Nam Region -->
+
+    <record id="as_vn_address_region_form_view" model="ir.ui.view">
+        <field name="name">res.country.region.form</field>
+        <field name="model">res.country.region</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="country_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="as_vn_address_region_list_view" model="ir.ui.view">
+        <field name="name">res.country.region.list</field>
+        <field name="model">res.country.region</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="code" optional="hide" />
+                <field name="country_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="vn_address_region_action" model="ir.actions.act_window">
+        <field name="name">Region</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.country.region</field>
+        <field name="view_id" ref="as_vn_address_region_list_view"/>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>

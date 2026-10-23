@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="accounting_balance_sheet_cash_flow_category_1" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">I. Lưu chuyển tiền từ hoạt động kinh doanh</field>
+<!--            <field name="parent_level">Luồng tiền từ hoạt động kinh doanh</field>-->
+<!--            <field name="apply_by">according_method_of_create</field>-->
+            <field name="stt_calculate">1</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+            <field name="is_bold_report" eval="True"/>
+        </record>
+
+        <record id="accounting_balance_sheet_cash_flow_1" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">1. Tiền thu được từ bán hàng, cung cấp dịch vụ và doanh thu khác</field>
+            <field name="code">01</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_1')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">2</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+
+        <record id="accounting_balance_sheet_cash_flow_2" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">2. Tiền chi trả cho người cung cấp hàng hoá, dịch vụ</field>
+            <field name="code">02</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_1')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">3</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_3" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">3. Tiền chi trả cho người lao động</field>
+            <field name="code">03</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_1')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">4</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_4" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">4. Tiền lãi vay đã trả</field>
+            <field name="code">04</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_1')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">5</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_5" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">5. Thuế TNDN đã nộp</field>
+            <field name="code">05</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_1')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">6</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_6" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">6. Tiền thu khác từ hoạt động kinh doanh</field>
+            <field name="code">06</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_1')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">7</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_7" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">7. Tiền chi khác cho hoạt động kinh doanh</field>
+            <field name="code">07</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_1')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">8</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">True</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_8" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">Lưu chuyển tiền thuần từ hoạt động kinh doanh</field>
+            <field name="code">20</field>
+<!--            <field name="parent_level">Luồng tiền từ hoạt động kinh doanh</field>-->
+            <field name="apply_by">total_categ</field>
+            <field name="stt_calculate">9</field>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_cash_flow_1'),
+                ref('accounting_balance_sheet_cash_flow_2'),
+                ref('accounting_balance_sheet_cash_flow_3'),
+                ref('accounting_balance_sheet_cash_flow_4'),
+                ref('accounting_balance_sheet_cash_flow_5'),
+                ref('accounting_balance_sheet_cash_flow_6'),
+                ref('accounting_balance_sheet_cash_flow_7'),
+            ])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+            <field name="is_bold_report" eval="True"/>
+            <field name="is_italic_report" eval="True"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_category_2" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">II. Lưu chuyển tiền từ hoạt động đầu tư</field>
+            <field name="stt_calculate">10</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+            <field name="is_bold_report" eval="True"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_9" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">1. Tiền chi mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác</field>
+            <field name="code">21</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_2')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">11</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_10" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">2. Tiền thu thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác</field>
+            <field name="code">22</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_2')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">12</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_11" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">3. Tiền chi cho vay và mua các công cụ nợ của đơn vị khác</field>
+            <field name="code">23</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_2')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">13</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_12" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">4. Tiền thu hồi cho vay, bán lại công cụ nợ của đơn vị khác</field>
+            <field name="code">24</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_2')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">14</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_13" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">5. Tiền chi đầu tư góp vốn vào đơn vị khác</field>
+            <field name="code">25</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_2')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">15</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_14" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">6. Tiền thu hồi đầu tư vốn vào đơn vị khác</field>
+            <field name="code">26</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_2')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">16</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_15" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">7. Thu lãi tiền cho vay, cổ tức và lợi nhuận được chia</field>
+            <field name="code">27</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_2')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">17</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_16" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">Lưu chuyển tiền thuần từ hoạt động đầu tư</field>
+            <field name="code">30</field>
+<!--            <field name="parent_level">Luồng tiền từ hoạt động đầu tư</field>-->
+            <field name="apply_by">total_categ</field>
+            <field name="stt_calculate">18</field>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_cash_flow_9'),
+                ref('accounting_balance_sheet_cash_flow_10'),
+                ref('accounting_balance_sheet_cash_flow_11'),
+                ref('accounting_balance_sheet_cash_flow_12'),
+                ref('accounting_balance_sheet_cash_flow_13'),
+                ref('accounting_balance_sheet_cash_flow_14'),
+                ref('accounting_balance_sheet_cash_flow_15')
+            ])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+            <field name="is_bold_report" eval="True"/>
+            <field name="is_italic_report" eval="True"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_category_3" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">III. Lưu chuyển tiền từ hoạt động tài chính</field>
+            <field name="stt_calculate">19</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+            <field name="is_bold_report" eval="True"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_17" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">1. Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu</field>
+            <field name="code">31</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_3')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">20</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_18" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">2. Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu đã phát hành</field>
+            <field name="code">32</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_3')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">21</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_19" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">3. Tiền thu từ đi vay</field>
+            <field name="code">33</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_3')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">22</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_20" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">4. Tiền trả nợ gốc vay</field>
+            <field name="code">34</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_3')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">23</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_21" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">5. Tiền trả nợ gốc thuê tài chính</field>
+            <field name="code">35</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_3')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">24</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_22" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">6. Cổ tức, lợi nhuận đã trả cho chủ sở hữu</field>
+            <field name="code">36</field>
+            <field name="parent_level" eval="ref('accounting_balance_sheet_cash_flow_category_3')"/>
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">25</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_23" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">Lưu chuyển tiền thuần từ hoạt động tài chính</field>
+            <field name="code">40</field>
+<!--            <field name="parent_level">Luồng tiền từ hoạt động tài chính</field>-->
+            <field name="apply_by">total_categ</field>
+            <field name="stt_calculate">26</field>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_cash_flow_17'),
+                ref('accounting_balance_sheet_cash_flow_18'),
+                ref('accounting_balance_sheet_cash_flow_19'),
+                ref('accounting_balance_sheet_cash_flow_20'),
+                ref('accounting_balance_sheet_cash_flow_21'),
+                ref('accounting_balance_sheet_cash_flow_22')
+            ])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+            <field name="is_bold_report" eval="True"/>
+            <field name="is_italic_report" eval="True"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_24" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">Lưu chuyển tiền thuần trong kỳ</field>
+            <field name="code">50</field>
+<!--            <field name="parent_level">Tổng hợp các luồng tiền trong kỳ</field>-->
+            <field name="apply_by">total_categ</field>
+            <field name="stt_calculate">27</field>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_cash_flow_8'),
+                ref('accounting_balance_sheet_cash_flow_16'),
+                ref('accounting_balance_sheet_cash_flow_23')
+            ])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+            <field name="is_bold_report" eval="True"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_25" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">Tiền và tương đương tiền đầu kỳ</field>
+            <field name="code">60</field>
+<!--            <field name="parent_level">Tổng hợp các luồng tiền trong kỳ</field>-->
+            <field name="apply_by">accounting_balance_sheet</field>
+            <field name="stt_calculate">28</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+            <field name="is_bold_report" eval="True"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_26" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ</field>
+            <field name="code">61</field>
+<!--            <field name="parent_level">Tổng hợp các luồng tiền trong kỳ</field>-->
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">29</field>
+            <field name="total_categ_ids" eval="[(6, 0, [])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+            <field name="is_bold_report" eval="True"/>
+        </record>
+        <record id="accounting_balance_sheet_cash_flow_27" model="cash.flows">
+            <field name="report_type">statements_cash_flows</field>
+            <field name="categ_name">Tiền và tương đương tiền cuối kỳ</field>
+            <field name="code">70</field>
+<!--            <field name="parent_level">Tổng hợp các luồng tiền trong kỳ</field>-->
+            <field name="apply_by">according_method_of_create</field>
+            <field name="stt_calculate">30</field>
+            <field name="total_categ_ids" eval="[(6, 0, [
+                ref('accounting_balance_sheet_cash_flow_24'),
+                ref('accounting_balance_sheet_cash_flow_25'),
+                ref('accounting_balance_sheet_cash_flow_26'),
+            ])]"/>
+            <field name="in_business_cycle">False</field>
+            <field name="line_ids" eval="[(5, 0, 0)]"/>
+            <field name="is_bold_report" eval="True"/>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <function model="cash.flows" name="create_missing_cash_flow_field_ids">
+            <value eval="[
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_1'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_2'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_3'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_4'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_5'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_6'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_7'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_8'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_9'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_10'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_11'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_12'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_13'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_14'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_15'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_16'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_17'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_18'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_19'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_20'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_21'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_22'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_23'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_24'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_25'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_26'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_27'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_category_1'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_category_2'),
+                ref('biz_cash_flows_report.accounting_balance_sheet_cash_flow_category_3'),
+            ]"/>
+        </function>
+    </data>
+</odoo>

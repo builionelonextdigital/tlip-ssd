@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="cip_wip_summary_report" model="account.report">
+            <field name="name">CIP/WIP Summary</field>
+            <field name="filter_date_range" eval="False" />
+            <field name="filter_growth_comparison" eval="False" />
+            <field name="filter_analytic" eval="True" />
+            <field name="filter_unfold_all" eval="True" />
+            <field name="filter_multi_company">selector</field>
+            <field name="filter_hide_0_lines">never</field>
+            <field name="default_opening_date_filter">this_month</field>
+            <field name="search_bar" eval="True" />
+            <field name="load_more_limit" eval="80" />
+            <field name="custom_handler_model_id"
+                ref="tlip_account.model_cip_wip_summary_report_handler" />
+
+            <field name="column_ids">
+                <!-- Text columns -->
+                <record id="cip_wip_report_project_code" model="account.report.column">
+                    <field name="name">Project Code</field>
+                    <field name="expression_label">project_code</field>
+                    <field name="figure_type">string</field>
+                    <field name="sequence" eval="1" />
+                </record>
+
+                <record id="cip_wip_report_project_name" model="account.report.column">
+                    <field name="name">Project Name</field>
+                    <field name="expression_label">project_name</field>
+                    <field name="figure_type">string</field>
+                    <field name="sequence" eval="2" />
+                </record>
+
+                <record id="cip_wip_report_budget_code" model="account.report.column">
+                    <field name="name">Budget Code</field>
+                    <field name="expression_label">budget_code</field>
+                    <field name="figure_type">string</field>
+                    <field name="sequence" eval="3" />
+                </record>
+
+                <!-- Opening Balance columns -->
+                <record id="cip_wip_report_opening_debit" model="account.report.column">
+                    <field name="name">Opening Balance - Debit</field>
+                    <field name="expression_label">opening_debit</field>
+                    <field name="figure_type">monetary</field>
+                    <field name="sequence" eval="4" />
+                </record>
+                <record id="cip_wip_report_opening_credit" model="account.report.column">
+                    <field name="name">Opening Balance - Credit</field>
+                    <field name="expression_label">opening_credit</field>
+                    <field name="figure_type">monetary</field>
+                    <field name="sequence" eval="5" />
+                </record>
+
+                <!-- Period columns -->
+                <record id="cip_wip_report_period_increase" model="account.report.column">
+                    <field name="name">Occurred in this period - Increase</field>
+                    <field name="expression_label">period_increase</field>
+                    <field name="figure_type">monetary</field>
+                    <field name="sequence" eval="6" />
+                </record>
+                <record id="cip_wip_report_period_decrease" model="account.report.column">
+                    <field name="name">Occurred in this period - Decrease</field>
+                    <field name="expression_label">period_decrease</field>
+                    <field name="figure_type">monetary</field>
+                    <field name="sequence" eval="7" />
+                </record>
+
+                <!-- Ending Balance columns -->
+                <record id="cip_wip_report_ending_debit" model="account.report.column">
+                    <field name="name">Ending Balance - Debit</field>
+                    <field name="expression_label">ending_debit</field>
+                    <field name="figure_type">monetary</field>
+                    <field name="sequence" eval="8" />
+                </record>
+                <record id="cip_wip_report_ending_credit" model="account.report.column">
+                    <field name="name">Ending Balance - Credit</field>
+                    <field name="expression_label">ending_credit</field>
+                    <field name="figure_type">monetary</field>
+                    <field name="sequence" eval="9" />
+                </record>
+            </field>
+        </record>
+
+        <record id="action_cip_wip_summary_report" model="ir.actions.client">
+            <field name="name">CIP/WIP Summary</field>
+            <field name="tag">account_report</field>
+            <field name="path">cip-wip-summary</field>
+            <field name="context" eval="{'report_id': ref('tlip_account.cip_wip_summary_report')}" />
+        </record>
+    </data>
+</odoo>

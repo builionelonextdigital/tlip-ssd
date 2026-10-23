@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_rq_power_1_document">
+        <t t-call="tlip_base.tlip_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
+            <t t-set="data" t-value="doc._generate_report_payment_request()" />
+            <div class="page" style="font-family:Times New Roman">
+                <div class="row" style="padding-top:20px">
+                    <div class="col-3"></div>
+                    <div class="col-6" style="text-align:center">
+                        <h3>
+                            <b>YÊU CẦU THANH TOÁN</b>
+                        </h3>
+                        <h3>
+                            <b>REQUEST FOR PAYMENT</b>
+                        </h3>
+                        <p>Số/ <span style="font-style: italic">Ref :</span><span
+                                t-esc="data['request_payment_number']" /></p>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <p style="margin-bottom: 0">Ngày/<i>Date:</i> <span t-esc="data['date']" /></p>
+                <p>Kính gửi/ <span style="font-style: italic"></span>Dear,</p>
+                <p style="margin-bottom: 0">Khách hàng: <span t-esc="data['partner_name_vn']" /></p>
+                <p>Customer: <span t-esc="data['partner_name_en']" /></p>
+                <p style="margin-bottom: 0">Địa chỉ: <span t-esc="data['partner_address_vn']" /></p>
+                <p>Address: <span t-esc="data['partner_address_en']" /></p>
+                <p>Mã số thuế/ <span style="font-style: italic"></span>Tax code: <span
+                        t-esc="data['vat']" /></p>
+                <div class="row mb-1">
+                    <div class="col-6">
+                        <p>Mã khách hàng/ <i>Tenant code: </i><span t-esc="data['partner_code']" /></p>
+                    </div>
+                    <div class="col-6">
+                        <p>Mã điểm đo/ <i>Measuring point code: </i><span
+                                t-esc="data['metering_point']" /></p>
+                    </div>
+                </div>
+                <p>Loại hình doanh nghiệp/ <span style="font-style: italic"></span>Business Entity
+                    Type: <t t-esc="data['business_type']" /></p>
+                <p style="margin-bottom: 0">Căn cứ vào Điều <span
+                        t-esc="data['contract_payment_article']" /> của Hợp đồng số <span
+                        t-esc="data['contract_number']" /> ký ngày <span
+                        t-esc="data['contract_signing_date']" /> và các Phụ lục Hợp đồng, sản lượng
+                    điện sử dụng thực tế của công ty. Chúng tôi đề nghị Quý công ty thanh toán cho
+                    chúng tôi tiền sử dụng điện như sau:</p>
+                <p class="mb-4" style="font-style: italic">In accordance with Article <span
+                        t-esc="data['contract_payment_article']" /> of Agreement No. <span
+                        t-esc="data['contract_number']" /> signed on <span
+                        t-esc="data['contract_signing_date']" /> and Supplement Agreement, your
+                    actual power consumption. We would like you to make the payment power supply
+                    charges to us as follows:</p>
+                <p style="font-weight: bold; font-size: 15pt; margin-bottom: 0">I. Nội dung thanh
+                    toán/ <i>Content of
+                        payment</i></p>
+                <div class="row">
+                    <p style="margin-bottom: 0"><strong>Kỳ/ <i>Period</i></strong>: Từ/ <span
+                            style="font-style: italic">from</span> <span
+                            t-esc="data['utitlity_period_from']" /> Đến/<span
+                            style="font-style: italic">To</span> <span
+                            t-esc="data['utitlity_period_to']" /></p>
+                </div>
+                <div class="row">
+                    <div class="col-9"></div>
+                    <div class="col-3">
+                        <p>Đơn vị tiền tệ/ <i>Currency Unit</i>: <span t-esc="data['currency']" /></p>
+                    </div>
+                </div>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th
+                                style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;text-align: center;">
+                                STT <br /><i>No</i><br />(1)</th>
+                            <th
+                                style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;text-align: center;">Hàng
+                                hóa và dịch vụ <br /><i>Goods &amp; Service</i><br />(2)</th>
+                            <th
+                                style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;text-align: center;">Chỉ
+                                số cũ <br /><i>Last index</i><br />(3)</th>
+                            <th
+                                style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;text-align: center;">Chỉ
+                                số mới <br /><i>New index</i><br />(4)</th>
+                            <th
+                                style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;text-align: center;">Hệ
+                                số nhân <br /><i>(Multiplier)</i><br />(5)</th>
+                            <th
+                                style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;text-align: center;">
+                                ĐVT <br /><i>Unit</i><br />(6)</th>
+                            <th
+                                style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;text-align: center;">Số
+                                lượng <br /><i>Quantity</i><br />(7=(4-3)*5)</th>
+                            <th
+                                style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;text-align: center;">Đơn
+                                giá <br /><i>Price</i><br />(8)</th>
+                            <th
+                                style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;text-align: center;">Thành
+                                tiền <br /><i>Amount</i><br />(9=7x8)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <t t-foreach="data['invoice_lines']" t-as="invoice_line">
+                            <tr>
+                                <td
+                                    style="border: 1px solid black; padding: 3px;text-align: center;">
+                                    <span t-esc="invoice_line['index']" />
+                                </td>
+                                <td style="border: 1px solid black; padding-left: 3px">
+                                    <p t-esc="invoice_line['name']" />
+                                </td>
+                                <td style="border: 1px solid black; padding: 3px;text-align: right;">
+                                    <span t-esc="invoice_line['last_value']" />
+                                </td>
+                                <td style="border: 1px solid black; padding: 3px;text-align: right;">
+                                    <span t-esc="invoice_line['new_value']" />
+                                </td>
+                                <td style="border: 1px solid black; padding: 3px;text-align: right;">
+                                    <span t-esc="invoice_line['multiplier']" />
+                                </td>
+                                <td style="border: 1px solid black; padding: 3px;">
+                                    <span t-esc="invoice_line['uom']" />
+                                </td>
+                                <td style="border: 1px solid black; padding: 3px;text-align: right;">
+                                    <span t-esc="invoice_line['utility_quantity']" />
+                                </td>
+                                <td style="border: 1px solid black; padding: 3px;text-align: right;">
+                                    <span t-esc="invoice_line['price_unit']" />
+                                </td>
+                                <td style="border: 1px solid black; padding: 3px;text-align: right;">
+                                    <span t-esc="invoice_line['subtotal']" />
+                                </td>
+                            </tr>
+                        </t>
+
+                        <tr>
+                            <td
+                                style="border: 1px solid black; padding: 8px; text-align: center; vertical-align: middle;"
+                                colspan="4" rowspan="3">Thuế suất GTGT / <i>(VAT rate):</i> <span
+                                    t-esc="data['tax_rate']" /> %</td>
+                            <td
+                                style="border: 1px solid black; padding: 8px; text-align: left;"
+                                colspan="4">
+                                <strong>Cộng tiền hàng </strong>
+                                <i>(Sub-total):</i>
+                            </td>
+                            <td style="border: 1px solid black; padding: 8px;text-align: right;">
+                                <span t-esc="data['amount_untaxed']" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                style="border: 1px solid black; padding: 8px; text-align: left;"
+                                colspan="4">
+                                <strong>Tiền
+                                    thuế GTGT </strong>
+                                <i>(VAT amount):</i>
+                            </td>
+                            <td style="border: 1px solid black; padding: 8px;text-align: right;">
+                                <span t-esc="data['amount_tax']" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                style="border: 1px solid black; padding: 8px; text-align: left;"
+                                colspan="4">
+                                <strong>Tổng
+                                    tiền phải trả </strong>
+                                <i>(Total payable):</i>
+                            </td>
+                            <td style="border: 1px solid black; padding: 8px;text-align: right;">
+                                <span t-esc="data['amount_total']" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="9"
+                                style="border: 1px solid black; padding: 8px; font-weight: bold;">
+                                (Bằng chữ: <span style="white-space:pre" t-esc="data['amount_in_words_vn']"/>&#9;chẵn) <br />
+                                (<i>In words: <span t-esc="data['amount_in_words_en']" />)</i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row mt-2 mb-2">
+                    <div class="col-4">
+                        <p style="font-weight: bold;font-size:15pt">II. Hạn thanh toán / <i>Due
+                                date:</i></p>
+                    </div>
+                    <div class="col-4">
+                        <span t-esc="data['due_date']" />
+                    </div>
+                </div>
+                <p style="font-weight: bold;font-size:15pt">III. Thông tin tài khoản / <span
+                        style="font-syle:italic"></span>Bank account:</p>
+                <p style="margin-bottom: 0">Vui lòng chuyển số tiền phải trả vào tài khoản ngân hàng
+                    của chúng tôi theo thông
+                    tin sau: </p>
+                <p style="font-style:italic">Please remit the payable amount to our bank account as
+                    belows: </p>
+                <div class="row">
+                    <div class="col-3"> Tên tài khoản/ <span style="font-style:italic">Account Name</span>
+                    </div>
+                    <div class="col-4">
+                        <span t-field="doc.company_id.name"></span>
+                    </div>
+                </div>
+                <t t-if="data['company_bank_accounts']">
+                    <div class="row">
+                        <div class="col-3"> Số tài khoản/ <span style="font-style:italic">Account
+                            Number</span>
+                        </div>
+                        <div class="col-9" style="padding-left:10px">
+                            <span>
+                                <b>
+                                    <t t-esc="data['company_bank_accounts'][0]" />
+                                </b>
+                            </span>
+                        </div>
+                    </div>
+                    <t t-if="len(data['company_bank_accounts']) &gt; 1">
+                        <t t-foreach="data['company_bank_accounts'][1:]" t-as="company_bank_account">
+                            <div class="row">
+                                <div class="col-3"> Hoặc/ <span style="font-style:italic">Or</span>
+                                </div>
+                                <div class="col-9" style="padding-left:10px">
+                                    <span>
+                                        <b>
+                                            <t t-esc="company_bank_account" />
+                                        </b>
+                                    </span>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+                <div class="row">
+                    <div class="col-3"> Lưu ý/ <span style="font-style:italic">Note</span>
+                    </div>
+                    <div class="col-9" style="padding-left:10px">
+                        <b>Phí của ngân hàng sẽ được trả bởi khách hàng/ <span
+                                style="font-style:italic">Bank's charge shall be borne by you.</span></b>
+                    </div>
+                </div>
+                <br />
+
+                <div class="mb-2">
+                    <b>Nếu có vấn đề gì thắc mắc, vui lòng liên hệ với chúng tôi vào bất kỳ thời
+                        gian nào.</b>
+                    <br />
+                    <span style="font-style:italic">
+                        <b>If you have any queries on this matter, please feel free to contact us at
+                            any time.</b>
+                    </span>
+                </div>
+                <div style="margin-bottom: 50px;"> Xin chân thành cảm ơn / <i>Faithfully</i> yours, </div>
+
+                <div style="font-weight: bold; margin-left: 40px"> ĐẠI DIỆN CÔNG TY <br />
+                    <i>(ON
+                    BEHALF OF COMPANY)</i>
+                </div>
+
+                <div style="margin-top: 70px; margin-left: 40px;">{{USER-SIGNATURE}}</div>
+                <div class="oe_structure" />
+            </div>
+        </t>
+    </template>
+
+    <template id="report_rq_power_1_raw">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="tlip_account.report_rq_power_1_document"
+                    t-lang="doc.partner_id.lang" />
+            </t>
+        </t>
+    </template>
+
+    <template id="report_power_1">
+        <t t-call="tlip_account.report_rq_power_1_raw" />
+    </template>
+
+</odoo>

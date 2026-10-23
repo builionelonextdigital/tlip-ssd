@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tlip_base_partner_form_inherit_approval" model="ir.ui.view">
+        <field name="name">tlip.base.partner.form.inherit.approval</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="tlip_base.view_tlip_base_partner_form_custom" />
+        <field name="arch" type="xml">
+            <button name="action_update_contact_info" position="before">
+                <button name="action_approve_request" type="object" string="Approve"
+                    invisible="user_status != 'pending' or (vendor_state != 'to_approve' and customer_state != 'to_approve')"
+                    class="btn-primary" data-hotkey="v" />
+                <button name="action_reject_request" string="Refuse" type="object"
+                    invisible="user_status != 'pending' or (vendor_state != 'to_approve' and customer_state != 'to_approve')"
+                    data-hotkey="z"  confirm="Are you sure that you want to do this action?" />
+            </button>
+            <button name="action_get_attachment_view" position="after">
+                <button class="oe_stat_button" name="action_open_approval_history_ids"
+                    type="object"
+                    icon="fa-history">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">
+                            Approval Histories
+                        </span>
+                    </div>
+                </button>
+            </button>
+            <page name="contact_addresses" position="after">
+                <page string="Approval" name="approval" invisible="not approver_ids">
+                    <field name="approver_ids" mode="list" readonly="1">
+                        <list editable="bottom" decoration-success="status=='approved'"
+                            decoration-warning="status in ['pending', 'waiting']"
+                            decoration-danger="status=='refused'" no_open="1">
+                            <field name="existing_request_user_ids" column_invisible="True" />
+                            <field name="sequence" column_invisible="True" />
+                            <field name="user_id" string="Approver"
+                                required="not job_id" />
+                            <field name="job_id" required="not user_id" />
+                            <field name="status" />
+                            <field name="company_id" column_invisible="True" />
+                        </list>
+                    </field>
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <record id="view_partner_search_inherit_tlip_approval" model="ir.ui.view">
+        <field name="name">tlip.base.partner.search.tlip.approval.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="tlip_base.view_partner_search_inherit_tlip_base"/>
+        <field name="arch" type="xml">
+            <filter name="inactive" position="before">
+                <filter name="filter_approvals_to_review" string="My Approvals to Review"
+                    domain="'&amp;', '|', ('vendor_state', '=', 'to_approve'), ('customer_state', '=', 'to_approve'), '|', ('current_approver_id.job_id.employee_ids.user_id', 'in', [uid]), ('current_approver_id.user_id', '=', uid)"/>
+                <separator/>
+            </filter>
+        </field>
+    </record>
+</odoo>

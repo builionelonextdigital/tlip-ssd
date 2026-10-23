@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_salary_distribution_report_xlsx" model="ir.actions.report">
+        <field name="name">Salary Distribution Report</field>
+        <field name="model">salary.distribution.report.wizard</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">tlip_account.report_salary_distribution_xlsx</field>
+        <field name="report_file">tlip_account.report_salary_distribution_xlsx</field>
+        <field name="print_report_name">'Salary Distribution Report'</field>
+        <field name="binding_model_id" ref="model_salary_distribution_report_wizard" />
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

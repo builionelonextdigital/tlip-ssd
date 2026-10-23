@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_dynamic_docx_report" model="ir.module.category">
+        <field name="name">Dynamic Docx Report</field>
+    </record>
+    
+    <record id="group_dynamic_docx_report_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="dynamic_docx_pdf_reports_omax.module_category_dynamic_docx_report"/>
+    </record>
+    
+    <record id="group_dynamic_docx_report_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="implied_ids" eval="[(4, ref('group_dynamic_docx_report_user'))]"/>
+        <field name="category_id" ref="dynamic_docx_pdf_reports_omax.module_category_dynamic_docx_report"/>
+    </record>
+    
+</odoo>

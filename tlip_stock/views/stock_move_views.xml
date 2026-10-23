@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_stock_move_line_operation_tree_inherit_tlip_stock" model="ir.ui.view">
+        <field name="name">stock.move.line.list.inherit.tlip.stock</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_stock_move_line_operation_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="usage" readonly="(state == 'done' and is_locked) or (package_level_id and parent.picking_type_entire_packs)" column_invisible="context.get('restricted_picking_type_code') != 'internal'" />
+                <field name="is_result_package_required" column_invisible="1" />
+            </xpath>
+            <xpath expr="//list//field[@name='result_package_id']" position="attributes">
+                <attribute name="required">is_result_package_required</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

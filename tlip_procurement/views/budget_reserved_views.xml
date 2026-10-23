@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_budget_reserved_tree_procurement" model="ir.ui.view">
+        <field name="name">budget.reserved.tree.procurement</field>
+        <field name="model">budget.reserved</field>
+        <field name="inherit_id" ref="tlip_account.view_budget_reserved_tree"/>
+        <field name="arch" type="xml">
+            <field name="account_id" position="after">
+                <field name="request_purchase_id"/>
+                <field name="task_ids" widget="many2many_tags"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_budget_reserved_form_procurement" model="ir.ui.view">
+        <field name="name">budget.reserved.form.procurement</field>
+        <field name="model">budget.reserved</field>
+        <field name="inherit_id" ref="tlip_account.view_budget_reserved_form"/>
+        <field name="arch" type="xml">
+            <field name="account_id" position="after">
+                <field name="request_purchase_id"/>
+            </field>
+            <group name="basic_info" position="after">
+                <group name="task_info">
+                    <field name="task_ids" />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

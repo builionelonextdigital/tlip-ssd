@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="minvoice_account_view_form" model="ir.ui.view">
+        <field name="name">minvoice.account.view.form</field>
+        <field name="model">minvoice.account</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <field name="status" invisible="1" />
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_view_minvoice_template"
+                            class="oe_stat_button" icon="fa-file-pdf-o" string="Mẫu hóa đơn" />
+                        <button name="disconnect" invisible="status == 'inactive'"
+                            class="oe_stat_button"
+                            confirm="Sau khi hủy kết nối, những sổ nhật ký sử dụng tài khoản này sẽ không thể xuất hóa đơn. Bạn có chắc chắn muốn hủy kết nối tài khoản này?"
+                            type="object" icon="fa-globe">
+                            <field name="toggle_status" widget="boolean_button"
+                                options="{&quot;terminology&quot;: {&quot;string_true&quot;: &quot;Đang hoạt động&quot;,                                                               &quot;hover_true&quot;: &quot;Ngắt kết nối&quot;,                                                               &quot;string_false&quot;: &quot;Ngắt kết nối&quot;,                                                               &quot;hover_false&quot;: &quot;Kết nối lại&quot;}}" />
+                        </button>
+                        <button name="reconnect" invisible="status == 'active'"
+                            class="oe_stat_button" type="object" icon="fa-globe">
+                            <field name="toggle_status" widget="boolean_button"
+                                options="{&quot;terminology&quot;: {&quot;string_false&quot;: &quot;Không hoạt động&quot;,                                                               &quot;hover_false&quot;: &quot;Kết nối lại&quot;,                                                               &quot;string_true&quot;: &quot;Kết nối&quot;,                                                               &quot;hover_true&quot;: &quot;Ngắt kết nối&quot;,}}" />
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" />
+                            <field name="company_id" 
+                                options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                            <field name="production_host" string="Host"/>
+                            <field name="username" />
+                            <field name="password" password="1" />
+                            <field name="company_id" />
+                        </group>
+                        <group />
+                    </group>
+                    <button string="KIỂM TRA KẾT NỐI" type="object" icon="fa-light fa-laptop"
+                        name="test_minvoice_connection" class="btn-primary" />
+                    <br />
+                    <div class="content-group">
+                        <div class="mt8">
+                            <button type="object" name="action_update_minvoice_template"
+                                string="Cập nhật mẫu hóa đơn điện tử " icon="fa-arrow-right"
+                                class="btn-link" />
+                        </div>
+                    </div>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="minvoice_account_view_tree" model="ir.ui.view">
+        <field name="name">minvoice.account.view.tree</field>
+        <field name="model">minvoice.account</field>
+        <field name="arch" type="xml">
+            <list string="Tài khoản M-invoice">
+                <field name="partner_id" />
+                <field name="username" />
+                <field name="status" widget="badge" decoration-info="status == 'inactive'"
+                    decoration-success="status == 'active'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_view_minvoice_setting_account" model="ir.actions.act_window">
+        <field name="name">Tài khoản M-invoice</field>
+        <field name="view_mode">list,form</field>
+        <field name="res_model">minvoice.account</field>
+    </record>
+</odoo>

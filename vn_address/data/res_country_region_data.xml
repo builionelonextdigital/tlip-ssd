@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <record id="region_001" model="res.country.region">
+			<field name="name">ĐB và Trung du Bắc Bộ</field>
+			<field name="code">DB</field>
+			<field name="active" eval="True"/>
+			<field name="country_id" ref="base.vn"/>
+		</record>
+        <record id="region_002" model="res.country.region">
+			<field name="name">Trung du và miền núi phía Bắc</field>
+			<field name="code">NB</field>
+			<field name="active" eval="True"/>
+			<field name="country_id" ref="base.vn"/>
+		</record>
+        <record id="region_003" model="res.country.region">
+			<field name="name">Duyên Hải Bắc Trung Bộ</field>
+			<field name="code">HBT</field>
+			<field name="active" eval="True"/>
+			<field name="country_id" ref="base.vn"/>
+		</record>
+        <record id="region_004" model="res.country.region">
+			<field name="name">Duyên hải Nam Trung bộ</field>
+			<field name="code">HNT</field>
+			<field name="active" eval="True"/>
+			<field name="country_id" ref="base.vn"/>
+		</record>
+        <record id="region_005" model="res.country.region">
+			<field name="name">Tây Nguyên</field>
+			<field name="code">TN</field>
+			<field name="active" eval="True"/>
+			<field name="country_id" ref="base.vn"/>
+		</record>
+        <record id="region_006" model="res.country.region">
+			<field name="name">Đông Nam Bộ</field>
+			<field name="code">DNB</field>
+			<field name="active" eval="True"/>
+			<field name="country_id" ref="base.vn"/>
+		</record>
+        <record id="region_007" model="res.country.region">
+			<field name="name">ĐB sông Cửu Long</field>
+			<field name="code">DCL</field>
+			<field name="active" eval="True"/>
+			<field name="country_id" ref="base.vn"/>
+		</record>
+    </data>
+
+</odoo>

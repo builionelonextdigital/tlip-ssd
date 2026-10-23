@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_quant_package_form_inherit_stock" model="ir.ui.view">
+        <field name="name">stock.quant.package.view.form.inherit</field>
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.view_quant_package_form"/>
+        <field name="arch" type="xml">
+            <label for="name" position="attributes">
+                <attribute name="string">Asset Code Reference</attribute>
+            </label>
+            <button name="action_view_picking" position="attributes">
+                <attribute name="string">Asset Code Transfers</attribute>
+            </button>
+        </field>
+    </record>
+
+    <record id="stock.action_package_type_view" model="ir.actions.act_window">
+        <field name="name">Asset Code Types</field>
+    </record>
+
+</odoo>

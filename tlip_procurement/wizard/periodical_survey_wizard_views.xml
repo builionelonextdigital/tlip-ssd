@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_periodical_survey_wizard" model="ir.ui.view">
+        <field name="name">periodical.survey.wizard.form</field>
+        <field name="model">periodical.survey.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create a Series of Periodical Supplier Evaluations">
+                <group>
+                    <field name="partner_ids"
+                        options="{'no_create': 1, 'no_open': 1}"
+                        widget="many2many_tags"
+                        domain="[('vendor_state', '=', 'approved'), ('is_blocked', '=', False)]"
+                        string="Suppliers"
+                        required="1" />
+                </group>
+                <footer>
+                    <button name="action_create_evaluation_surveys" type="object" string="Confirm" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_periodical_survey_wizard" model="ir.actions.act_window">
+        <field name="name">Create a series of periodical supplier evaluations</field>
+        <field name="res_model">periodical.survey.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

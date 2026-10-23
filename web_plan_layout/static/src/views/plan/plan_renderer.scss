@@ -1,0 +1,30 @@
+.o_plan_renderer {
+    height: 93% !important;
+    .o_plan_renderer_container {
+        height: 100%;
+        width: 100%;
+    }
+    .leaflet-tooltip {
+        padding: 0 !important;
+    }
+}
+
+.o_apps_menu_opened .o_plan_renderer_container {
+    display: none !important;
+}
+
+.o_location_tooltip {
+    font-size: small !important;
+    display: table !important;
+    opacity: 1 !important;
+    background-color: rgb(236, 200, 154);
+    overflow-wrap: break-word;
+    padding: 4px !important;
+}
+
+.leaflet-label-overlay {
+    position: absolute;
+    text-align: center;
+    line-height: 1.5;
+    color: black;
+}

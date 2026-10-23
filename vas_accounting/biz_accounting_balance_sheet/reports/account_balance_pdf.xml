@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <openerp> -->
+<odoo>
+	<data>
+		<template id="report_accounting_balance_sheet">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.html_container">
+					<t t-call="web.basic_layout">
+						<div class="page" style="font-family: 'Times New Roman';font-size:14pt; line-height: 1.5;">
+							<div class="row">
+								<div class="col-6">
+									<div>
+										<strong>Đơn vị báo cáo: </strong>
+										<span t-field="o.env.company.name"/>
+									</div>
+									<div>
+										<strong>Địa chỉ: </strong><span t-esc="get_company_address(o.env.company)"/>
+									</div>
+								</div>
+								<div class="col-6 text-right" style="text-align:center;">
+									<div style="font-weight:bold">Mẫu số B 01 - DN</div>
+									<div class="font-italic">(Ban hành theo Thông tư Số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài chính)</div>
+								</div>
+							</div>
+							<div class="text-center" style="margin-top:30px !important;">
+								<h4 class="text-uppercase font-weight-bold">Bảng cân đối kế toán</h4>
+								<p>Tại ngày <span t-esc="o.to_date.strftime('%d')"/> tháng <span t-esc="o.to_date.strftime('%m')"/> năm <span t-esc="o.to_date.strftime('%Y')"/> (1)</p>
+								<p class="font-weight-bold font-italic">(Áp dụng cho doanh nghiệp đáp ứng giả định hoạt động liên tục)</p>
+
+							</div>
+							<div class="text-right font-italic" style="text-align:right;">
+								<p>Đơn vị tính: <span t-field="o.env.company.currency_id"/></p>
+							</div>
+							<table class="table table-bordered">
+								<thead>
+									<tr class="text-center">
+										<th class="col-5">TÀI SẢN</th>
+										<th>Mã số</th>
+										<th>Thuyết minh</th>
+										<th>Số cuối năm <br/> (3)</th>
+										<th>Số đầu năm <br/> (4)</th>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-set="offers" t-value="o.mapped('line_ids').sorted('code')"/>
+									<tr>
+										<td class="text-center">1</td>
+										<td class="text-center">2</td>
+										<td class="text-center">3</td>
+										<td class="text-center">4</td>
+										<td class="text-center">5</td>
+									</tr>
+									<tr t-foreach="offers" class="tr-table" t-as="offer" t-att-style="offer.balance_id.is_bold_report and 'font-weight:bold' or ''">
+										<td>
+											<span t-field="offer.balance_id"/>
+										</td>
+										<td class="text-center">
+											<span t-field="offer.code"/>
+										</td>
+										<td>
+										</td>
+										<td style="text-align: right;">
+											<span t-esc="format_float_number(offer, offer.number_last_year)"/>
+										</td>
+										<td style="text-align: right;">
+											<span t-esc="format_float_number(offer, offer.number_first_year)"/>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div style="text-align:right;">
+								<p class="font-italic">Lập, ngày <span t-esc="datetime.datetime.now().strftime('%d')"/> tháng <span t-esc="datetime.datetime.now().strftime('%m')"/> năm <span t-esc="datetime.datetime.now().strftime('%Y')"/></p>
+							</div>
+							<div class="row text-center table-parameter" style="page-break-inside:avoid;margin-bottom:200px;">
+								<div class="col-4" style="page-break-after: avoid;">
+									<div style="font-weight:bold;" class="text-uppercase">Người lập biểu</div>
+									<div class="font-italic">(Ký, họ tên)</div>
+									<div class="certificate">
+										<span> - Số chứng chỉ hành nghề;</span><br/>
+										<span> - Đơn vị cung cấp dịch vụ kế toán</span>
+									</div>
+								</div>
+								<div class="col-4" style="page-break-after: avoid;">
+									<div style="font-weight:bold;">Kế toán trưởng</div>
+									<div class="font-italic">(Ký, họ tên)</div>
+								</div>
+								<div class="col-4" style="page-break-after: avoid;">
+									<div style="font-weight:bold;">Giám đốc</div>
+									<div class="font-italic">(Ký, họ tên, đóng dấu)</div>
+								</div>
+							</div>
+							<div class="note-footer">
+								<p class="font-italic" style="page-break-inside: avoid;"><b>Ghi chú:</b><br/>
+									(1) Những chỉ tiêu không có số liệu được miễn trình bày nhưng không được đánh lại “Mã số” chỉ tiêu.<br/>
+									(2) Số liệu trong các chỉ tiêu có dấu (*) được ghi bằng số âm dưới hình thức ghi trong ngoặc đơn (...).<br/>
+									(3) Đối với doanh nghiệp có kỳ kế toán năm là năm dương lịch (X) thì “Số cuối năm“ có thể ghi là “31.12.X“; “Số đầu năm“ có thể ghi là “01.01.X“.<br/>
+									(4) Đối với người lập biểu là các đơn vị dịch vụ kế toán phải ghi rõ Số chứng chỉ hành nghề,  tên và địa chỉ Đơn vị cung cấp dịch vụ kế toán. Người lập biểu là cá nhân ghi rõ Số chứng chỉ hành nghề.<br/>
+								</p>
+							</div>
+						</div>
+						<style>
+							.font-italic {
+								font-style: italic;
+							}
+							.text-uppercase {
+								font-weight: bold;
+							}
+							.table-bordered {
+								border: 1px solid #000000;
+							}
+							.certificate {
+								text-align: left;
+							}
+							.tr-table {
+								border-style: dashed;
+							}
+						</style>
+					</t>
+				</t>
+			</t>
+		</template>
+
+		<template id="rp_account_balance_pdf">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="biz_accounting_balance_sheet.report_accounting_balance_sheet"/>
+			</t>
+		</template>
+
+	</data>
+</odoo>

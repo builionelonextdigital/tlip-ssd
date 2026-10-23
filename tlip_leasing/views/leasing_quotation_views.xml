@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="leasing_quotation_view_list" model="ir.ui.view">
+        <field name="name">leasing_quotation.view.list</field>
+        <field name="model">leasing.quotation</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="land_plot_id" />
+                <field name="lessee_name" />
+                <field name="land_plot_category_id" />
+                <field name="create_date" widget="timeless_date" />
+                <field name="state"
+                    widget="badge"
+                    decoration-info="state == 'expire'"
+                    decoration-warning="state == 'wait'"
+                    decoration-success="state == 'confirm'" />
+            </list>
+        </field>
+    </record>
+
+    <record id="leasing_quotation_view_form" model="ir.ui.view">
+        <field name="name">leasing_quotation.view.form</field>
+        <field name="model">leasing.quotation</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_create_reservation_agreement" string="Create Reservation" type="object"
+                        class="oe_highlight"
+                        invisible="state != 'confirm' or reservation_agreement_count &gt; 0"
+                        confirm="Are you sure that you want to do this action?" />
+                    <widget name="attach_document" string="Attach Document" 
+                        invisible="not active or state == 'cancel'"
+                        action="message_post" highlight="1"/>
+                    <button name="action_confirm" string="Confirm" type="object"
+                        class="oe_highlight"
+                        invisible="state != 'wait'"
+                        confirm="Are you sure that you want to do this action?" />
+                    <button name="action_cancel" string="Cancel" type="object"
+                        invisible="state == 'cancel'" confirm="Are you sure that you want to do this action?" />
+                    <field name="state" widget="statusbar" statusbar_visible="wait,confirm,expire"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_get_attachment_view"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            type="object"
+                            invisible="attachment_number == 0">
+                            <field name="attachment_number" widget="statinfo" string="Documents"
+                                options="{'reload_on_button': true}" />
+                        </button>
+                        <button name="action_get_reservation_agreement_view"
+                            class="oe_stat_button"
+                            icon="fa-envelope"
+                            type="object"
+                            invisible="reservation_agreement_count &lt; 1">
+                            <field name="reservation_agreement_count" widget="statinfo" string="Reservation"/>
+                        </button>
+                        <button name="action_get_supplement_agreement_view"
+                            class="oe_stat_button"
+                            icon="fa-envelope"
+                            type="object"
+                            invisible="not supplement_agreement_ids">
+                            <field name="supplement_agreement_count" widget="statinfo" string="Supplement"/>
+                        </button>
+                        <button name="action_get_termination_agreement_view"
+                            class="oe_stat_button"
+                            icon="fa-envelope"
+                            type="object"
+                            invisible="not termination_agreement_ids">
+                            <field name="termination_agreement_count" widget="statinfo" string="Termination"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active" />
+                    <field name="active" invisible="1" />
+                    <label for="name"/>
+                    <h1>
+                        <field name="name" string="Quotation" />
+                    </h1>
+                    <group>
+                        <group string="Quotation Information">
+                            <field name="issued_date" readonly="state == 'confirm'"/>
+                            <field name="due_date" readonly="state == 'confirm'"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Land Plot">
+                            <field name="land_plot_id" readonly="state == 'confirm'" options='{"no_create": True, "no_edit": True}' context="{'short_name': True}"/>
+                            <field name="plot_view_id" readonly="1"/>
+                            <field name="land_plot_category_id" readonly="1"/>
+                            <label for="area"/>
+                            <div>
+                                <field name="area" force_save="1" class="oe_inline"/> sqm
+                            </div>
+                            <label for="actual_area"/>
+                            <div>
+                                <field name="actual_area" class="oe_inline" readonly="state not in ('draft', 'wait')"/> sqm
+                            </div>
+                        </group>
+                        <group string="Lessee">
+                            <field name="lessee_id" string="Customer Code" readonly="state == 'confirm'"/>
+                            <field name="lessee_name" string="Name" required="1" readonly="1"/>
+                            <field name="lessee_email" readonly="1"/>
+                            <label for="lessee_street" string="Address"/>
+                            <div class="o_address_format">
+                                <field name="lessee_street" placeholder="Street..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1"/>
+                                <field name="lessee_street_2" placeholder="Street 2..."
+                                    class="o_address_state" style="width: 35% !important"
+                                    readonly="1"/>
+                                <field name="lessee_district_id" placeholder="District"
+                                    options='{"no_open": True, "no_create": True}'
+                                    style="width: 35% !important" class="o_address_district" 
+                                    readonly="1"/>
+                                <field name="lessee_ward_id" placeholder="Ward"
+                                    options='{"no_open": True, "no_create": True}'
+                                    style="width: 35% !important" class="o_address_ward"
+                                    readonly="1" />
+                                <field name="lessee_state_id" class="o_address_state" placeholder="City"
+                                    style="width: 35% !important" options="{'no_open': True, 'no_quick_create': True}"
+                                    context="{'country_id': lessee_country_id, 'default_country_id': lessee_country_id}" 
+                                    readonly="1"/>
+                                <field name="lessee_country_id" placeholder="Country"
+                                    style="width: 34% !important" class="o_address_country"
+                                    options='{"no_open": True, "no_create": True}' 
+                                    readonly="1"/>
+                            </div>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note" readonly="state == 'confirm'"/>
+                    </group>
+                    <notebook>
+                        <page name="other_info" string="Other Information">
+                            <group>
+                                <group>
+                                    <field name="user_id" readonly="state == 'confirm'" options="{'no_create': True, 'no_open': True}"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_leasing_quotation_view">
+        <field name="name">Quotation</field>
+        <field name="res_model">leasing.quotation</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('tlip_leasing.leasing_quotation_view_list')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('tlip_leasing.leasing_quotation_view_form')})]" />
+    </record>
+    
+
+</odoo>

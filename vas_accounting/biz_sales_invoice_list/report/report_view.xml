@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		<record id="action_report_invoice_list_xlsx" model="ir.actions.report">
+	        <field name="name">Invoice list</field>
+	        <field name="model">wizard.sale.invoicelist</field>
+	        <field name="report_type">xlsx</field>
+	        <field name="report_name">biz_sales_invoice_list.report_invoice_list_xlsx</field>
+	        <field name="report_file">biz_sales_invoice_list.report_invoice_list_xlsx</field>
+	        <field name="print_report_name">'BẢNG KÊ HÓA ĐƠN, CHỨNG TỪ HÀNG HÓA, DỊCH VỤ BÁN RA'</field>
+	        <field name="binding_model_id" ref="model_wizard_sale_invoicelist"/>
+	        <field name="binding_type">report</field>
+	    </record>
+		
+</odoo>

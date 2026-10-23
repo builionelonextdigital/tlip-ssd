@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tlip_base_res_partner_cr_form_inherit_approval" model="ir.ui.view">
+        <field name="name">tlip.base.res.partner.cr.form.inherit.approval</field>
+        <field name="model">res.partner.cr</field>
+        <field name="inherit_id" ref="tlip_base.view_tlip_base_res_partner_cr_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" name="action_open_approval_history_ids"
+                    type="object"
+                    icon="fa-history">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">
+                            Approval Histories
+                        </span>
+                    </div>
+                </button>
+            </div>
+            <page name="summary_changes" position="before">
+                <page string="Approval" name="approval" invisible="not approver_ids">
+                    <field name="approver_ids" mode="list" readonly="1">
+                        <list editable="bottom" decoration-success="status=='approved'"
+                            decoration-warning="status in ['pending', 'waiting']"
+                            decoration-danger="status=='refused'" no_open="1">
+                            <field name="existing_request_user_ids" column_invisible="True" />
+                            <field name="sequence" column_invisible="True" />
+                            <field name="user_id" string="Approver"
+                                required="not job_id" />
+                            <field name="job_id" required="not user_id" />
+                            <field name="status" />
+                            <field name="company_id" column_invisible="True" />
+                        </list>
+                    </field>
+                </page>
+            </page>
+            <button name="action_cancel" position="before">
+                <field name="user_status" invisible="1" />
+                <button name="action_submit_changes" string="Submit" type="object"
+                    context="{'approval_partner_type': 'vendor'}"
+                    class="btn btn-primary"
+                    invisible="state != 'draft'"  confirm="Are you sure that you want to do this action?" />
+                <button name="action_approve_request" type="object" string="Approve"
+                    invisible="user_status != 'pending' or state != 'to_approve'" class="btn-primary" data-hotkey="v" />
+                <button name="action_reject_request" string="Refuse" type="object"
+                    invisible="user_status != 'pending' or state != 'to_approve'" data-hotkey="z"  confirm="Are you sure that you want to do this action?" />
+                <button name="action_withdraw_approval" string="Withdraw" type="object"
+                    confirm="Are you sure that you want to do this action?"
+                    invisible="state != 'to_approve'" />
+            </button>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="invoice_type_view_form" model="ir.ui.view">
+        <field name="name">invoice.type.view.form</field>
+        <field name="model">invoice.type</field>
+        <field name="inherit_id" ref="tlip_account.invoice_type_view_form" />
+        <field name="arch" type="xml">
+            <field name="utility_type" position="after">
+                <field name="utility_electricity_type" invisible="utility_type != 'electricity'"/>
+            </field>
+        </field>
+    </record>
+</odoo>

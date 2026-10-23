@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_category_rfq" model="product.category">
+        <field name="name">RFQ</field>
+    </record>
+</odoo>

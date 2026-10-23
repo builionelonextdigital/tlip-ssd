@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_budget_analytic_form_inherit_module_name" model="ir.ui.view">
+        <field name="name">budget.analytic.view.form.inherit</field>
+        <field name="model">budget.analytic</field>
+        <field name="inherit_id" ref="account_budget.view_budget_analytic_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">0</attribute>
+            </xpath>
+            <header position="attributes">
+                <attribute name="invisible">1</attribute>
+            </header>
+            <field name="name" position="attributes">
+                <attribute name="string">Budget Monthly</attribute>
+            </field>
+            <xpath expr="//sheet" position="attributes">
+                <attribute name="string">Budget Monthly</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']/parent::group" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='budget_line_ids']/list/field[@name='account_id']"
+                position="after">
+                <button name="open_budget_line_details"
+                    type="object"
+                    class="fa fa-list"
+                    title="Open Budget Code Details" />
+            </xpath>
+            <xpath expr="//field[@name='budget_line_ids']/list"
+                position="inside">
+                <field name="additional_amount" sum="Additional" />
+                <field name="remained_amount" sum="Remained" />
+            </xpath>
+            <xpath expr="//field[@name='budget_line_ids']/list/field[@name='budget_amount']"
+                position="before">
+                <field name="planning_budget_amount" sum="Budget" />
+            </xpath>
+            <xpath expr="//field[@name='budget_line_ids']/list/field[@name='budget_amount']"
+                position="attributes">
+                <attribute name="sum">Cashflow</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

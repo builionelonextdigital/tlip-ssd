@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wizard_sale_invoicelist,wizard_sale_invoicelist,model_wizard_sale_invoicelist,,1,1,1,1
+

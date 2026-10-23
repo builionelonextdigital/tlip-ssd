@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payment_report_list_view" model="ir.ui.view">
+        <field name="name">payment.report.list.view</field>
+        <field name="model">payment.report</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="date"/>
+                <field name="payment_type"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="amount" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="beneficiary_name"/>
+                <field name="description"/>
+                <field name="remark"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="payment_report_report_view" model="ir.ui.view">
+        <field name="name">payment.report.search</field>
+        <field name="model">payment.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="bank_id"/>
+                <field name="beneficiary_name" />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_by_bank_id"
+                        string="Bank"
+                        context="{'group_by': 'bank_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_payment_report" model="ir.actions.act_window">
+        <field name="name">Payment Report</field>
+        <field name="res_model">payment.report</field>
+        <field name="view_mode">list</field>
+        <field name="view_id"></field>
+        <field name="search_view_id" ref="payment_report_report_view"/>
+        <field name="context">{'search_default_group_by_bank_id':1}</field>
+    </record>
+
+     <!-- Accounting / Reporting / Management / Payment Report -->
+    <menuitem id="menu_payment_report"
+        action="tlip_account.action_payment_report"
+        parent="account.account_reports_management_menu"
+        sequence="20" />
+</odoo>

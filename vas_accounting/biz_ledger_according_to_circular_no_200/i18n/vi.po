@@ -1,0 +1,250 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* biz_ledger_according_to_circular_no_200
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-08 07:35+0000\n"
+"PO-Revision-Date: 2024-01-08 07:35+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "- Ngày mở sổ:...."
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "- Sổ này có .... trang, đánh số từ trang số 01 đến trang ...."
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "-Số dư đầu năm"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "-Số phát sinh trong tháng"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "<b class=\"b-title\">SỔ CÁI</b>"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "<b>(Dùng cho hình thức kế toán Nhật ký chung)</b>"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "<b>Giám đốc</b>"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "<b>Kế toán trưởng</b>"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "<b>Người ghi sổ</b>"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "<b>Đơn vị:</b>"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "<b>Địa chỉ:</b>"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "<i>(Ban hành theo Thông tư số 200/2014/TT-BTC</i>"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "<i>(Ký, họ tên)</i>"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "<i>(Ký, họ tên, đóng dấu)</i>"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "<i>Ngày 22/12/2014 của Bộ Tài chính)</i>"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "<i>Ngày.... tháng.... năm.......</i>"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#, python-format
+msgid "Account ledger (form S03b-DN)"
+msgstr "Sổ cái (mẫu số S03b-DN)"
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model:ir.model,name:biz_ledger_according_to_circular_no_200.model_account_report
+msgid "Accounting Report"
+msgstr "Báo cáo kế toán"
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "Chứng từ"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "Có"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "Diễn giải"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#, python-format
+msgid "Kể từ %s"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "Mẫu số S03b-DN"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "Ngày tháng"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "Ngày, tháng ghi sổ"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "Nhật ký chung"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#, python-format
+msgid "Năm %s"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "Nợ"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#, python-format
+msgid "PDF"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#, python-format
+msgid "Quý %s năm %s"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#, python-format
+msgid "S03b-DN (PDF)"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#, python-format
+msgid "S03b-DN (XLSX)"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "STT dòng"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#, python-format
+msgid "Save"
+msgstr "Lưu"
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "Số hiệu"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "Số tiền"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "TK đối ứng"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#, python-format
+msgid "Tháng %s năm %s"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_ledger_according_to_circular_no_200.S03B_DN_template
+msgid "Trang sổ"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#, python-format
+msgid ""
+"Từ %s\n"
+"đến  %s"
+msgstr ""
+
+#. module: biz_ledger_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#: code:addons/biz_ledger_according_to_circular_no_200/models/account_report.py:0
+#, python-format
+msgid "XLSX"
+msgstr ""

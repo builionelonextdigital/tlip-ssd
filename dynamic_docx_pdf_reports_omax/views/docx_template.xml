@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Wizard Form view -->
+        <record id="view_docx_template_form" model="ir.ui.view">
+            <field name="name">docx.template.form</field>
+            <field name="model">docx.template</field>
+            <field name="arch" type="xml">
+                <form string="Docx Template Detail">
+                    <group>
+                        <group>
+                            <field name="model_id" />
+                            <field name="docx_file" filename="file_name" />
+                            <field name="name" />
+                            <field name="font_name" />
+                            <field name="font_size" />
+                            <field name="ir_actions_server_id" invisible="1" />
+                            <field name="new_docx_file" invisible="1" />
+                            <field name="file_name" invisible="1" />
+                            <field name="print_type" widget="radio" />
+                            <field name="skip_wizard" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Help" name="help">
+                            <!--span
+                            colspan="2"-->
+                            <i class="fa fa-info fa-3x text-info float-start" role="img"
+                                aria-label="Info" title="Info" />
+                            <h3>When create docs template then please follow below instructions.</h3>
+                            <!--/span-->
+                            <div><!--  colspan="2" -->
+                                <p> Detailed template: <ol>
+                                        <li>User needs value from the record then use
+                                    '$\{field_technical_name\}', Ex. $\{name\},
+                                            $\{payment_term_id\}, $\{company_id\}</li>
+                                        <li>If we need value in table then use '$' sign and then
+                                    field_technical_name. Ex $order_line.name, $partner_id</li>
+                                    </ol>
+                                </p>
+                                <img
+                                    src="/dynamic_docx_pdf_reports_omax/static/description/template_guide.png"
+                                    style="max-height:250pt;max-width:100%;" height="220%"
+                                    width="80%" alt="Table Example" />
+                            </div>
+                        </page>
+                        <page string="Available Fields" name="available_fields">
+                            <field name="field_ids" nolabel="1" colspan="2">
+                                <list>
+                                    <field name="name" />
+                                    <field name="field_description" />
+                                    <field name="ttype" />
+                                </list>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="name" />
+                                            <field name="field_description" />
+                                        </group>
+                                        <group>
+                                            <field name="ttype" />
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_docx_template_tree" model="ir.ui.view">
+            <field name="name">docx.template.tree</field>
+            <field name="model">docx.template</field>
+            <field name="arch" type="xml">
+                <list string="Docx Template Detail">
+                    <field name="name" />
+                    <field name="model_id" />
+                </list>
+            </field>
+        </record>
+
+        <record id="action_docx_template" model="ir.actions.act_window">
+            <field name="name">Docx Template</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">docx.template</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="action_docx_template_main_menu_id" name="Docx Template" sequence="104"
+            groups="dynamic_docx_pdf_reports_omax.group_dynamic_docx_report_manager"
+            web_icon="dynamic_docx_pdf_reports_omax,static/description/icon.png" />
+
+        <menuitem id="action_docx_template_menu_id" name="Docx Template Detail"
+            action="action_docx_template"
+            parent="dynamic_docx_pdf_reports_omax.action_docx_template_main_menu_id" sequence="1" />
+
+    </data>
+</odoo>

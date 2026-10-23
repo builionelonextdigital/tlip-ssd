@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="tlip_account.PivotView.buttons" t-inherit="web.PivotView.Buttons"
+        t-inherit-mode="extension">
+        <xpath expr="//button[hasclass('o_pivot_download')]" position="after">
+            <div t-if="showDownloadBudgetReport() and env.isSmall">
+                <button
+                    class="btn btn-secondary fa fa-file-text-o o_pivot_download_analytic_report h-100 rounded-end-0"
+                    t-att-title="getSpecificReportName()" t-att-aria-label="getSpecificReportName()"
+                    t-on-click="() => this.onDownloadSpecificReport()" />
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('btn-group')][last()]" position="after">
+            <t t-if="showDownloadBudgetReport() and !env.isSmall">
+                <div class="btn-group" t-att-aria-label="getSpecificReportName()">
+                    <button class="btn btn-secondary o_pivot_download_analytic_report"
+                        t-on-click="() => this.onDownloadSpecificReport()"
+                        t-att-string="'Download ' + getSpecificReportName()">
+                        <t t-out="'Download ' + getSpecificReportName()" />
+                    </button>
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>

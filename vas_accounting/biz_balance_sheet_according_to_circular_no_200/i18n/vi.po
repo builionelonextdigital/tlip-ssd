@@ -1,0 +1,191 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* biz_balance_sheet_according_to_circular_no_200
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-12 08:37+0000\n"
+"PO-Revision-Date: 2023-12-12 08:37+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_balance_sheet_according_to_circular_no_200/models/account_trial_balance_report.py:0
+#, python-format
+msgid "%s đến %s"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid "<br/><span class=\"s06-dn-title-small\">Đơn vị:</span>"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid "<br/><span class=\"s06-dn-title-small\">Địa chỉ: </span>"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid ""
+"<span class=\"s06-dn-text-italic\">Ngày ..... tháng ..... năm .....</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s06-dn-title-small\">Giám đốc</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s06-dn-text-italic\">(Ký, họ tên, đóng dấu)</span>"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid ""
+"<span class=\"s06-dn-title \">Mẫu số S06-DN</span>\n"
+"                                    <br/>\n"
+"                                    <span>(Ban hành theo Thông tư số 200/2014/TT-BTC</span>\n"
+"                                    <br/>\n"
+"                                    <span>Ngày 22/12/2014 của Bộ Tài Chính)</span>"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid ""
+"<span class=\"s06-dn-title-small\">Kế toán trưởng</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s06-dn-text-italic\">(Ký, họ tên)</span>"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid ""
+"<span class=\"s06-dn-title-small\">Người ghi sổ</span>\n"
+"                        <br/>\n"
+"                        <span class=\"s06-dn-text-italic\">(Ký, họ tên)</span>"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid "<span class=\"s06-dn-title-small\">Đơn vị: </span>"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid "<strong>Bảng cân đối số phát sinh</strong>"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model:ir.model,name:biz_balance_sheet_according_to_circular_no_200.model_account_group
+msgid "Account Group"
+msgstr "Nhóm tài khoản"
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model:ir.model,name:biz_balance_sheet_according_to_circular_no_200.model_account_report
+msgid "Accounting Report"
+msgstr "Báo cáo kế toán"
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model:ir.model.fields,field_description:biz_balance_sheet_according_to_circular_no_200.field_account_group__code
+msgid "Code"
+msgstr "Mã"
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid "Có"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_balance_sheet_according_to_circular_no_200/models/account_trial_balance_report.py:0
+#: code:addons/biz_balance_sheet_according_to_circular_no_200/models/account_trial_balance_report.py:0
+#, python-format
+msgid "Năm %s"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid "Nợ"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_balance_sheet_according_to_circular_no_200/models/account_trial_balance_report.py:0
+#, python-format
+msgid "PDF"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_balance_sheet_according_to_circular_no_200/models/account_trial_balance_report.py:0
+#: code:addons/biz_balance_sheet_according_to_circular_no_200/models/account_trial_balance_report.py:0
+#, python-format
+msgid "Quý %s năm %s"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_balance_sheet_according_to_circular_no_200/models/account_trial_balance_report.py:0
+#, python-format
+msgid "S06-DN(PDF)"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_balance_sheet_according_to_circular_no_200/models/account_trial_balance_report.py:0
+#, python-format
+msgid "S06-DN(XLSX)"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid "Số dư cuối tháng"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid "Số dư đầu tháng"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid "Số hiệu tài khoản"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid "Số phát sinh trong tháng"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_balance_sheet_according_to_circular_no_200/models/account_trial_balance_report.py:0
+#: code:addons/biz_balance_sheet_according_to_circular_no_200/models/account_trial_balance_report.py:0
+#, python-format
+msgid "Tháng %s năm %s"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model:ir.model,name:biz_balance_sheet_according_to_circular_no_200.model_account_trial_balance_report_handler
+msgid "Trial Balance Custom Handler"
+msgstr "Trình xử lý tùy chỉnh số dư dùng thử"
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid "Tên tài khoản kế toán"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#: model_terms:ir.ui.view,arch_db:biz_balance_sheet_according_to_circular_no_200.s06_dn_pdf
+msgid "Tất cả"
+msgstr ""
+
+#. module: biz_balance_sheet_according_to_circular_no_200
+#. odoo-python
+#: code:addons/biz_balance_sheet_according_to_circular_no_200/models/account_trial_balance_report.py:0
+#, python-format
+msgid "XLSX"
+msgstr ""

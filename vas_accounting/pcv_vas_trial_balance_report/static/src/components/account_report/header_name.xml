@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+    <t t-name="pcv_vas_trial_balance_report.AccountReportHeaderCustomizable"
+        t-inherit="account_reports.AccountReportHeaderCustomizable" t-inherit-mode="extension">
+        <xpath expr="//thead[@id='table_header']/t[1]/tr/th" position="after">
+            <th t-if="controller.action.xml_id == 'pcv_vas_trial_balance_report.action_vas_trial_balance_report'"></th>
+        </xpath>
+        <xpath expr="//thead[@id='table_header']/t[2]/tr/th" position="after">
+            <th t-if="controller.action.xml_id == 'pcv_vas_trial_balance_report.action_vas_trial_balance_report'"></th>
+        </xpath>
+        <xpath expr="//thead[@id='table_header']/tr[1]/th" position="after">
+            <th t-if="controller.action.xml_id == 'pcv_vas_trial_balance_report.action_vas_trial_balance_report'"></th>
+        </xpath>
+    </t>
+</templates>

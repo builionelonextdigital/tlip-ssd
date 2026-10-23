@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_purchasequotation_document_inherit_purchase" inherit_id="purchase.report_purchasequotation_document">
+        <xpath expr="//th[@name='th_description']" position="after">
+            <th name="th_specification">Specification</th>
+        </xpath>
+        <xpath expr="//td[@id='product']" position="after">
+            <td name="td_specification">
+                <span t-field="order_line.specification" />
+            </td>
+        </xpath>
+        <xpath expr="//t[@t-if='o.dest_address_id']//t[@t-set='information_block']//strong" position="before">
+            <strong>Purchaser:</strong>
+            <div t-field="o.user_id" />
+        </xpath>
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <div class="footer">
+                <div style="font-weight: bold; margin-left: 40px;">KÝ TÊN</div>
+                <div style="margin-top: 50px; border-bottom: 2px solid black;"></div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="report_purchasequotation_document_inherit_purchase_stock" inherit_id="purchase_stock.report_purchasequotation_document">
+        <xpath expr="//t[@t-else]//t[@t-set='information_block']//strong" position="before">
+            <strong>Purchaser:</strong>
+            <div t-field="o.user_id" />
+        </xpath>
+    </template>
+
+</odoo>

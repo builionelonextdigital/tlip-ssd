@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="pcv_mysign.MySignPopup">
+        <div class="o_dialog o_dialog--no-header" role="dialog">
+            <div class="p-3" role="alert" style="font-size: 16px;">
+                <p>Are you sure to sign these documents ?</p>
+            </div>
+            <div class="o_footer_buttons gap-3 d-flex" style="margin-left: 10px; margin-bottom: 10px">
+                <button type="button" class="btn btn-primary oe_form_button" t-on-click="_confirm">Confirm</button>
+                <button type="button" class="btn btn-secondary oe_form_button" t-on-click="_cancel">Cancel</button>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="pcv_mysign.WaitingDialog">
+        <Dialog title="props.title" size="'sm'">
+            <p><t t-esc="props.body"/></p>
+            <t t-set-slot="footer">
+                <button class="btn btn-secondary" t-on-click="props.close">
+                    <t t-esc="'Close'"/>
+                </button>
+            </t>
+        </Dialog>
+    </t>
+
+</templates>

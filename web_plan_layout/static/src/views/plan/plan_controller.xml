@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="web_plan_layout.PlanView" owl="1">
+        <div t-att-class="props.className" t-ref="root">
+            <div class="o_plan_view">
+                <Layout className="model.useSampleModel ? 'o_view_sample_data' : ''" display="display">
+                    <t t-set-slot="layout-buttons">
+                        <t t-call="{{ props.buttonTemplate }}"/>
+                    </t>
+                    <t t-component="props.Renderer" t-props="rendererProps"/>
+                </Layout>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="web_plan_layout.PlanView.Buttons" owl="1">
+        <div t-if="model.metaData.mode == 'editable'" class="o_cp_buttons" role="toolbar" aria-label="Main actions" t-ref="buttons">
+            <div class="o_plan_buttons">
+                <t t-if="props.showButtons">
+                    <t t-if="isEditing">
+                        <button type="button" class="btn btn-primary o_plan_button_save" data-hotkey="s" t-on-click.stop="onClickSave">
+                            Save
+                        </button>
+                        <button type="button" class="btn btn-secondary o_plan_button_cancel" data-hotkey="j" t-on-click.stop="onClickDiscard">
+                            Discard
+                        </button>
+                    </t>
+                </t>
+            </div>
+        </div>
+    </t>
+</templates>

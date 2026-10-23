@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="budget_analytic_year_comp_rule" model="ir.rule">
+            <field name="name">Budget Year multi-company</field>
+            <field name="model_id" ref="tlip_account.model_budget_analytic_year"/>
+            <field name="domain_force">[('company_id', 'parent_of', company_ids)]</field>
+        </record>
+        <record id="budget_line_year_comp_rule" model="ir.rule">
+            <field name="name">Budget Line Year multi-company</field>
+            <field name="model_id" ref="tlip_account.model_budget_line_year"/>
+            <field name="domain_force">[('company_id', 'parent_of', company_ids)]</field>
+        </record>
+        <!-- <record model="ir.rule" id="budget_code_user_rule">
+            <field name="name">Budget code internal user rule</field>
+            <field name="model_id" ref="account.model_account_analytic_account" />
+            <field name="groups" eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">[('budget_department_id','=',user.employee_ids.department_id.budget_department_id.id)]</field>
+        </record> -->
+        <record model="ir.rule" id="budget_code_accountant_rule">
+            <field name="name">Budget code Accountant rule</field>
+            <field name="model_id" ref="account.model_account_analytic_account" />
+            <field name="groups" eval="[(4, ref('tlip_access_rights.group_tlip_accountant'))]" />
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="check_partner_exist_wizard_form_view" model="ir.ui.view">
+        <field name="name">check_partner_exist_wizard_form_view</field>
+        <field name="model">check.partner.exist.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="vat" />
+                    </group>
+                    <field name="check_type" invisible="True" />
+                </sheet>
+                <footer>
+                    <button name="button_check_exist" type="object" string="Confirm"
+                        class="oe_highlight" />
+                    <button special="cancel" string="Cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

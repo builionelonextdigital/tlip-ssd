@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_docx_template_wiz_form" model="ir.ui.view">
+            <field name="name">docx.template.wiz.form</field>
+            <field name="model">docx.template.wiz</field>
+            <field name="arch" type="xml">
+                <form string="Download or Attach Report">
+                    <group>
+                        <group>
+                            <field name="print_type" string="Report type" widget="radio" invisible="attachment == True"/>
+                            <field name="print_type" string="Attachment type" widget="radio" invisible="attachment == False"/>
+                            <field name="attachment"/>
+                        </group>
+                        <group></group>
+                    </group>
+		            <footer>
+                        <button string='Download' name="download_file" type="object" class="btn-primary" invisible="attachment == True"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                        <button string='Attachment' name="download_file" type="object" class="btn-primary" invisible="attachment == False"/>
+		            </footer>
+               </form>
+            </field>
+        </record>
+    </data>
+</odoo>
