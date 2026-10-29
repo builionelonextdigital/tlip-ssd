@@ -11,5 +11,7 @@ class WithdrawApprovalWizard(models.TransientModel):
 
     def action_confirm(self):
         # trigger action withdraw mixin
-        self.env[self.related_model].browse(
-            self.related_res_id)._trigger_action_withdraw(self.reason)
+        records = self.env[self.related_model].browse(self.related_res_id)
+        if not records.exists():
+            raise ValidationError(_("Related document no longer exists"))
+        records._trigger_action_withdraw(self.reason)

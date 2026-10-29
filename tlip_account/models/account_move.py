@@ -799,15 +799,21 @@ class AccountMove(models.Model):
 
     def _post(self, soft=True):
         # To bypass period closing for customer import data
-        if not self.env.context.get('bypass_period_closing'):
+        trusted = self.env.su or self.env.user.has_group(
+            'tlip_access_rights.group_tlip_chief_account') or self.env.user.has_group(
+            'account.group_account_manager')
+        if not (trusted and self.env.context.get('bypass_period_closing')):
             current_period = self.env['accounting.period.closing']._get_current_accounting_period(
             )
             for invoice in self.filtered(lambda move: not move.asset_id):
                 current_period.validate_accounting_date(invoice.date)
 
+        trusted = self.env.su or self.env.user.has_group(
+            'tlip_access_rights.group_tlip_chief_account') or self.env.user.has_group(
+            'account.group_account_manager')
         if not self.env.user.has_groups(
             "account.group_account_user"
-        ) and not self.env.context.get("force_post"):
+        ) and not (trusted and self.env.context.get("force_post")):
             raise ValidationError(_("You do not have permission to post journal entry"))
 
         self = self.with_context(skip_change_partner=True)

@@ -14,6 +14,7 @@
             <field name="domain_force">['|', '|', '|',
                 ('request_owner_id', '=', user.id),
                 ('approver_ids.user_id','=', user.id),
+                '&amp;', ('approver_ids.job_id','!=', False),
                 ('approver_ids.job_id','=', user.employee_id.job_id.id),
                 '&amp;',
                 ('category_id.manager_approval', 'in', ['approver', 'required']),

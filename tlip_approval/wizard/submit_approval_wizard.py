@@ -22,6 +22,7 @@ class SubmitApprovalWizard(models.TransientModel):
             "request_owner_id": self.env.user.id,
             "category_id": self.category_id.id,
             "approver_sequence": self.category_option_id.approver_sequence,
+            "approval_minimum": self.category_option_id.approval_minimum or len(self.category_option_id.approver_ids),
             "approver_ids": [(0, 0, {
                 "user_id": approver.user_id.id,
                 "sequence": approver.sequence,

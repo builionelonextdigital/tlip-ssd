@@ -18,9 +18,9 @@ class MInvoiceTemplate(models.Model):
     company_id = fields.Many2one('res.company', string='Công ty', default=lambda self: self.env.company, required=True)
     username = fields.Char(string="Tên tài khoản",
                            required=True, tracking=True)
-    password = fields.Char(string="Mật khẩu", required=True, tracking=False)
+    password = fields.Char(string="Mật khẩu", required=True, tracking=False, groups="base.group_system")
     production_host = fields.Char(
-        string="Production Host"
+        string="Production Host", groups="base.group_system"
     )
     toggle_status = fields.Boolean(
         string="Toggle Status", default=False, copy=False)

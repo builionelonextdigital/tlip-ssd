@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./odoo.conf)",
+      "Read(./**/.env)",
+      "Read(./cosphi.json)",
+      "Read(./electrict.json)",
+      "Read(./water.json)",
+      "Edit(./odoo.conf)",
+      "Edit(./Project-infomations/**)",
+      "Edit(./queue_job/**)",
+      "Edit(./report_xlsx/**)",
+      "Edit(./web_m2x_options/**)",
+      "Edit(./web_plan_layout/**)",
+      "Edit(./web_widget_boolean_button/**)",
+      "Edit(./web_widget_dropdown_dynamic/**)",
+      "Edit(./vn_address/**)",
+      "Edit(./dynamic_docx_pdf_reports_omax/**)",
+      "Edit(./account_report_filter_currency/**)",
+      "Bash(./deploy_dev.sh:*)",
+      "Bash(git push:*)",
+      "Bash(psql:*)",
+      "Bash(docker compose down -v:*)",
+      "Bash(docker volume rm:*)",
+      "Bash(cat odoo.conf:*)",
+      "Bash(cat ./odoo.conf:*)"
+    ],
+    "ask": [
+      "Bash(git commit:*)",
+      "Bash(git reset:*)",
+      "Bash(git checkout:*)",
+      "Bash(docker compose down:*)"
+    ]
+  }
+}

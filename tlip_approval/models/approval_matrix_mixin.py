@@ -65,7 +65,35 @@ class ApprovalMatrixMixin(models.AbstractModel):
         self.approval_request_id.action_refuse()
         
     def action_reset_approval(self):
+        for record in self:
+            if record.approval_state in ('wait_for_approval', 'approved'):
+                raise ValidationError(
+                    _("You cannot reset the approval state while the request is pending or approved"))
         self.write({"approval_state": "draft"})
+
+    def write(self, vals):
+        for record in self:
+            if record.approval_state in ('wait_for_approval', 'approved') and record.approval_request_id:
+                option = record.approval_request_id.category_id.approval_option_ids.filtered(
+                    lambda o: o.filter_domain)[:1]
+                blocked = []
+                if option:
+                    try:
+                        blocked = [f for f in ast.literal_eval(option.filter_domain or '[]')
+                                   if isinstance(f, (list, tuple)) and len(f) >= 2 and f[0] in vals]
+                    except Exception:
+                        blocked = []
+                if blocked:
+                    raise ValidationError(
+                        _("Document is locked while the approval is pending/approved. Withdraw the request first."))
+        return super().write(vals)
+
+    def unlink(self):
+        for record in self:
+            request = record.approval_request_id
+            if request and request.request_status in ('pending', 'new'):
+                request.action_withdraw_with_reason(_("Related document deleted"))
+        return super().unlink()
 
     def action_submit_approval(self):
         self.ensure_one()

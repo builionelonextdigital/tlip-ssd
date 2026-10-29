@@ -14,6 +14,9 @@ class ApprovalRequest(models.Model):
         compute='_compute_non_stored_information_from_related_document',
         compute_sudo=True,)
     withdraw_reason = fields.Text("Reason", readonly=True)
+    approval_minimum = fields.Integer(
+        string='Minimum Approvers', default=0, copy=False,
+        help="Số người duyệt tối thiểu để request được chấp thuận")
     approval_review_ids = fields.One2many(
         'approval.review', 'approval_request_id', string='Reviews')
     to_review_contract = fields.Boolean(
@@ -155,8 +158,15 @@ class ApprovalRequest(models.Model):
         return res
 
     def action_approve(self, approver=None):
-        self = self.sudo()
         approver = self._validate_approve_reject(approver)
+        minimum = self._get_required_approver_count()
+        other_approved = self.approver_ids.filtered(
+            lambda a: a.status == 'approved' and a != approver)
+        if len(other_approved) + 1 < minimum:
+            approver.write({'status': 'approved'})
+            self._trigger_approve_or_refuse_review(approver)
+            return True
+        self = self.sudo()
 
         # Retrieve existing approval activities before creating new ones
         prev_approval_activities = self._get_existing_approval_activities()
@@ -197,10 +207,21 @@ class ApprovalRequest(models.Model):
         return result
 
     def action_withdraw_with_reason(self, reason: str):
-        self = self.sudo()
+        for request in self:
+            if request.request_owner_id != self.env.user and not self.env.user.has_group('base.group_system'):
+                raise ValidationError(_("Only the request owner can withdraw this request"))
+            if request.request_status not in ('pending', 'new'):
+                raise ValidationError(_("Only pending requests can be withdrawn"))
         self.write({"withdraw_reason": reason})
         self._send_withdraw_email_notification(reason)
         self.action_cancel()
+
+    def _get_required_approver_count(self):
+        self.ensure_one()
+        options = self.category_id.approval_option_ids
+        minimum = max(options.mapped('approval_minimum') or [0]) or 0
+        required = len(self.approver_ids.filtered(lambda a: a.required))
+        return max(minimum, required, 1)
 
     def action_open_related_document(self):
         self.ensure_one()
