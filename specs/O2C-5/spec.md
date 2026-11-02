@@ -21,11 +21,12 @@ technical_approver:
 
 ## 2. Mục tiêu
 
-Mọi mẫu PDF RFP in ra trên A4 có lề đều hai bên, không bị cắt chữ, cân đối giữa các khối; chỉnh một lần áp dụng cho tất cả Request Type.
+Mọi mẫu PDF RFP in ra trên A4 có lề đều hai bên, không bị cắt chữ; chỉnh một lần áp dụng cho tất cả Request Type.
 
 ## 3. Ngoài phạm vi
 
 - Thay đổi nội dung, câu chữ, bố cục chi tiết bên trong từng mẫu (chờ mẫu chuẩn từ TLIP – Q2).
+- Khoảng cách giữa các khối (đầu trang, bảng chi tiết, thông tin chuyển khoản, chữ ký): làm sau khi TLIP gửi mẫu (Q2).
 - Mẫu in Payment (`paperformat_account_payment`) và Batch Payment (`base.paperformat_euro`): không đổi.
 - Lỗi tên file in của mẫu Power 1 (`print_report_name` đang là `'Power 2 - %s'`): ghi nhận, tách thành task riêng.
 
@@ -74,8 +75,8 @@ Màn hình: bản in PDF RFP (nút Print trên RFP / Payment request).
 | # | Câu hỏi | Người trả lời | Trả lời |
 |---|---|---|---|
 | Q1 | Giá trị lề mong muốn? Đề xuất: trái 15 mm, phải 15 mm, dưới 15 mm, trên giữ 25 mm. TLIP có quy chuẩn văn bản khác (VD: trái 30 mm, phải 15 mm theo Nghị định 30/2020 về văn bản hành chính) không? | FC (xác nhận với TLIP) | Chấp nhận đề xuất: trái 15 mm, phải 15 mm, dưới 15 mm, trên giữ 25 mm (xác nhận 2026-11-02). |
-| Q2 | Issue ghi "Cần TLIP gửi mẫu hoặc xác nhận các căn chỉnh mong muốn". TLIP đã gửi mẫu chưa? Nếu chưa: bản này chỉ chỉnh lề (R1–R4), phần khoảng cách giữa các khối (đầu trang, bảng chi tiết, thông tin chuyển khoản, chữ ký) làm khi có mẫu – đồng ý? | FC | |
-| Q3 | Mẫu nào là mẫu TLIP thấy lệch nhất để QC ưu tiên test (MF-RQ, Water, Land Rent…)? | FC | |
+| Q2 | Issue ghi "Cần TLIP gửi mẫu hoặc xác nhận các căn chỉnh mong muốn". TLIP đã gửi mẫu chưa? Nếu chưa: bản này chỉ chỉnh lề (R1–R4), phần khoảng cách giữa các khối (đầu trang, bảng chi tiết, thông tin chuyển khoản, chữ ký) làm khi có mẫu – đồng ý? | FC | Bản này chỉ chỉnh lề (R1–R4); khoảng cách giữa các khối làm sau khi TLIP gửi mẫu (xác nhận 2026-11-02). |
+| Q3 | Mẫu nào là mẫu TLIP thấy lệch nhất để QC ưu tiên test (MF-RQ, Water, Land Rent…)? | FC | Ưu tiên MF-RQ và Water (AC5, AC6) (xác nhận 2026-11-02). |
 
 ## 10. Lịch sử
 
@@ -83,3 +84,4 @@ Màn hình: bản in PDF RFP (nút Print trên RFP / Payment request).
 |---|---|---|
 | 2026-11-02 | AI (/sdd-spec) | Tạo bản nháp từ Issue #18 và khảo sát code |
 | 2026-11-02 | AI (/sdd-spec) | Ghi câu trả lời Q1 (chấp nhận lề 15 mm); R1, R2 bỏ chữ "đề xuất". AC không đổi |
+| 2026-11-02 | AI (/sdd-spec) | Ghi câu trả lời Q2 (chỉ chỉnh lề, thêm vào Ngoài phạm vi) và Q3 (ưu tiên MF-RQ, Water); Mục tiêu bỏ "cân đối giữa các khối". AC không đổi |
