@@ -5,7 +5,7 @@ title: Lỗi mất thông tin khi chọn kỳ hạn phân bổ
 status: Draft
 ai_level: Trung bình
 shared_modules: Không
-source: Tracker "Chi tiết task" STT 29 (O2C No. 14); TLIP_O2C_Giai_phap_chi_tiet_va_uoc_luong.docx mục "No. 14 – Lỗi mất thông tin khi chọn kỳ hạn phân bổ"; Meeting Minutes 2026-10-02 mục 2.2 và việc #5; Tai-hien-issue/O2C No.14 (step by step).xlsx
+source: Tracker "Chi tiết task" STT 29 (O2C No. 14); TLIP_O2C_Giai_phap_chi_tiet_va_uoc_luong.docx mục "No. 14 – Lỗi mất thông tin khi chọn kỳ hạn phân bổ"; Meeting Minutes 2026-10-02 mục 2.2 và việc #5; Tai-hien-issue/O2C No.14 (step by step).xlsx; TLIP_O2C_Issue_Summary UPDATED.xlsx (dòng O2C 14); MoM - Review O2C Report - 23-10-2026.docx (mục Deferred revenue, chỉ để xác định ranh giới với No. 13)
 business_approver:
 technical_approver:
 ---
@@ -34,7 +34,7 @@ Khi PIC/kế toán đổi kỳ (Date From/Date To) hoặc thông tin đầu phi�
 
 ## 3. Ngoài phạm vi
 
-- Tự động phân bổ doanh thu 3387 theo Date From – Date To, chuyển TK doanh thu sang 3387, số tiền theo số tháng (thuộc **O2C No. 13**). Hiện tượng A6 trong file tái hiện (TK vẫn 511310, số tiền 1 tháng dù kỳ 3 tháng) không xử lý ở đây.
+- Tự động phân bổ doanh thu 3387 theo Date From – Date To, chuyển TK doanh thu sang 3387, số tiền theo số tháng (thuộc **O2C No. 13**). Hiện tượng A6 trong file tái hiện (TK vẫn 511310, số tiền 1 tháng dù kỳ 3 tháng) không xử lý ở đây. Quy tắc đã thống nhất ngày 23/10/2026 (Date To cùng tháng với due date → ghi thẳng doanh thu, sang tháng sau → phân bổ qua 3387; tạo bảng phân bổ khi kế toán xác nhận thanh toán) cũng thuộc No. 13.
 - Đổi giá trị mặc định 5 kỳ × Years trên form Deferred Revenue (cân nhắc ở No. 13).
 - Ẩn/hiện cột Date From/Date To theo loại yêu cầu; cột Area/Quantity cho thuê đất (thuộc **O2C No. 15**).
 - Khóa sửa chứng từ sau duyệt (thuộc **O2C No. 23**).
@@ -119,10 +119,11 @@ Spec **không được Approved** khi còn câu hỏi chưa trả lời.
 | Q5 | Với loại thuê, nếu người dùng sửa tay trực tiếp Unit Price (không qua Price × Area) thì khi đổi Area/Price có được ghi đè không? (Spec hiện giữ hành vi tự tính – R6.) | FC | |
 | Q6 | Muốn "khôi phục" mô tả tự sinh sau khi đã sửa tay thì người dùng làm thế nào (xóa trống mô tả, chọn lại sản phẩm…)? Có cần không? | FC | |
 | Q7 | RFP tạo tự động từ hợp đồng thuê (`tlip_leasing`) cho kỳ tiếp theo: mô tả dòng mới nên tự sinh theo kỳ mới hay copy mô tả của kỳ trước (kể cả phần sửa tay)? | FC + TC | |
-| Q8 | Tracker ghi 1,5 MD, tài liệu giải pháp ghi 2 MD. Chốt số nào? Video hướng dẫn Deferred Revenue có tính trong MD này không, ai làm? | TC / PM | |
+| Q8 | Tracker ghi 1,5 MD, tài liệu giải pháp và Issue Summary UPDATED ghi 2 MD. Chốt số nào? Video hướng dẫn Deferred Revenue có tính trong MD này không, ai làm? | TC / PM | |
 
 ## 10. Lịch sử
 
 | Ngày | Người | Thay đổi |
 |---|---|---|
 | 2026-11-02 | AI | Tạo bản nháp từ tracker, tài liệu giải pháp, biên bản 02/10/2026 và file tái hiện No.14 |
+| 2026-11-02 | AI | Cập nhật bản nháp: đối chiếu lại code `tlip_account/models/account_move_line.py` (`_compute_name`, `_compute_price_unit`) khớp mục 1; bổ sung nguồn Issue Summary UPDATED và MoM 23/10/2026; ghi rõ ranh giới với No. 13; cập nhật Q8 |
