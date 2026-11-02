@@ -13,3 +13,4 @@
 - Một số module có `CLAUDE.md` riêng với lưu ý chi tiết; đọc khi làm việc trong module đó.
 - Hạng mục **Mức dùng AI = Thấp**: dùng plan mode, chỉ đưa kế hoạch và test, không tự viết logic lõi.
 - `.claude/settings.json` đã chặn đọc file bí mật/dữ liệu thật và chặn push/deploy. Không tìm cách vượt qua.
+- Chạy trên GitHub (`@claude` trong Issue/PR): xem `docs/ai/SDD_STUDIO.md`; Project-infomations/ không có trên runner, nguồn yêu cầu là Issue.

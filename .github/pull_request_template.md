@@ -1,4 +1,8 @@
-<!-- Tiêu đề PR: [<Mã hạng mục>] <Tên hạng mục>   – điền bằng output của /sdd-verify -->
+<!-- Tiêu đề PR: [<Mã hạng mục>] <Spec | Plan | Tên hạng mục>   – PR code: điền bằng output của /sdd-verify -->
+
+Refs #<số Issue>
+
+**Loại PR:** Spec / Plan / Code
 
 **Spec:** specs/<ID>/spec.md · **Plan:** specs/<ID>/plan.md
 
@@ -11,11 +15,12 @@
 **AC → test:**
 - AC1 ✔ `test_ac1_...`
 
-**Test:** <số test chạy / qua, các module đã chạy>
+**Test:** <số test chạy / qua, các module đã chạy – test chạy local, ghi rõ nếu chưa chạy>
 
 **Mức dùng AI:**  · phần AI viết:  · phần TC viết: 
 
 **Cần FC/TLIP xác nhận (UAT):** 
 
-- [ ] Spec và plan đã được duyệt (status Approved, có tên người duyệt)
+- [ ] PR Spec/Plan: đã điền người duyệt và đổi status trước khi merge
+- [ ] PR Code: spec và plan trên `main` đã Approved; test đã chạy local
 - [ ] Không có dữ liệu thật / bí mật trong diff

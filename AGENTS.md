@@ -123,3 +123,5 @@ Luật cứng:
 - AI **không** tự đổi `status` sang `Approved`/`Done`, không điền tên người duyệt.
 - Spec là nguồn sự thật. Yêu cầu thay đổi → sửa spec trước (ghi Lịch sử, duyệt lại nếu đổi AC), rồi mới sửa code.
 - Phát hiện spec/plan sai khi đang code → dừng và báo, không tự sửa trong code.
+
+Trên GitHub: mỗi hạng mục là một Issue trên board "TLIP SDD", gọi các bước bằng comment `@claude /sdd-*`, mỗi cổng duyệt là một PR merge vào `main`. Xem `docs/ai/SDD_STUDIO.md`.

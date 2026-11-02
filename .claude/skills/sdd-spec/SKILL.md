@@ -36,6 +36,8 @@ Mục tiêu: một file spec mà FC đọc hiểu được nghiệp vụ và TC 
 - Tài liệu trong `requirement_docs` (docx/pdf): trích đúng đoạn liên quan; nếu không đọc được, nhờ người dùng dán.
 - Biên bản họp liên quan nếu người dùng chỉ ra.
 - **Không** đọc dữ liệu thật, file bí mật (theo `AGENTS.md`). Ví dụ số liệu luôn dùng dữ liệu giả.
+- **Chạy trên GitHub (`@claude /sdd-spec` trong Issue)**: không có `Project-infomations/`. Nguồn = tiêu đề, thân Issue (các mục Vấn đề / Giải pháp / Cách làm / Model-Field / Ghi chú) và comment trong Issue. Ghi `source: GitHub Issue #<số> (+ tài liệu được nhắc trong Issue)`. Thông tin chỉ có trong docx/biên bản mà Issue không trích → đưa vào Câu hỏi mở, nhờ FC dán vào Issue.
+- Tracker có 2 dòng trùng mã (Issue ghi "dòng trùng mã") → thêm câu hỏi mở cho FC chốt dòng nguồn.
 
 ## 2. Khảo sát nhanh code (chỉ để viết đúng mục 7 của spec)
 
@@ -65,3 +67,4 @@ Grep model/field được nhắc tới để biết field nào **đã có**, fie
 - Số yêu cầu, số AC.
 - **Danh sách câu hỏi mở** cần FC/TC trả lời (nguyên văn).
 - Bước tiếp theo: FC + TC duyệt → đổi `status: Approved`, điền tên người duyệt → chạy `/sdd-plan <ID>`.
+- Trên GitHub: commit spec lên nhánh mới, mở PR vào `main` với `Refs #<issue>`; FC/TC duyệt trong PR (sửa `status` + tên người duyệt bằng nút Edit file của PR), merge PR = spec đã duyệt.

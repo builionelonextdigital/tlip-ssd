@@ -1,0 +1,37 @@
+name: SDD board sync
+
+# Cập nhật nhãn status:* của Issue (và cột trên Project board nếu cấu hình) theo spec.md / plan.md.
+# - PR mở/cập nhật: phản ánh spec đang soạn (Draft, In Review, Plan Review, Implementing).
+# - Push vào main: phản ánh trạng thái đã merge; cho phép lùi trạng thái (thay đổi yêu cầu).
+
+on:
+  push:
+    branches: [main]
+    paths: ["specs/**"]
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths: ["specs/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Sync status labels / board
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          SDD_ALLOW_BACKWARD: ${{ github.event_name == 'push' && '1' || '0' }}
+          # Tùy chọn – cột Status trên GitHub Projects (v2):
+          PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+          PROJECT_OWNER: ${{ vars.PROJECT_OWNER }}
+          PROJECT_NUMBER: ${{ vars.PROJECT_NUMBER }}
+        run: python3 ci/sdd_sync.py

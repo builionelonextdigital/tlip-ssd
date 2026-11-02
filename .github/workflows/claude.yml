@@ -1,0 +1,45 @@
+name: Claude (SDD)
+
+# Comment "@claude /sdd-spec" (hoặc /sdd-plan, /sdd-tasks, /sdd-implement, /sdd-verify)
+# trong Issue hoặc PR để Claude chạy bước SDD tương ứng. Chỉ người có quyền write mới kích hoạt được.
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  pull_request_review:
+    types: [submitted]
+
+concurrency:
+  group: claude-${{ github.event.issue.number || github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  claude:
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Dùng gói Claude Team/Enterprise thay API key: đổi dòng trên thành
+          # claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: |
+            --max-turns 60
+            --allowedTools "Bash(python3 ci/check_specs.py:*),Bash(git diff:*),Bash(git log:*),Bash(git status:*),Bash(grep:*),Bash(ls:*)"
+            --append-system-prompt "Ban dang chay trong GitHub Actions cua repo TLIP theo quy trinh SDD (AGENTS.md muc 8, docs/ai/SDD_STUDIO.md). Quy tac: (1) '/sdd-spec', '/sdd-plan', '/sdd-tasks', '/sdd-implement', '/sdd-verify' trong comment = chay skill cung ten trong .claude/skills. (2) Thu muc Project-infomations/ KHONG co tren runner: nguon yeu cau la tieu de, than Issue va cac comment cua Issue. Khong bia thong tin ngoai nguon; thieu thi dua vao muc Cau hoi mo. (3) ID hang muc lay tu tieu de Issue: '[O2C No. 14] ...' -> thu muc specs/O2C-14. (4) Moi buoc lam tren mot nhanh rieng va de xuat PR vao main, PR body co 'Refs #<so issue>'; o che do nay duoc commit len nhanh cua ban, khong bao gio push vao main. (5) Runner khong co Odoo: viet test nhung ghi ro 'chua chay', huong dan TC chay local bang test_command trong sdd.config.yml. (6) Khong doi status sang Approved hoac Done, khong dien business_approver/technical_approver. (7) Commit message bat dau bang ma hang muc, VD '[O2C No. 14] Add spec draft'. (8) Tra loi bang tieng Viet, ngan gon: da lam gi, file nao, buoc tiep theo, ai can duyet."
