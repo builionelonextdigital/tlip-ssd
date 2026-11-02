@@ -1,0 +1,29 @@
+# Cấu hình mẫu cho dự án TLIP (Odoo 18 Enterprise, multi-company 3 pháp nhân)
+
+project: TLIP
+
+specs_dir: specs
+
+# [O2C No. 14] ..., [P2P No. 3] ..., [ACC No. 2] ...
+id_regex: ^\[(?P<prefix>[A-Z][A-Z0-9]+)(?: No\.)? ?#?(?P<num>\d+)\]
+
+# AUDIT #x đã có mô tả trong báo cáo audit và skill fix-audit-finding
+exempt_prefixes: [AUDIT, HOTFIX, CHORE]
+
+allowed_statuses: [Approved, Implementing, Done]
+
+tracker_path: Project-infomations/TLIP_Phase_Tracker.xlsx
+tracker_sheet: Chi tiết task
+tracker_id_column: Mã
+requirement_docs: [Project-infomations/O2C/, Project-infomations/07. Deliverables/]
+
+shared_modules: [tlip_approval, tlip_access_rights, pcv_minvoice, pcv_mysign]
+
+third_party_modules: [queue_job, report_xlsx, web_m2x_options, web_plan_layout, web_widget_boolean_button, web_widget_dropdown_dynamic, vn_address, dynamic_docx_pdf_reports_omax, account_report_filter_currency]
+
+business_approver_role: FC
+technical_approver_role: TC
+
+test_command: docker compose run --rm --entrypoint /usr/bin/odoo odoo -c /etc/odoo/odoo.conf --db_host=db --db_user=odoo --db_password=odoo -d tlip_test -i {module} --test-enable --test-tags {tags} --stop-after-init
+
+report_language: vi

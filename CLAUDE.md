@@ -5,7 +5,8 @@
 ## Riêng cho Claude Code
 
 - Skill có sẵn trong `.claude/skills/`:
-  - `odoo-feature`: làm một hạng mục trong tracker (O2C/P2P/Kế toán) từ đầu đến merge request.
+  - `sdd-spec` → `sdd-plan` → `sdd-tasks` → `sdd-implement` → `sdd-verify`: quy trình SDD cho mọi hạng mục O2C/P2P (xem `AGENTS.md` mục 8).
+  - `odoo-feature`: lối tắt chạy lần lượt các bước SDD cho một hạng mục trong tracker (O2C/P2P/Kế toán) từ đầu đến merge request.
   - `odoo-test`: viết và chạy test cho module `tlip_*`.
   - `fix-audit-finding`: sửa một lỗi trong báo cáo audit (`AUDIT #x`).
   - `shared-module-review`: checklist review khi đụng `tlip_approval`, `tlip_access_rights`, `pcv_minvoice`, `pcv_mysign`.

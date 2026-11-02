@@ -41,6 +41,8 @@ class TestRfpPayment(TransactionCase):
         ...
 ```
 
+Quy ước SDD: mỗi tiêu chí nghiệm thu trong `specs/<ID>/spec.md` có ít nhất một test tên `test_ac<n>_...`, docstring chép Given/When/Then của AC (để `/sdd-verify` đối chiếu).
+
 Lưu ý: Odoo 18 dùng `groups_id` trên `res.users` (`group_ids` là tên của bản 19, không dùng).
 
 ## Những loại test cần có
