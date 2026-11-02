@@ -1,3 +1,5 @@
+from dateutil.relativedelta import relativedelta
+
 from odoo import api, fields, models, _
 
 
@@ -34,6 +36,22 @@ class InvoiceType(models.Model):
     request_sequence_ids = fields.Many2many('ir.sequence', string='Request Payment Sequence')
     request_sequence_id = fields.Many2one('ir.sequence', compute='_compute_request_sequence_id')
     default_email_template_id = fields.Many2one('mail.template', string='Default Email Template')
+    accounting_date_rule = fields.Selection(
+        selection=[
+            ('payment_date', 'Payment Date'),
+            ('rfp_date', 'RFP Date'),
+            ('period_end', 'End of RFP Period'),
+        ],
+        string='Accounting Date when Posted from Payment',
+        default='payment_date',
+        required=True,
+        tracking=True,
+        help="Accounting date used when an approved RFP of this type is posted automatically "
+             "on payment confirmation (O2C No. 1):\n"
+             "- Payment Date: date of the payment.\n"
+             "- RFP Date: invoice date of the RFP.\n"
+             "- End of RFP Period: last day of the month of the RFP invoice date.",
+    )
 
     active = fields.Boolean(default=True)
     tax_calculation_rounding_method = fields.Selection([
@@ -51,3 +69,16 @@ class InvoiceType(models.Model):
     
     def get_minvoice_template(self, company):
         return self.with_company(company).minvoice_template_ids.filtered(lambda r: r.company_id == company)[:1]
+
+    def _get_rfp_accounting_date(self, rfp, payment):
+        """Return the accounting date to use when ``rfp`` is posted from ``payment``.
+
+        Falls back to the payment date when the RFP has no invoice date.
+        """
+        self.ensure_one()
+        rfp_date = rfp.invoice_date or payment.date
+        if self.accounting_date_rule == 'rfp_date':
+            return rfp_date
+        if self.accounting_date_rule == 'period_end':
+            return rfp_date + relativedelta(day=31)
+        return payment.date

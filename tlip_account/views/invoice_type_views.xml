@@ -27,6 +27,7 @@
                             <field name="leasing_type" invisible="type != 'leasing'" />
                             <field name="utility_quantity_based_on" invisible="type != 'utility'" required="type == 'utility'" />
                             <field name="tax_calculation_rounding_method"/>
+                            <field name="accounting_date_rule"/>
                         </group>
                         <group>
                             <field name="name_vn" />

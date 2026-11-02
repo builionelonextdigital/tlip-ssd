@@ -10,7 +10,7 @@
     "website": "http://www.portcities.net",
     "category": "Accounting",
     "license": "LGPL-3",
-    "version": "18.0.2.0.0",
+    "version": "18.0.2.1.0",
     "depends": [
         "account_accountant",
         "purchase",

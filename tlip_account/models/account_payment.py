@@ -131,6 +131,16 @@ class AccountPayment(models.Model):
         'Analytic Distribution', copy=True, readonly=False)
     report_attachment_id = fields.Many2one('ir.attachment')
 
+    # O2C No. 1: approved (not yet posted) RFPs selected for matching on an inbound payment
+    rfp_line_ids = fields.One2many(
+        'account.payment.rfp.line', 'payment_id',
+        string='Request for Payments', copy=False)
+    available_rfp_move_ids = fields.Many2many(
+        'account.move', compute='_compute_available_rfp_move_ids')
+    rfp_allocated_amount = fields.Monetary(
+        string='Allocated to RFPs', compute='_compute_rfp_allocated_amount',
+        currency_field='currency_id')
+
     @api.onchange('due_date')
     def _onchange_due_date(self):
         if self.due_date and not self.invoice_type_id.utility_type:
@@ -208,6 +218,39 @@ class AccountPayment(models.Model):
                 filter_domain).sorted(lambda x: x.move_id.invoice_date_due)
             rec.available_reconcile_item_ids = available_reconcile_item_ids
 
+    @api.depends('partner_id', 'currency_id', 'company_id', 'payment_type')
+    def _compute_available_rfp_move_ids(self):
+        AccountMove = self.env['account.move']
+        for rec in self:
+            if rec.payment_type != 'inbound' or not rec.partner_id:
+                rec.available_rfp_move_ids = AccountMove
+                continue
+            rec.available_rfp_move_ids = AccountMove.search(rec._get_domain_available_rfp_moves())
+
+    @api.depends('rfp_line_ids.amount')
+    def _compute_rfp_allocated_amount(self):
+        for rec in self:
+            rec.rfp_allocated_amount = sum(rec.rfp_line_ids.mapped('amount'))
+
+    def _get_domain_available_rfp_moves(self):
+        """RFPs that can be matched with this inbound payment (O2C No. 1).
+
+        Approved RFPs that are not posted yet are included: they are posted
+        when the payment is confirmed. Posted RFPs that are not fully paid
+        are included as well.
+        """
+        self.ensure_one()
+        return [
+            ('company_id', '=', self.company_id.id),
+            ('move_type', '=', 'out_invoice'),
+            ('is_request_payment', '=', True),
+            ('commercial_partner_id', '=', self.partner_id.commercial_partner_id.id),
+            ('currency_id', '=', self.currency_id.id),
+            '|',
+            '&', ('state', '=', 'draft'), ('approval_state', '=', 'approved'),
+            '&', ('state', '=', 'posted'), ('payment_state', 'in', ('not_paid', 'partial')),
+        ]
+
     def _compute_accounting_state(self):
         for record in self:
             accounting_state = 'draft'
@@ -234,10 +277,93 @@ class AccountPayment(models.Model):
         return "Payment"
 
     def action_post(self):
+        self._check_rfp_lines()
         result = super().action_post()
         self._generate_writeoff_journal_entry()
         self._action_auto_reconcile()
+        self._post_and_reconcile_rfp_lines()
         return result
+
+    def _check_rfp_lines(self):
+        """Validate the RFP allocations before the payment is confirmed (O2C No. 1)."""
+        for payment in self.filtered('rfp_line_ids'):
+            if payment.payment_type != 'inbound':
+                raise UserError(_("RFPs can only be matched with incoming payments."))
+            currency = payment.currency_id
+            allowed_moves = payment.env['account.move'].search(
+                payment._get_domain_available_rfp_moves())
+            for line in payment.rfp_line_ids:
+                if line.move_id not in allowed_moves:
+                    raise UserError(_(
+                        "%(rfp)s cannot be matched with this payment. It must belong to the same "
+                        "customer and currency, and be approved or posted and not fully paid.",
+                        rfp=line.move_id.display_name))
+            if currency.compare_amounts(payment.rfp_allocated_amount, payment.amount) > 0:
+                raise UserError(_(
+                    "The amount allocated to RFPs (%(allocated)s) exceeds the payment amount (%(amount)s).",
+                    allocated=formatLang(self.env, payment.rfp_allocated_amount, currency_obj=currency),
+                    amount=formatLang(self.env, payment.amount, currency_obj=currency)))
+            # Standard reconciliation settles the RFPs in order until the payment is used up,
+            # so only the last RFP can be partially paid, and only with the remaining amount.
+            lines = payment.rfp_line_ids.sorted(lambda l: (l.sequence, l.id))
+            for line in lines:
+                is_partial = currency.compare_amounts(line.amount, line.move_amount_open) < 0
+                if not is_partial:
+                    continue
+                is_last = line == lines[-1]
+                uses_remaining = currency.compare_amounts(
+                    payment.rfp_allocated_amount, payment.amount) == 0
+                if not (is_last and uses_remaining):
+                    raise UserError(_(
+                        "Only the last RFP in the list can be partially paid, and only with the "
+                        "remaining amount of the payment (%(rfp)s).",
+                        rfp=line.move_id.display_name))
+
+    def _post_and_reconcile_rfp_lines(self):
+        """Post the selected approved RFPs and reconcile them with the payment (O2C No. 1).
+
+        The accounting date of each RFP follows the rule of its Request Type
+        (``invoice.type.accounting_date_rule``). Posting goes through the normal
+        ``_post`` so period closing and posting rights are still enforced.
+        """
+        for payment in self.filtered(lambda p: p.payment_type == 'inbound' and p.rfp_line_ids):
+            if not payment.move_id:
+                raise UserError(_(
+                    "Payment %s has no journal entry, so the RFPs cannot be reconciled. "
+                    "Please set an outstanding receipts account on the payment method.",
+                    payment.display_name))
+            lines = payment.rfp_line_ids.sorted(lambda l: (l.sequence, l.id))
+            draft_rfps = lines.move_id.filtered(lambda m: m.state == 'draft')
+            for rfp in draft_rfps:
+                accounting_date = (
+                    rfp.invoice_type_id._get_rfp_accounting_date(rfp, payment)
+                    if rfp.invoice_type_id else payment.date
+                )
+                rfp.write({'date': accounting_date})
+            if draft_rfps:
+                draft_rfps._post(soft=False)
+                # The accountant confirming the payment stands for the accounting approval.
+                draft_rfps.write({'accounting_approval_state': 'approved'})
+                for rfp in draft_rfps:
+                    rfp.message_post(body=_(
+                        "Posted automatically on confirmation of payment %s.",
+                        payment.display_name))
+
+            receivable_account = payment.destination_account_id
+            payment_lines = payment.move_id.line_ids.filtered(
+                lambda l: l.account_id == receivable_account)
+            for line in lines:
+                rfp_lines = line.move_id.line_ids.filtered(
+                    lambda l: l.account_id == receivable_account and not l.reconciled)
+                if not rfp_lines:
+                    raise UserError(_(
+                        "%(rfp)s has no open item on the receivable account %(account)s of the payment.",
+                        rfp=line.move_id.display_name, account=receivable_account.display_name))
+                open_payment_lines = payment_lines.filtered(lambda l: not l.reconciled)
+                if not open_payment_lines:
+                    break
+                (open_payment_lines + rfp_lines).reconcile()
+        return True
 
     def _action_auto_reconcile(self):
         for rec in self:

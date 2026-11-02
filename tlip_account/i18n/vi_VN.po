@@ -95,3 +95,145 @@ msgstr "Báo cáo Debit/ Credit"
 #: model:ir.model.fields,field_description:tlip_account.field_account_account__use_for_cip
 msgid "Use for CIP"
 msgstr "Dùng cho CIP"
+#. module: tlip_account
+#: model:ir.model,name:tlip_account.model_account_payment_rfp_line
+msgid "Payment RFP Allocation"
+msgstr "Phân bổ thanh toán cho RFP"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_account_payment__rfp_line_ids
+#: model_terms:ir.ui.view,arch_db:tlip_account.view_account_payment_form
+msgid "Request for Payments"
+msgstr "Đề nghị thanh toán (RFP)"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_account_payment__rfp_allocated_amount
+msgid "Allocated to RFPs"
+msgstr "Đã phân bổ cho RFP"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_account_payment_rfp_line__move_id
+msgid "Request for Payment"
+msgstr "Đề nghị thanh toán"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_account_payment_rfp_line__move_state
+msgid "RFP Status"
+msgstr "Trạng thái ghi sổ RFP"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_account_payment_rfp_line__move_approval_state
+msgid "RFP Approval State"
+msgstr "Trạng thái duyệt RFP"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_account_payment_rfp_line__move_amount_total
+msgid "RFP Total"
+msgstr "Tổng tiền RFP"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_account_payment_rfp_line__move_amount_open
+msgid "RFP Amount Due"
+msgstr "Số tiền RFP còn phải thu"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_account_payment_rfp_line__amount
+msgid "Allocated Amount"
+msgstr "Số tiền phân bổ"
+
+#. module: tlip_account
+#: model:ir.model.fields,field_description:tlip_account.field_invoice_type__accounting_date_rule
+msgid "Accounting Date when Posted from Payment"
+msgstr "Ngày hạch toán khi post từ Payment"
+
+#. module: tlip_account
+#: model:ir.model.fields.selection,name:tlip_account.selection__invoice_type__accounting_date_rule__payment_date
+msgid "Payment Date"
+msgstr "Ngày thanh toán"
+
+#. module: tlip_account
+#: model:ir.model.fields.selection,name:tlip_account.selection__invoice_type__accounting_date_rule__rfp_date
+msgid "RFP Date"
+msgstr "Ngày RFP"
+
+#. module: tlip_account
+#: model:ir.model.fields.selection,name:tlip_account.selection__invoice_type__accounting_date_rule__period_end
+msgid "End of RFP Period"
+msgstr "Ngày kết thúc kỳ của RFP"
+
+#. module: tlip_account
+#: model:ir.model.fields,help:tlip_account.field_invoice_type__accounting_date_rule
+msgid ""
+"Accounting date used when an approved RFP of this type is posted automatically on payment confirmation (O2C No. 1):\n"
+"- Payment Date: date of the payment.\n"
+"- RFP Date: invoice date of the RFP.\n"
+"- End of RFP Period: last day of the month of the RFP invoice date."
+msgstr ""
+"Ngày hạch toán dùng khi RFP đã duyệt thuộc loại này được post tự động lúc xác nhận Payment (O2C No. 1):\n"
+"- Ngày thanh toán: ngày của Payment.\n"
+"- Ngày RFP: ngày hóa đơn của RFP.\n"
+"- Ngày kết thúc kỳ của RFP: ngày cuối tháng của ngày hóa đơn RFP."
+
+#. module: tlip_account
+#: code:addons/tlip_account/models/account_payment_rfp_line.py:0
+msgid "An RFP can only be selected once on the same payment."
+msgstr "Mỗi RFP chỉ được chọn một lần trên cùng một Payment."
+
+#. module: tlip_account
+#: code:addons/tlip_account/models/account_payment_rfp_line.py:0
+#, python-format
+msgid "The allocated amount for %s must be positive."
+msgstr "Số tiền phân bổ cho %s phải lớn hơn 0."
+
+#. module: tlip_account
+#: code:addons/tlip_account/models/account_payment_rfp_line.py:0
+#, python-format
+msgid "The allocated amount for %(rfp)s cannot exceed its amount due (%(due)s)."
+msgstr "Số tiền phân bổ cho %(rfp)s không được vượt quá số tiền còn phải thu (%(due)s)."
+
+#. module: tlip_account
+#: code:addons/tlip_account/models/account_payment.py:0
+msgid "RFPs can only be matched with incoming payments."
+msgstr "Chỉ Payment nhận tiền (Receive) mới đối soát được với RFP."
+
+#. module: tlip_account
+#: code:addons/tlip_account/models/account_payment.py:0
+#, python-format
+msgid "%(rfp)s cannot be matched with this payment. It must belong to the same customer and currency, and be approved or posted and not fully paid."
+msgstr "%(rfp)s không đối soát được với Payment này. RFP phải cùng khách hàng, cùng loại tiền, đã duyệt hoặc đã post và chưa thanh toán đủ."
+
+#. module: tlip_account
+#: code:addons/tlip_account/models/account_payment.py:0
+#, python-format
+msgid "The amount allocated to RFPs (%(allocated)s) exceeds the payment amount (%(amount)s)."
+msgstr "Tổng số tiền phân bổ cho RFP (%(allocated)s) vượt quá số tiền của Payment (%(amount)s)."
+
+#. module: tlip_account
+#: code:addons/tlip_account/models/account_payment.py:0
+#, python-format
+msgid "Only the last RFP in the list can be partially paid, and only with the remaining amount of the payment (%(rfp)s)."
+msgstr "Chỉ RFP cuối cùng trong danh sách được thanh toán một phần, và chỉ bằng số tiền còn lại của Payment (%(rfp)s)."
+
+#. module: tlip_account
+#: code:addons/tlip_account/models/account_payment.py:0
+#, python-format
+msgid "Payment %s has no journal entry, so the RFPs cannot be reconciled. Please set an outstanding receipts account on the payment method."
+msgstr "Payment %s chưa có bút toán nên không gạch nợ RFP được. Vui lòng cấu hình tài khoản Outstanding Receipts cho phương thức thanh toán."
+
+#. module: tlip_account
+#: code:addons/tlip_account/models/account_payment.py:0
+#, python-format
+msgid "Posted automatically on confirmation of payment %s."
+msgstr "Được post tự động khi xác nhận Payment %s."
+
+#. module: tlip_account
+#: code:addons/tlip_account/models/account_payment.py:0
+#, python-format
+msgid "%(rfp)s has no open item on the receivable account %(account)s of the payment."
+msgstr "%(rfp)s không có khoản phải thu còn mở trên tài khoản %(account)s của Payment."
+
+#. module: tlip_account
+#: code:addons/tlip_account/models/account_move.py:0
+#, python-format
+msgid "You cannot reset to draft %s because its e-invoice has already been published. Please use a credit note or an adjustment invoice instead."
+msgstr "Không thể đưa %s về dự thảo vì hóa đơn điện tử đã phát hành. Vui lòng điều chỉnh bằng Credit Note hoặc hóa đơn điều chỉnh."
