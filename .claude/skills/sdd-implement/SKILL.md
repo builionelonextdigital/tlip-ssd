@@ -33,7 +33,8 @@ description: Bước 4 của quy trình SDD – thực thi specs/<ID>/tasks.md t
 
 ## 3. Không được
 
-- Không commit, push, deploy (để TC làm). Nếu người dùng yêu cầu commit: message bắt đầu bằng `[<Mã gốc>]`.
+- Chạy local: không commit, push, deploy (để TC làm). Nếu người dùng yêu cầu commit: message bắt đầu bằng `[<Mã gốc>]`.
+- Chạy trên GitHub (`@claude`): được commit lên nhánh riêng của phiên và mở PR vào `main`; không push vào `main`. Không chạy được test Odoo trên runner → ghi rõ "test chưa chạy" trong PR và trong tasks.md (để `[~]`), TC chạy local bằng `test_command` rồi mới tick `[x]`.
 - Không sửa `status` của plan; không đánh `Done` cho spec.
 - Không làm test "qua cho có": không xóa assert, không skip test, không sửa AC trong test cho khớp code.
 

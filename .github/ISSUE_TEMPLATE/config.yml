@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Hướng dẫn SDD Studio
+    url: https://github.com/builionelonextdigital/tlip-ssd/blob/main/docs/ai/SDD_STUDIO.md
+    about: Cách dùng board, @claude và các cổng duyệt

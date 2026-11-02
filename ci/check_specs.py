@@ -62,12 +62,29 @@ def read_frontmatter(path):
     return data
 
 
+SPEC_ONLY_PREFIXES = ("specs/", "docs/")
+
+
 def commit_subjects(rng):
+    """(sha, subject) for each non-merge commit; commits touching only specs/ or docs/ are dropped
+    (spec and plan PRs are how a spec gets approved, so they cannot require an approved spec)."""
     out = subprocess.run(
         ["git", "log", "--no-merges", "--format=%h%x09%s", rng],
         check=True, capture_output=True, text=True,
     ).stdout
-    return [tuple(line.split("\t", 1)) for line in out.splitlines() if "\t" in line]
+    result = []
+    for line in out.splitlines():
+        if "\t" not in line:
+            continue
+        sha, subject = line.split("\t", 1)
+        files = subprocess.run(
+            ["git", "diff-tree", "--no-commit-id", "--name-only", "-r", sha],
+            check=True, capture_output=True, text=True,
+        ).stdout.split()
+        if files and all(f.startswith(SPEC_ONLY_PREFIXES) for f in files):
+            continue
+        result.append((sha, subject))
+    return result
 
 
 def default_range():

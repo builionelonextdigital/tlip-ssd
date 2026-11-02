@@ -1,0 +1,62 @@
+name: Hạng mục SDD
+description: Một hạng mục O2C / P2P / Kế toán chạy theo quy trình Spec-Driven Development
+title: "[O2C No. ] <Tên hạng mục>"
+labels: ["sdd", "status:backlog"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Tiêu đề **bắt buộc** bắt đầu bằng mã hạng mục, VD `[O2C No. 14] ...`, `[P2P No. 3] ...`.
+        Không dán dữ liệu thật của khách hàng (tên khách, số tiền thật, ảnh chụp hệ thống thật).
+        Sau khi tạo issue, comment `@claude /sdd-spec` để AI soạn spec.
+  - type: input
+    id: code
+    attributes:
+      label: Mã hạng mục
+      placeholder: O2C No. 14
+    validations:
+      required: true
+  - type: dropdown
+    id: ai_level
+    attributes:
+      label: Mức dùng AI
+      options: ["Cao", "Trung bình", "Thấp"]
+    validations:
+      required: true
+  - type: dropdown
+    id: shared
+    attributes:
+      label: Có đụng module dùng chung? (tlip_approval, tlip_access_rights, pcv_minvoice, pcv_mysign)
+      options: ["Không", "Có", "Chưa rõ"]
+    validations:
+      required: true
+  - type: input
+    id: md
+    attributes:
+      label: MD ước lượng
+      placeholder: "2"
+  - type: textarea
+    id: problem
+    attributes:
+      label: Vấn đề / Hiện trạng
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Giải pháp
+    validations:
+      required: true
+  - type: textarea
+    id: how
+    attributes:
+      label: Cách làm
+  - type: textarea
+    id: fields
+    attributes:
+      label: Model / Field cần sửa
+      description: Field mới ghi "(mới)"
+  - type: textarea
+    id: notes
+    attributes:
+      label: Ghi chú / Căn cứ (tài liệu, biên bản họp)
