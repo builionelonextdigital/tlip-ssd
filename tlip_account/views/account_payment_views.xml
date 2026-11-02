@@ -117,6 +117,32 @@
 
             <sheet position="inside">
                 <notebook>
+                    <page name="rfp_matching" string="Request for Payments"
+                        invisible="payment_type != 'inbound'">
+                        <field name="available_rfp_move_ids" invisible="1" />
+                        <field name="rfp_line_ids" nolabel="1" readonly="state != 'draft'">
+                            <list editable="bottom">
+                                <field name="sequence" widget="handle" />
+                                <field name="company_id" column_invisible="True" />
+                                <field name="currency_id" column_invisible="True" />
+                                <field name="move_id"
+                                    domain="[('id', 'in', parent.available_rfp_move_ids)]"
+                                    options="{'no_create': True}" />
+                                <field name="invoice_date" />
+                                <field name="invoice_date_due" optional="show" />
+                                <field name="move_approval_state" widget="badge" optional="hide" />
+                                <field name="move_state" widget="badge"
+                                    decoration-success="move_state == 'posted'"
+                                    decoration-info="move_state == 'draft'" />
+                                <field name="move_amount_total" optional="hide" />
+                                <field name="move_amount_open" />
+                                <field name="amount" sum="Total" />
+                            </list>
+                        </field>
+                        <group class="oe_subtotal_footer">
+                            <field name="rfp_allocated_amount" />
+                        </group>
+                    </page>
                     <page name="reconcile" string="Bills" invisible="(is_advance_payment and not auto_reconcile_item_ids) or payment_type == 'inbound'">
                         <field name="available_reconcile_item_ids" invisible="1" />
                         <field name="auto_reconcile_item_ids" colspan="2" nolabel="1"

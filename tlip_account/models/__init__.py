@@ -2,6 +2,7 @@ from . import account
 from . import account_move
 from . import account_move_line
 from . import account_payment
+from . import account_payment_rfp_line
 from . import budget_category
 from . import budget_code
 from . import analytic_account

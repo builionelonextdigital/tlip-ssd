@@ -22,6 +22,11 @@
             <field name="model_id" ref="tlip_account.model_accounting_period_closing" />
             <field name="domain_force">[('company_id', 'parent_of', company_ids)]</field>
         </record>
+        <record model="ir.rule" id="account_payment_rfp_line_company_rule">
+            <field name="name">Payment RFP Allocation: multi-company</field>
+            <field name="model_id" ref="tlip_account.model_account_payment_rfp_line" />
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
         <record model="ir.rule" id="bank_exchange_rate_rule">
             <field name="name">Bank Exhange Rate Rule</field>
             <field name="model_id" ref="tlip_account.model_bank_exchange_rate" />

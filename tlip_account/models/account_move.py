@@ -494,9 +494,30 @@ class AccountMove(models.Model):
                     line.partner_id = invoice.employee_id
 
     def button_draft(self):
+        self._check_reset_to_draft_minvoice_published()
         self.action_reset_approval()
         self.action_accounting_reset_approval()
         return super().button_draft()
+
+    def _check_reset_to_draft_minvoice_published(self):
+        """O2C No. 1: a posted invoice/RFP whose e-invoice is published cannot be unposted.
+
+        Enforced in Python (not only in the view) so that RPC, scripts and jobs are
+        blocked too. Corrections go through a credit note or an adjustment invoice.
+        The M-invoice cancel wizard sets the publish state back to 'unpublished'
+        before calling ``button_draft``, so it is not affected.
+        """
+        published = self.filtered(
+            lambda m: m.state == "posted"
+            and m.move_type in ("out_invoice", "out_refund")
+            and m.minvoice_publish_state == "published"
+        )
+        if published:
+            raise UserError(_(
+                "You cannot reset to draft %s because its e-invoice has already been published. "
+                "Please use a credit note or an adjustment invoice instead.",
+                ", ".join(published.mapped("display_name")),
+            ))
 
     def action_reset_approval(self):
         "Approval State: Rejected | Withdrawn -> Draft"
