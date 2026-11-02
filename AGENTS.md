@@ -8,7 +8,7 @@ Người chịu trách nhiệm cuối cùng về code luôn là TC tạo merge r
 - Odoo **18.0 Enterprise**, image `registry.gitlab.com/portcitiesidealis/odoo-enterprise:18.0`, PostgreSQL 16.
 - Khách hàng TLIP gồm **3 pháp nhân** chạy trên cùng một database (multi-company). Dữ liệu giữa các công ty phải tách biệt.
 - Code customize ban đầu do Port Cities viết (~33k dòng Python, 22 module). A1 / Rikkei đang tiếp quản và cải tiến theo 2 gói O2C và P2P.
-- Tài liệu nghiệp vụ nằm trong `Project-infomations/` (biên bản họp, tài liệu giải pháp, tracker `TLIP_Phase_Tracker.xlsx`, báo cáo audit `TLIP Audit.pdf`). **Chỉ đọc, không sửa** thư mục này.
+- Tài liệu nghiệp vụ nằm trong `Project-infomations/` (biên bản họp, tài liệu giải pháp, tracker `TLIP_Phase_Tracker.xlsx`, báo cáo audit `TLIP Audit.pdf`). **Chỉ đọc, không sửa** thư mục này. Thư mục này **không nằm trong git** (tài liệu của khách hàng); mỗi TC giữ bản local, đã có trong `.gitignore`.
 
 ### Bản đồ module
 
@@ -64,6 +64,7 @@ Người chịu trách nhiệm cuối cùng về code luôn là TC tạo merge r
 
 ## 4. Mỗi thay đổi phải có
 
+0. **Spec + plan đã duyệt** trong `specs/<ID>/` theo quy trình SDD (mục 8). Miễn trừ: `AUDIT #x`, `HOTFIX`, `CHORE`.
 1. **Test** trong `<module>/tests/` (xem skill `odoo-test`). Hiện repo chưa có test cho module `tlip_*`, nên mọi hạng mục mới đều bắt đầu bằng việc tạo test.
 2. **Quyền**: model mới có dòng trong `security/ir.model.access.csv`, **luôn có group** (dòng không group = mọi user, kể cả portal – AUDIT #10).
 3. **Version** trong `__manifest__.py` tăng theo dạng `18.0.x.y.z`; thêm script trong `migrations/` nếu đổi dữ liệu có sẵn.
@@ -98,3 +99,27 @@ docker compose run --rm --entrypoint /usr/bin/odoo odoo \
 ```
 
 Báo cáo lại cho người dùng bằng **tiếng Việt**: đã sửa file nào, test nào đã chạy và kết quả, điểm nào cần TC/FC xác nhận.
+
+## 8. Quy trình SDD – Spec-Driven Development (bắt buộc)
+
+```
+spec (FC+TC duyệt) → plan (TC duyệt) → tasks → implement (test trước) → verify → MR
+```
+
+| Bước | Claude Code | File | Ai duyệt |
+|---|---|---|---|
+| 1 | `/sdd-spec <mã>` | `specs/<ID>/spec.md` | FC + TC → `status: Approved` |
+| 2 | `/sdd-plan <ID>` | `specs/<ID>/plan.md` | TC → `status: Approved` |
+| 3 | `/sdd-tasks <ID>` | `specs/<ID>/tasks.md` | — |
+| 4 | `/sdd-implement <ID>` | code + test | — |
+| 5 | `/sdd-verify <ID>` | mô tả MR | Reviewer |
+
+Cấu hình: `sdd.config.yml`. Chi tiết quy trình: `docs/ai/SDD_WORKFLOW.md`.
+Công cụ khác (Cursor, Codex...): đọc file `.claude/skills/sdd-*/SKILL.md` tương ứng và làm theo.
+
+Luật cứng:
+
+- **Không code khi spec chưa `Approved` hoặc plan chưa `Approved`.**
+- AI **không** tự đổi `status` sang `Approved`/`Done`, không điền tên người duyệt.
+- Spec là nguồn sự thật. Yêu cầu thay đổi → sửa spec trước (ghi Lịch sử, duyệt lại nếu đổi AC), rồi mới sửa code.
+- Phát hiện spec/plan sai khi đang code → dừng và báo, không tự sửa trong code.

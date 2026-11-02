@@ -166,3 +166,10 @@ Makefile
 /odoo
 /odoo-enterprise
 odoo.conf
+
+# TLIP: dữ liệu thật và tài liệu khách hàng – không đưa lên git
+cosphi.json
+electrict.json
+water.json
+Project-infomations/
+Claude outputs/

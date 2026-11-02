@@ -5,6 +5,8 @@ description: Làm một hạng mục trong tracker TLIP (mã O2C No. x, P2P No. 
 
 # Làm một hạng mục trong tracker
 
+> **Từ khi áp dụng SDD**: chạy theo thứ tự `/sdd-spec` → (FC + TC duyệt) → `/sdd-plan` → (TC duyệt) → `/sdd-tasks` → `/sdd-implement` → `/sdd-verify`. Các bước dưới đây là nội dung chi tiết mà các skill `sdd-*` dựa vào; không bỏ qua cổng duyệt spec/plan.
+
 ## Bước 1. Lấy thông tin hạng mục
 
 Hỏi mã hạng mục nếu người dùng chưa nói. Đọc dòng tương ứng trong tracker:

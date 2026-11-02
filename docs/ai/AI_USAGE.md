@@ -46,4 +46,6 @@ Ghi lại cho mỗi hạng mục để quyết định có áp rộng hay không
 | O2C No. 14 | 1,5 | | Trung bình | | | | |
 | O2C No. 1 | 8,5 | | Trung bình | | | | |
 
+Hạng mục làm theo SDD: ghi thêm vào cột Ghi chú số vòng sửa spec và link `specs/<ID>/`.
+
 Tiêu chí áp rộng: MD thực tế thấp hơn ước lượng và số lỗi ở UAT không tăng so với hạng mục làm tay.

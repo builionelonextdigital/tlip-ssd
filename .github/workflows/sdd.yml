@@ -1,0 +1,20 @@
+name: SDD check
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-specs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Spec gate
+        run: python3 ci/check_specs.py --range "origin/${{ github.base_ref }}...HEAD"
+        # Giai đoạn thí điểm: chỉ cảnh báo. Xóa dòng dưới khi áp dụng chính thức.
+        continue-on-error: true
