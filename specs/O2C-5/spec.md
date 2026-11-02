@@ -2,7 +2,7 @@
 id: O2C-5
 code: O2C No. 5
 title: Căn lề và cân đối mẫu PDF RFP
-status: Draft
+status: Approved
 ai_level: Trung bình
 shared_modules: Không
 source: GitHub Issue #18 (từ TLIP_Phase_Tracker.xlsx, docx giải pháp O2C mục No. 5); khảo sát code tlip_base, tlip_account
