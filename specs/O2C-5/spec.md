@@ -38,8 +38,8 @@ Mọi mẫu PDF RFP in ra trên A4 có lề đều hai bên, không bị cắt c
 
 ## 5. Yêu cầu nghiệp vụ
 
-- **R1.** Khổ giấy dùng chung của RFP có lề trái và lề phải bằng nhau, đủ rộng để không sát mép giấy (giá trị đề xuất: 15 mm – Q1).
-- **R2.** Lề dưới đủ để nội dung trang cuối không sát mép (đề xuất 15 mm – Q1); lề trên và khoảng cách header giữ nguyên để không đổi vị trí logo.
+- **R1.** Khổ giấy dùng chung của RFP có lề trái và lề phải bằng nhau, đủ rộng để không sát mép giấy: 15 mm (Q1 đã chốt).
+- **R2.** Lề dưới 15 mm để nội dung trang cuối không sát mép (Q1 đã chốt); lề trên và khoảng cách header giữ nguyên để không đổi vị trí logo.
 - **R3.** Thay đổi áp dụng cho cả 11 mẫu RFP và cho database đang chạy sau khi nâng cấp module (không chỉ cài mới).
 - **R4.** Không ảnh hưởng mẫu Payment và Batch Payment.
 
@@ -73,7 +73,7 @@ Màn hình: bản in PDF RFP (nút Print trên RFP / Payment request).
 
 | # | Câu hỏi | Người trả lời | Trả lời |
 |---|---|---|---|
-| Q1 | Giá trị lề mong muốn? Đề xuất: trái 15 mm, phải 15 mm, dưới 15 mm, trên giữ 25 mm. TLIP có quy chuẩn văn bản khác (VD: trái 30 mm, phải 15 mm theo Nghị định 30/2020 về văn bản hành chính) không? | FC (xác nhận với TLIP) | |
+| Q1 | Giá trị lề mong muốn? Đề xuất: trái 15 mm, phải 15 mm, dưới 15 mm, trên giữ 25 mm. TLIP có quy chuẩn văn bản khác (VD: trái 30 mm, phải 15 mm theo Nghị định 30/2020 về văn bản hành chính) không? | FC (xác nhận với TLIP) | Chấp nhận đề xuất: trái 15 mm, phải 15 mm, dưới 15 mm, trên giữ 25 mm (xác nhận 2026-11-02). |
 | Q2 | Issue ghi "Cần TLIP gửi mẫu hoặc xác nhận các căn chỉnh mong muốn". TLIP đã gửi mẫu chưa? Nếu chưa: bản này chỉ chỉnh lề (R1–R4), phần khoảng cách giữa các khối (đầu trang, bảng chi tiết, thông tin chuyển khoản, chữ ký) làm khi có mẫu – đồng ý? | FC | |
 | Q3 | Mẫu nào là mẫu TLIP thấy lệch nhất để QC ưu tiên test (MF-RQ, Water, Land Rent…)? | FC | |
 
@@ -82,3 +82,4 @@ Màn hình: bản in PDF RFP (nút Print trên RFP / Payment request).
 | Ngày | Người | Thay đổi |
 |---|---|---|
 | 2026-11-02 | AI (/sdd-spec) | Tạo bản nháp từ Issue #18 và khảo sát code |
+| 2026-11-02 | AI (/sdd-spec) | Ghi câu trả lời Q1 (chấp nhận lề 15 mm); R1, R2 bỏ chữ "đề xuất". AC không đổi |
