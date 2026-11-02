@@ -1,83 +1,110 @@
-# SDD Studio trên GitHub – Hướng dẫn vận hành
+# SDD Studio – Claude Code web + GitHub
 
-Mỗi hạng mục là **một Issue trên board**. Mọi bước SDD được gọi bằng một comment `@claude ...`. Mỗi cổng duyệt là **một PR merge vào `main`**. Không ai phải nhớ lệnh terminal; TC chỉ cần terminal để chạy test Odoo trên máy local.
+Toàn bộ quy trình SDD chạy trên hai nơi, không cần VS Code hay terminal:
 
-## 1. Board
+- **GitHub**: board "TLIP SDD", Issue, Pull Request, review, duyệt.
+- **Claude Code web** (claude.ai/code, hoặc tab **Code** trong app Claude với môi trường **Cloud**): Claude soạn spec, plan, code, rồi push lên nhánh và mở PR.
 
-Project "TLIP SDD" có các cột (trường Status), tương ứng nhãn `status:*` trên Issue:
+Mỗi người dùng **gói Claude của mình**. Repo không cần `ANTHROPIC_API_KEY`.
+
+## 1. Thiết lập
+
+### Mỗi người (một lần)
+
+1. Vào **claude.ai/code** → kết nối GitHub (Claude GitHub App) → chọn repo `builionelonextdigital/tlip-ssd`.
+2. Môi trường: giữ **Default** (Trusted network).
+3. Kiểm tra: mở session mới, gõ `/` — phải thấy `sdd-spec`, `sdd-plan`, `sdd-tasks`, `sdd-implement`, `sdd-verify`.
+
+Tài khoản dùng cho code TLIP phải theo `docs/ai/AI_USAGE.md`. Nên dùng gói **Team/Enterprise** của công ty. Tài khoản Pro/Max cá nhân chỉ dùng khi PM đã xác nhận.
+
+### Repo (đã làm, ghi lại để tham khảo)
+
+| Thành phần | Vai trò |
+|---|---|
+| Board "TLIP SDD" (`github.com/users/builionelonextdigital/projects/1`) | Mỗi hạng mục một thẻ, cột = trạng thái spec |
+| Issue Form "Hạng mục SDD", `tools/tracker_to_issues.py` | Tạo hạng mục |
+| Workflow **SDD board sync** | Đổi nhãn `status:*` và cột trên board theo `spec.md` / `plan.md` |
+| Workflow **SDD check** | PR có commit code phải có spec + plan đã `Approved` |
+| Workflow **Claude (SDD)** | **Tắt** (Actions → Claude (SDD) → ⋯ → Disable workflow). Chỉ bật lại khi công ty có API key chung |
+
+## 2. Board
 
 | Cột | Nghĩa | Ai đẩy sang cột tiếp |
 |---|---|---|
-| Backlog | Có Issue, chưa có spec | TC: comment `@claude /sdd-spec` |
-| Spec Draft | Claude đã mở PR spec | Claude / TC |
-| Spec Review | Chờ FC + TC duyệt spec | FC + TC duyệt PR spec |
-| Spec Approved | PR spec đã merge | TC: `@claude /sdd-plan` |
-| Plan Review | Chờ TC duyệt plan | TC duyệt PR plan |
-| Ready to build | Spec + plan đã merge | TC: `@claude /sdd-tasks` rồi `/sdd-implement` |
-| Implementing | Đang có PR code | Reviewer + pod Core |
-| Done | Đã merge, qua UAT | TC đổi spec `status: Done` |
+| Backlog | Có Issue, chưa có spec | TC chạy `/sdd-spec` trên Claude Code web |
+| Spec Draft | PR spec đã mở | FC + TC đọc |
+| Spec Review | Spec chờ duyệt (`status: In Review`) | FC + TC duyệt |
+| Spec Approved | Spec `Approved`, chưa có plan | TC chạy `/sdd-plan` |
+| Plan Review | Plan chờ TC duyệt | TC duyệt |
+| Ready to build | Spec + plan đã duyệt | TC chạy `/sdd-tasks`, `/sdd-implement` |
+| Implementing | Đang code (`status: Implementing`) | Reviewer + pod Core |
+| Done | Đã merge, qua UAT (`status: Done`) | — |
 | Dropped | Hủy | PM |
 
-Nhãn và cột do workflow **SDD board sync** tự cập nhật theo `status` trong `spec.md` / `plan.md`. Không kéo thẻ bằng tay. Muốn đổi cột thì sửa file spec.
+Thẻ **tự chuyển cột** mỗi khi PR có thay đổi trong `specs/`. Không kéo thẻ bằng tay; muốn đổi cột thì đổi `status` trong file spec/plan.
 
-Lọc nhanh trên board: `label:ai:thap`, `label:shared-module`, `label:pod:o2c`.
+## 3. Một hạng mục từ đầu đến cuối
 
-## 2. Một hạng mục từ đầu đến cuối
+Quy ước: **một hạng mục = một session Claude = một nhánh = một PR**. Spec, plan và code đều nằm trong cùng PR; PR chỉ được merge ở cuối.
 
-| # | Ai | Làm ở đâu | Thao tác |
+| # | Ai | Ở đâu | Thao tác |
 |---|---|---|---|
-| 1 | PM/TC | Issues → New → "Hạng mục SDD" | Điền form. Hoặc tạo hàng loạt từ tracker (mục 4) |
-| 2 | TC | Comment trong Issue | `@claude /sdd-spec` |
-| 3 | Claude | — | Soạn `specs/<ID>/spec.md` từ nội dung Issue, mở PR "Spec", trả lời bằng danh sách câu hỏi mở |
-| 4 | FC | PR Spec → tab *Files changed* | Đọc AC, trả lời câu hỏi mở (comment trên dòng, hoặc nút *Edit file*) |
-| 5 | TC | PR Spec | Muốn Claude sửa thì comment `@claude cập nhật spec theo trả lời của FC ở trên` |
-| 6 | FC + TC | PR Spec → *Edit file* | Điền `business_approver`, `technical_approver` (tên + ngày), đổi `status: Approved`. TC approve và **merge** PR → **Cổng 1** |
-| 7 | TC | Comment trong Issue | `@claude /sdd-plan` → Claude mở PR "Plan" |
-| 8 | TC | PR Plan | Đọc plan, đổi plan `status: Approved` + `technical_approver`, **merge** → **Cổng 2** |
-| 9 | TC | Comment trong Issue | `@claude /sdd-tasks và /sdd-implement` → Claude mở PR code (Draft) |
-| 10 | TC | Máy local | `gh pr checkout <số PR>`, chạy test Odoo (`test_command` trong `sdd.config.yml`), sửa nếu cần, tick task trong `tasks.md`, push |
-| 11 | TC | PR code | `@claude /sdd-verify` → Claude đối chiếu AC ↔ test và cập nhật mô tả PR |
-| 12 | Reviewer (+ pod Core) | PR code | Review theo spec và plan; check "SDD check" phải xanh; merge |
-| 13 | TC | Sau UAT | Sửa spec `status: Done` (commit nhỏ vào `main` qua PR) → thẻ sang Done |
+| 1 | PM/TC | GitHub → Issues → New → "Hạng mục SDD" | Tạo Issue (hoặc PM tạo hàng loạt từ tracker, mục 6). Copy link Issue |
+| 2 | TC | claude.ai/code → **New session**, repo `tlip-ssd`, nhánh `main` | Gõ: `/sdd-spec O2C No. 14 – nguồn: <link Issue>`. Đổi tên session thành `O2C-14` |
+| 3 | TC | Claude Code web | Đọc spec trong khung **Changes**, comment trên dòng cần sửa, gửi cho Claude. Xong thì nhờ: `push và mở PR draft, tiêu đề "[O2C No. 14] <tên>", body "Refs #<số Issue>"` |
+| 4 | FC | GitHub → PR → **Files changed** | Đọc bảng tiêu chí nghiệm thu (AC), trả lời câu hỏi mở bằng comment trên dòng |
+| 5 | TC | Claude Code web (cùng session) | `cập nhật spec theo các comment của FC trên PR` → Claude sửa và push |
+| 6 | FC + TC | GitHub → PR → `specs/O2C-14/spec.md` → **⋯ → Edit file** | Điền `business_approver`, `technical_approver` (tên + ngày), đổi `status: Approved`, **Commit changes** vào nhánh PR → **Cổng 1** |
+| 7 | TC | Claude Code web | `/sdd-plan O2C-14` → Claude push `plan.md` lên cùng PR |
+| 8 | TC | GitHub → PR → **Edit file** `plan.md` | Đọc plan, đổi `status: Approved` + `technical_approver` → **Cổng 2** |
+| 9 | TC | Claude Code web | `/sdd-tasks O2C-14`, rồi `/sdd-implement O2C-14` |
+| 10 | TC | Claude Code web | Đọc từng file trong **Changes**; comment để Claude sửa. Mức AI **Thấp**: TC tự viết logic lõi bằng **Edit file** trên GitHub, rồi nhờ Claude review |
+| 11 | TC | Claude Code web | `/sdd-verify O2C-14` → `cập nhật mô tả PR theo kết quả verify` |
+| 12 | TC | Claude Code web → menu **⋮** cạnh PR trong khung Changes | Bật **Auto-fix**: Claude tự sửa khi CI đỏ hoặc có comment review |
+| 13 | TC | GitHub → PR | **Ready for review**, gắn reviewer (+ pod Core nếu nhãn `shared-module`) |
+| 14 | Reviewer | GitHub → PR | Review theo spec + plan; check **SDD check** xanh; **Merge** |
+| 15 | TC | GitHub | Sau UAT: **Edit file** `spec.md` trên `main` (qua PR nhỏ), `status: Done` → thẻ sang Done |
 
-Hạng mục **mức AI Thấp**: ở bước 9 chỉ gọi `@claude /sdd-tasks và viết test`. Logic lõi do TC tự viết ở bước 10.
+Session nằm trong danh sách bên trái của claude.ai/code; mở lại từ máy tính hoặc điện thoại để làm tiếp. Session để lâu không dùng sẽ khởi động lại môi trường nhưng giữ nguyên lịch sử chat.
 
-## 3. Câu lệnh hay dùng trong comment
+## 4. Câu lệnh mẫu trong Claude Code web
 
-| Comment | Kết quả |
+| Gõ | Kết quả |
 |---|---|
-| `@claude /sdd-spec` | Soạn spec từ Issue, mở PR spec |
-| `@claude /sdd-plan` | Khảo sát code, viết plan, mở PR plan (dừng nếu spec chưa duyệt) |
-| `@claude /sdd-tasks và /sdd-implement` | Tách task, viết test + code theo mức AI, mở PR code |
-| `@claude /sdd-verify` (trong PR) | Bảng AC → test, checklist, mô tả PR |
-| `@claude giải thích hàm <tên>` | Giải thích code cũ, không sửa gì |
-| `@claude sửa theo review ở trên` (trong PR) | Sửa và push lên chính nhánh PR |
+| `/sdd-spec O2C No. 14 – nguồn: <link Issue>` | Soạn spec từ Issue, liệt kê câu hỏi mở |
+| `push và mở PR draft "[O2C No. 14] <tên>", body "Refs #4"` | Tạo nhánh + PR |
+| `cập nhật spec theo comment của FC trên PR #<số>` | Sửa spec, push |
+| `/sdd-plan O2C-14` | Plan; tự dừng nếu spec chưa `Approved` |
+| `/sdd-tasks O2C-14` rồi `/sdd-implement O2C-14` | Test + code theo mức dùng AI |
+| `/sdd-verify O2C-14` | Bảng AC → test, checklist, mô tả PR |
+| `giải thích hàm <tên> trong <file>` | Đọc code cũ, không sửa |
+| `rebase nhánh lên main` | Khi PR bị xung đột |
 
-Chỉ người có quyền **write** trên repo mới kích hoạt được `@claude`. Mỗi lần chạy tốn phút GitHub Actions và token Claude: viết yêu cầu cụ thể, mỗi comment một việc.
+Mỗi tin nhắn một việc, nói rõ mã hạng mục. Claude không được tự đổi `Approved` / `Done` hay điền người duyệt: việc đó luôn làm bằng **Edit file** trên GitHub.
 
-## 4. Tạo Issue hàng loạt từ tracker
+## 5. Giới hạn và cách xử lý
 
-Chạy trên máy TC, vì tracker chỉ có bản local:
+| Giới hạn | Cách xử lý |
+|---|---|
+| Claude Code web **không thấy `Project-infomations/`** (không có trong git) | Nguồn của `/sdd-spec` là Issue. Đoạn nào chỉ có trong docx / biên bản họp: dán vào Issue hoặc vào chat. Không dán dữ liệu thật của khách |
+| **Không chạy được test Odoo** trên môi trường cloud (không có image Odoo Enterprise) | Claude viết test và ghi rõ "chưa chạy". Test do người có môi trường Odoo chạy trước khi merge, hoặc dùng workflow "Odoo tests" trên GitHub khi đã có (cần deploy token registry GitLab) |
+| Session dùng hạn mức gói Claude của từng người | Viết yêu cầu cụ thể; dùng `/compact` khi session dài |
+| Đọc Issue từ link không được | Copy nội dung Issue dán vào tin nhắn đầu |
+
+## 6. Tạo Issue hàng loạt từ tracker (PM, khi cần)
+
+Việc này cần tracker bản local nên PM làm một lần cho mỗi đợt, trên máy có repo và `Project-infomations/`:
 
 ```bash
-python3 tools/tracker_to_issues.py --only O2C --show-body     # xem trước, không tạo gì
-python3 tools/tracker_to_issues.py --only O2C --apply         # tạo Issue (bỏ qua mã đã có)
+python3 tools/tracker_to_issues.py --only O2C --show-body   # xem trước
+python3 tools/tracker_to_issues.py --only O2C --apply       # tạo, bỏ qua mã đã có
 ```
 
-Script chỉ chép các cột thiết kế giải pháp. **Đọc bản xem trước**: không được có tên khách thật, số tiền thật hay dữ liệu đo thật. Mã có 2 dòng trong tracker (O2C No. 13, 16) được gộp vào một Issue và đánh dấu để FC chốt.
+Đọc bản xem trước, đảm bảo không có dữ liệu thật của khách hàng. Không làm được bước này thì tạo Issue bằng form trên GitHub và dán nội dung từ tracker.
 
-## 5. Giới hạn cần biết
+## 7. Quy tắc giữ nguyên
 
-- Runner GitHub **không có Odoo** (image Enterprise là private), nên Claude viết test nhưng không chạy được. Test luôn do TC chạy local trước khi review.
-- Claude trên GitHub **không thấy** `Project-infomations/`. Thông tin chỉ có trong docx hoặc biên bản họp thì FC/TC dán đoạn liên quan vào Issue.
-- Claude không bao giờ tự duyệt, không đổi `Approved` / `Done`, không push vào `main`.
-- Code Claude viết vẫn qua đủ các cổng trong `docs/ai/AI_USAGE.md`: test, review chéo, pod Core, UAT.
-
-## 6. Cài đặt (một lần)
-
-1. Merge PR thêm SDD Studio.
-2. `./tools/setup_github.sh`: tạo nhãn và in các bước làm tay.
-3. Cài Claude GitHub App, thêm secret `ANTHROPIC_API_KEY`.
-4. Tạo Project board, trường Status đúng 9 lựa chọn ở mục 1. Tùy chọn: thêm `PROJECT_TOKEN`, `PROJECT_OWNER`, `PROJECT_NUMBER` để board tự chuyển cột.
-5. Branch protection cho `main`.
-6. Thử với một hạng mục nhỏ (O2C No. 14).
+- Không code khi spec hoặc plan chưa `Approved` (AGENTS.md mục 8).
+- Mức dùng AI **Thấp**: AI không viết logic lõi.
+- Module dùng chung: pod Core review bắt buộc.
+- Code AI viết đi qua đủ các cổng trong `docs/ai/AI_USAGE.md`: test, review chéo, pod Core, UAT.
